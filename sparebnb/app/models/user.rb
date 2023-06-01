@@ -28,6 +28,7 @@ class User < ApplicationRecord
     allow_nil: true
   validates :session_token, presence: true, uniqueness: true
   validates :password, length: { in: 6..255 }, allow_nil: true
+  validate :birth_date, :validate_age
 
   before_validation :ensure_session_token
 
@@ -49,6 +50,12 @@ class User < ApplicationRecord
   end
 
   private
+
+  def validate_age
+    if birth_date > 18.years.ago
+      errors.add(:birth_date, 'Must be 18 or over to register - birthdate will not be displayed publicly.')
+    end
+  end
 
   def self.generate_unique_session_token
     while true
