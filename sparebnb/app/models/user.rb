@@ -34,6 +34,7 @@ class User < ApplicationRecord
 
   # TESTING: 
   # attributes = {email: 'demo@demo.io', first_name: 'Demo', last_name: 'Lition', birth_date: Time.new(2003,3,8), password: 'password'}
+  # attributes = {email: 'phone@demo.io', first_name: 'Demo', last_name: 'Lition', birth_date: Time.new(1993,3,8), password: 'password', phone_number: '5551239999'}
   # User.create(attributes).tap(&:valid?).errors.messages
 
   def self.find_by_credentials(credential, password)
