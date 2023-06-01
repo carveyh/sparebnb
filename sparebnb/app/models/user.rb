@@ -24,13 +24,17 @@ class User < ApplicationRecord
   validates :first_name, :last_name, :birth_date, presence: true
   validates :phone_number, 
     length: { is: 10 },
-    format: { with: /\A\d{10}\z/ }
+    format: { with: /\A\d{10}\z/ },
     allow_nil: true
   validates :session_token, presence: true, uniqueness: true
   validates :password, length: { in: 6..255 }, allow_nil: true
   validate :birth_date, :validate_age
 
   before_validation :ensure_session_token
+
+  # TESTING: 
+  # attributes = {email: 'demo@demo.io', first_name: 'Demo', last_name: 'Lition', birth_date: Time.new(2003,3,8), password: 'password'}
+  # User.create(attributes).tap(&:valid?).errors.messages
 
   def self.find_by_credentials(credential, password)
     type = credential =~ URI::MailTo::EMAIL_REGEXP ? :email : :phone_number
