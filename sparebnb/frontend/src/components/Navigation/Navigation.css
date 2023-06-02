@@ -1,0 +1,56 @@
+/****************************/
+/* ABOVE NAV BAR */
+/****************************/
+.above-nav-banner {
+	height: 50px;
+	background-color: aquamarine;
+}
+
+/****************************/
+/* NAV BAR CONTAINER */
+/****************************/
+
+.nav-bar-container {
+	height: 60px;
+	position: sticky;
+	top:0px;
+	background-color: lightpink;
+}
+
+/****************************/
+/* NAV BAR LINKS */
+/****************************/
+
+ul.nav-bar-links {
+	display: flex;
+	flex-direction: row;
+}
+.nav-bar-links > li {
+	margin-right: 10px;
+}
+.nav-bar-links > li:hover {
+	color: yellow;
+}
+
+/****************************/
+/* DROP DOWN MENU */
+/****************************/
+
+.profile-drop-menu {
+	position:absolute;
+	top: 30px;
+	left: 30px;
+	background-color: white;
+	border: 1px solid pink;
+	border-radius: 15px;
+	padding: 5px;
+	box-shadow: 2px 5px 15px #999999;
+}
+
+.profile-drop-menu:hover {
+	box-shadow: 2px 5px 15px #888888;
+}
+
+.profile-drop-menu > li:hover {
+	color: red;
+}
