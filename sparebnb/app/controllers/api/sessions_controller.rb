@@ -40,4 +40,4 @@ end
 # await fetch('/api/session', loginRequestOptions).then(res => res.json())
 # await fetch('/api/session', { method: 'GET' }).then(res => res.json())
 # await fetch('/api/session', { method: 'DELETE' }).then(res => res.json())
-# await fetch('/api/session', { method: 'GET' }).then(res => res.json())
+# await fetch('/api/session', { method: 'GET' }).then(res => res.json()) 
