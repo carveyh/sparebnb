@@ -33,3 +33,4 @@ end
 #       phone_number: '5551230000'
 #   })
 # }
+# await fetch('/api/users', signupRequestOptions).then(res => res.json())
