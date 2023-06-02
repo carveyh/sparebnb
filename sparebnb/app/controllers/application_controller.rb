@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
 	# Handle errors resulting from CSRF protection check fails instead of just console errors:
-	# rescue_from StandardError, with: :unhandled_error
+	rescue_from StandardError, with: :unhandled_error
 	rescue_from ActionController::InvalidAuthenticityToken, with: :invalid_authenticity_token
 
 	#Module to ensure incoming requests have auth tokens
