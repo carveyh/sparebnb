@@ -3,8 +3,8 @@ class Api::SessionsController < ApplicationController
     # banana #this will cause an error, used to test out application_controller#unhandled_error
     if current_user
       @user = current_user # Jbuilder needs access to i-vars from controllers.
-      render json: { user: @user } #BEFORE JBUILDER 'VIEWS' WERE DEFINED
-      # render 'api/users/show'
+      # render json: { user: @user } #BEFORE JBUILDER 'VIEWS' WERE DEFINED
+      render 'api/users/show'
     else
       render json: { user: nil }
     end
@@ -16,8 +16,8 @@ class Api::SessionsController < ApplicationController
     @user = User.find_by_credentials(credential, password)
     if @user
       login!(@user)
-      render json: { user: @user } #BEFORE JBUILDER 'VIEWS' WERE DEFINED
-      # render 'api/users/show'
+      # render json: { user: @user } #BEFORE JBUILDER 'VIEWS' WERE DEFINED
+      render 'api/users/show'
     else
       render json: { errors: ['The provided credentials were invalid.'] }, status: :unauthorized
     end

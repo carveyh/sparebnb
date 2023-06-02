@@ -6,8 +6,8 @@ class Api::UsersController < ApplicationController
     @user = User.new(user_params)
     if(@user.save)
       login!(@user)
-      render json: { user: @user } #BEFORE JBUILDER 'VIEWS' WERE DEFINED
-      # render :show #Can use this to render a show page with same folder nesting as namespace/controllername
+      # render json: { user: @user } #BEFORE JBUILDER 'VIEWS' WERE DEFINED
+      render :show #Can use this to render a show page with same folder nesting as namespace/controllername
     else
       render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
