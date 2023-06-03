@@ -15,8 +15,7 @@ const SignupFormPage = () => {
 	const [birthDate, setBirthDate] = useState('');	
 	const [email, setEmail] = useState('');	
 	const [password, setPassword] = useState('');	
-	// const [confirmPassword, setConfirmPassword] = useState('');	
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState({});
 
 	const handleFirstName = (e) => {
 		e.preventDefault();
@@ -29,7 +28,6 @@ const SignupFormPage = () => {
 	}
 
 	const handleBirthdate = (e) => {
-		// console.log("max",e.target.max)
 		e.preventDefault();
 		setBirthDate(e.target.value);
 	}
@@ -45,10 +43,6 @@ const SignupFormPage = () => {
 		setPassword(e.target.value);
 	}
 
-	// const handleConfirmPassword = (e) => {
-	// 	e.preventDefault();
-	// 	setConfirmPassword(e.target.value);
-	// }
 	const maxDate = () => {
 		const month = String(new Date().getMonth())
 		const date = String(new Date().getDate())
@@ -58,7 +52,6 @@ const SignupFormPage = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		// if(password === confirmPassword){
-			// console.log(birthDate)
 			const user = {firstName, lastName, birthDate, email, password}
 			// debugger
 			return dispatch(signupUser(user))
@@ -69,11 +62,9 @@ const SignupFormPage = () => {
 				} catch {
 					data = await res.text()
 				}
-				// debugger
 				if(data?.errors) setErrors(data.errors)
 				else if(data) setErrors([data])
 				else setErrors([res.statusText]);
-				// debugger
 				
 			})
 		// } else {
@@ -86,13 +77,6 @@ const SignupFormPage = () => {
 	return (
 		<div className="signup-form">
 			<form onSubmit={handleSubmit}>
-				<ul>
-					{/* {errors.map(error => <li key={error}>{error}</li>)} */}
-					{Object.entries(errors).map(error => <li key={error[0]}>{error[0]} - {error[1]}</li>)}
-				</ul>
-
-
-
 				<label>First Name:&nbsp;
 					<input
 						type="text"
@@ -122,12 +106,16 @@ const SignupFormPage = () => {
 						type="date"
 						value={birthDate}
 						max={maxDate()}
-						// max={`2023-06-12`}
 						onChange={handleBirthdate}
 						placeholder='Birthdate'
 						required
 					/>
 				</label>
+				{errors.birth_date && 
+					<>
+						<br />
+						<div style={{color:'red'}}>{errors.birth_date}</div>
+					</>}
 				<br />
 				<br />
 
@@ -140,6 +128,11 @@ const SignupFormPage = () => {
 						required
 					/>
 				</label>
+				{errors.email && 
+					<>
+						<br />
+						<div style={{color:'red'}}>Email {errors.email}</div>
+					</>}
 				<br />
 				<br />
 
@@ -151,18 +144,13 @@ const SignupFormPage = () => {
 						required
 					/>
 				</label>
+				{errors.password && 
+					<>
+						<br />
+						<div style={{color:'red'}}>Password {errors.password}</div>
+					</>}
 				<br />
 				<br />
-				{/* <label>Confirm Password:&nbsp;
-					<input
-						type="password"
-						value={confirmPassword}
-						onChange={handleConfirmPassword}
-						required
-					/>
-				</label>
-				<br />
-				<br /> */}
 				<input type="submit" value="Signup" />
 			</form>
 		</div>
