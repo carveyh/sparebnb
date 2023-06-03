@@ -3,9 +3,12 @@ import './LoginForm.css';
 import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../store/session";
-// import { Redirect } from "react-router-dom";
+import { useEffect } from 'react';
 
 const LoginForm = () => {
+	useEffect(() => {
+		document.getElementById("credential-input").focus({focusVisible:true, preventScroll:false})
+	}, [])
 	const dispatch = useDispatch();
 	
 	const [credential, setCredential] = useState('');	
@@ -64,6 +67,7 @@ const LoginForm = () => {
 				</ul>
 				<label>Email (or phone):&nbsp;
 					<input
+						id="credential-input"
 						type="text"
 						value={credential}
 						onChange={handleCredential}

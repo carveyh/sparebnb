@@ -5,8 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { useState } from "react";
 import { signupUser } from "../../store/session";
+import { useEffect } from 'react';
 
 const SignupForm = () => {
+	useEffect(() => {
+		document.getElementById("first-name-input").focus({preventScroll:false, focusVisible: true});
+	}, [])
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state = {}) => state.session?.user)
 
@@ -79,6 +83,7 @@ const SignupForm = () => {
 			<form onSubmit={handleSubmit}>
 				<label>First Name:&nbsp;
 					<input
+						id="first-name-input"
 						type="text"
 						value={firstName}
 						onChange={handleFirstName}

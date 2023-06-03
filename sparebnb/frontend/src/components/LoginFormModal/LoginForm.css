@@ -1,12 +1,25 @@
 .login-form, .signup-form {
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-	margin: 10px;
+	/* margin: 10px; */
 	padding: 10px;
-	border-radius: 10px;
+	border-radius: 15px;
 	max-width: 400px;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	border: 1px solid red
+	border: 1px solid red;
+	box-sizing: border-box;
+	/* background-clip: border-box; */
+	/* background-origin: padding-box; */
+	/* overflow-x: hidden; */
+	/* overflow-y: hidden; */
+	/* overflow: hidden; */
+	/* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+
+	-webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+	/* box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5); */
+	/* background-clip: padding-box; */
+	/* outline: none; */
+	
 }
