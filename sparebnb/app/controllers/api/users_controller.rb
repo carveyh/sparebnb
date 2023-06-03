@@ -1,22 +1,20 @@
 class Api::UsersController < ApplicationController
-  wrap_parameters include: User.attribute_names + ['password'] 
+  wrap_parameters include: User.attribute_names + ['password', 'firstName', 'lastName', 'birthDate'] 
 
   def create
-    # render json: user_params # Testing - instead of creating any users, this just returns a response with user_params in json format to check that user_params works
     @user = User.new(user_params)
     if(@user.save)
       login!(@user)
-      # render json: { user: @user } #BEFORE JBUILDER 'VIEWS' WERE DEFINED
       render :show #Can use this to render a show page with same folder nesting as namespace/controllername
     else
-      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: @user.errors.messages }, status: :unprocessable_entity
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:email, :first_name, :last_name, :birth_date, :phone_number, :password)
+    params.require(:user).permit(:email, :first_name, :last_name, :birth_date, :birthDate, :phone_number, :password)
   end
 end
 
