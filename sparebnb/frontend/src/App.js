@@ -22,36 +22,37 @@ function App() {
     <div>
       <Navigation />
       {/* <h1>abnb</h1> */}
-
-      <Switch>
-        {/* <Route exact path="/signup">
-          <SignupFormPage />
-        </Route> */}
-        <Route exact path="/testing">
-          <Testing />
-        </Route>
-        <Route exact path="/">
-          {sessionUser &&
-            <img src={sessionUser.photoUrl} />  
-            // <img src={`https://sparebnb-madison-seeds.s3.amazonaws.com/Screenshot+2023-05-17+at+10.15.45+PM.png`} />  
-          }
-          <LoremIpsum />
-          <LoremIpsum />
-          <LoremIpsum />
-          <LoremIpsum />
-          <LoremIpsum />
-          <LoremIpsum className="random-sticky-para" />
-          {loremIpsumWall}
-        </Route>
-        {/* <Route>
-          <>
+      <div id="main-body">
+        <Switch>
+          {/* <Route exact path="/signup">
+            <SignupFormPage />
+          </Route> */}
+          <Route exact path="/testing">
+            <Testing />
+          </Route>
+          <Route exact path="/">
+            {sessionUser &&
+              <img src={sessionUser.photoUrl} />  
+              // <img src={`https://sparebnb-madison-seeds.s3.amazonaws.com/Screenshot+2023-05-17+at+10.15.45+PM.png`} />  
+            }
+            <LoremIpsum />
+            <LoremIpsum />
+            <LoremIpsum />
+            <LoremIpsum />
+            <LoremIpsum />
+            <LoremIpsum className="random-sticky-para" />
+            {loremIpsumWall}
+          </Route>
+          {/* <Route>
+            <>
             {history.replace("/")}
-          </>
-        </Route> */}
-        <Route>
-          <h1>404 - page not found.</h1>
-        </Route>
-      </Switch>
+            </>
+          </Route> */}
+          <Route>
+            <h1>404 - page not found.</h1>
+          </Route>
+        </Switch>
+      </div>
     </div>
   );
 }
