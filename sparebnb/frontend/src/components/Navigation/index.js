@@ -29,7 +29,9 @@ return (
 						{/* <img src={require("../../images/airbnb_logo.png")} style={{width:"102px", height:"33px"}}/> */}
 						<img src={require("../../images/sparebnb_logo_2.png")} style={{width:"140px", height:"32px"}}/>
 					</div>
-					<div className="upper-navbar-search"> Anywhere | Any week | Add guests </div>
+					<div className="upper-navbar-search-container">
+						<div className="upper-navbar-search"> Anywhere | Any week | Add guests </div>
+					</div>
 					<nav className="upper-navbar-right"> Airbnb your home | O | Add guests </nav>
 				</div>
 			</header>
