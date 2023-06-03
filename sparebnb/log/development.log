@@ -4215,3 +4215,10 @@ Processing by Api::UsersController#create as JSON
 Completed 422 Unprocessable Entity in 415ms (Views: 0.1ms | ActiveRecord: 1.1ms | Allocations: 5636)
 
 
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 03:42:02 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 26ms (Views: 0.2ms | ActiveRecord: 11.5ms | Allocations: 4579)
+
+
