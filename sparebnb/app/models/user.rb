@@ -33,6 +33,8 @@ class User < ApplicationRecord
 
   before_validation :ensure_session_token
 
+  has_one_attached :photo
+
   # TESTING: 
   # attributes = {email: 'phone@demo.io', first_name: 'Demo', last_name: 'Lition', birth_date: Time.new(1993,3,8), password: 'password', phone_number: '5551239999'}
   # User.create(attributes).tap(&:valid?).errors.messages

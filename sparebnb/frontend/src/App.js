@@ -2,10 +2,13 @@
 import { Route, Link, NavLink, Switch, useHistory } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import Navigation from "./components/Navigation";
+import { useSelector } from "react-redux";
+import Testing from "./components/Testing";
 
 function App() {
   // const history = useHistory();
 
+  const sessionUser = useSelector(state => state.session?.user )
   const loremIpsumWall = []
   const LoremIpsum = ({className}) => {
     return(
@@ -18,14 +21,20 @@ function App() {
   return (
     <div>
       <Navigation />
-      <h1>abnb</h1>
+      {/* <h1>abnb</h1> */}
 
       <Switch>
         <Route exact path="/signup">
           <SignupFormPage />
         </Route>
+        <Route exact path="/testing">
+          <Testing />
+        </Route>
         <Route exact path="/">
-          <h2>home</h2>
+          {sessionUser &&
+            <img src={sessionUser.photoUrl} />  
+            // <img src={`https://sparebnb-madison-seeds.s3.amazonaws.com/Screenshot+2023-05-17+at+10.15.45+PM.png`} />  
+          }
           <LoremIpsum />
           <LoremIpsum />
           <LoremIpsum />

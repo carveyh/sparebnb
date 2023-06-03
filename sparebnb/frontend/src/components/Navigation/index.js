@@ -21,10 +21,21 @@ const Navigation = () => {
 
 return (
 		<>
-			<div className="above-nav-banner"></div>
+			<header className="upper-navbar-header">
+				<div className="upper-navbar-container">
+					<div className="upper-navbar-logo">
+						<img src={require("./placeholder_logo.png")} />
+						{/* <img src="./placeholder_logo.png" /> */}
+						{/* <img src=".../images/placeholder_logo.png" /> */}
+					</div>
+					<div className="upper-navbar-search"> Anywhere | Any week | Add guests </div>
+					<nav className="upper-navbar-right"> Airbnb your home | O | Add guests </nav>
+				</div>
+			</header>
 			<div className="nav-bar-container">
 				<ProfileButton />
 				<ul className="nav-bar-links">
+					<li><NavLink exact activeStyle={{ backgroundColor:"blue" }} to="/testing">Testing</NavLink></li>
 					<li><NavLink exact activeStyle={{ backgroundColor:"blue" }} to="/">Home</NavLink></li>
 					{sessionLinks}
 				</ul>
