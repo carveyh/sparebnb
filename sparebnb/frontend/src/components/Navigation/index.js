@@ -26,9 +26,8 @@ return (
 			<header className="upper-navbar-header">
 				<div className="upper-navbar-container">
 					<div className="upper-navbar-logo">
-						<img src={require("./placeholder_logo.png")} />
-						{/* <img src="./placeholder_logo.png" /> */}
-						{/* <img src=".../images/placeholder_logo.png" /> */}
+						{/* <img src={require("../../images/airbnb_logo.png")} style={{width:"102px", height:"33px"}}/> */}
+						<img src={require("../../images/sparebnb_logo_2.png")} style={{width:"140px", height:"32px"}}/>
 					</div>
 					<div className="upper-navbar-search"> Anywhere | Any week | Add guests </div>
 					<nav className="upper-navbar-right"> Airbnb your home | O | Add guests </nav>
