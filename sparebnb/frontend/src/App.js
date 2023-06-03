@@ -1,6 +1,6 @@
 // import LoginFormPage from "./components/LoginFormModal/LoginForm";
 import { Route, Link, NavLink, Switch, useHistory } from "react-router-dom";
-import SignupFormPage from "./components/SignupFormPage";
+// import SignupFormPage from "./components/SignupFormModal/SignupForm";
 import Navigation from "./components/Navigation";
 import { useSelector } from "react-redux";
 import Testing from "./components/Testing";
@@ -24,9 +24,9 @@ function App() {
       {/* <h1>abnb</h1> */}
 
       <Switch>
-        <Route exact path="/signup">
+        {/* <Route exact path="/signup">
           <SignupFormPage />
-        </Route>
+        </Route> */}
         <Route exact path="/testing">
           <Testing />
         </Route>

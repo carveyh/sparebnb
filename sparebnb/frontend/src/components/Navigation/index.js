@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom"
 
 import ProfileButton from "./ProfileButton"
 import LoginFormModal from "../LoginFormModal";
+import SignupFormModal from "../SignupFormModal";
 
 const Navigation = () => {
 	const sessionUser = useSelector(state => state.session?.user)
@@ -14,7 +15,8 @@ const Navigation = () => {
 		sessionLinks = (
 			<>
 			<li><LoginFormModal /></li>
-			<li><NavLink exact activeStyle={{ backgroundColor:"teal" }} to="/signup">Signup</NavLink></li>
+			<li><SignupFormModal /></li>
+			{/* <li><NavLink exact activeStyle={{ backgroundColor:"teal" }} to="/signup">Signup</NavLink></li> */}
 			</>
 		)
 	}
