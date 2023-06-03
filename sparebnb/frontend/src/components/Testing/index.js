@@ -127,3 +127,7 @@ export default Testing;
 			// window.getComputedStyle(document.documentElement).getPropertyValue('--div-background-color')
 			// WRITE
 			// In click handler: document.documentElement.style.setProperty('--div-background-color', '#333')
+	////////////////
+	// FORM ELEMENT STYLING:
+	////////////////
+		// FORM ELEMENTS DO NOT INHERIT FONT SETTINGS!!! https://stackoverflow.com/questions/26140050/why-is-font-family-not-inherited-in-button-tags-automatically
