@@ -37,11 +37,28 @@ const LoginForm = () => {
 				else if(data) setErrors([data])
 				else setErrors([res.statusText]);
 			})
+
+		}
+	const loginDemo = (e) => {
+		e.preventDefault();
+		const user = {email:'demo@user.io', password:'password'}
+		dispatch(loginUser(user))
+			.catch(async (res) => {
+				let data;
+				try {
+					data = await res.clone().json();
+				} catch {
+					data = await res.text()
+				}
+				if(data?.errors) setErrors(data.errors)
+				else if(data) setErrors([data])
+				else setErrors([res.statusText]);
+			})
 	}
 	
 	return (
 		<div className="login-form">
-			<form onSubmit={handleSubmit}>
+			<form>
 				<ul>
 					{errors.map(error => <li key={error}>{error}</li>)}
 				</ul>
@@ -65,7 +82,10 @@ const LoginForm = () => {
 				</label>
 				<br />
 				<br />
-				<input type="submit" value="Login" />
+				<input type="submit" value="Login" onClick={handleSubmit} />
+				<br />
+				<br />
+				<input type="submit" value="Demo Login" onClick={loginDemo} />
 			</form>
 		</div>
 	)

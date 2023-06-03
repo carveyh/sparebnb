@@ -2639,3 +2639,1579 @@ Processing by Api::SessionsController#create as JSON
 Completed 200 OK in 285ms (Views: 4.8ms | ActiveRecord: 2.7ms | Allocations: 9883)
 
 
+Started DELETE "/api/session" for 127.0.0.1 at 2023-06-03 00:20:14 -0400
+Processing by Api::SessionsController#destroy as JSON
+  Parameters: {"session"=>{}}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "demo@user.io"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "[FILTERED]"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Update (0.6ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "[FILTERED]"], ["updated_at", "2023-06-03 04:20:14.457548"], ["id", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+Completed 200 OK in 41ms (Views: 0.4ms | ActiveRecord: 13.7ms | Allocations: 8874)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 01:08:27 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"a@a.a", "username"=>"foo", "password"=>"[FILTERED]", "user"=>{"email"=>"a@a.a", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "a@a.a"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  Rendering api/errors/internal_server_error.json.jbuilder
+  Rendered api/errors/internal_server_error.json.jbuilder (Duration: 0.8ms | Allocations: 222)
+
+NoMethodError - undefined method `>' for nil:NilClass
+
+    if birth_date > 18.years.ago
+                  ^:
+	app/models/user.rb:58:in `validate_age'
+	app/controllers/api/users_controller.rb:7:in `create'
+
+Completed 500 Internal Server Error in 432ms (Views: 2.4ms | ActiveRecord: 12.4ms | Allocations: 10662)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 01:09:14 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1888)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:11:04 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"", "password"=>"[FILTERED]", "session"=>{"credential"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 4ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 1728)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:11:10 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"", "password"=>"[FILTERED]", "session"=>{"credential"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 1586)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:11:12 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"", "password"=>"[FILTERED]", "session"=>{"credential"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 5ms (Views: 0.3ms | ActiveRecord: 0.4ms | Allocations: 1583)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:11:13 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"", "password"=>"[FILTERED]", "session"=>{"credential"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 4ms (Views: 0.4ms | ActiveRecord: 0.3ms | Allocations: 1595)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:11:16 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"", "password"=>"[FILTERED]", "session"=>{"credential"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 4ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 1604)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:11:17 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"", "password"=>"[FILTERED]", "session"=>{"credential"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 4ms (Views: 0.3ms | ActiveRecord: 0.3ms | Allocations: 1595)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:11:26 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"demo@user.io", "password"=>"[FILTERED]", "session"=>{"credential"=>"demo@user.io", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@user.io"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "demo@user.io"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "[FILTERED]"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Update (0.9ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "[FILTERED]"], ["updated_at", "2023-06-03 05:11:27.322638"], ["id", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  Rendering api/users/show.json.jbuilder
+  [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "User"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/api/users/show.json.jbuilder:4
+  [1m[36mActiveStorage::Blob Load (0.6ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/api/users/show.json.jbuilder:4
+[36m  S3 Storage (2.8ms) [0m[34mGenerated URL for file at key: 49kvpuoc443fg4b8bhswnbhvwbvz (https://sparebnb-madison-prod.s3.amazonaws.com/49kvpuoc443fg4b8bhswnbhvwbvz?response-content-disposition=inline%3B%20filename%3D%22sample_profile_pic.jpg%22%3B%20filename%2A%3DUTF-8%27%27sample_profile_pic.jpg&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIATORC7H5WXM4YSCZO%2F20230603%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230603T051127Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=287a519b157ad6598254eb6f0b803ab6d208e17a3ae25f268fb0928162c67d43)[0m
+  Rendered api/users/show.json.jbuilder (Duration: 8.1ms | Allocations: 3201)
+Completed 200 OK in 426ms (Views: 7.2ms | ActiveRecord: 4.5ms | Allocations: 9097)
+
+
+Started DELETE "/api/session" for 127.0.0.1 at 2023-06-03 01:11:30 -0400
+Processing by Api::SessionsController#destroy as JSON
+  Parameters: {"session"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "demo@user.io"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "[FILTERED]"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Update (0.5ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "[FILTERED]"], ["updated_at", "2023-06-03 05:11:30.800791"], ["id", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 3.0ms | Allocations: 5693)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:11:52 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"", "password"=>"[FILTERED]", "session"=>{"credential"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 3ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1595)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:11:54 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"", "password"=>"[FILTERED]", "session"=>{"credential"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 3ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1595)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:12:20 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"", "password"=>"[FILTERED]", "session"=>{"credential"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 3ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1598)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:12:20 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"", "password"=>"[FILTERED]", "session"=>{"credential"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 4ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 1601)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:12:21 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"", "password"=>"[FILTERED]", "session"=>{"credential"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 4ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 1610)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:12:21 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"", "password"=>"[FILTERED]", "session"=>{"credential"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 1589)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:12:21 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"", "password"=>"[FILTERED]", "session"=>{"credential"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 4ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 1592)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:12:21 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"", "password"=>"[FILTERED]", "session"=>{"credential"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 1580)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:12:21 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"", "password"=>"[FILTERED]", "session"=>{"credential"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 5ms (Views: 0.3ms | ActiveRecord: 0.3ms | Allocations: 1601)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:12:22 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"", "password"=>"[FILTERED]", "session"=>{"credential"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 4ms (Views: 0.3ms | ActiveRecord: 0.3ms | Allocations: 1583)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:12:22 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"", "password"=>"[FILTERED]", "session"=>{"credential"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 4ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 1592)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:12:22 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"", "password"=>"[FILTERED]", "session"=>{"credential"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 1610)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:12:30 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"demo@user.io", "password"=>"[FILTERED]", "session"=>{"credential"=>"demo@user.io", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@user.io"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "demo@user.io"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "[FILTERED]"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Update (0.3ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "[FILTERED]"], ["updated_at", "2023-06-03 05:12:30.662835"], ["id", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  Rendering api/users/show.json.jbuilder
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "User"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/api/users/show.json.jbuilder:4
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/api/users/show.json.jbuilder:4
+[36m  S3 Storage (1.1ms) [0m[34mGenerated URL for file at key: 49kvpuoc443fg4b8bhswnbhvwbvz (https://sparebnb-madison-prod.s3.amazonaws.com/49kvpuoc443fg4b8bhswnbhvwbvz?response-content-disposition=inline%3B%20filename%3D%22sample_profile_pic.jpg%22%3B%20filename%2A%3DUTF-8%27%27sample_profile_pic.jpg&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIATORC7H5WXM4YSCZO%2F20230603%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230603T051230Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=57014c5c72965715442f3fc164afd653068444729b70991e653ff506d83a6439)[0m
+  Rendered api/users/show.json.jbuilder (Duration: 3.8ms | Allocations: 2884)
+Completed 200 OK in 419ms (Views: 3.7ms | ActiveRecord: 3.4ms | Allocations: 8675)
+
+
+Started DELETE "/api/session" for 127.0.0.1 at 2023-06-03 01:12:34 -0400
+Processing by Api::SessionsController#destroy as JSON
+  Parameters: {"session"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "demo@user.io"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "[FILTERED]"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Update (0.7ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "[FILTERED]"], ["updated_at", "2023-06-03 05:12:34.354099"], ["id", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+Completed 200 OK in 18ms (Views: 0.2ms | ActiveRecord: 2.9ms | Allocations: 5657)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:12:38 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"awef", "password"=>"[FILTERED]", "session"=>{"credential"=>"awef", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", "awef"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 4ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 1598)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:12:40 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"awef", "password"=>"[FILTERED]", "session"=>{"credential"=>"awef", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", "awef"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 4ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 1592)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:12:46 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"awef", "password"=>"[FILTERED]", "session"=>{"credential"=>"awef", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", "awef"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 4ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 1616)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:13:41 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"", "password"=>"[FILTERED]", "session"=>{"credential"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 3ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1595)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:13:41 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"credential"=>"", "password"=>"[FILTERED]", "session"=>{"credential"=>"", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" = $1 LIMIT $2[0m  [["phone_number", ""], ["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1595)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:14:38 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"password"=>"[FILTERED]", "session"=>{"password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "demo@user.io"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "[FILTERED]"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Update (0.4ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "[FILTERED]"], ["updated_at", "2023-06-03 05:14:38.518128"], ["id", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  Rendering api/users/show.json.jbuilder
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "User"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/api/users/show.json.jbuilder:4
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/api/users/show.json.jbuilder:4
+[36m  S3 Storage (1.1ms) [0m[34mGenerated URL for file at key: 49kvpuoc443fg4b8bhswnbhvwbvz (https://sparebnb-madison-prod.s3.amazonaws.com/49kvpuoc443fg4b8bhswnbhvwbvz?response-content-disposition=inline%3B%20filename%3D%22sample_profile_pic.jpg%22%3B%20filename%2A%3DUTF-8%27%27sample_profile_pic.jpg&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIATORC7H5WXM4YSCZO%2F20230603%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230603T051438Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=c038c425359ed111410b65c398101bfc152133d1c4fd29cc0f9882d2a3adc687)[0m
+  Rendered api/users/show.json.jbuilder (Duration: 3.8ms | Allocations: 2884)
+Completed 200 OK in 411ms (Views: 3.7ms | ActiveRecord: 3.3ms | Allocations: 8807)
+
+
+Started DELETE "/api/session" for 127.0.0.1 at 2023-06-03 01:14:41 -0400
+Processing by Api::SessionsController#destroy as JSON
+  Parameters: {"session"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "demo@user.io"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "[FILTERED]"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Update (0.3ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "[FILTERED]"], ["updated_at", "2023-06-03 05:14:41.051043"], ["id", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+Completed 200 OK in 10ms (Views: 0.1ms | ActiveRecord: 1.3ms | Allocations: 5678)
+
+
+Started POST "/api/session" for 127.0.0.1 at 2023-06-03 01:14:43 -0400
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"password"=>"[FILTERED]", "session"=>{"password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."phone_number" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/models/user.rb:44:in `find_by_credentials'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "demo@user.io"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "[FILTERED]"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Update (0.2ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "[FILTERED]"], ["updated_at", "2023-06-03 05:14:44.172562"], ["id", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  Rendering api/users/show.json.jbuilder
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "User"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/api/users/show.json.jbuilder:4
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/api/users/show.json.jbuilder:4
+[36m  S3 Storage (1.0ms) [0m[34mGenerated URL for file at key: 49kvpuoc443fg4b8bhswnbhvwbvz (https://sparebnb-madison-prod.s3.amazonaws.com/49kvpuoc443fg4b8bhswnbhvwbvz?response-content-disposition=inline%3B%20filename%3D%22sample_profile_pic.jpg%22%3B%20filename%2A%3DUTF-8%27%27sample_profile_pic.jpg&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIATORC7H5WXM4YSCZO%2F20230603%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230603T051444Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=988d9c6fbea95c59824f267ba1f263d66f16476685ea18caeef56cdfa48d01df)[0m
+  Rendered api/users/show.json.jbuilder (Duration: 3.8ms | Allocations: 2887)
+Completed 200 OK in 422ms (Views: 3.6ms | ActiveRecord: 2.7ms | Allocations: 8817)
+
+
+Started DELETE "/api/session" for 127.0.0.1 at 2023-06-03 01:14:51 -0400
+Processing by Api::SessionsController#destroy as JSON
+  Parameters: {"session"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "demo@user.io"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "[FILTERED]"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Update (1.1ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "[FILTERED]"], ["updated_at", "2023-06-03 05:14:51.973369"], ["id", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+Completed 200 OK in 17ms (Views: 0.1ms | ActiveRecord: 5.0ms | Allocations: 5667)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 01:28:39 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"demo@user.io", "password"=>"[FILTERED]", "user"=>{"email"=>"demo@user.io", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@user.io"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  Rendering api/errors/internal_server_error.json.jbuilder
+  Rendered api/errors/internal_server_error.json.jbuilder (Duration: 0.2ms | Allocations: 108)
+
+NoMethodError - undefined method `>' for nil:NilClass
+
+    if birth_date > 18.years.ago
+                  ^:
+	app/models/user.rb:58:in `validate_age'
+	app/controllers/api/users_controller.rb:7:in `create'
+
+Completed 500 Internal Server Error in 433ms (Views: 0.5ms | ActiveRecord: 13.3ms | Allocations: 9693)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 01:28:56 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 1718)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 01:37:24 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"demo@user.io", "password"=>"[FILTERED]", "user"=>{"email"=>"demo@user.io", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@user.io"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  Rendering api/errors/internal_server_error.json.jbuilder
+  Rendered api/errors/internal_server_error.json.jbuilder (Duration: 0.2ms | Allocations: 108)
+
+NoMethodError - undefined method `>' for nil:NilClass
+
+    if birth_date > 18.years.ago
+                  ^:
+	app/models/user.rb:58:in `validate_age'
+	app/controllers/api/users_controller.rb:7:in `create'
+
+Completed 500 Internal Server Error in 421ms (Views: 0.5ms | ActiveRecord: 9.4ms | Allocations: 9540)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 01:37:30 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 5ms (Views: 0.3ms | ActiveRecord: 0.8ms | Allocations: 1709)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 01:46:23 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"demo@user.io", "password"=>"[FILTERED]", "user"=>{"email"=>"demo@user.io", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@user.io"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  Rendering api/errors/internal_server_error.json.jbuilder
+  Rendered api/errors/internal_server_error.json.jbuilder (Duration: 0.5ms | Allocations: 108)
+
+NoMethodError - undefined method `>' for nil:NilClass
+
+    if birth_date > 18.years.ago
+                  ^:
+	app/models/user.rb:58:in `validate_age'
+	app/controllers/api/users_controller.rb:7:in `create'
+
+Completed 500 Internal Server Error in 431ms (Views: 1.7ms | ActiveRecord: 9.8ms | Allocations: 9512)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 01:47:12 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"demo@user.io", "password"=>"[FILTERED]", "user"=>{"email"=>"demo@user.io", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@user.io"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  Rendering api/errors/internal_server_error.json.jbuilder
+  Rendered api/errors/internal_server_error.json.jbuilder (Duration: 0.2ms | Allocations: 108)
+
+NoMethodError - undefined method `>' for nil:NilClass
+
+    if birth_date > 18.years.ago
+                  ^:
+	app/models/user.rb:58:in `validate_age'
+	app/controllers/api/users_controller.rb:7:in `create'
+
+Completed 500 Internal Server Error in 432ms (Views: 0.9ms | ActiveRecord: 1.2ms | Allocations: 6627)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 01:49:33 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"f", "password"=>"[FILTERED]", "user"=>{"email"=>"f", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "f"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  Rendering api/errors/internal_server_error.json.jbuilder
+  Rendered api/errors/internal_server_error.json.jbuilder (Duration: 0.1ms | Allocations: 108)
+
+NoMethodError - undefined method `>' for nil:NilClass
+
+    if birth_date > 18.years.ago
+                  ^:
+	app/models/user.rb:58:in `validate_age'
+	app/controllers/api/users_controller.rb:7:in `create'
+
+Completed 500 Internal Server Error in 404ms (Views: 0.4ms | ActiveRecord: 1.0ms | Allocations: 6659)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 01:53:42 -0400
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 14ms (Views: 0.2ms | ActiveRecord: 1.9ms | Allocations: 7721)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 01:53:57 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"1", "password"=>"[FILTERED]", "user"=>{"email"=>"1", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "1"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  Rendering api/errors/internal_server_error.json.jbuilder
+  Rendered api/errors/internal_server_error.json.jbuilder (Duration: 1.1ms | Allocations: 452)
+
+NoMethodError - undefined method `>' for nil:NilClass
+
+    if birth_date > 18.years.ago
+                  ^:
+	app/models/user.rb:58:in `validate_age'
+	app/controllers/api/users_controller.rb:7:in `create'
+
+Completed 500 Internal Server Error in 1450ms (Views: 1029.2ms | ActiveRecord: 3.1ms | Allocations: 962371)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 01:54:06 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 5ms (Views: 0.3ms | ActiveRecord: 0.5ms | Allocations: 1885)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 01:54:16 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"1", "password"=>"[FILTERED]", "user"=>{"email"=>"1", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "1"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  Rendering api/errors/internal_server_error.json.jbuilder
+  Rendered api/errors/internal_server_error.json.jbuilder (Duration: 0.2ms | Allocations: 109)
+
+NoMethodError - undefined method `>' for nil:NilClass
+
+    if birth_date > 18.years.ago
+                  ^:
+	app/models/user.rb:58:in `validate_age'
+	app/controllers/api/users_controller.rb:7:in `create'
+
+Completed 500 Internal Server Error in 404ms (Views: 0.4ms | ActiveRecord: 0.8ms | Allocations: 6827)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 01:55:45 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 1.4ms | Allocations: 4704)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 01:55:52 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"f", "password"=>"[FILTERED]", "user"=>{"email"=>"f", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "f"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:7:in `create'
+  Rendering api/errors/internal_server_error.json.jbuilder
+  Rendered api/errors/internal_server_error.json.jbuilder (Duration: 0.1ms | Allocations: 151)
+
+NoMethodError - undefined method `>' for nil:NilClass
+
+    if birth_date > 18.years.ago
+                  ^:
+	app/models/user.rb:58:in `validate_age'
+	app/controllers/api/users_controller.rb:7:in `create'
+
+Completed 500 Internal Server Error in 414ms (Views: 0.6ms | ActiveRecord: 2.5ms | Allocations: 9812)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 01:57:04 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 1.4ms | Allocations: 4702)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 01:57:09 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"1", "password"=>"[FILTERED]", "user"=>{"email"=>"1", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "1"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  Rendering api/errors/internal_server_error.json.jbuilder
+  Rendered api/errors/internal_server_error.json.jbuilder (Duration: 0.2ms | Allocations: 151)
+
+NoMethodError - undefined method `>' for nil:NilClass
+
+    if birth_date > 18.years.ago
+                  ^:
+	app/models/user.rb:58:in `validate_age'
+	app/controllers/api/users_controller.rb:8:in `create'
+
+Completed 500 Internal Server Error in 48124ms (Views: 1.0ms | ActiveRecord: 3.4ms | Allocations: 86043)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 01:58:01 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 1.2ms | Allocations: 4694)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 01:58:07 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"1", "password"=>"[FILTERED]", "user"=>{"email"=>"1", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "1"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 02:00:05 -0400
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  Rendering api/errors/internal_server_error.json.jbuilder
+  Rendered api/errors/internal_server_error.json.jbuilder (Duration: 0.2ms | Allocations: 151)
+
+NoMethodError - undefined method `>' for nil:NilClass
+
+    if birth_date > 18.years.ago
+                  ^:
+	app/models/user.rb:58:in `validate_age'
+	app/controllers/api/users_controller.rb:8:in `create'
+
+Completed 500 Internal Server Error in 118363ms (Views: 1.0ms | ActiveRecord: 4.9ms | Allocations: 12670)
+
+
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 1.3ms | Allocations: 4687)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 02:00:46 -0400
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 14ms (Views: 0.2ms | ActiveRecord: 2.0ms | Allocations: 7739)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 02:00:48 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 1775)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 02:00:52 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"", "lastName"=>"", "birthDate"=>"2023-06-07", "email"=>"1", "password"=>"[FILTERED]", "user"=>{"email"=>"1", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 02:01:43 -0400
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 02:01:43 -0400
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "1"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+Processing by Api::SessionsController#show as JSON
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+  [1m[36mUser Load (23.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 92ms (Views: 0.1ms | ActiveRecord: 52.3ms | Allocations: 33940)
+
+
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 92ms (Views: 0.1ms | ActiveRecord: 71.5ms | Allocations: 32705)
+
+
+  Rendering api/errors/internal_server_error.json.jbuilder
+  Rendered api/errors/internal_server_error.json.jbuilder (Duration: 2.1ms | Allocations: 451)
+
+NoMethodError - undefined method `>' for nil:NilClass
+
+    if birth_date > 18.years.ago
+                  ^:
+	app/models/user.rb:58:in `validate_age'
+	app/controllers/api/users_controller.rb:8:in `create'
+
+Completed 500 Internal Server Error in 52444ms (Views: 1239.7ms | ActiveRecord: 3.7ms | Allocations: 1051841)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 02:02:29 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"", "lastName"=>"", "birthDate"=>"2023-06-15", "email"=>"1", "password"=>"[FILTERED]", "user"=>{"email"=>"1", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "1"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  Rendering api/errors/internal_server_error.json.jbuilder
+  Rendered api/errors/internal_server_error.json.jbuilder (Duration: 0.2ms | Allocations: 109)
+
+NoMethodError - undefined method `>' for nil:NilClass
+
+    if birth_date > 18.years.ago
+                  ^:
+	app/models/user.rb:58:in `validate_age'
+	app/controllers/api/users_controller.rb:8:in `create'
+
+Completed 500 Internal Server Error in 20232ms (Views: 0.6ms | ActiveRecord: 1.1ms | Allocations: 9066)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 02:03:01 -0400
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 1.9ms | Allocations: 7726)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 02:03:13 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"", "lastName"=>"", "birthDate"=>"2023-06-22", "email"=>"3", "password"=>"[FILTERED]", "user"=>{"email"=>"3", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "3"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  Rendering api/errors/internal_server_error.json.jbuilder
+  Rendered api/errors/internal_server_error.json.jbuilder (Duration: 1.3ms | Allocations: 451)
+
+NoMethodError - undefined method `>' for nil:NilClass
+
+    if birth_date > 18.years.ago
+                  ^:
+	app/models/user.rb:58:in `validate_age'
+	app/controllers/api/users_controller.rb:8:in `create'
+
+Completed 500 Internal Server Error in 157506ms (Views: 1084.8ms | ActiveRecord: 4.4ms | Allocations: 1039149)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 02:05:55 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 14ms (Views: 0.2ms | ActiveRecord: 1.7ms | Allocations: 4717)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 02:06:16 -0400
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 12ms (Views: 0.2ms | ActiveRecord: 1.9ms | Allocations: 7714)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 02:06:24 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"", "lastName"=>"", "birthDate"=>"2023-05-31", "email"=>"1", "password"=>"[FILTERED]", "user"=>{"email"=>"1", "password"=>"[FILTERED]", "birthDate"=>"2023-05-31"}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "1"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+Completed 422 Unprocessable Entity in 381047ms (Views: 0.2ms | ActiveRecord: 3.4ms | Allocations: 1037000)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 02:13:12 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"", "lastName"=>"", "birthDate"=>"2023-05-31", "email"=>"1", "password"=>"[FILTERED]", "user"=>{"email"=>"1", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "1"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  Rendering api/errors/internal_server_error.json.jbuilder
+  Rendered api/errors/internal_server_error.json.jbuilder (Duration: 1.5ms | Allocations: 449)
+
+NoMethodError - undefined method `>' for nil:NilClass
+
+    if birth_date > 18.years.ago
+                  ^:
+	app/models/user.rb:58:in `validate_age'
+	app/controllers/api/users_controller.rb:8:in `create'
+
+Completed 500 Internal Server Error in 19800ms (Views: 8.9ms | ActiveRecord: 2.7ms | Allocations: 17173)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 02:13:43 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 41614ms (Views: 0.2ms | ActiveRecord: 1.5ms | Allocations: 9330)
+
+
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 02:15:37 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"", "lastName"=>"", "birthDate"=>"2023-05-30", "email"=>"1", "password"=>"[FILTERED]", "user"=>{"email"=>"1", "password"=>"[FILTERED]"}}
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 02:19:01 -0400
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "1"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  Rendering api/errors/internal_server_error.json.jbuilder
+  Rendered api/errors/internal_server_error.json.jbuilder (Duration: 0.2ms | Allocations: 151)
+
+NoMethodError - undefined method `>' for nil:NilClass
+
+    if birth_date > 18.years.ago
+                  ^:
+	app/models/user.rb:58:in `validate_age'
+	app/controllers/api/users_controller.rb:8:in `create'
+
+Completed 500 Internal Server Error in 307376ms (Views: 0.8ms | ActiveRecord: 2.9ms | Allocations: 153390)
+
+
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"", "lastName"=>"", "birthDate"=>"2023-05-30", "email"=>"1", "password"=>"[FILTERED]", "user"=>{"email"=>"1", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "1"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:9:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `create'
+  Rendering api/errors/internal_server_error.json.jbuilder
+  Rendered api/errors/internal_server_error.json.jbuilder (Duration: 0.2ms | Allocations: 151)
+
+NoMethodError - undefined method `>' for nil:NilClass
+
+    if birth_date > 18.years.ago
+                  ^:
+	app/models/user.rb:58:in `validate_age'
+	app/controllers/api/users_controller.rb:9:in `create'
+
+Completed 500 Internal Server Error in 17054ms (Views: 0.9ms | ActiveRecord: 3.3ms | Allocations: 18433)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 02:25:43 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 7934ms (Views: 0.2ms | ActiveRecord: 1.5ms | Allocations: 10157)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 02:26:40 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"", "lastName"=>"", "birthDate"=>"2023-05-30", "email"=>"1", "password"=>"[FILTERED]", "user"=>{"email"=>"1", "password"=>"[FILTERED]", "firstName"=>"", "lastName"=>"", "birthDate"=>"2023-05-30"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "1"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:8:in `create'
+Completed 422 Unprocessable Entity in 418ms (Views: 0.1ms | ActiveRecord: 2.4ms | Allocations: 9613)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 02:38:10 -0400
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 15ms (Views: 0.2ms | ActiveRecord: 2.2ms | Allocations: 7704)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 02:38:25 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"", "lastName"=>"", "birthDate"=>"2023-06-01", "email"=>"1", "password"=>"[FILTERED]", "user"=>{"email"=>"1", "password"=>"[FILTERED]", "firstName"=>"", "lastName"=>"", "birthDate"=>"2023-06-01"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "1"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 1417ms (Views: 0.1ms | ActiveRecord: 3.8ms | Allocations: 960442)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 02:38:42 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 5ms (Views: 0.4ms | ActiveRecord: 0.4ms | Allocations: 1766)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 02:49:41 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"", "lastName"=>"", "birthDate"=>"2023-06-10", "email"=>"2", "password"=>"[FILTERED]", "user"=>{"email"=>"2", "password"=>"[FILTERED]", "firstName"=>"", "lastName"=>"", "birthDate"=>"2023-06-10"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "2"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 426ms (Views: 0.2ms | ActiveRecord: 8.9ms | Allocations: 9670)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 02:50:02 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"", "lastName"=>"", "birthDate"=>"2023-06-10", "email"=>"2", "password"=>"[FILTERED]", "user"=>{"email"=>"2", "password"=>"[FILTERED]", "firstName"=>"", "lastName"=>"", "birthDate"=>"2023-06-10"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "2"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 405ms (Views: 0.1ms | ActiveRecord: 1.1ms | Allocations: 6574)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 02:53:24 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"", "lastName"=>"", "birthDate"=>"1997-01-06", "email"=>"2", "password"=>"[FILTERED]", "user"=>{"email"=>"2", "password"=>"[FILTERED]", "firstName"=>"", "lastName"=>"", "birthDate"=>"1997-01-06"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "2"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 407ms (Views: 0.2ms | ActiveRecord: 1.0ms | Allocations: 6474)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 02:53:40 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"", "lastName"=>"", "birthDate"=>"1997-01-06", "email"=>"jan@user.io", "password"=>"[FILTERED]", "user"=>{"email"=>"jan@user.io", "password"=>"[FILTERED]", "firstName"=>"", "lastName"=>"", "birthDate"=>"1997-01-06"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:66:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "jan@user.io"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 421ms (Views: 0.1ms | ActiveRecord: 1.0ms | Allocations: 5545)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 02:56:59 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 12ms (Views: 0.2ms | ActiveRecord: 3.4ms | Allocations: 4860)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 02:57:20 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"Demo", "lastName"=>"Lition", "birthDate"=>"1994-01-02", "email"=>"1", "password"=>"[FILTERED]", "user"=>{"email"=>"1", "password"=>"[FILTERED]", "firstName"=>"Demo", "lastName"=>"Lition", "birthDate"=>"1994-01-02"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "1"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 409ms (Views: 0.1ms | ActiveRecord: 3.7ms | Allocations: 8801)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 02:57:35 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1994-01-02", "email"=>"jan@user.io", "password"=>"[FILTERED]", "user"=>{"email"=>"jan@user.io", "password"=>"[FILTERED]", "firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1994-01-02"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "jan@user.io"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("password_digest", "email", "first_name", "last_name", "birth_date", "phone_number", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["password_digest", "[FILTERED]"], ["email", "jan@user.io"], ["first_name", "Jan"], ["last_name", "Ice"], ["birth_date", "1994-01-02"], ["phone_number", nil], ["session_token", "[FILTERED]"], ["created_at", "2023-06-03 06:57:36.303811"], ["updated_at", "2023-06-03 06:57:36.303811"]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "jan@user.io"], ["id", 13], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "[FILTERED]"], ["id", 13], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Update (0.4ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "[FILTERED]"], ["updated_at", "2023-06-03 06:57:36.312024"], ["id", 13]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  Rendering api/users/show.json.jbuilder
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 13], ["record_type", "User"], ["name", "photo"], ["LIMIT", 1]]
+  ↳ app/views/api/users/show.json.jbuilder:4
+  Rendered api/users/show.json.jbuilder (Duration: 16.1ms | Allocations: 7095)
+Completed 200 OK in 432ms (Views: 21.5ms | ActiveRecord: 6.2ms | Allocations: 20640)
+
+
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+Started DELETE "/api/session" for 127.0.0.1 at 2023-06-03 02:58:22 -0400
+Processing by Api::SessionsController#destroy as JSON
+  Parameters: {"session"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "jan@user.io"], ["id", 13], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "[FILTERED]"], ["id", 13], ["LIMIT", 1]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mUser Update (0.3ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "[FILTERED]"], ["updated_at", "2023-06-03 06:58:22.098673"], ["id", 13]]
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:51:in `reset_session_token!'
+Completed 200 OK in 11ms (Views: 0.1ms | ActiveRecord: 1.8ms | Allocations: 5953)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 02:59:48 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1993-01-02", "email"=>"jan@user.io", "password"=>"[FILTERED]", "user"=>{"email"=>"jan@user.io", "password"=>"[FILTERED]", "firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1993-01-02"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "jan@user.io"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 418ms (Views: 0.1ms | ActiveRecord: 0.8ms | Allocations: 5378)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 03:00:38 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 1717)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:10:38 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1902-06-03", "email"=>"demo@user.io", "password"=>"[FILTERED]", "user"=>{"email"=>"demo@user.io", "password"=>"[FILTERED]", "firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1902-06-03"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@user.io"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 444ms (Views: 0.3ms | ActiveRecord: 8.1ms | Allocations: 8380)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:10:50 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1902-06-04", "email"=>"demo@user.io", "password"=>"[FILTERED]", "user"=>{"email"=>"demo@user.io", "password"=>"[FILTERED]", "firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1902-06-04"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@user.io"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 410ms (Views: 0.1ms | ActiveRecord: 0.8ms | Allocations: 5342)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:10:54 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1902-06-04", "email"=>"demo@user.io", "password"=>"[FILTERED]", "user"=>{"email"=>"demo@user.io", "password"=>"[FILTERED]", "firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1902-06-04"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@user.io"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 410ms (Views: 0.1ms | ActiveRecord: 0.8ms | Allocations: 5343)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:11:05 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1902-06-04", "email"=>"d@a", "password"=>"[FILTERED]", "user"=>{"email"=>"d@a", "password"=>"[FILTERED]", "firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1902-06-04"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "d@a"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 407ms (Views: 0.1ms | ActiveRecord: 1.0ms | Allocations: 5357)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:11:11 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1902-06-11", "email"=>"d@a", "password"=>"[FILTERED]", "user"=>{"email"=>"d@a", "password"=>"[FILTERED]", "firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1902-06-11"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "d@a"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 401ms (Views: 0.1ms | ActiveRecord: 0.9ms | Allocations: 5355)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:11:18 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1973-06-11", "email"=>"d@a", "password"=>"[FILTERED]", "user"=>{"email"=>"d@a", "password"=>"[FILTERED]", "firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1973-06-11"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "d@a"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 412ms (Views: 0.1ms | ActiveRecord: 1.0ms | Allocations: 5242)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:11:34 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1902-06-03", "email"=>"d@a", "password"=>"[FILTERED]", "user"=>{"email"=>"d@a", "password"=>"[FILTERED]", "firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1902-06-03"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "d@a"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 404ms (Views: 0.1ms | ActiveRecord: 0.8ms | Allocations: 5364)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:11:38 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1903-06-03", "email"=>"d@a", "password"=>"[FILTERED]", "user"=>{"email"=>"d@a", "password"=>"[FILTERED]", "firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1903-06-03"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "d@a"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 415ms (Views: 0.1ms | ActiveRecord: 0.8ms | Allocations: 5354)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:11:40 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1903-06-03", "email"=>"d@a", "password"=>"[FILTERED]", "user"=>{"email"=>"d@a", "password"=>"[FILTERED]", "firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1903-06-03"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "d@a"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 414ms (Views: 0.1ms | ActiveRecord: 0.8ms | Allocations: 5352)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:11:44 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1906-06-03", "email"=>"d@a", "password"=>"[FILTERED]", "user"=>{"email"=>"d@a", "password"=>"[FILTERED]", "firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1906-06-03"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "d@a"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 408ms (Views: 0.1ms | ActiveRecord: 0.8ms | Allocations: 5258)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:11:49 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1904-06-03", "email"=>"d@a", "password"=>"[FILTERED]", "user"=>{"email"=>"d@a", "password"=>"[FILTERED]", "firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1904-06-03"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "d@a"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 406ms (Views: 0.1ms | ActiveRecord: 1.3ms | Allocations: 5234)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:11:51 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1904-06-03", "email"=>"d@a", "password"=>"[FILTERED]", "user"=>{"email"=>"d@a", "password"=>"[FILTERED]", "firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1904-06-03"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "d@a"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 412ms (Views: 0.1ms | ActiveRecord: 0.7ms | Allocations: 5248)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:11:54 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1903-06-03", "email"=>"d@a", "password"=>"[FILTERED]", "user"=>{"email"=>"d@a", "password"=>"[FILTERED]", "firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1903-06-03"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "d@a"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 416ms (Views: 0.1ms | ActiveRecord: 0.7ms | Allocations: 5355)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:11:56 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1904-06-03", "email"=>"d@a", "password"=>"[FILTERED]", "user"=>{"email"=>"d@a", "password"=>"[FILTERED]", "firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1904-06-03"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "d@a"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 413ms (Views: 0.1ms | ActiveRecord: 0.8ms | Allocations: 5246)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:12:00 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1903-06-04", "email"=>"d@a", "password"=>"[FILTERED]", "user"=>{"email"=>"d@a", "password"=>"[FILTERED]", "firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1903-06-04"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "d@a"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 412ms (Views: 0.1ms | ActiveRecord: 1.0ms | Allocations: 5252)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:12:03 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1903-06-03", "email"=>"d@a", "password"=>"[FILTERED]", "user"=>{"email"=>"d@a", "password"=>"[FILTERED]", "firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1903-06-03"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "d@a"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 413ms (Views: 0.1ms | ActiveRecord: 0.8ms | Allocations: 5358)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:17:59 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1903-06-03", "email"=>"d@a", "password"=>"[FILTERED]", "user"=>{"email"=>"d@a", "password"=>"[FILTERED]", "firstName"=>"Jan", "lastName"=>"Ice", "birthDate"=>"1903-06-03"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "d@a"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 420ms (Views: 0.1ms | ActiveRecord: 7.1ms | Allocations: 8241)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 03:20:04 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 15ms (Views: 0.7ms | ActiveRecord: 4.0ms | Allocations: 4821)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:20:16 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"j", "lastName"=>"j", "birthDate"=>"2023-05-01", "email"=>"j", "password"=>"[FILTERED]", "user"=>{"email"=>"j", "password"=>"[FILTERED]", "firstName"=>"j", "lastName"=>"j", "birthDate"=>"2023-05-01"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "j"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 420ms (Views: 0.1ms | ActiveRecord: 3.8ms | Allocations: 8517)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:22:49 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"j", "lastName"=>"j", "birthDate"=>"2023-05-01", "email"=>"j", "password"=>"[FILTERED]", "user"=>{"email"=>"j", "password"=>"[FILTERED]", "firstName"=>"j", "lastName"=>"j", "birthDate"=>"2023-05-01"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "j"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 412ms (Views: 0.1ms | ActiveRecord: 1.1ms | Allocations: 5632)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:23:35 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"j", "lastName"=>"j", "birthDate"=>"2023-05-01", "email"=>"j", "password"=>"[FILTERED]", "user"=>{"email"=>"j", "password"=>"[FILTERED]", "firstName"=>"j", "lastName"=>"j", "birthDate"=>"2023-05-01"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "j"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 409ms (Views: 0.1ms | ActiveRecord: 0.8ms | Allocations: 5639)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:32:25 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"j", "lastName"=>"j", "birthDate"=>"2023-05-01", "email"=>"j", "password"=>"[FILTERED]", "user"=>{"email"=>"j", "password"=>"[FILTERED]", "firstName"=>"j", "lastName"=>"j", "birthDate"=>"2023-05-01"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "j"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 434ms (Views: 0.3ms | ActiveRecord: 12.9ms | Allocations: 8626)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-03 03:33:35 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 5ms (Views: 0.5ms | ActiveRecord: 0.3ms | Allocations: 1718)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:33:43 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"j", "lastName"=>"j", "birthDate"=>"2023-05-01", "email"=>"j", "password"=>"[FILTERED]", "user"=>{"email"=>"j", "password"=>"[FILTERED]", "firstName"=>"j", "lastName"=>"j", "birthDate"=>"2023-05-01"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "j"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 409ms (Views: 0.1ms | ActiveRecord: 0.9ms | Allocations: 5632)
+
+
+Started POST "/api/users" for 127.0.0.1 at 2023-06-03 03:33:54 -0400
+Processing by Api::UsersController#create as JSON
+  Parameters: {"firstName"=>"j", "lastName"=>"j", "birthDate"=>"1901-05-01", "email"=>"j", "password"=>"[FILTERED]", "user"=>{"email"=>"j", "password"=>"[FILTERED]", "firstName"=>"j", "lastName"=>"j", "birthDate"=>"1901-05-01"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:69:in `generate_unique_session_token'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "j"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/users_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 415ms (Views: 0.1ms | ActiveRecord: 1.1ms | Allocations: 5636)
+
+

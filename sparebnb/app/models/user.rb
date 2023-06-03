@@ -58,6 +58,9 @@ class User < ApplicationRecord
     if birth_date > 18.years.ago
       errors.add(:birth_date, 'Must be 18 or over to register - birthdate will not be displayed publicly.')
     end
+    if birth_date < 120.years.ago
+      errors.add(:birth_date, 'Easter egg: as of 2023, airbnb only allows ages up to 120 years old!')
+    end
   end
 
   def self.generate_unique_session_token

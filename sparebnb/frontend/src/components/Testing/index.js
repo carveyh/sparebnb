@@ -94,4 +94,36 @@ export default Testing;
 		// Combines flex-direction & flex-wrap
 			// Default: row nowrap
 			// Switch up order: column wrap-reverse
-			
+	////////////////
+	// Display basics
+	////////////////
+		// display: block
+			// Takes up entire width of container, forcing other elements on newline above and below its content
+		// display: inline (e.g. span)
+			// Takes up minimal space possible, inline elements fit as closely as possible
+			// cannot take width / height
+		// display: inline-block
+			// can set width and height, but behaves like inline in document flow
+		// display: none
+			// as if element does not exist, does not take up space in document flow.
+	////////////////
+	// Variables
+	////////////////
+		// Cascade down and can be inherited by descendant elements
+			// :root {
+			//  	--div-background-color: red;
+			// }
+			// 
+			// .child {
+			//	background-color: var(--div-background-color); 
+			// 	color: var(--div-background-color, pink) (can specify a default value if css variable not found)
+			// }
+			// 
+			// .one {
+			//	--div-background-color: blue (can override an applied variable on select elements) 
+			// }
+		// Manipulate with JS:
+			// READ
+			// window.getComputedStyle(document.documentElement).getPropertyValue('--div-background-color')
+			// WRITE
+			// In click handler: document.documentElement.style.setProperty('--div-background-color', '#333')
