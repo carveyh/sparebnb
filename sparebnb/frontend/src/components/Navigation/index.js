@@ -30,7 +30,21 @@ return (
 						<img src={require("../../images/sparebnb_logo_2.png")} style={{width:"140px", height:"32px"}}/>
 					</div>
 					<div className="upper-navbar-search-container">
-						<div className="upper-navbar-search"> Anywhere | Any week | Add guests </div>
+						<div className="upper-navbar-search">
+							{/* Anywhere | Any week | Add guests  */}
+							<span className="search-location-unopened"></span>
+							<button className="search-location-unopened">
+								Anywhere
+							</button>
+							<span className="search-date-unopened"></span>
+							<button className="search-date-unopened">
+								Any week
+							</button>
+							<span className="search-people-unopened"></span>
+							<button className="search-people-unopened">
+								Add guests Q
+							</button>
+						</div>
 					</div>
 					<nav className="upper-navbar-right"> Airbnb your home | O | Add guests </nav>
 				</div>

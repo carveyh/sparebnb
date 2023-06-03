@@ -27,7 +27,6 @@
 	/* Padding changes - if it is full screen, 80px, else 40px */
 	padding: 0px 80px;
 	font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-
 }
 
 .upper-navbar-logo {
@@ -36,33 +35,91 @@
 	align-items: center;
 	position: relative;
 	vertical-align: middle;
-	/* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
 	font-size: 35px;
 	color: red;
 }
 
+/****************************/
+/* UPPER NAV BAR SEARCH BAR */
+/****************************/
+
 .upper-navbar-search-container {
-	padding: 0px 24px;
-	min-width: 348px;
-	/* this flex-grow of 1 is probably not right... */
-	flex: 0 1 auto; 
-	box-sizing: border-box;
-	text-align: center;
-	display: block;
-	display:flex;
-	justify-content: space-around;
-	align-items: center;
-	font-size: 16px;
-	color: #222222;
-	line-height: 20px;
-	font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+	min-width: 352px;
 	height: 48px;
-	border-radius: 40px;
-	border: 1px lightgray solid;
-	box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
-	transition: box-shadow 0.2s ease;
+	
+	flex: 0 1 auto; 
+	display: block;
+	padding: 0px 24px;
+	box-sizing: border-box;
+
+	/* text-align: center; */
+	/* line-height: 20px; */
 }
 
+.upper-navbar-search {
+	display: flex;
+	height: 48px;
+	width: 350px;
+	border: 1px lightgray solid;
+	border-radius: 40px;
+	
+	justify-content: space-around;
+	align-items: center;
+	
+	box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+	transition: box-shadow 0.2s ease;
+
+	color: #222222;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+span.search-location-unopened {
+	width: 1px;
+	height: 1px;
+}
+
+span.search-date-unopened, span.search-people-unopened {
+	width: 1px;
+	height: 24px;
+	background-color: rgb(221,221,221);
+}
+
+.upper-navbar-search > button {
+	padding: 0px;
+	margin: -1px;
+	border: 1px solid rgba(0,0,0,0);
+	/* border: 1px solid green; */
+	background-color: rgba(0,0,0,0);
+	appearance: none;
+	box-sizing: border-box;
+	font-family: inherit;
+	font-weight: inherit;
+}
+
+button.search-location-unopened {
+	width: 99px;
+	height: 46px;
+	padding-left: 8px;
+	padding-right: 0px;
+}
+
+button.search-date-unopened {
+	width: 96px;
+	height: 46px;
+}
+
+button.search-people-unopened {
+	width: 144px;
+	height: 46px;
+	font-weight: 200;
+}
+
+
+
+/****************************/
+/* UPPER NAV BAR TOP RIGHT LINKS */
+/****************************/
 
 .upper-navbar-right {
 	flex: 1 0 140px;

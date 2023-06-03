@@ -4,7 +4,14 @@ import sessionReducer from './session';
 
 const rootReducer = combineReducers({
 	session: sessionReducer
+	// session: sessionReducer,
+	// entities: entitiesReducer
 });
+
+// const entitiesReducer = combineReducers({
+// 	users: usersReducer,
+// 	listings: listingsReducer
+// })
 
 let enhancer;
 
