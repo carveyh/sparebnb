@@ -4,16 +4,24 @@ const Testing = (props) => {
 	return (
 		<>
 			<div className="main-test-div" >
-				Hello from testing!
+				<div className="fake-header">
+					Hello from testing!
+				</div>
+				<br />
+				<p>
+					This para. Default font-size is 16. 
+					<ul>
+						<li>`font-size: #rem` makes a factor of root's font-size.</li>
+						<li>`font-size: #em` makes a factor of container's font-size.</li>
+					</ul>
+				</p>
+
+				<div className="ani-parent">
+					<div className="ani-child"></div>
+				</div>
+
+
 			</div>
-			<br />
-			<p>
-				This para. Default font-size is 16. 
-				<ul>
-					<li>`font-size: #rem` makes a factor of root's font-size.</li>
-					<li>`font-size: #em` makes a factor of container's font-size.</li>
-				</ul>
-			</p>
 		</>
 	)
 }
@@ -21,6 +29,7 @@ const Testing = (props) => {
 export default Testing;
 
 // rem & em: https://www.sitepoint.com/understanding-and-using-rem-units-in-css/#:~:text=In%20CSS%20rem%20stands%20for,and%20spacing%20throughout%20your%20UI.
+	// rem Relative to document root element, em relative to parent of target element.
 // Devtools advanced usage https://www.youtube.com/watch?v=151NXMk0a2c
 // Devtools CSS Flexbox visualizer https://developer.chrome.com/docs/devtools/css/flexbox/#layout
 // Flexbox: https://www.youtube.com/watch?v=1zKX71GYisE
@@ -131,3 +140,8 @@ export default Testing;
 	// FORM ELEMENT STYLING:
 	////////////////
 		// FORM ELEMENTS DO NOT INHERIT FONT SETTINGS!!! https://stackoverflow.com/questions/26140050/why-is-font-family-not-inherited-in-button-tags-automatically
+	////////////////
+	// CSS ANIMATIONS
+	////////////////
+		// transition (simple)
+		// animation (complex)
