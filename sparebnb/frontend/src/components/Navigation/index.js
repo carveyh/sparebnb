@@ -68,13 +68,14 @@ return (
 								</div>
 							</div>
 							<div className="session-menu-div">
-								{/* <u>=</u> */}
-								<button className="session-menu-button">
+								{/* <button className="session-menu-button">
+									<ProfileButton />
 									<i className="fa-solid fa-bars"></i>
 									<div className="user-icon">
 										<i className="fa-solid fa-user"></i>
 									</div>
-								</button>
+								</button> */}
+								<ProfileButton />
 							</div>
 						</nav>
 					</div>
@@ -86,7 +87,7 @@ return (
 				</div>
 			</header>
 			<div className="nav-bar-container">
-				<ProfileButton />
+				{/* <ProfileButton /> */}
 				<ul className="nav-bar-links">
 					<li><NavLink exact activeStyle={{ backgroundColor:"blue" }} to="/testing">Testing</NavLink></li>
 					<li><NavLink exact activeStyle={{ backgroundColor:"blue" }} to="/">Home</NavLink></li>
