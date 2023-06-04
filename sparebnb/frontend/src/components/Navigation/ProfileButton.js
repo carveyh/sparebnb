@@ -7,12 +7,18 @@ import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+
+// import LoginForm from "../LoginFormModal/LoginForm";
+// import SignupForm from "../SignupFormModal/SignupForm";
+// import { Modal } from "../../context/Modal";
+
 import "./Navigation.css";
 
-const ProfileButton = () => {
+const ProfileButton = ({setShowSignUpModal, setShowLogInModal}) => {
 	const dispatch = useDispatch();
 	const sessionUser = useSelector(state => state.session?.user)
 	const [showMenu, setShowMenu] = useState(false);
+	// const [showSignUpModal, setShowSignUpModal] = useState(false);
 
 	const handleLogout = (e) => {
 		e.preventDefault();
@@ -32,15 +38,15 @@ const ProfileButton = () => {
 		setShowMenu(oldShowMenu => !oldShowMenu);
 	}
 
-	// useEffect(() => {
-	// 	if(showMenu){
-	// 		const closeMenu = () => {
-	// 			setShowMenu(false)
-	// 		}	
-	// 		document.addEventListener("click", closeMenu)
-	// 		return () => document.removeEventListener("click", closeMenu)
-	// 	}
-	// }, [showMenu])
+	useEffect(() => {
+		if(showMenu){
+			const closeMenu = () => {
+				setShowMenu(false)
+			}	
+			document.addEventListener("click", closeMenu)
+			return () => document.removeEventListener("click", closeMenu)
+		}
+	}, [showMenu])
 
 
 	const MenuDivider = () => {
@@ -52,12 +58,44 @@ const ProfileButton = () => {
 	let sessionLinks;
 
 	if(!sessionUser) {
+		// debugger
 		sessionLinks = (
 			<>
-				{/* <li>Sign up</li>
-				<li>Log in</li> */}
-				<li><SignupFormModal /></li>
-				<li><LoginFormModal /></li>
+
+
+
+
+
+
+				{/* HERE WE GO - START*/}
+				{/* <li><SignupFormModal /></li> */}
+				{/* <li onClick={e => setShowSignUpModal(true)}>Sign up</li>
+				{showSignUpModal && 
+					<Modal onClose={e => setShowSignUpModal(false)}>
+						<SignupForm />
+					</Modal>
+				} */}
+				<li onClick={e => setShowSignUpModal(true)}>Sign up</li>
+
+
+
+
+
+
+
+				{/* HERE WE GO - END */}
+
+
+
+
+
+
+
+
+
+
+				<li onClick={e => setShowLogInModal(true)}>Log in</li>
+				{/* <li><LoginFormModal /></li> */}
 				<li><MenuDivider /></li>
 				<li>Sparebnb your home</li>
 				<li>Help</li>
@@ -127,15 +165,16 @@ const ProfileButton = () => {
 		// 	{(showMenu && sessionUser) && <ProfileDropMenu />}
 
 		// </div>
-
+<>
 <button className="session-menu-button" onClick={toggleMenu}>
 {/* <button className="session-menu-button" onClick={openMenu}> */}
-	{showMenu&& <ProfileDropMenu />}
 	<i className="fa-solid fa-bars"></i>
 	<div className="user-icon">
 		<i className="fa-solid fa-user"></i>
 	</div>
 </button>
+	{showMenu&& <ProfileDropMenu />}
+</>
 	)
 }
 

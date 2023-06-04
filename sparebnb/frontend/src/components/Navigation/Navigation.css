@@ -303,6 +303,10 @@ ul.nav-bar-links {
 	/* justify-self: flex-start; */
 }
 
+.profile-drop-menu li:hover {
+	background-color: rgb(247,247,247);
+}
+
 .profile-drop-menu li:nth-child(1) {
 	font-weight: 500;
 }

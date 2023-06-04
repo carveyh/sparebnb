@@ -5,9 +5,15 @@ import { NavLink, Link } from "react-router-dom"
 import ProfileButton from "./ProfileButton"
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import LoginForm from "../LoginFormModal/LoginForm";
+import SignupForm from "../SignupFormModal/SignupForm";
+import { Modal } from "../../context/Modal";
+import { useState } from "react";
 
 const Navigation = () => {
 	const sessionUser = useSelector(state => state.session?.user)
+	const [showSignUpModal, setShowSignUpModal] = useState(false);
+	const [showLogInModal, setShowLogInModal] = useState(false);
 
 	let sessionLinks;
 
@@ -23,9 +29,6 @@ const Navigation = () => {
 
 return (
 		<>
-			{/* <div>
-				Placeholder
-			</div> */}
 			<header className="upper-navbar-header">
 				<div className="upper-navbar-container">
 					<div className="upper-navbar-logo-div">
@@ -75,7 +78,10 @@ return (
 										<i className="fa-solid fa-user"></i>
 									</div>
 								</button> */}
-								<ProfileButton />
+								<ProfileButton 
+									setShowSignUpModal={setShowSignUpModal}
+									setShowLogInModal={setShowLogInModal}
+								/>
 							</div>
 						</nav>
 					</div>
@@ -86,14 +92,13 @@ return (
 
 				</div>
 			</header>
-			<div className="nav-bar-container">
-				{/* <ProfileButton /> */}
-				<ul className="nav-bar-links">
-					<li><NavLink exact activeStyle={{ backgroundColor:"blue" }} to="/testing">Testing</NavLink></li>
-					<li><NavLink exact activeStyle={{ backgroundColor:"blue" }} to="/">Home</NavLink></li>
-					{sessionLinks}
-				</ul>
-			</div>
+			
+			{showSignUpModal && <Modal onClose={e => setShowSignUpModal(false)}>
+				<SignupForm />
+			</Modal>}
+			{showLogInModal && <Modal onClose={e => setShowLogInModal(false)}>
+				<LoginForm />
+			</Modal>}
 		</>
 	)
 }

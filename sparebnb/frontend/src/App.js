@@ -2,14 +2,13 @@
 import { Route, Link, NavLink, Switch, useHistory } from "react-router-dom";
 // import SignupFormPage from "./components/SignupFormModal/SignupForm";
 import Navigation from "./components/Navigation";
-import { useSelector } from "react-redux";
 import Testing from "./components/Testing";
 import ListingsIndex from "./components/Listings/ListingsIndex";
 
 function App() {
   // const history = useHistory();
 
-  const sessionUser = useSelector(state => state.session?.user )
+  
   const loremIpsumWall = []
   const LoremIpsum = ({className}) => {
     return(
@@ -24,9 +23,7 @@ function App() {
       <Navigation />
 
       <div id="main-body">
-        {sessionUser &&
-          <img src={sessionUser.photoUrl} />  
-        }
+
         <Switch>
           <Route exact path="/testing"><Testing /></Route>
           {/* <Route exact path="/">{loremIpsumWall}</Route> */}

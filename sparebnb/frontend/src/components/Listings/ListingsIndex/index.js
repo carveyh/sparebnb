@@ -1,7 +1,8 @@
 import "./ListingsIndex.css";
+import { useSelector } from "react-redux";
 
 const ListingsFilter = () => {
-
+	
 	return (
 		<div className="carousel-container">
 			<div className="carousel-main">
@@ -107,9 +108,7 @@ const ListingsFilter = () => {
 }
 
 const ListingsIndex = () => {
-
-
-	
+	const sessionUser = useSelector(state => state.session?.user )
 	return (
 		<>
 			<ListingsFilter/>
@@ -119,8 +118,11 @@ const ListingsIndex = () => {
 				<br/>
 				<br/>
 				<br/>
-				<br/>
 				Listings grid goes here.
+				<br/>
+				{sessionUser &&
+          <img src={sessionUser.photoUrl} />  
+        }
 			</div>
 		</>
 	)
