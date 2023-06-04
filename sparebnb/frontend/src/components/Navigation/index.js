@@ -63,13 +63,18 @@ return (
 								<NavLink className="host-home-link" to="/">Sparebnb your home</NavLink>
 								<div className="lang-button-div">
 									<button className="lang-button" >
-									<i className="fa-brands fa-github"></i>
+										<i className="fa-brands fa-github"></i>
 									</button>
 								</div>
 							</div>
-							<div className="session-menu">
-								<u>=</u>
-
+							<div className="session-menu-div">
+								{/* <u>=</u> */}
+								<button className="session-menu-button">
+									<i className="fa-solid fa-bars"></i>
+									<div className="user-icon">
+										<i className="fa-solid fa-user"></i>
+									</div>
+								</button>
 							</div>
 						</nav>
 					</div>

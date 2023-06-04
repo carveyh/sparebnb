@@ -13,7 +13,6 @@
 	box-sizing: border-box;
 	display: block;
 	background-color: white;
-	/* padding: 48px; */
 }
 
 /****************************/
@@ -55,21 +54,15 @@
 /****************************/
 
 .upper-navbar-search-container {
-	/* min-width: 352px; */
 	height: 48px;
 	
 	flex: 0 1 auto; 
 	display: block;
 	padding: 0px 24px;
 	box-sizing: border-box;
-
-	/* text-align: center; */
-	/* line-height: 20px; */
 }
 
 .upper-navbar-search:hover {
-	/* box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05); */
-	/* box-shadow: 0 4px 12px rgba(0,0,0,0.18); */
 	box-shadow: 0 2px 4px rgba(0,0,0,0.18);
 }
 
@@ -85,7 +78,6 @@
 	
 	
 	box-shadow: 0 1px 2px rgba(0,0,0,0.08);
-	/* box-shadow: rgba(0,0,0,0.08); */
 	transition: box-shadow 0.2s ease;
 
 	color: #222222;
@@ -108,31 +100,26 @@ span.search-date-unopened, span.search-people-unopened {
 	padding: 0px;
 	margin: -1px;
 	border: 1px solid rgba(0,0,0,0);
-	/* border: 1px solid green; */
 	background-color: rgba(0,0,0,0);
 	appearance: none;
 	box-sizing: border-box;
 	font-family: inherit;
 	font-size: 14px;
-	font-weight: 600;
+	font-weight: 500;
 }
 
 button.search-location-unopened {
-	/* width: 99px; */
 	height: 46px;
 	padding-left: 24px;
 	padding-right: 16px;
-	/* padding-right: 0px; */
 }
 
 button.search-date-unopened {
-	/* width: 96px; */
 	height: 46px;
 	padding: 0px 16px;
 }
 
 button.search-people-unopened {
-	/* width: 144px; */
 	height: 46px;
 	font-weight: 200;
 	display: flex;
@@ -144,7 +131,6 @@ div.search-people-unopened-text {
 }
 
 div.search-people-unopened-magnifying {
-	/* padding: 0px 16px; */
 	height: 12px;
 	width: 12px;
 	padding: 10px;
@@ -175,7 +161,6 @@ div.search-people-unopened-magnifying {
 
 .upper-navbar-right {
 	height: 80px;
-	/* flex: 1 0 140px; */
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
@@ -183,37 +168,75 @@ div.search-people-unopened-magnifying {
 
 .host-lang-buttons {
 	height: 42px;
-	/* width: 355px; */
 	box-sizing: border-box;
 	margin-right: 8px;
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	/* flex-grow: 1; */
 }
 
 .host-home-link {
 	font-size: 14px;
-	font-weight: 600;
+	font-weight: 500;
 	padding: 12px;
 }
 
 .lang-button-div {
 	height: 42px;
-	width: 40px;
+	/* width: 40px; */
 	padding: 0px;
 
 	box-sizing: border-box;
 }
 
 .lang-button {
-	height: 18px;
-	width: 16px;
+	height: 100%;
+	width: 100%;
 	box-sizing: border-box;
 	margin: 0px;
 	border: 0px;
 	padding: 12px;
 	background-color: rgba(0,0,0,0);
+}
+
+.lang-button > i {
+	font-size: 16px;
+}
+
+.session-menu-div {
+	display: block;
+	/* height: 80px; */
+	/* width: 100%; */
+}
+
+.session-menu-button {
+	height: 42px;
+	display: inline-flex;
+	align-items: center;
+	padding: 5px 5px 5px 12px;
+	border-radius: 21px;
+	border: 1px solid rgb(221,221,221);
+	background-color: white;
+}
+
+.session-menu-button > i:nth-child(1) {
+	font-size: 14px;
+}
+
+.user-icon {
+	height: 30px;
+	width: 30px;
+	margin: 0px 0px 0px 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 15px;
+	background-color: rgb(113,113,113);
+	color: white;
+}
+
+.session-menu-button > div > i {
+	font-size: 18px;
 }
 
 /****************************/
