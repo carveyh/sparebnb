@@ -1,0 +1,36 @@
+.listings-main {
+	background-color: rgba(240,255,255,1);
+	height: 2000px;
+}
+
+.carousel-container {
+	position: sticky;
+	top:80px;
+	width: 100%;
+	display: block;
+	height: 78px;
+	background-color: rgba(221,221,221,1);
+}
+
+.carousel-main {
+	/* gap: 2em; */
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow-x:scroll;
+	overscroll-behavior-x: none;
+
+}
+
+.carousel-main::-webkit-scrollbar {
+	display: none;
+}
+
+.listing-preview {
+	min-width: 40px;
+	min-height: 40px;
+	margin: 5px;
+	border: 1px solid red;
+}

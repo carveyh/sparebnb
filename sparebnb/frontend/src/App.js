@@ -4,6 +4,7 @@ import { Route, Link, NavLink, Switch, useHistory } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import { useSelector } from "react-redux";
 import Testing from "./components/Testing";
+import ListingsIndex from "./components/Listings/ListingsIndex";
 
 function App() {
   // const history = useHistory();
@@ -21,38 +22,24 @@ function App() {
   return (
     <div>
       <Navigation />
-      {/* <h1>abnb</h1> */}
+
       <div id="main-body">
+        {sessionUser &&
+          <img src={sessionUser.photoUrl} />  
+        }
         <Switch>
-          {/* <Route exact path="/signup">
-            <SignupFormPage />
-          </Route> */}
-          <Route exact path="/testing">
-            <Testing />
-          </Route>
+          <Route exact path="/testing"><Testing /></Route>
+          {/* <Route exact path="/">{loremIpsumWall}</Route> */}
           <Route exact path="/">
-            {sessionUser &&
-              <img src={sessionUser.photoUrl} />  
-              // <img src={`https://sparebnb-madison-seeds.s3.amazonaws.com/Screenshot+2023-05-17+at+10.15.45+PM.png`} />  
-            }
-            <LoremIpsum />
-            <LoremIpsum />
-            <LoremIpsum />
-            <LoremIpsum />
-            <LoremIpsum />
-            <LoremIpsum className="random-sticky-para" />
+            {<ListingsIndex/>}
+            {/* {loremIpsumWall}
             {loremIpsumWall}
+            {loremIpsumWall} */}
           </Route>
-          {/* <Route>
-            <>
-            {history.replace("/")}
-            </>
-          </Route> */}
-          <Route>
-            <h1>404 - page not found.</h1>
-          </Route>
+          <Route><h1>404 - page not found.</h1></Route>
         </Switch>
       </div>
+
     </div>
   );
 }

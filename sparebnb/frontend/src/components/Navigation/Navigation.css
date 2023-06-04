@@ -251,8 +251,8 @@ div.search-people-unopened-magnifying {
 
 .nav-bar-container {
 	height: 60px;
-	position: sticky;
-	top:80px;
+	/* position: sticky; */
+	/* top:80px; */
 	background-color: lightsteelblue;
 	padding: 0px 80px;
 	z-index: 1;
