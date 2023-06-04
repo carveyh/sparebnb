@@ -1,31 +1,17 @@
 import "./Navigation.css";
-import { useSelector } from "react-redux"
-import { NavLink, Link } from "react-router-dom"
+import { NavLink} from "react-router-dom"
 
 import ProfileButton from "./ProfileButton"
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
 import LoginForm from "../LoginFormModal/LoginForm";
 import SignupForm from "../SignupFormModal/SignupForm";
 import { Modal } from "../../context/Modal";
 import { useState } from "react";
 
 const Navigation = () => {
-	const sessionUser = useSelector(state => state.session?.user)
+	
 	const [showSignUpModal, setShowSignUpModal] = useState(false);
 	const [showLogInModal, setShowLogInModal] = useState(false);
 
-	let sessionLinks;
-
-	if(!sessionUser){
-		sessionLinks = (
-			<>
-			<li><LoginFormModal /></li>
-			<li><SignupFormModal /></li>
-			{/* <li><NavLink exact activeStyle={{ backgroundColor:"teal" }} to="/signup">Signup</NavLink></li> */}
-			</>
-		)
-	}
 
 return (
 		<>
@@ -58,8 +44,7 @@ return (
 						</div>
 					</div>
 
-					{/* OPERATION: UPPER RIGHT NAV!!! START */}
-
+					{/* UPPER RIGHT NAV!!! START */}
 					<div className="upper-navbar-right-div">
 						<nav className="upper-navbar-right"> 
 							<div className="host-lang-buttons">
@@ -71,13 +56,6 @@ return (
 								</div>
 							</div>
 							<div className="session-menu-div">
-								{/* <button className="session-menu-button">
-									<ProfileButton />
-									<i className="fa-solid fa-bars"></i>
-									<div className="user-icon">
-										<i className="fa-solid fa-user"></i>
-									</div>
-								</button> */}
 								<ProfileButton 
 									setShowSignUpModal={setShowSignUpModal}
 									setShowLogInModal={setShowLogInModal}
@@ -85,10 +63,7 @@ return (
 							</div>
 						</nav>
 					</div>
-
-
-
-					{/* OPERATION: UPPER RIGHT NAV!!! END */}
+					{/* UPPER RIGHT NAV!!! END */}
 
 				</div>
 			</header>
