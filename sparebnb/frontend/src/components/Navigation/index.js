@@ -62,7 +62,9 @@ return (
 							<div className="host-lang-buttons">
 								<NavLink className="host-home-link" to="/">Sparebnb your home</NavLink>
 								<div className="lang-button-div">
-									<button className="lang-button" >O</button>
+									<button className="lang-button" >
+									<i className="fa-brands fa-github"></i>
+									</button>
 								</div>
 							</div>
 							<div className="session-menu">

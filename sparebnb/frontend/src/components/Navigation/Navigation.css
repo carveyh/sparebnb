@@ -67,6 +67,12 @@
 	/* line-height: 20px; */
 }
 
+.upper-navbar-search:hover {
+	/* box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05); */
+	/* box-shadow: 0 4px 12px rgba(0,0,0,0.18); */
+	box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+}
+
 .upper-navbar-search {
 	display: flex;
 	height: 48px;
@@ -77,7 +83,9 @@
 	justify-content: space-around;
 	align-items: center;
 	
-	box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+	
+	box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+	/* box-shadow: rgba(0,0,0,0.08); */
 	transition: box-shadow 0.2s ease;
 
 	color: #222222;
