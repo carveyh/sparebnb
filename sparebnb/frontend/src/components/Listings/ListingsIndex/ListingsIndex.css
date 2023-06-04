@@ -12,25 +12,30 @@
 	background-color: rgba(221,221,221,1);
 }
 
+.carousel-main::-webkit-scrollbar {
+	display: none;
+}
+
 .carousel-main {
 	/* gap: 2em; */
 	height: 100%;
 	width: 100%;
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	overflow-x:scroll;
 	overscroll-behavior-x: none;
-
-}
-
-.carousel-main::-webkit-scrollbar {
-	display: none;
 }
 
 .listing-preview {
 	min-width: 40px;
 	min-height: 40px;
-	margin: 5px;
+	margin: 0px 16px;
 	border: 1px solid red;
+}
+.listing-preview:first-child {
+	margin-left: 0px;
+}
+.listing-preview:last-child {
+	margin-right: 0px;
 }
