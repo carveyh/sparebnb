@@ -42,7 +42,8 @@
 	/* transition: border-radius 0.5s ease-in-out 0.1s; */
 	/* transition: css property to transition, transition duration, timing function, delay before start */
 	
-	transition: transform 1s ease-in;
+	/* transition: transform 1s ease-in; */
+	animation: left-to-right 1s linear forwards infinite 0.1s;
 
 }
 
@@ -54,7 +55,7 @@
 
 	/* Convert from simple transition to complex animation: */
 	/* UNLIKE TRANSITION: write the animation where you want it to happen: */
-	/* SYNTAX: animation name (custom), duration, timing function, delay */
+	/* SYNTAX: animation name (custom), duration, timing function, iteration count, direction (alternate / alternate-reverse), delay */
 		/* RE: animation name - see @keyframes below */
 	/* FROM: transition: transform 1s; */
 	/* TO: */
@@ -63,14 +64,29 @@
 		/* forwards - keep all 100% properties applied at end of animation */
 		/* backwards - apply all 0% properties before start of animation */
 		/* both -  do both */
-	animation: left-to-right 1s ease-in;
-	animation: left-to-right 1s ease-in both;
+	/* animation: left-to-right 1s ease-in; */
+	/* animation: left-to-right 1s ease-in forwards 3 alternate-reverse 0.3s; */
+	/* animation: left-to-right 1s ease-in forwards infinite alternate-reverse 0.3s; */
+
+	animation-play-state: running;
+	animation-play-state: paused;
 }
 
 /* This must be outside any selector. */
 @keyframes left-to-right {
-	/* Define all the states from 0 to 100% completion. */
-	100% {
+	0% {
+		transform: translateX(0%);
+	}
+	25% {
 		transform: translateX(100%);
+	}
+	50% {
+		transform: translateX(100%) translateY(100%);
+	}
+	75% {
+		transform: translateY(100%);
+	}
+	100% {
+		transform: translateX(0%);
 	}
 }
