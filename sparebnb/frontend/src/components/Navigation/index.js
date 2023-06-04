@@ -45,10 +45,12 @@ return (
 							</button>
 							<span className="search-people-unopened"></span>
 							<button className="search-people-unopened">
-								<div className="search-people-unopened" >
+								<div className="search-people-unopened-text" >
 									Add guests
 								</div>
-								<i className="fa-solid fa-magnifying-glass"></i>
+								<div className="search-people-unopened-magnifying">
+									<i className="fa-solid fa-magnifying-glass"></i>
+								</div>
 							</button>
 						</div>
 					</div>

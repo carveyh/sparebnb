@@ -96,6 +96,7 @@ span.search-date-unopened, span.search-people-unopened {
 }
 
 .upper-navbar-search > button {
+	cursor: pointer;
 	padding: 0px;
 	margin: -1px;
 	border: 1px solid rgba(0,0,0,0);
@@ -109,25 +110,44 @@ span.search-date-unopened, span.search-people-unopened {
 }
 
 button.search-location-unopened {
-	width: 99px;
+	/* width: 99px; */
 	height: 46px;
-	padding-left: 8px;
-	padding-right: 0px;
+	padding-left: 24px;
+	padding-right: 16px;
+	/* padding-right: 0px; */
 }
 
 button.search-date-unopened {
-	width: 96px;
+	/* width: 96px; */
 	height: 46px;
+	padding: 0px 16px;
 }
 
 button.search-people-unopened {
-	width: 144px;
+	/* width: 144px; */
 	height: 46px;
 	font-weight: 200;
+	display: flex;
+	align-items: center;
 }
 
-div.search-people-unopened {
+div.search-people-unopened-text {
 	padding: 0px 16px;
+}
+
+div.search-people-unopened-magnifying {
+	/* padding: 0px 16px; */
+	height: 12px;
+	width: 12px;
+	padding: 10px;
+	margin: 7px 7px 7px 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 12px;
+	background-color: red;
+	color: white;
+	border-radius: 18px;
 }
 
 
