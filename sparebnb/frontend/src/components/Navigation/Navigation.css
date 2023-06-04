@@ -62,7 +62,7 @@
 	box-sizing: border-box;
 }
 
-.upper-navbar-search:hover {
+.session-menu-button:hover, .upper-navbar-search:hover {
 	box-shadow: 0 2px 4px rgba(0,0,0,0.18);
 }
 
@@ -179,6 +179,11 @@ div.search-people-unopened-magnifying {
 	font-size: 14px;
 	font-weight: 500;
 	padding: 12px;
+}
+
+.lang-button:hover, .host-home-link:hover {
+	background-color: rgb(247,247,247);
+	border-radius: 22px;
 }
 
 .lang-button-div {
