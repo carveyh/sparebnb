@@ -1,21 +1,18 @@
-import LoginForm from "./LoginForm";
-import { useState } from "react";
-import { Modal } from "../../context/Modal";
-// import { NavLink } from "react-router-dom";
+// import LoginForm from "./LoginForm";
+// import { useState } from "react";
+// import { Modal } from "../../context/Modal";
 
-const LoginFormModal = () => {
-	const [showModal, setShowModal] = useState(false);
+// const LoginFormModal = () => {
+// 	const [showModal, setShowModal] = useState(false);
 
-	return (
-		<>
-			<div onClick={e => setShowModal(true)}>Log in</div>
-			{/* <NavLink onClick={e => setShowModal(true)} to="">Log In</NavLink> */}
-			{/* <button onClick={e => setShowModal(true)}>Log In</button> */}
-			{showModal && <Modal onClose={e => setShowModal(false)}>
-				<LoginForm />
-			</Modal>}
-		</>
-	)
-}
+// 	return (
+// 		<>
+// 			<div onClick={e => setShowModal(true)}>Log in</div>
+// 			{showModal && <Modal onClose={e => setShowModal(false)}>
+// 				<LoginForm />
+// 			</Modal>}
+// 		</>
+// 	)
+// }
 
-export default LoginFormModal;
+// export default LoginFormModal;

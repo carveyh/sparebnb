@@ -1,4 +1,92 @@
 .main-test-div {
+	font-size: 20px;
+}
+
+.fake-header {
 	color: green;
-	font-size: 16px;
+	font-size: 40px;
+}
+
+.main-test-div p {
+	
+}
+
+.main-test-div li:nth-child(1) {
+	font-size: 2em;
+}
+
+.main-test-div li:nth-child(2) {
+	font-size: 2rem;
+}
+
+.ani-parent {
+	background-color: hsla(200, 100%, 20%);
+	height: 400px;
+	width: 400px;
+}
+
+.ani-child {
+	background-color: red;
+	height: 50%;
+	width: 50%;
+	border-radius: 0px;
+	/* by default, transition applies to all changes in style. we want to select specific. */
+	/* transition: all; */
+	/* transition: 1s; */
+
+	/* NOTE: want to apply `transition` to base class, and NOT modified e.g. :hover class */
+	/* transition: transform 5s linear; */
+	/* transition: transform 1s ease-in-out;
+	transition: transform 1s ease-in; */
+	/* transition: transform 0.5s ease-out; */
+	/* transition: border-radius 0.5s ease-in-out 0.1s; */
+	/* transition: css property to transition, transition duration, timing function, delay before start */
+	
+	/* transition: transform 1s ease-in; */
+	animation: left-to-right 1s linear forwards infinite 0.1s;
+
+}
+
+.ani-parent:hover .ani-child {
+	/* transform: translateX(100%); */
+	/* background-color: yellow; */
+	/* border-radius: 100px; */
+
+
+	/* Convert from simple transition to complex animation: */
+	/* UNLIKE TRANSITION: write the animation where you want it to happen: */
+	/* SYNTAX: animation name (custom), duration, timing function, iteration count, direction (alternate / alternate-reverse), delay */
+		/* RE: animation name - see @keyframes below */
+	/* FROM: transition: transform 1s; */
+	/* TO: */
+	
+	/* animation-fill-mode: - need to specify if want style to apply at end of animation */
+		/* forwards - keep all 100% properties applied at end of animation */
+		/* backwards - apply all 0% properties before start of animation */
+		/* both -  do both */
+	/* animation: left-to-right 1s ease-in; */
+	/* animation: left-to-right 1s ease-in forwards 3 alternate-reverse 0.3s; */
+	/* animation: left-to-right 1s ease-in forwards infinite alternate-reverse 0.3s; */
+
+	animation-play-state: running;
+	animation-play-state: paused;
+}
+
+/* This must be outside any selector. */
+@keyframes left-to-right {
+	0% {
+		transform: translateX(0%);
+	}
+	25% {
+		transform: translateX(100%);
+	}
+	50% {
+		transform: translateX(100%) translateY(100%);
+	}
+	75% {
+		transform: translateY(100%);
+	}
+	100% {
+		transform: translateX(0%);
+	}
 }

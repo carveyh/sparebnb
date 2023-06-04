@@ -1,3 +1,5 @@
+
+
 /****************************/
 /* UPPER NAV BAR HEADER */
 /****************************/
@@ -6,10 +8,13 @@
 .upper-navbar-header {
 	height: 80px;
 	width: 100%;
-	position: relative;
+	position: sticky;
+	top: 0px;
 	box-sizing: border-box;
 	display: block;
-	/* padding: 48px; */
+	background-color: white;
+	z-index: 100;
+	border-bottom: 0.5px solid rgb(221, 221, 221);
 }
 
 /****************************/
@@ -17,7 +22,6 @@
 /****************************/
 
 .upper-navbar-container {
-	width: 100%;
 	height: 100%;
 	position: relative;
 	display: flex;
@@ -27,46 +31,219 @@
 	/* Padding changes - if it is full screen, 80px, else 40px */
 	padding: 0px 80px;
 	font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+}
 
+.upper-navbar-logo-div {
+	box-sizing: border-box;
+	height: 80px;
+	width: 100%;
+	display: block;
+	flex: 1 0 140px;
 }
 
 .upper-navbar-logo {
+	height: 80px;
 	display: inline-flex;
-	flex: 1 0 140px;
 	align-items: center;
 	position: relative;
 	vertical-align: middle;
-	/* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
 	font-size: 35px;
 	color: red;
 }
 
-.upper-navbar-search {
-	padding: 0px 24px;
-	min-width: 348px;
-	/* this flex-grow of 1 is probably not right... */
+/****************************/
+/* UPPER NAV BAR SEARCH BAR */
+/****************************/
+
+.upper-navbar-search-container {
+	height: 48px;
+	
 	flex: 0 1 auto; 
-	box-sizing: border-box;
-	text-align: center;
 	display: block;
-	display:flex;
+	padding: 0px 24px;
+	box-sizing: border-box;
+}
+
+.session-menu-button:hover, .upper-navbar-search:hover {
+	box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+}
+
+.upper-navbar-search {
+	display: flex;
+	height: 48px;
+	width: 350px;
+	border: 1px lightgray solid;
+	border-radius: 40px;
+	
 	justify-content: space-around;
 	align-items: center;
-	font-size: 16px;
-	color: #222222;
-	line-height: 20px;
-	font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-	height: 48px;
-	border-radius: 40px;
-	border: 1px lightgray solid;
-	box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+	
+	
+	box-shadow: 0 1px 2px rgba(0,0,0,0.08);
 	transition: box-shadow 0.2s ease;
+
+	color: #222222;
+
+}
+
+span.search-location-unopened {
+	width: 1px;
+	height: 1px;
+}
+
+span.search-date-unopened, span.search-people-unopened {
+	width: 1px;
+	height: 24px;
+	background-color: rgb(221,221,221);
+}
+
+.upper-navbar-search > button {
+	cursor: pointer;
+	padding: 0px;
+	margin: -1px;
+	border: 1px solid rgba(0,0,0,0);
+	background-color: rgba(0,0,0,0);
+	appearance: none;
+	box-sizing: border-box;
+	font-family: inherit;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+button.search-location-unopened {
+	height: 46px;
+	padding-left: 24px;
+	padding-right: 16px;
+}
+
+button.search-date-unopened {
+	height: 46px;
+	padding: 0px 16px;
+}
+
+button.search-people-unopened {
+	height: 46px;
+	font-weight: 200;
+	display: flex;
+	align-items: center;
+}
+
+div.search-people-unopened-text {
+	padding: 0px 16px;
+}
+
+div.search-people-unopened-magnifying {
+	height: 12px;
+	width: 12px;
+	padding: 10px;
+	margin: 7px 7px 7px 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 12px;
+	background-color: red;
+	color: white;
+	border-radius: 18px;
+}
+
+
+
+/********************************************************/
+/* UPPER NAV BAR RIGHT: HOST/LANG - SESSION MENU */
+/********************************************************/
+
+.upper-navbar-right-div {
+	/* Exists just to contain the nav, if not, then a `flex: 1 0 140` on the nav behaves weirdly*/
+	box-sizing: border-box;
+	height: 80px;
+	width: 100%;
+	display: block;
+	flex: 1 0 140px;
 }
 
 .upper-navbar-right {
-	flex: 1 0 140px;
+	height: 80px;
 	display: flex;
 	justify-content: flex-end;
+	align-items: center;
+}
+
+.host-lang-buttons {
+	height: 42px;
+	box-sizing: border-box;
+	margin-right: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.host-home-link {
+	font-size: 14px;
+	font-weight: 500;
+	padding: 12px;
+}
+
+.lang-button:hover, .host-home-link:hover {
+	background-color: rgb(247,247,247);
+	border-radius: 22px;
+}
+
+.lang-button-div {
+	height: 42px;
+	/* width: 40px; */
+	padding: 0px;
+
+	box-sizing: border-box;
+}
+
+.lang-button {
+	height: 100%;
+	width: 100%;
+	box-sizing: border-box;
+	margin: 0px;
+	border: 0px;
+	padding: 12px;
+	background-color: rgba(0,0,0,0);
+}
+
+.lang-button > i {
+	font-size: 16px;
+}
+
+.session-menu-div {
+	display: block;
+	/* height: 80px; */
+	/* width: 100%; */
+}
+
+.session-menu-button {
+	height: 42px;
+	display: inline-flex;
+	align-items: center;
+	padding: 5px 5px 5px 12px;
+	border-radius: 21px;
+	border: 1px solid rgb(221,221,221);
+	background-color: white;
+}
+
+.session-menu-button > i:nth-child(1) {
+	font-size: 14px;
+}
+
+.user-icon {
+	height: 30px;
+	width: 30px;
+	margin: 0px 0px 0px 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 15px;
+	background-color: rgb(113,113,113);
+	color: white;
+}
+
+.session-menu-button > div > i {
+	font-size: 18px;
 }
 
 /****************************/
@@ -75,9 +252,11 @@
 
 .nav-bar-container {
 	height: 60px;
-	position: sticky;
-	top:0px;
-	background-color: lightpink;
+	/* position: sticky; */
+	/* top:80px; */
+	background-color: lightsteelblue;
+	padding: 0px 80px;
+	z-index: 1;
 }
 
 /****************************/
@@ -100,20 +279,56 @@ ul.nav-bar-links {
 /****************************/
 
 .profile-drop-menu {
-	position:absolute;
-	top: 30px;
-	left: 30px;
+	position: absolute;
+	top: 40px;
+	right: 80px;
+	box-sizing: border-box;
+	box-shadow: 0px 0px 10px rgba(0,0,0,0.12);
+	border-radius: 12px;
+	margin-top: 34px;
+	padding: 8px 0px;
+	min-width: 240px;
 	background-color: white;
-	border: 1px solid pink;
-	border-radius: 15px;
-	padding: 5px;
-	box-shadow: 2px 5px 15px #999999;
+	display:block;
+	
+}
+
+.profile-drop-menu li {
+	font-size: 14px;
+	font-weight: 300;
+	font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+	padding: 12px 16px;
+	display:flex;
+	/* align-self: flex-start; */
+	/* justify-self: flex-start; */
+}
+
+.profile-drop-menu li:hover {
+	background-color: rgb(247,247,247);
+}
+
+.profile-drop-menu li:nth-child(1) {
+	font-weight: 500;
+}
+
+.profile-drop-menu-bold-item {
+	/* Not overriding... */
+	font-weight: 500;
+}
+
+.menu-divider {
+	padding: 0px 0px;
+	background-color: rgb(221,221,221);
+	margin: 8px 0px;
+	box-sizing: border-box;
+	height: 1px;
+	width: 100%;
 }
 
 .profile-drop-menu:hover {
-	box-shadow: 2px 5px 15px #888888;
+	/* box-shadow: 2px 5px 15px #888888; */
 }
 
 .profile-drop-menu > li:hover {
-	color: red;
+	/* color: red; */
 }
