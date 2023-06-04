@@ -1,6 +1,6 @@
 import "./Navigation.css";
 import { useSelector } from "react-redux"
-import { NavLink } from "react-router-dom"
+import { NavLink, Link } from "react-router-dom"
 
 import ProfileButton from "./ProfileButton"
 import LoginFormModal from "../LoginFormModal";
@@ -23,15 +23,18 @@ const Navigation = () => {
 
 return (
 		<>
+			{/* <div>
+				Placeholder
+			</div> */}
 			<header className="upper-navbar-header">
 				<div className="upper-navbar-container">
-					<div className="upper-navbar-logo">
-						{/* <img src={require("../../images/airbnb_logo.png")} style={{width:"102px", height:"33px"}}/> */}
-						<img src={require("../../images/sparebnb_logo_2.png")} style={{width:"140px", height:"32px"}}/>
+					<div className="upper-navbar-logo-div">
+						<div className="upper-navbar-logo">
+							<img src={require("../../images/sparebnb_logo_2.png")} style={{width:"140px", height:"32px"}}/>
+						</div>
 					</div>
 					<div className="upper-navbar-search-container">
 						<div className="upper-navbar-search">
-							{/* Anywhere | Any week | Add guests  */}
 							<span className="search-location-unopened"></span>
 							<button className="search-location-unopened">
 								Anywhere
@@ -42,11 +45,35 @@ return (
 							</button>
 							<span className="search-people-unopened"></span>
 							<button className="search-people-unopened">
-								Add guests Q
+								<div className="search-people-unopened" >
+									Add guests
+								</div>
+								<i className="fa-solid fa-magnifying-glass"></i>
 							</button>
 						</div>
 					</div>
-					<nav className="upper-navbar-right"> Airbnb your home | O | Add guests </nav>
+
+					{/* OPERATION: UPPER RIGHT NAV!!! START */}
+
+					<div className="upper-navbar-right-div">
+						<nav className="upper-navbar-right"> 
+							<div className="host-lang-buttons">
+								<NavLink className="host-home-link" to="/">Sparebnb your home</NavLink>
+								<div className="lang-button-div">
+									<button className="lang-button" >O</button>
+								</div>
+							</div>
+							<div className="session-menu">
+								<u>=</u>
+
+							</div>
+						</nav>
+					</div>
+
+
+
+					{/* OPERATION: UPPER RIGHT NAV!!! END */}
+
 				</div>
 			</header>
 			<div className="nav-bar-container">
