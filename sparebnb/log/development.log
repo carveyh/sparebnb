@@ -5742,3 +5742,45 @@ Processing by Api::SessionsController#show as JSON
 Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.4ms | Allocations: 1699)
 
 
+Started GET "/api/session" for 127.0.0.1 at 2023-06-04 10:01:18 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 26ms (Views: 0.3ms | ActiveRecord: 8.3ms | Allocations: 4560)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-04 10:02:31 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 4ms (Views: 0.3ms | ActiveRecord: 0.6ms | Allocations: 1699)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-04 10:28:17 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 23ms (Views: 0.4ms | ActiveRecord: 6.8ms | Allocations: 4563)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-04 10:29:24 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.5ms | Allocations: 1690)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-04 10:31:14 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 1684)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-04 10:41:12 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 19ms (Views: 0.1ms | ActiveRecord: 10.0ms | Allocations: 4566)
+
+
