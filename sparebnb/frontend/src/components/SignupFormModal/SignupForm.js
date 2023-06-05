@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import { useState } from "react";
 import { signupUser } from "../../store/session";
 import { useEffect } from 'react';
+import { loginUser } from '../../store/session';
 
 const SignupForm = ({setShowSignUpModal}) => {
 	useEffect(() => {
@@ -70,9 +71,23 @@ const SignupForm = ({setShowSignUpModal}) => {
 				else setErrors([res.statusText]);
 				
 			})
-		// } else {
-		// 	return setErrors(['Confirm Password must match Password'])
-		// }
+	}
+
+	const loginDemo = (e) => {
+		e.preventDefault();
+		const user = {email:'demo@user.io', password:'password'}
+		dispatch(loginUser(user))
+			.catch(async (res) => {
+				let data;
+				try {
+					data = await res.clone().json();
+				} catch {
+					data = await res.text()
+				}
+				if(data?.errors) setErrors(data.errors)
+				else if(data) setErrors([data])
+				else setErrors([res.statusText]);
+			})
 	}
 
 	if(sessionUser) return <Redirect to="/" />
@@ -89,49 +104,46 @@ const SignupForm = ({setShowSignUpModal}) => {
 					<div className='name-entry-div'>
 						<div className='first-name-box'>
 							<label className='name-entry-label'>
-								<div className='floating-placeholder'>First name</div>
-								<input
-									id="first-name-input"
-									type="text"
-									value={firstName}
-									onChange={handleFirstName}
-									// placeholder='First name'
-									required
-								/>
+								<div className='floating-placeholder-container'>
+
+									{/* <div className='floating-placeholder'>First name</div> */}
+									<div className='floating-placeholder'></div>
+									<input
+										id="first-name-input"
+										type="text"
+										value={firstName}
+										onChange={handleFirstName}
+										placeholder='First name'
+										required
+									/>
+								</div>
 							</label>
 						</div>
 						<div className='last-name-box'>
-							{/*  */}
+						<label className='name-entry-label'>
+								<div className='floating-placeholder-container'>
+
+									<div className='floating-placeholder'></div>
+									<input
+										id="last-name-input"
+										type="text"
+										value={lastName}
+										onChange={handleLastName}
+										placeholder='Last name'
+										required
+									/>
+								</div>
+							</label>
 						</div>
 					</div>
 
-					<br />
-					<br />
-					<label>First Name:&nbsp;
-						<input
-							// id="first-name-input"
-							type="text"
-							value={firstName}
-							onChange={handleFirstName}
-							placeholder='Demo'
-							required
-						/>
-					</label>
 
-					<label>Last Name:&nbsp;
-						<input
-							type="text"
-							value={lastName}
-							onChange={handleLastName}
-							placeholder='Lition'
-							required
-						/>
-					</label>
+
 
 					{/* NAME STYLING - END */}
 
 
-
+					<br />
 					<label>Birthdate:&nbsp;
 						<input
 							type="date"
@@ -183,7 +195,10 @@ const SignupForm = ({setShowSignUpModal}) => {
 					<br />
 					<br />
 					<input type="submit" value="Signup" />
-					<p>Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text </p>
+					<br />
+					<br />
+					<input type="submit" value="Demo Login" onClick={loginDemo} />
+					{/* <p>Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text </p> */}
 				</form>
 			</div>
 		</div>

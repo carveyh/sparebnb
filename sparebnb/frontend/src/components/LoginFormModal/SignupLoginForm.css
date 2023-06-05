@@ -78,8 +78,13 @@ p {
 	align-items: center;
 }
 
+.floating-placeholder-container {
+	/* USE THIS TO ANCHOR INNER POSITION:ABSOLUTE STUFF */
+}
+
 .floating-placeholder {
 	position: absolute;
+	top: 110px;
 	left: 36px;
 	color: rgb(113, 113, 113);
 	font-size: 18px;
@@ -100,14 +105,20 @@ p {
 	outline: 1px solid purple;
 }
 
-#first-name-input {
+#first-name-input, #last-name-input {
 	box-sizing: border-box;
-	width: 496px;
-	height: 20px;
+	width: 520px;
+	height: 56px;
+	padding: 26px 12px 6px 12px;
+
+	border-radius: 8px;
+	/* Weird, these two borders prevent missing corner otherwise... START */
+	border: 1px solid rgb(176, 176, 176);
 	border: 0px;
-	padding: 0px;
-	margin: 26px 12px 6px 12px;
-	/* border: 1px solid red; */
-	outline-color: green;
-	flex: 1;
+	/* Weird, these two borders prevent missing corners otherwise... END */
+
+	outline-color: black;
+	-moz-outline-radius: 8px;
+
+	font-size: 18px;
 }
