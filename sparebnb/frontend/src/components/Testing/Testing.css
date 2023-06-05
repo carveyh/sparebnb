@@ -252,6 +252,16 @@
 	}
 }
 
+@container (width < 648px){
+	.grid-item {
+		color: blue;
+	}
+
+	.grid-container {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
 .grid-item:nth-child(odd) {
   /* background-color: #5bbdfa; */
 }
