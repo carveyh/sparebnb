@@ -6792,3 +6792,17 @@ Processing by Api::SessionsController#show as JSON
 Completed 200 OK in 18ms (Views: 0.1ms | ActiveRecord: 9.4ms | Allocations: 4575)
 
 
+Started GET "/api/session" for 127.0.0.1 at 2023-06-05 15:43:53 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 16ms (Views: 0.2ms | ActiveRecord: 6.2ms | Allocations: 4575)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-05 16:04:28 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 17ms (Views: 0.1ms | ActiveRecord: 7.5ms | Allocations: 4563)
+
+
