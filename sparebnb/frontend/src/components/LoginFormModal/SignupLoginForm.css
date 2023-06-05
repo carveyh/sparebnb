@@ -111,6 +111,7 @@ p {
 
 .name-entry-label:focus-within .floating-placeholder:nth-child(1) {
 	color: blue;
+	font-size: 13px;
 
 }
 
@@ -149,5 +150,6 @@ p {
 
 .name-tooltip {
 	margin: 8px 0px;
-	font-size: 12px;
+	font-size: 13px;
+	font-weight: 100;
 }

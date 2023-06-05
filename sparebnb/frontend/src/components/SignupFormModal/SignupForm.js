@@ -198,7 +198,7 @@ const SignupForm = ({setShowSignUpModal}) => {
 					<br />
 					<br />
 					<input type="submit" value="Demo Login" onClick={loginDemo} />
-					<p>Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text </p>
+					{/* <p>Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text </p> */}
 				</form>
 			</div>
 		</div>
