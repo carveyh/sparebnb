@@ -80,6 +80,7 @@ p {
 
 .floating-placeholder-container {
 	/* USE THIS TO ANCHOR INNER POSITION:ABSOLUTE STUFF */
+	position: relative;
 }
 
 /* .signup-form .floating-placeholder:nth-of-type(1) {
@@ -93,19 +94,19 @@ p {
 
 .signup-form .floating-placeholder {
 	position: absolute;
-	top: 110px;
-	left: 36px;
+	/* top: 110px; */
+	left: 12px;
 	color: rgb(113, 113, 113);
 	font-size: 18px;
 	font-weight: 300;
 }
 
 .signup-form .first-name-floating {
-	
+	top: 20px;
 }
 
 .signup-form .last-name-floating {
-	top: 170px;
+	top: 20px;
 }
 
 .name-entry-label:focus-within .floating-placeholder:nth-child(1) {
