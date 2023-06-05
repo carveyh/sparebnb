@@ -12,6 +12,12 @@ const Navigation = () => {
 	const [showSignUpModal, setShowSignUpModal] = useState(false);
 	const [showLogInModal, setShowLogInModal] = useState(false);
 
+	// Disables page scrolling if a modal is open!
+	if(showLogInModal || showSignUpModal){
+		document.body.style.overflow = "hidden";
+	} else {
+		document.body.style.overflow = "scroll";
+	}
 
 return (
 		<>

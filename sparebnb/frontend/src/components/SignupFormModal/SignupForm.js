@@ -81,15 +81,35 @@ const SignupForm = ({setShowSignUpModal}) => {
 		<div className="signup-form">
 			<header className="auth-form-header">
 				<div className='x-close' onClick={e => setShowSignUpModal(false)}><i class="fa-solid fa-xmark"></i></div>
-				<div>Log in or sign up</div>
-				</header>
+				<div className="auth-form-title">Finish signing up</div>
+			</header>
 			<div className="auth-form-body">
-
-			
 				<form onSubmit={handleSubmit}>
+					{/* NAME STYLING - START */}
+					<div className='name-entry-div'>
+						<div className='first-name-box'>
+							<label className='name-entry-label'>
+								<div className='floating-placeholder'>First name</div>
+								<input
+									id="first-name-input"
+									type="text"
+									value={firstName}
+									onChange={handleFirstName}
+									// placeholder='First name'
+									required
+								/>
+							</label>
+						</div>
+						<div className='last-name-box'>
+							{/*  */}
+						</div>
+					</div>
+
+					<br />
+					<br />
 					<label>First Name:&nbsp;
 						<input
-							id="first-name-input"
+							// id="first-name-input"
 							type="text"
 							value={firstName}
 							onChange={handleFirstName}
@@ -97,8 +117,6 @@ const SignupForm = ({setShowSignUpModal}) => {
 							required
 						/>
 					</label>
-					<br />
-					<br />
 
 					<label>Last Name:&nbsp;
 						<input
@@ -109,8 +127,10 @@ const SignupForm = ({setShowSignUpModal}) => {
 							required
 						/>
 					</label>
-					<br />
-					<br />
+
+					{/* NAME STYLING - END */}
+
+
 
 					<label>Birthdate:&nbsp;
 						<input
@@ -163,6 +183,7 @@ const SignupForm = ({setShowSignUpModal}) => {
 					<br />
 					<br />
 					<input type="submit" value="Signup" />
+					<p>Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text </p>
 				</form>
 			</div>
 		</div>

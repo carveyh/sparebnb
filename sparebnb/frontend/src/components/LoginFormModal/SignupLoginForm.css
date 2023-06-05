@@ -5,10 +5,17 @@ div.login-form, div.signup-form {
 	max-width: 400px;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: stretch;
 	background-color: white;
 	animation: slideIn 0.4s both, fadeInModal 0.5s forwards;
+	max-width: 568px;
+	overscroll-behavior: contain;
+}
+
+div.signup-form {
+	align-self: center;
+	align-self: stretch;
 }
 
 @keyframes slideIn {
@@ -26,7 +33,6 @@ div.login-form, div.signup-form {
 	}
 	100% {
 		background-color: rgba(255,255,255,1.0);
-		/* background-color: green; */
 	}
 }
 
@@ -35,14 +41,66 @@ div.login-form, div.signup-form {
 	justify-content: center;
 	border-bottom: 0.5px solid rgb(221, 221, 221);
 	padding: 24px 24px;
+	font-size:17px;
+}
+
+.auth-form-title {
+	font-weight: 600;
+}
+
+.x-close {
+	position: absolute;
+	left: 24px;
 }
 
 .auth-form-body {
 	display: flex;
 	padding: 24px;
+	overflow-y:scroll;
+
+}
+.auth-form-body::-webkit-scrollbar {
+	display: none;
 }
 
-.x-close {
+p {
+	font-size: 80px;
+}
+
+.name-entry-div {
+	border-radius: 8px;
+	border: 1px solid rgb(176, 176, 176);
+}
+
+.name-entry-div > * {
+	height: 56px;
+	display: flex;
+	align-items: center;
+}
+
+.floating-placeholder {
 	position: absolute;
-	left: 0px;
+	left: 36px;
+	color: rgb(113, 113, 113);
+	font-size: 18px;
+	font-weight: 300;
+}
+
+.first-name-box {
+	border-bottom: 1px solid rgb(176, 176, 176);
+}
+
+.last-name-box {
+}
+
+.name-entry-label {
+	display: flex;
+}
+
+#first-name-input {
+	width: 520px;
+	height: 46px;
+	/* border: 1px solid red; */
+	/* outline: none; */
+	flex: 1;
 }
