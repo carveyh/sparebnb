@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_02_174305) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_05_224338) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,36 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_174305) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "listings", force: :cascade do |t|
+    t.string "title", null: false
+    t.bigint "host_id", null: false
+    t.decimal "latitude", null: false
+    t.decimal "longitude", null: false
+    t.string "address", null: false
+    t.string "city", null: false
+    t.string "state", null: false
+    t.string "zip", null: false
+    t.integer "num_beds", null: false
+    t.integer "num_baths", null: false
+    t.integer "max_guests", null: false
+    t.text "description", null: false
+    t.integer "base_nightly_rate", null: false
+    t.string "category", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["base_nightly_rate"], name: "index_listings_on_base_nightly_rate"
+    t.index ["category"], name: "index_listings_on_category"
+    t.index ["city"], name: "index_listings_on_city"
+    t.index ["host_id"], name: "index_listings_on_host_id"
+    t.index ["latitude"], name: "index_listings_on_latitude"
+    t.index ["longitude"], name: "index_listings_on_longitude"
+    t.index ["max_guests"], name: "index_listings_on_max_guests"
+    t.index ["num_baths"], name: "index_listings_on_num_baths"
+    t.index ["num_beds"], name: "index_listings_on_num_beds"
+    t.index ["state"], name: "index_listings_on_state"
+    t.index ["zip"], name: "index_listings_on_zip"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "password_digest", null: false
     t.string "email", null: false
@@ -59,4 +89,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_174305) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "listings", "users", column: "host_id"
 end
