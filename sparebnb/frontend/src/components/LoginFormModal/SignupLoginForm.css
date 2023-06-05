@@ -96,11 +96,18 @@ p {
 .name-entry-label {
 	display: flex;
 }
+.name-entry-label:focus {
+	outline: 1px solid purple;
+}
 
 #first-name-input {
-	width: 520px;
-	height: 46px;
+	box-sizing: border-box;
+	width: 496px;
+	height: 20px;
+	border: 0px;
+	padding: 0px;
+	margin: 26px 12px 6px 12px;
 	/* border: 1px solid red; */
-	/* outline: none; */
+	outline-color: green;
 	flex: 1;
 }
