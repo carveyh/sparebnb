@@ -1,21 +1,39 @@
 import "./Testing.css";
 
-const Testing = (props) => {
+const PlaceholderListingData = ({num}) => {
 	return (
-		<>
-		<div className="grid-container-container">
-			<div className="grid-container">
-				<div className="grid-item grid-item-1">
-					{/* <img src={require("../../images/sparebnb_logo_2.png")} style={{width:"140px", height:"32px"}} /> */}
+		<div className={`grid-item grid-item-${num}`}>
 					<div className="listings-photo-container">
-						<img className="listings-photo" src={require("../../images/listings/pool-1/sample-pool-listing.png")} /></div>
+						<img className="listings-photo" src={require("../../images/listings/pool-1/sample-pool-listing.png")} />
+					</div>
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
 					</p>
+		</div>
+	)
+}
+
+const Testing = (props) => {
+	const numTestListings = 16;
+	const testListingsArray = [];
+	for(let i = 1; i < numTestListings; i++) {
+		testListingsArray.push(
+			<PlaceholderListingData num={i} />
+		)
+	}
+
+
+	return (
+		<>
+		<div className="grid-container-container">
+			<div className="grid-container">
+				{testListingsArray}
+				{/* <div className="grid-item grid-item-1">
+					<PlaceholderListingData />
 				</div>
 				<div className="grid-item grid-item-2">
-				{/* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. */}
+					<PlaceholderListingData />
 				</div>
 				<div className="grid-item grid-item-3"></div>
 				<div className="grid-item grid-item-4"></div>
@@ -30,7 +48,7 @@ const Testing = (props) => {
 				<div className="grid-item grid-item-13"></div>
 				<div className="grid-item grid-item-14"></div>
 				<div className="grid-item grid-item-15"></div>
-				<div className="grid-item grid-item-16"></div>
+				<div className="grid-item grid-item-16"></div> */}
 			</div>
 		</div>
 		</>

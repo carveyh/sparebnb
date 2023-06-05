@@ -102,7 +102,7 @@
 @container (width > 1px) {
 	.grid-container {
 		/* width: 80cqw; */
-		background-color: lightgrey;
+		/* background-color: lightgrey; */
 		/* width: 100cqw; */
 	}
 }
@@ -143,6 +143,7 @@
 	/* This specifies all rows, unless specified, will have min height of 150px */
 	/* and can grow to contain its full elements (auto) */
 	grid-auto-rows: minmax(min-content, max-content);
+	grid-auto-rows: minmax(300px, max-content);
 
 	/* spacing in btwn */
 	row-gap: 40px;
@@ -176,6 +177,7 @@
 	display:grid;
 	justify-items: center;
 	min-width: 0px;
+	border-radius: 12px;
 	overflow: hidden;
 }
 
@@ -187,7 +189,7 @@
 	/* min-width: 0; */
 }
 
-.grid-item-1 * {
+.grid-item * {
 	font-size: 14px;
 }
 
@@ -228,9 +230,9 @@
 	/* max-width: 100px; */
   position: relative;
   font-size: 25px;
-  padding: 20px;
-  padding-top: 50px;
-  background-color: #379AD6;
+  /* padding: 20px;
+  padding-top: 50px; */
+  /* background-color: #379AD6; */
   color: #222;
   border: 1px solid white;
 	/* overflow: hidden; */
@@ -251,7 +253,7 @@
 }
 
 .grid-item:nth-child(odd) {
-  background-color: #5bbdfa;
+  /* background-color: #5bbdfa; */
 }
 
 .grid-item::before {
