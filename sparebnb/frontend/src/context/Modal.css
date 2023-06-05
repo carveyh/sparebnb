@@ -8,6 +8,7 @@
 	justify-content: center;
 	align-items: center;
 	z-index: 100;
+	padding: 40px;
 }
 
 #modal-background {
@@ -20,6 +21,13 @@
 	animation: fadeIn 0.2s;
 }
 
+#modal-content {
+	position: absolute;
+	background-color: white;
+	border-radius: 15px;
+	animation: slideIn 0.5s;
+}
+
 @keyframes fadeIn {
 	0% {
 		background-color: rgba(0,0,0,0);
@@ -28,6 +36,16 @@
 		background-color: rgba(0,0,0,0.2);
 	}
 }
+
+@keyframes slideIn {
+	0% {
+		transform: translateY(400%);
+	}
+	100% {
+		transform: translateY(0%);
+	}
+}
+
 
 /* @keyframes slideIn {
   0% {
@@ -48,18 +66,3 @@
   }
 } */
 
-@keyframes slideIn {
-	0% {
-		transform: translateY(400%);
-	}
-	100% {
-		transform: translateY(0%);
-	}
-}
-
-#modal-content {
-	position: absolute;
-	background-color: white;
-	border-radius: 15px;
-	animation: slideIn 0.5s;
-}
