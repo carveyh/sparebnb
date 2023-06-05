@@ -25,7 +25,9 @@ return (
 				<div className="upper-navbar-container">
 					<div className="upper-navbar-logo-div">
 						<div className="upper-navbar-logo">
-							<img src={require("../../images/sparebnb_logo_2.png")} style={{width:"140px", height:"32px"}}/>
+							<NavLink to="/">
+								<img src={require("../../images/sparebnb_logo_2.png")} style={{width:"140px", height:"32px"}}/>
+							</NavLink>
 						</div>
 					</div>
 					<div className="upper-navbar-search-container">

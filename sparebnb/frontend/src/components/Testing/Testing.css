@@ -90,3 +90,207 @@
 		transform: translateX(0%);
 	}
 }
+
+.grid-container-container {
+	display: flex;
+	/* width: 80%; */
+	/* width: 100px; */
+	padding: 0px 80px;
+	width: 100vw;
+	container-type: inline-size;
+}
+
+@container (width > 1px) {
+	.grid-container {
+		/* width: 80%; */
+		width: 80cqw;
+		width: 100cqw;
+	}
+}
+
+.grid-container {
+	display: grid;
+	/* max-width: 100cqw; doesn't do anything... */
+
+
+	/* ------COLUMNS------ */
+	/* hard code column widths */
+	grid-template-columns: 200px 100px;
+	
+	/* setup grid columns to size dynamically based on contents */
+	/* nfr similar to flex-grow */
+	grid-template-columns: 2fr 1fr;
+	
+	/* repeat: create n sets of (specified columns)  */
+	grid-template-columns: repeat(3,2fr 1fr);
+	
+	/* Can combine different units and repeats. */
+	grid-template-columns: repeat(3,2fr 1fr) 50px 5fr;
+	
+	/* Simple demo spec */
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(4, 100px);
+	grid-template-columns: 200px 250px;
+	
+	/* ------ROWS------ */
+	/* NOTE: if grid items themselves have larger box-sizing: border-box size */
+	/* than the specified row height, the grid items' heigh does not change, */
+	/* will get 'stacked' on top */
+	/* grid-template-rows: 200px 150px; */
+	
+	/* Specify height of unspecified rows, can be a pattern as well */
+	/* grid-auto-rows: 150px; */
+
+	/* This specifies all rows, unless specified, will have min height of 150px */
+	/* and can grow to contain its full elements (auto) */
+	grid-auto-rows: minmax(150px, auto);
+
+	/* spacing in btwn */
+	row-gap: 20px;
+	column-gap: 10px;
+	/* Does both row and col gaps */
+	gap:5px;
+
+	/* grid-template-areas: 
+		"header header"
+		"sidebar content"
+		"sidebar content"
+		; */
+}
+
+.grid-item-1 {
+	/* grid-area: header; */
+	grid-column-start: 1;
+	/* Note - these count gaps as columns, care if need to bridge a gap */
+	grid-column-end: 3; 
+	/* A negative col number specifies the farthest column */
+	/* grid-column-end: -1;  */
+
+	/* Shorthand: */
+	grid-column: 1 / 3;
+	
+	/* Or: */
+	grid-column: span 2;
+}
+
+.grid-item-2 {
+	/* grid-area: sidebar; */
+	grid-row-start: 2;
+	grid-row-end: 4;
+	/* or: */
+	grid-row: 2 / 4;
+	/* or: */
+	grid-row: span 2;
+}
+
+/* .grid-item-7 {
+	grid-area: content;
+} */
+
+.grid-item {
+	/* min-width: 100px; */
+	/* min-width: 0px; */
+	/* max-width: 100px; */
+  position: relative;
+  font-size: 25px;
+  padding: 20px;
+  padding-top: 50px;
+  background-color: #379AD6;
+  color: #222;
+  border: 1px solid white;
+	/* overflow: hidden; */
+	overflow: scroll;
+}
+
+
+/* @container (min-width: 800px){ */
+@container (width < 800px){
+	.grid-item {
+		color: green;
+	}
+}
+
+.grid-item:nth-child(odd) {
+  background-color: #5bbdfa;
+}
+
+.grid-item::before {
+  content: 'Grid Item!';
+  position: absolute;
+  font-size: 25px;
+  font-weight: bold;
+  top: 10px;
+  left: 15px;
+}
+
+.grid-item::after {
+  position: absolute;
+  font-size: 25px;
+  top: 10px;
+  right: 15px;
+  font-weight: bold;
+}
+
+.grid-item-1::after {
+  content: '1';
+}
+
+.grid-item-2::after {
+  content: '2';
+}
+
+.grid-item-3::after {
+  content: '3';
+}
+
+.grid-item-4::after {
+  content: '4';
+}
+
+.grid-item-5::after {
+  content: '5';
+}
+
+.grid-item-6::after {
+  content: '6';
+}
+
+.grid-item-7::after {
+  content: '7';
+}
+
+.grid-item-8::after {
+  content: '8';
+}
+
+.grid-item-9::after {
+  content: '9';
+}
+
+.grid-item-10::after {
+  content: '10';
+}
+
+.grid-item-11::after {
+  content: '11';
+}
+
+.grid-item-12::after {
+  content: '12';
+}
+
+.grid-item-13::after {
+  content: '13';
+}
+
+.grid-item-14::after {
+  content: '14';
+}
+
+.grid-item-15::after {
+  content: '15';
+}
+
+.grid-item-16::after {
+  content: '16';
+}
