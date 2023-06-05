@@ -6,8 +6,11 @@
 	right: 0;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	/* align-items: center; */
+	/* align-items: stretch; */
 	z-index: 100;
+	padding: 40px;
+	/* height: 100%; */
 }
 
 #modal-background {
@@ -16,8 +19,15 @@
 	left: 0;
 	bottom: 0;
 	right: 0;
-	background-color: rgba(0,0,0,0.2);
-	animation: fadeIn 0.2s;
+	/* background-color: rgba(0,0,0,0.2); */
+	animation: fadeIn 0.4s linear both;
+}
+
+#modal-content {
+	display: flex;
+	position: absolute;
+	top: 40px;
+	bottom: 40px;
 }
 
 @keyframes fadeIn {
@@ -25,41 +35,6 @@
 		background-color: rgba(0,0,0,0);
 	}
 	100% {
-		background-color: rgba(0,0,0,0.2);
+		background-color: rgba(0,0,0,0.5);
 	}
-}
-
-/* @keyframes slideIn {
-  0% {
-    transform: translateY(400px);
-    animation-timing-function: ease-out;
-  }
-  60% {
-    transform: translateY(-30px);
-    animation-timing-function: ease-in;
-  }
-  80% {
-    transform: translateY(10px);
-    animation-timing-function: ease-out;
-  }
-  100% {
-    transform: translateY(0px);
-    animation-timing-function: ease-in;
-  }
-} */
-
-@keyframes slideIn {
-	0% {
-		transform: translateY(400%);
-	}
-	100% {
-		transform: translateY(0%);
-	}
-}
-
-#modal-content {
-	position: absolute;
-	background-color: white;
-	border-radius: 15px;
-	animation: slideIn 0.5s;
 }

@@ -1,0 +1,155 @@
+div.login-form, div.signup-form {
+
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	border-radius: 12px;
+	max-width: 400px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: stretch;
+	background-color: white;
+	animation: slideIn 0.4s both, fadeInModal 0.5s forwards;
+	max-width: 568px;
+	overscroll-behavior: contain;
+}
+
+div.signup-form {
+	align-self: center;
+	align-self: stretch;
+}
+
+@keyframes slideIn {
+	0% {
+		transform: translateY(400%);
+	}
+	100% {
+		transform: translateY(0%);
+	}
+}
+
+@keyframes fadeInModal {
+	0% {
+		background-color: rgba(255,255,255,0.0);
+	}
+	100% {
+		background-color: rgba(255,255,255,1.0);
+	}
+}
+
+.auth-form-header {
+	display: flex;
+	justify-content: center;
+	border-bottom: 0.5px solid rgb(221, 221, 221);
+	padding: 24px 24px;
+	font-size:17px;
+}
+
+.auth-form-title {
+	font-weight: 600;
+}
+
+.x-close {
+	position: absolute;
+	left: 24px;
+}
+
+.auth-form-body {
+	display: flex;
+	padding: 24px;
+	overflow-y:scroll;
+
+}
+.auth-form-body::-webkit-scrollbar {
+	display: none;
+}
+
+p {
+	font-size: 80px;
+}
+
+.name-entry-div {
+	border-radius: 8px;
+	border: 1px solid rgb(176, 176, 176);
+}
+
+.name-entry-div > * {
+	height: 56px;
+	display: flex;
+	align-items: center;
+}
+
+.floating-placeholder-container {
+	/* USE THIS TO ANCHOR INNER POSITION:ABSOLUTE STUFF */
+	position: relative;
+}
+
+/* .signup-form .floating-placeholder:nth-of-type(1) {
+	position: absolute;
+	top: 110px;
+	left: 36px;
+	color: rgb(113, 113, 113);
+	font-size: 18px;
+	font-weight: 300;
+} */
+
+.signup-form .floating-placeholder {
+	position: absolute;
+	/* top: 110px; */
+	left: 12px;
+	color: rgb(113, 113, 113);
+	font-size: 18px;
+	font-weight: 300;
+}
+
+.signup-form .first-name-floating {
+	top: 20px;
+}
+
+.signup-form .last-name-floating {
+	top: 20px;
+}
+
+.name-entry-label:focus-within .floating-placeholder:nth-child(1) {
+	color: blue;
+	font-size: 13px;
+
+}
+
+.first-name-box {
+	border-bottom: 1px solid rgb(176, 176, 176);
+}
+
+.last-name-box {
+}
+
+.name-entry-label {
+	display: flex;
+}
+.name-entry-label:focus {
+	outline: 1px solid purple;
+}
+
+#first-name-input, #last-name-input {
+	box-sizing: border-box;
+	width: 520px;
+	height: 56px;
+	padding: 26px 12px 6px 12px;
+
+	border-radius: 8px;
+	/* Weird, these two borders prevent missing corner otherwise... START */
+	border: 1px solid rgb(176, 176, 176);
+	border: 0px;
+	/* Weird, these two borders prevent missing corners otherwise... END */
+
+	outline-color: black;
+	-moz-outline-radius: 8px;
+
+	font-size: 16px;
+	font-weight: 100;
+}
+
+.name-tooltip {
+	margin: 8px 0px;
+	font-size: 13px;
+	font-weight: 100;
+}
