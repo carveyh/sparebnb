@@ -1,5 +1,4 @@
-// import './SignupForm.css';
-import '../LoginFormModal/LoginForm.css';
+import '../LoginFormModal/SignupLoginForm.css';
 
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -7,7 +6,7 @@ import { useState } from "react";
 import { signupUser } from "../../store/session";
 import { useEffect } from 'react';
 
-const SignupForm = () => {
+const SignupForm = ({setShowSignUpModal}) => {
 	useEffect(() => {
 		document.getElementById("first-name-input").focus({preventScroll:false, focusVisible: true});
 	}, [])
@@ -80,84 +79,92 @@ const SignupForm = () => {
 
 	return (
 		<div className="signup-form">
-			<form onSubmit={handleSubmit}>
-				<label>First Name:&nbsp;
-					<input
-						id="first-name-input"
-						type="text"
-						value={firstName}
-						onChange={handleFirstName}
-						placeholder='Demo'
-						required
-					/>
-				</label>
-				<br />
-				<br />
+			<header className="auth-form-header">
+				<div className='x-close' onClick={e => setShowSignUpModal(false)}><i class="fa-solid fa-xmark"></i></div>
+				<div>Log in or sign up</div>
+				</header>
+			<div className="auth-form-body">
 
-				<label>Last Name:&nbsp;
-					<input
-						type="text"
-						value={lastName}
-						onChange={handleLastName}
-						placeholder='Lition'
-						required
-					/>
-				</label>
-				<br />
-				<br />
+			
+				<form onSubmit={handleSubmit}>
+					<label>First Name:&nbsp;
+						<input
+							id="first-name-input"
+							type="text"
+							value={firstName}
+							onChange={handleFirstName}
+							placeholder='Demo'
+							required
+						/>
+					</label>
+					<br />
+					<br />
 
-				<label>Birthdate:&nbsp;
-					<input
-						type="date"
-						value={birthDate}
-						max={maxDate()}
-						onChange={handleBirthdate}
-						placeholder='Birthdate'
-						required
-					/>
-				</label>
-				{errors.birth_date && 
-					<>
-						<br />
-						<div style={{color:'red'}}>{errors.birth_date}</div>
-					</>}
-				<br />
-				<br />
+					<label>Last Name:&nbsp;
+						<input
+							type="text"
+							value={lastName}
+							onChange={handleLastName}
+							placeholder='Lition'
+							required
+						/>
+					</label>
+					<br />
+					<br />
 
-				<label>Email:&nbsp;
-					<input
-						id="email"
-						type="text"
-						value={email}
-						onChange={handleEmail}
-						required
-					/>
-				</label>
-				{errors.email && 
-					<>
-						<br />
-						<div style={{color:'red'}}>Email {errors.email}</div>
-					</>}
-				<br />
-				<br />
+					<label>Birthdate:&nbsp;
+						<input
+							type="date"
+							value={birthDate}
+							max={maxDate()}
+							onChange={handleBirthdate}
+							placeholder='Birthdate'
+							required
+						/>
+					</label>
+					{errors.birth_date && 
+						<>
+							<br />
+							<div style={{color:'red'}}>{errors.birth_date}</div>
+						</>}
+					<br />
+					<br />
 
-				<label>Password:&nbsp;
-					<input
-						type="password"
-						value={password}
-						onChange={handlePassword}
-						required
-					/>
-				</label>
-				{errors.password && 
-					<>
-						<br />
-						<div style={{color:'red'}}>Password {errors.password}</div>
-					</>}
-				<br />
-				<br />
-				<input type="submit" value="Signup" />
-			</form>
+					<label>Email:&nbsp;
+						<input
+							id="email"
+							type="text"
+							value={email}
+							onChange={handleEmail}
+							required
+						/>
+					</label>
+					{errors.email && 
+						<>
+							<br />
+							<div style={{color:'red'}}>Email {errors.email}</div>
+						</>}
+					<br />
+					<br />
+
+					<label>Password:&nbsp;
+						<input
+							type="password"
+							value={password}
+							onChange={handlePassword}
+							required
+						/>
+					</label>
+					{errors.password && 
+						<>
+							<br />
+							<div style={{color:'red'}}>Password {errors.password}</div>
+						</>}
+					<br />
+					<br />
+					<input type="submit" value="Signup" />
+				</form>
+			</div>
 		</div>
 	)
 }
