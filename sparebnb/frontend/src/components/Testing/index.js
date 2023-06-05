@@ -1,30 +1,98 @@
 import "./Testing.css";
 
+const PlaceholderListingData = ({num}) => {
+	return (
+		<div className={`grid-item grid-item-${num}`}>
+					<div className="listings-photo-container">
+						<img className="listings-photo" src={require("../../images/listings/pool-1/sample-pool-listing.png")} />
+					</div>
+					{/* <p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
+					</p> */}
+					<p>Townsville, Stateland</p>
+					<p>On Lake Waterwharf</p>
+					<p>June 15 - 22</p>
+					<p>$1,399 night</p>
+		</div>
+	)
+}
+
 const Testing = (props) => {
+	const numTestListings = 16;
+	const testListingsArray = [];
+	for(let i = 1; i < numTestListings; i++) {
+		testListingsArray.push(
+			<PlaceholderListingData num={i} />
+		)
+	}
+
+
 	return (
 		<>
-			<div className="main-test-div" >
-				<div className="fake-header">
-					Hello from testing!
+		<div className="grid-container-container">
+			<div className="grid-container">
+				{testListingsArray}
+				{/* <div className="grid-item grid-item-1">
+					<PlaceholderListingData />
 				</div>
-				<br />
-				<p>
-					This para. Default font-size is 16. 
-					<ul>
-						<li>`font-size: #rem` makes a factor of root's font-size.</li>
-						<li>`font-size: #em` makes a factor of container's font-size.</li>
-					</ul>
-				</p>
-
-				<div className="ani-parent">
-					<div className="ani-child"></div>
+				<div className="grid-item grid-item-2">
+					<PlaceholderListingData />
 				</div>
-
-
+				<div className="grid-item grid-item-3"></div>
+				<div className="grid-item grid-item-4"></div>
+				<div className="grid-item grid-item-5"></div>
+				<div className="grid-item grid-item-6"></div>
+				<div className="grid-item grid-item-7"></div>
+				<div className="grid-item grid-item-8"></div>
+				<div className="grid-item grid-item-9"></div>
+				<div className="grid-item grid-item-10"></div>
+				<div className="grid-item grid-item-11"></div>
+				<div className="grid-item grid-item-12"></div>
+				<div className="grid-item grid-item-13"></div>
+				<div className="grid-item grid-item-14"></div>
+				<div className="grid-item grid-item-15"></div>
+				<div className="grid-item grid-item-16"></div> */}
 			</div>
+		</div>
 		</>
 	)
 }
+
+
+
+
+
+
+
+
+
+
+// const Testing = (props) => {
+// 	return (
+// 		<>
+// 			<div className="main-test-div" >
+// 				<div className="fake-header">
+// 					Hello from testing!
+// 				</div>
+// 				<br />
+// 				<p>
+// 					This para. Default font-size is 16. 
+// 					<ul>
+// 						<li>`font-size: #rem` makes a factor of root's font-size.</li>
+// 						<li>`font-size: #em` makes a factor of container's font-size.</li>
+// 					</ul>
+// 				</p>
+
+// 				<div className="ani-parent">
+// 					<div className="ani-child"></div>
+// 				</div>
+
+
+// 			</div>
+// 		</>
+// 	)
+// }
 
 export default Testing;
 

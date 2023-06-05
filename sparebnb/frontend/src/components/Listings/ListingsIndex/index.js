@@ -1,3 +1,4 @@
+import Testing from "../../Testing";
 import "./ListingsIndex.css";
 import { useSelector } from "react-redux";
 
@@ -112,6 +113,7 @@ const ListingsIndex = () => {
 	return (
 		<>
 			<ListingsFilter/>
+			<Testing />
 			<div className="listings-main">
 				<br/>
 				<br/>
