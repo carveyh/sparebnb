@@ -106,14 +106,14 @@ const SignupForm = ({setShowSignUpModal}) => {
 							<label className='name-entry-label'>
 								<div className='floating-placeholder-container'>
 
-									{/* <div className='floating-placeholder'>First name</div> */}
-									<div className='floating-placeholder'></div>
+									<div className='first-name-floating floating-placeholder'>First name</div>
+									{/* <div className='floating-placeholder'></div> */}
 									<input
 										id="first-name-input"
 										type="text"
 										value={firstName}
 										onChange={handleFirstName}
-										placeholder='First name'
+										// placeholder='First name'
 										required
 									/>
 								</div>
@@ -123,20 +123,20 @@ const SignupForm = ({setShowSignUpModal}) => {
 						<label className='name-entry-label'>
 								<div className='floating-placeholder-container'>
 
-									<div className='floating-placeholder'></div>
+									<div className='last-name-floating floating-placeholder'>Last name</div>
 									<input
 										id="last-name-input"
 										type="text"
 										value={lastName}
 										onChange={handleLastName}
-										placeholder='Last name'
+										// placeholder='Last name'
 										required
 									/>
 								</div>
 							</label>
 						</div>
 					</div>
-
+					<div className='name-tooltip'>Make sure it matches the name on your government ID.</div>
 
 
 
@@ -198,7 +198,7 @@ const SignupForm = ({setShowSignUpModal}) => {
 					<br />
 					<br />
 					<input type="submit" value="Demo Login" onClick={loginDemo} />
-					{/* <p>Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text </p> */}
+					<p>Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text </p>
 				</form>
 			</div>
 		</div>

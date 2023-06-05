@@ -82,13 +82,35 @@ p {
 	/* USE THIS TO ANCHOR INNER POSITION:ABSOLUTE STUFF */
 }
 
-.floating-placeholder {
+/* .signup-form .floating-placeholder:nth-of-type(1) {
 	position: absolute;
 	top: 110px;
 	left: 36px;
 	color: rgb(113, 113, 113);
 	font-size: 18px;
 	font-weight: 300;
+} */
+
+.signup-form .floating-placeholder {
+	position: absolute;
+	top: 110px;
+	left: 36px;
+	color: rgb(113, 113, 113);
+	font-size: 18px;
+	font-weight: 300;
+}
+
+.signup-form .first-name-floating {
+	
+}
+
+.signup-form .last-name-floating {
+	top: 170px;
+}
+
+.name-entry-label:focus-within .floating-placeholder:nth-child(1) {
+	color: blue;
+
 }
 
 .first-name-box {
@@ -120,5 +142,11 @@ p {
 	outline-color: black;
 	-moz-outline-radius: 8px;
 
-	font-size: 18px;
+	font-size: 16px;
+	font-weight: 100;
+}
+
+.name-tooltip {
+	margin: 8px 0px;
+	font-size: 12px;
 }
