@@ -234,7 +234,7 @@
   padding-top: 50px; */
   /* background-color: #379AD6; */
   color: #222;
-  border: 1px solid white;
+  /* border: 1px solid white; */
 	/* overflow: hidden; */
 	/* overflow: scroll; */
 }
@@ -256,14 +256,14 @@
   /* background-color: #5bbdfa; */
 }
 
-.grid-item::before {
+/* .grid-item::before {
   content: 'Listing';
   position: absolute;
   font-size: 25px;
   font-weight: bold;
   top: 10px;
   left: 15px;
-}
+} */
 
 .grid-item::after {
   position: absolute;

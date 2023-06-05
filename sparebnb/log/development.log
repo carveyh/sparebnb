@@ -6838,3 +6838,17 @@ Processing by Api::UsersController#create as JSON
 Completed 422 Unprocessable Entity in 415ms (Views: 0.4ms | ActiveRecord: 0.9ms | Allocations: 5636)
 
 
+Started GET "/api/session" for 127.0.0.1 at 2023-06-05 18:07:42 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 28ms (Views: 0.5ms | ActiveRecord: 9.0ms | Allocations: 4569)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-06-05 18:11:45 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 1690)
+
+

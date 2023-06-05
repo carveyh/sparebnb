@@ -6,10 +6,14 @@ const PlaceholderListingData = ({num}) => {
 					<div className="listings-photo-container">
 						<img className="listings-photo" src={require("../../images/listings/pool-1/sample-pool-listing.png")} />
 					</div>
-					<p>
+					{/* <p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
-					</p>
+					</p> */}
+					<p>Townsville, Stateland</p>
+					<p>On Lake Waterwharf</p>
+					<p>June 15 - 22</p>
+					<p>$1,399 night</p>
 		</div>
 	)
 }
