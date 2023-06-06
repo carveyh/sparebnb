@@ -38,7 +38,6 @@ const SignupForm = ({setShowSignUpModal}) => {
 	
 	const handleEmail = (e) => {
 		e.preventDefault();
-		// console.log(e.target.id);
 		setEmail(e.target.value);
 	}
 	
@@ -57,7 +56,6 @@ const SignupForm = ({setShowSignUpModal}) => {
 		e.preventDefault();
 		// if(password === confirmPassword){
 			const user = {firstName, lastName, birthDate, email, password}
-			// debugger
 			return dispatch(signupUser(user))
 			.catch(async (res) => {
 				let data;

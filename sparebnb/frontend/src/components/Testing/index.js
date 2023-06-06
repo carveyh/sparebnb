@@ -13,7 +13,6 @@ const array = words.split(" ");
 export const photoFileNames = "architectural-wonder beach-niantic dining-jersey fossatun-iceland hilltop-haven mirror-glass-cabin mountain-retreat sample-pool-listing tower-def-treehouse unique-treehouse".split(" ");
 
 const PlaceholderListingData = ({listing, num}) => {
-	// debugger
 	return (
 		<div className={`grid-item grid-item-${num}`}>
 					<div className="listing-favorite-button"><i className="fa-regular fa-heart"></i></div>
@@ -47,15 +46,12 @@ const Testing = (props) => {
 	// useEffect(() => {
 	// 	setListingsArray(Object.values(listings))
 	// }, [listings])
-	// debugger
 	const numTestListings = 10;
 	const testListingsArray = [];
-	// debugger
 
 	// THIS WAS GIVING ERROR - IN CHECKING IF EMPTY OBJECT. MEMORY CHECK EQUALITY?
 	// if(listings !== {}){
 	if(Object.keys(listings).length !== 0){
-		// debugger
 		for(let i = 1; i <= numTestListings; i++) {
 			testListingsArray.push(
 				<PlaceholderListingData listing={listings[`${i}`]} num={i} />

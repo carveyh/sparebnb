@@ -86,7 +86,6 @@ export const restoreSession = () => async dispatch => {
 	storeCurrentUser(data.user);
 	// Here is the magic where we restore the current user to app's session slice of state.
 	dispatch(setSession(data.user));
-	console.log("Session restored")
 	// return res;
 }
 

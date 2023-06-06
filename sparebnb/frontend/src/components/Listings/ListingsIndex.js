@@ -41,8 +41,6 @@ const ListingsIndex = (props) => {
 			)
 		}
 	}
-
-	// debugger
 	
 	return (
 		<>

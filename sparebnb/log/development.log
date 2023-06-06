@@ -9342,3 +9342,29 @@ Processing by Api::ListingsController#index as JSON
 Completed 200 OK in 6ms (Views: 4.4ms | ActiveRecord: 0.4ms | Allocations: 4298)
 
 
+Started GET "/api/session" for ::1 at 2023-06-06 16:53:06 -0400
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 3.6ms | Allocations: 8391)
+
+
+Started GET "/api/listings" for ::1 at 2023-06-06 16:53:06 -0400
+Processing by Api::ListingsController#index as JSON
+  Rendering api/listings/index.json.jbuilder
+  [1m[36mListing Load (2.5ms)[0m  [1m[34mSELECT "listings".* FROM "listings"[0m
+  ↳ app/views/api/listings/index.json.jbuilder:2
+  Rendered api/listings/index.json.jbuilder (Duration: 18.4ms | Allocations: 12779)
+Completed 200 OK in 1067ms (Views: 1061.0ms | ActiveRecord: 5.3ms | Allocations: 962453)
+
+
+Started GET "/api/listings" for ::1 at 2023-06-06 16:53:07 -0400
+Processing by Api::ListingsController#index as JSON
+  Rendering api/listings/index.json.jbuilder
+  [1m[36mListing Load (1.1ms)[0m  [1m[34mSELECT "listings".* FROM "listings"[0m
+  ↳ app/views/api/listings/index.json.jbuilder:2
+  Rendered api/listings/index.json.jbuilder (Duration: 4.3ms | Allocations: 3341)
+Completed 200 OK in 6ms (Views: 3.7ms | ActiveRecord: 1.1ms | Allocations: 4647)
+
+
