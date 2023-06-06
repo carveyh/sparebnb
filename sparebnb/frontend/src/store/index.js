@@ -3,16 +3,15 @@ import thunk from 'redux-thunk'
 import sessionReducer from './session';
 import listingsReducer from './listings';
 
+
+const entitiesReducer = combineReducers({
+	listings: listingsReducer
+})
+
 const rootReducer = combineReducers({
 	session: sessionReducer,
-	listings: listingsReducer
-	// entities: entitiesReducer
+	entities: entitiesReducer
 });
-
-// const entitiesReducer = combineReducers({
-// 	users: usersReducer,
-// 	listings: listingsReducer
-// })
 
 let enhancer;
 

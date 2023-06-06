@@ -1,6 +1,13 @@
 import "./Testing.css";
 
-const PlaceholderListingData = ({num}) => {
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { fetchListings } from "../../store/listings";
+import { useState } from "react";
+
+const PlaceholderListingData = ({listing, num}) => {
+	// debugger
 	return (
 		<div className={`grid-item grid-item-${num}`}>
 					<div className="listings-photo-container">
@@ -10,23 +17,41 @@ const PlaceholderListingData = ({num}) => {
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
 					</p> */}
-					<p>Townsville, Stateland</p>
+					{/* <p>Townsville, Stateland</p>
 					<p>On Lake Waterwharf</p>
 					<p>June 15 - 22</p>
-					<p>$1,399 night</p>
+					<p>$1,399 night</p> */}
+					<p>{`${listing.city}, ${listing.state}`}</p>
+					<p>On Lake Waterwharf</p>
+					<p>June 15 - 22</p>
+					<p>{`$${listing.baseNightlyRate} night`}</p>
 		</div>
 	)
 }
 
 const Testing = (props) => {
-	const numTestListings = 16;
-	const testListingsArray = [];
-	for(let i = 1; i < numTestListings; i++) {
-		testListingsArray.push(
-			<PlaceholderListingData num={i} />
-		)
-	}
+	const dispatch = useDispatch();
+	const listings = useSelector(state => state.entities?.listings)
+	// const [listingsArray, setListingsArray] = useState(listings);
+	useEffect(() => {
+		dispatch(fetchListings())
+	}, [])
 
+	// useEffect(() => {
+	// 	setListingsArray(Object.values(listings))
+	// }, [listings])
+	// debugger
+	const numTestListings = 10;
+	const testListingsArray = [];
+	// debugger
+	if(listings !== {}){
+		for(let i = 1; i < numTestListings; i++) {
+			testListingsArray.push(
+				<PlaceholderListingData listing={listings[`${i}`]} num={i} />
+				// <PlaceholderListingData listing={listingsArray[i]} num={i} />
+			)
+		}
+	}
 
 	return (
 		<>

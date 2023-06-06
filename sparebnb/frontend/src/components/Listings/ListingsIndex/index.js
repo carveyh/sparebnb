@@ -1,6 +1,9 @@
 import Testing from "../../Testing";
 import "./ListingsIndex.css";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchListings } from "../../../store/listings";
 
 const ListingsFilter = () => {
 	
@@ -110,6 +113,13 @@ const ListingsFilter = () => {
 
 const ListingsIndex = () => {
 	const sessionUser = useSelector(state => state.session?.user )
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(fetchListings())
+	}, [])
+	
+	const listings = useSelector(state => state.entities?.listings)
+	// debugger
 	return (
 		<>
 			<ListingsFilter/>
@@ -123,7 +133,12 @@ const ListingsIndex = () => {
 				Listings grid goes here.
 				<br/>
 				{sessionUser &&
+				<>
+					{/* <p>{sessionUser.email}</p> */}
+					{/* <p>{listings["1"].title}</p> */}
+
           <img src={sessionUser.photoUrl} />  
+				</>
         }
 			</div>
 		</>
