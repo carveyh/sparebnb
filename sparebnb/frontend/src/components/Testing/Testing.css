@@ -182,16 +182,14 @@
 	border-radius: 12px;
 	overflow: hidden;
 	margin-bottom: 12px;
+	aspect-ratio: 325/309;
 }
 
 .listings-photo {
-	/* display: block; */
-	/* object-fit: scale-down; */
-	max-width: 100%;
-	/* flex: 1; */
-	/* min-width: 0; */
-	/* width: 100%; */
-	object-fit: cover;
+	/* Code needed for the image to fit its container in a certain way. */
+	width: 100%;
+	height: 100%;
+	object-fit:cover;
 }
 
 .grid-item * {
@@ -199,6 +197,8 @@
 }
 
 .listings-text-container p {
+	display: flex;
+	/* width: 80%; */
 	padding-top: 5px;
 	font-weight: 300;
 	color: rgb(113,113,113)
