@@ -31,7 +31,7 @@ const PlaceholderListingData = ({listing, num}) => {
 
 const Testing = (props) => {
 	const dispatch = useDispatch();
-	const listings = useSelector(state => state.entities?.listings)
+	const listings = useSelector(state => state.entities?.listings ? state.entities.listings : null)
 	// const [listingsArray, setListingsArray] = useState(listings);
 	useEffect(() => {
 		dispatch(fetchListings())
@@ -44,7 +44,11 @@ const Testing = (props) => {
 	const numTestListings = 10;
 	const testListingsArray = [];
 	// debugger
-	if(listings !== {}){
+
+	// THIS WAS GIVING ERROR - IN CHECKING IF EMPTY OBJECT. MEMORY CHECK EQUALITY?
+	// if(listings !== {}){
+	if(Object.keys(listings).length !== 0){
+		// debugger
 		for(let i = 1; i < numTestListings; i++) {
 			testListingsArray.push(
 				<PlaceholderListingData listing={listings[`${i}`]} num={i} />
