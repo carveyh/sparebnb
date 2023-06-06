@@ -113,7 +113,7 @@ const ListingsFilter = () => {
 }
 
 const ListingsMain = () => {
-	const sessionUser = useSelector(state => state.session?.user )
+	// const sessionUser = useSelector(state => state.session?.user )
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(fetchListings())

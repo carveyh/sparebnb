@@ -10,7 +10,7 @@ const entitiesReducer = combineReducers({
 
 const rootReducer = combineReducers({
 	session: sessionReducer,
-	entities: entitiesReducer
+	entities: entitiesReducer,
 });
 
 let enhancer;

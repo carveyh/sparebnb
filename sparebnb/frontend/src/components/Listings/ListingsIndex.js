@@ -26,12 +26,14 @@ const PlaceholderListingData = ({listing, num}) => {
 
 const ListingsIndex = (props) => {
 	const dispatch = useDispatch();
-	const listings = useSelector(state => state.entities?.listings ? state.entities.listings : null)
+	const listings = useSelector(state => state.entities?.listings ? state.entities.listings : {})
+	// const listings = useSelector(state => state.listings ? state.listings : {})
 	useEffect(() => {
 		dispatch(fetchListings())
 	}, [])
 	const numTestListings = 10;
 	const testListingsArray = [];
+
 	if(Object.keys(listings).length !== 0){
 		for(let i = 1; i <= numTestListings; i++) {
 			testListingsArray.push(
@@ -40,6 +42,8 @@ const ListingsIndex = (props) => {
 		}
 	}
 
+	// debugger
+	
 	return (
 		<>
 		<div className="grid-container-container">

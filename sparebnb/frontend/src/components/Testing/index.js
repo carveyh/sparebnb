@@ -18,7 +18,7 @@ const PlaceholderListingData = ({listing, num}) => {
 		<div className={`grid-item grid-item-${num}`}>
 					<div className="listing-favorite-button"><i className="fa-regular fa-heart"></i></div>
 					<div className="listings-photo-container">
-						<img className="listings-photo" src={require(`../../images/listings/${photoFileNames[num-1]}.png`)} />
+						{/* <img className="listings-photo" src={require(`../../images/listings/${photoFileNames[num-1]}.png`)} /> */}
 					</div>
 					{/* <p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
