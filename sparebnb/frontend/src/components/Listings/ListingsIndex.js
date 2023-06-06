@@ -18,7 +18,7 @@ const PlaceholderListingData = ({listing, num}) => {
 						<p>{`${listing.title}`}</p>
 						<p>{`${listing.city}, ${listing.state}`}</p>
 						<p>June 15 - 22</p>
-						<p className="listings-index-price-para"><div className="listings-index-price-figure">{`$${listing.baseNightlyRate}`}</div><div>&nbsp;night</div></p>
+						<div className="listings-index-price-para"><div className="listings-index-price-figure">{`$${listing.baseNightlyRate}`}</div><div>&nbsp;night</div></div>
 					</div>
 		</div>
 	)
@@ -26,12 +26,14 @@ const PlaceholderListingData = ({listing, num}) => {
 
 const ListingsIndex = (props) => {
 	const dispatch = useDispatch();
-	const listings = useSelector(state => state.entities?.listings ? state.entities.listings : null)
+	const listings = useSelector(state => state.entities?.listings ? state.entities.listings : {})
+	// const listings = useSelector(state => state.listings ? state.listings : {})
 	useEffect(() => {
 		dispatch(fetchListings())
 	}, [])
 	const numTestListings = 10;
 	const testListingsArray = [];
+
 	if(Object.keys(listings).length !== 0){
 		for(let i = 1; i <= numTestListings; i++) {
 			testListingsArray.push(
@@ -40,6 +42,8 @@ const ListingsIndex = (props) => {
 		}
 	}
 
+	// debugger
+	
 	return (
 		<>
 		<div className="grid-container-container">

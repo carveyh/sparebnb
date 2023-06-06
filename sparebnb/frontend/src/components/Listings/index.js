@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchListings } from "../../store/listings";
 
-const ListingsFilter = () => {
+const ListingsFilterCarousel = () => {
 	
 	return (
 		<div className="carousel-container">
@@ -113,7 +113,7 @@ const ListingsFilter = () => {
 }
 
 const ListingsMain = () => {
-	const sessionUser = useSelector(state => state.session?.user )
+	// const sessionUser = useSelector(state => state.session?.user )
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(fetchListings())
@@ -122,7 +122,7 @@ const ListingsMain = () => {
 	const listings = useSelector(state => state.entities?.listings)
 	return (
 		<>
-			<ListingsFilter/>
+			<ListingsFilterCarousel/>
 			<ListingsIndex />
 			<div className="listings-main">
           {/* <img src={sessionUser.photoUrl} />   */}
