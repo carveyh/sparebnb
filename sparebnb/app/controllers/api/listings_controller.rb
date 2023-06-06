@@ -3,6 +3,7 @@ class Api::ListingsController < ApplicationController
   # CHECK WRAP PARAMS
 
   def index
+    # BACKEND FILTERING
     if params[:category]
       @listings = Listing.where(category: params[:category]) #where for retrieving all matching record
       # @listings = Listing.find_by(category: params[:category]) #find_by for retrieving one matching record
