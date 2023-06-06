@@ -91,6 +91,12 @@
 	}
 }
 
+
+
+.listings-main {
+	padding: 0px 80px;
+}
+
 .grid-container-container {
 	/* display: flex; */
 	display: block;
