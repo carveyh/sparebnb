@@ -17,12 +17,10 @@ const PlaceholderListingData = ({listing, num}) => {
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
 					</p> */}
-					{/* <p>Townsville, Stateland</p>
-					<p>On Lake Waterwharf</p>
-					<p>June 15 - 22</p>
-					<p>$1,399 night</p> */}
+					{/* <p>{`${listing.city}, ${listing.state}`}</p>
+					<p>On Lake Waterwharf</p> */}
+					<p>{`${listing.title}`}</p>
 					<p>{`${listing.city}, ${listing.state}`}</p>
-					<p>On Lake Waterwharf</p>
 					<p>June 15 - 22</p>
 					<p>{`$${listing.baseNightlyRate} night`}</p>
 		</div>

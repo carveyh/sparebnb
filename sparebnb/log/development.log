@@ -8315,3 +8315,21 @@ Processing by Api::ListingsController#index as JSON
 Completed 200 OK in 4ms (Views: 2.5ms | ActiveRecord: 0.3ms | Allocations: 4287)
 
 
+Started GET "/api/listings" for 127.0.0.1 at 2023-06-06 04:05:58 -0400
+Processing by Api::ListingsController#index as JSON
+  Rendering api/listings/index.json.jbuilder
+  [1m[36mListing Load (0.3ms)[0m  [1m[34mSELECT "listings".* FROM "listings"[0m
+  ↳ app/views/api/listings/index.json.jbuilder:2
+  Rendered api/listings/index.json.jbuilder (Duration: 2.5ms | Allocations: 3110)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.3ms | Allocations: 4314)
+
+
+Started GET "/api/listings" for 127.0.0.1 at 2023-06-06 04:06:21 -0400
+Processing by Api::ListingsController#index as JSON
+  Rendering api/listings/index.json.jbuilder
+  [1m[36mListing Load (0.3ms)[0m  [1m[34mSELECT "listings".* FROM "listings"[0m
+  ↳ app/views/api/listings/index.json.jbuilder:2
+  Rendered api/listings/index.json.jbuilder (Duration: 2.7ms | Allocations: 3110)
+Completed 200 OK in 4ms (Views: 2.6ms | ActiveRecord: 0.3ms | Allocations: 4311)
+
+
