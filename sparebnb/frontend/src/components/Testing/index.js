@@ -26,10 +26,12 @@ const PlaceholderListingData = ({listing, num}) => {
 					</p> */}
 					{/* <p>{`${listing.city}, ${listing.state}`}</p>
 					<p>On Lake Waterwharf</p> */}
-					<p>{`${listing.title}`}</p>
-					<p>{`${listing.city}, ${listing.state}`}</p>
-					<p>June 15 - 22</p>
-					<p className="listings-index-price-para"><div className="listings-index-price-figure">{`$${listing.baseNightlyRate}`}</div><div>&nbsp;night</div></p>
+					<div className="listings-text-container">
+						<p>{`${listing.title}`}</p>
+						<p>{`${listing.city}, ${listing.state}`}</p>
+						<p>June 15 - 22</p>
+						<p className="listings-index-price-para"><div className="listings-index-price-figure">{`$${listing.baseNightlyRate}`}</div><div>&nbsp;night</div></p>
+					</div>
 		</div>
 	)
 }
