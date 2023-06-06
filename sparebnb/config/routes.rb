@@ -9,4 +9,6 @@ Rails.application.routes.draw do
     resource :session, only: [:show, :create, :destroy] # get current_user, login, logout
     resources :listings, only: [:index, :show]
   end
+
+  get '*path', to: "static_pages#frontend_index"
 end
