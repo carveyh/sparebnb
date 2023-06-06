@@ -1,3 +1,26 @@
+# == Schema Information
+#
+# Table name: listings
+#
+#  id                :bigint           not null, primary key
+#  title             :string           not null
+#  host_id           :bigint           not null
+#  latitude          :decimal(, )      not null
+#  longitude         :decimal(, )      not null
+#  address           :string           not null
+#  city              :string           not null
+#  state             :string           not null
+#  zip               :string           not null
+#  num_beds          :integer          not null
+#  num_baths         :integer          not null
+#  max_guests        :integer          not null
+#  description       :text             not null
+#  base_nightly_rate :integer          not null
+#  category          :string           not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  num_bedrooms      :integer          not null
+#
 class Listing < ApplicationRecord
   belongs_to :host,
     foreign_key: :host_id,

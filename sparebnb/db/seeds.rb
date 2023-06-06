@@ -13,9 +13,11 @@ ApplicationRecord.transaction do
 	puts "Destroying tables..."
 	# Unnecessary if using `rails db:seed:replant`
 	User.destroy_all
+	Listing.destroy_all
 
 	puts "Resetting primary keys..."
 	ApplicationRecord.connection.reset_pk_sequence!('users')
+	ApplicationRecord.connection.reset_pk_sequence!('listings')
 
 
 
@@ -70,11 +72,15 @@ ApplicationRecord.transaction do
 		password: 'password'
 	)
 
-	photo_url = shuffled_urls.shift
-	file_name = File.basename(photo_url)
-	photo_object = s3.get_object(bucket: bucket_name, key: photo_url)
-	photo_file = photo_object.body
-	no_phone.photo.attach(io: photo_file, filename: file_name)
+	# ######################################################################
+	# THIS WAS WORKING BUT FAILED A NEXT ATTEMPT TO DB:SEED - START
+	# photo_url = shuffled_urls.shift
+	# file_name = File.basename(photo_url)
+	# photo_object = s3.get_object(bucket: bucket_name, key: photo_url)
+	# photo_file = photo_object.body
+	# no_phone.photo.attach(io: photo_file, filename: file_name)
+	# THIS WAS WORKING BUT FAILED A NEXT ATTEMPT TO DB:SEED - END
+	# ######################################################################
 
 	# file = URI.open('https://sparebnb-madison-seeds.s3.amazonaws.com/Screenshot+2023-05-17+at+10.15.45+PM.png') # <- Adjust the path here if the image is not in app/assets/images
 	# no_phone.photo.attach(io: file, filename: 'sample_profile_pic.jpg')
@@ -113,6 +119,31 @@ ApplicationRecord.transaction do
 			phone_number: Faker::PhoneNumber.subscriber_number(length:10)
 		})
 	end
+	
+	puts "Creating listings..."
+	
+	10.times do
+		Listing.create!({
+			title: 
+				Faker::Adjective.positive.capitalize() + ' ' + Faker::Adjective.positive.capitalize() + ' ' + (%w(Apartment House Dwelling Mansion Getaway Resort Tent ) + ['Parking Lot', 'Suspicious Back Alley', 'Port-a-Potty', 'Coding Bootcamp', 'Cardboard Box', "Wendy\'s Dumpster"]).sample + (((0..1).to_a.sample % 2 == 0) ? (' ' + 'Inspired by' + ' ' + Faker::Movie.title) : ""),
+			host_id: (1..12).to_a.sample,
+			latitude: rand(-90.0..90.0).truncate(6),
+			longitude: rand(-180.0..180.0).truncate(6),
+			address: Faker::Address.street_address,
+			city: Faker::Address.city,
+			state: Faker::Address.state,
+			zip: Faker::Address.zip_code,
+			num_bedrooms: (1..20).to_a.sample,
+			num_beds: (1..20).to_a.sample,
+			num_baths: (1..10).to_a.sample,
+			max_guests: (1..20).to_a.sample,
+			description: Faker::Lorem.sentences(number: 5),
+			base_nightly_rate: (29..7999).to_a.sample,
+			category: %w(amazing-pools rooms adapted beachfront treehouses mountains trending mansions majestic arctic woods govt-secret private-escapes home-theater studios gaming-dens fitness creme-de-la-creme green rustic urban tornado camps 420-friendly).sample
+
+		})
+	end
 
 	puts "Done!"
+
 end

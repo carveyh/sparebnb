@@ -1,0 +1,41 @@
+/* div.signup-form {
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	margin: 10px;
+	padding: 10px;
+	border-radius: 12px;
+	max-width: 400px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: stretch;
+	border: 1px solid red;
+	animation: slideIn 1s;
+}
+
+@keyframes slideIn {
+	0% {
+		transform: translateY(400%);
+	}
+	100% {
+		transform: translateY(0%);
+	}
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(400px);
+    animation-timing-function: ease-out;
+  }
+  60% {
+    transform: translateY(-30px);
+    animation-timing-function: ease-in;
+  }
+  80% {
+    transform: translateY(10px);
+    animation-timing-function: ease-out;
+  }
+  100% {
+    transform: translateY(0px);
+    animation-timing-function: ease-in;
+  }
+} */
