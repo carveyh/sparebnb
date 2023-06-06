@@ -8678,3 +8678,111 @@ Processing by Api::ListingsController#index as JSON
 Completed 200 OK in 4ms (Views: 2.6ms | ActiveRecord: 0.3ms | Allocations: 4307)
 
 
+Started GET "/api/listings" for 127.0.0.1 at 2023-06-06 11:06:33 -0400
+Processing by Api::ListingsController#index as JSON
+  Rendering api/listings/index.json.jbuilder
+  [1m[36mListing Load (1.5ms)[0m  [1m[34mSELECT "listings".* FROM "listings"[0m
+  ↳ app/views/api/listings/index.json.jbuilder:2
+  Rendered api/listings/index.json.jbuilder (Duration: 18.7ms | Allocations: 5978)
+Completed 200 OK in 22ms (Views: 19.6ms | ActiveRecord: 7.5ms | Allocations: 7153)
+
+
+Started GET "/api/listings" for 127.0.0.1 at 2023-06-06 11:06:33 -0400
+Processing by Api::ListingsController#index as JSON
+  Rendering api/listings/index.json.jbuilder
+  [1m[36mListing Load (0.3ms)[0m  [1m[34mSELECT "listings".* FROM "listings"[0m
+  ↳ app/views/api/listings/index.json.jbuilder:2
+  Rendered api/listings/index.json.jbuilder (Duration: 3.5ms | Allocations: 3110)
+Completed 200 OK in 5ms (Views: 3.6ms | ActiveRecord: 0.3ms | Allocations: 4289)
+
+
+Started GET "/api/listings" for 127.0.0.1 at 2023-06-06 11:06:52 -0400
+Processing by Api::ListingsController#index as JSON
+  Rendering api/listings/index.json.jbuilder
+  [1m[36mListing Load (0.3ms)[0m  [1m[34mSELECT "listings".* FROM "listings"[0m
+  ↳ app/views/api/listings/index.json.jbuilder:2
+  Rendered api/listings/index.json.jbuilder (Duration: 2.6ms | Allocations: 3110)
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.3ms | Allocations: 4310)
+
+
+Started GET "/api/listings" for 127.0.0.1 at 2023-06-06 11:06:52 -0400
+Processing by Api::ListingsController#index as JSON
+  Rendering api/listings/index.json.jbuilder
+  [1m[36mListing Load (0.3ms)[0m  [1m[34mSELECT "listings".* FROM "listings"[0m
+  ↳ app/views/api/listings/index.json.jbuilder:2
+  Rendered api/listings/index.json.jbuilder (Duration: 2.3ms | Allocations: 3110)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.3ms | Allocations: 4310)
+
+
+Started GET "/api/listings" for 127.0.0.1 at 2023-06-06 11:07:19 -0400
+Processing by Api::ListingsController#index as JSON
+  Rendering api/listings/index.json.jbuilder
+  [1m[36mListing Load (0.5ms)[0m  [1m[34mSELECT "listings".* FROM "listings"[0m
+  ↳ app/views/api/listings/index.json.jbuilder:2
+  Rendered api/listings/index.json.jbuilder (Duration: 2.7ms | Allocations: 3110)
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.5ms | Allocations: 4310)
+
+
+Started GET "/api/listings" for 127.0.0.1 at 2023-06-06 11:07:19 -0400
+Processing by Api::ListingsController#index as JSON
+  Rendering api/listings/index.json.jbuilder
+  [1m[36mListing Load (0.3ms)[0m  [1m[34mSELECT "listings".* FROM "listings"[0m
+  ↳ app/views/api/listings/index.json.jbuilder:2
+  Rendered api/listings/index.json.jbuilder (Duration: 2.4ms | Allocations: 3110)
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.3ms | Allocations: 4310)
+
+
+Started GET "/api/listings" for 127.0.0.1 at 2023-06-06 11:08:39 -0400
+Processing by Api::ListingsController#index as JSON
+  Rendering api/listings/index.json.jbuilder
+  [1m[36mListing Load (0.3ms)[0m  [1m[34mSELECT "listings".* FROM "listings"[0m
+  ↳ app/views/api/listings/index.json.jbuilder:2
+  Rendered api/listings/index.json.jbuilder (Duration: 2.4ms | Allocations: 3110)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.3ms | Allocations: 4298)
+
+
+Started GET "/api/listings" for 127.0.0.1 at 2023-06-06 11:08:39 -0400
+Processing by Api::ListingsController#index as JSON
+  Rendering api/listings/index.json.jbuilder
+  [1m[36mListing Load (0.3ms)[0m  [1m[34mSELECT "listings".* FROM "listings"[0m
+  ↳ app/views/api/listings/index.json.jbuilder:2
+  Rendered api/listings/index.json.jbuilder (Duration: 2.3ms | Allocations: 3110)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.3ms | Allocations: 4298)
+
+
+Started GET "/api/listings" for 127.0.0.1 at 2023-06-06 11:10:04 -0400
+Processing by Api::ListingsController#index as JSON
+  Rendering api/listings/index.json.jbuilder
+  [1m[36mListing Load (0.3ms)[0m  [1m[34mSELECT "listings".* FROM "listings"[0m
+  ↳ app/views/api/listings/index.json.jbuilder:2
+  Rendered api/listings/index.json.jbuilder (Duration: 2.3ms | Allocations: 3110)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.3ms | Allocations: 4301)
+
+
+Started GET "/api/listings" for 127.0.0.1 at 2023-06-06 11:10:04 -0400
+Processing by Api::ListingsController#index as JSON
+  Rendering api/listings/index.json.jbuilder
+  [1m[36mListing Load (0.4ms)[0m  [1m[34mSELECT "listings".* FROM "listings"[0m
+  ↳ app/views/api/listings/index.json.jbuilder:2
+  Rendered api/listings/index.json.jbuilder (Duration: 2.5ms | Allocations: 3110)
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.4ms | Allocations: 4301)
+
+
+Started GET "/api/listings" for 127.0.0.1 at 2023-06-06 11:10:17 -0400
+Processing by Api::ListingsController#index as JSON
+  Rendering api/listings/index.json.jbuilder
+  [1m[36mListing Load (0.5ms)[0m  [1m[34mSELECT "listings".* FROM "listings"[0m
+  ↳ app/views/api/listings/index.json.jbuilder:2
+  Rendered api/listings/index.json.jbuilder (Duration: 2.8ms | Allocations: 3110)
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.5ms | Allocations: 4283)
+
+
+Started GET "/api/listings" for 127.0.0.1 at 2023-06-06 11:10:17 -0400
+Processing by Api::ListingsController#index as JSON
+  Rendering api/listings/index.json.jbuilder
+  [1m[36mListing Load (0.3ms)[0m  [1m[34mSELECT "listings".* FROM "listings"[0m
+  ↳ app/views/api/listings/index.json.jbuilder:2
+  Rendered api/listings/index.json.jbuilder (Duration: 2.3ms | Allocations: 3110)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.3ms | Allocations: 4283)
+
+

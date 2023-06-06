@@ -182,6 +182,8 @@
 	border-radius: 12px;
 	overflow: hidden;
 	margin-bottom: 12px;
+	/* THIS IS VERY IMPORTANT FOR CONTROLLING GRID ITEM DIMENSIONS~!!! */
+	/* Here, since WxH are functions, the input is the container grid column width for W. */
 	aspect-ratio: 325/309;
 }
 
@@ -190,6 +192,22 @@
 	width: 100%;
 	height: 100%;
 	object-fit:cover;
+}
+
+.listing-favorite-button {
+	position: absolute;
+  top: 18px;
+  right: 18px;
+}
+
+.listing-favorite-button > i {
+	font-size: 20px;
+	/* text-shadow: 0px 0px 2px white; */
+	/* Will override color (regardless of order) */
+	-webkit-text-fill-color: black; 
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+	/* -webkit-text-stroke: 1px #F8F8F8; */
 }
 
 .grid-item * {
@@ -311,68 +329,4 @@
   top: 10px;
   right: 15px;
   font-weight: bold;
-}
-
-.grid-item-1::after {
-  content: '1';
-}
-
-.grid-item-2::after {
-  content: '2';
-}
-
-.grid-item-3::after {
-  content: '3';
-}
-
-.grid-item-4::after {
-  content: '4';
-}
-
-.grid-item-5::after {
-  content: '5';
-}
-
-.grid-item-6::after {
-  content: '6';
-}
-
-.grid-item-7::after {
-  content: '7';
-}
-
-.grid-item-8::after {
-  content: '8';
-}
-
-.grid-item-9::after {
-  content: '9';
-}
-
-.grid-item-10::after {
-  content: '10';
-}
-
-.grid-item-11::after {
-  content: '11';
-}
-
-.grid-item-12::after {
-  content: '12';
-}
-
-.grid-item-13::after {
-  content: '13';
-}
-
-.grid-item-14::after {
-  content: '14';
-}
-
-.grid-item-15::after {
-  content: '15';
-}
-
-.grid-item-16::after {
-  content: '16';
 }
