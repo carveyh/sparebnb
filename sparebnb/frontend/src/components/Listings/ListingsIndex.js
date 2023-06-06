@@ -18,7 +18,7 @@ const PlaceholderListingData = ({listing, num}) => {
 						<p>{`${listing.title}`}</p>
 						<p>{`${listing.city}, ${listing.state}`}</p>
 						<p>June 15 - 22</p>
-						<p className="listings-index-price-para"><div className="listings-index-price-figure">{`$${listing.baseNightlyRate}`}</div><div>&nbsp;night</div></p>
+						<div className="listings-index-price-para"><div className="listings-index-price-figure">{`$${listing.baseNightlyRate}`}</div><div>&nbsp;night</div></div>
 					</div>
 		</div>
 	)
