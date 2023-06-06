@@ -125,7 +125,7 @@ const ListingsIndex = () => {
 			<ListingsFilter/>
 			<Testing />
 			<div className="listings-main">
-				<br/>
+				{/* <br/>
 				<br/>
 				<br/>
 				<br/>
@@ -134,12 +134,15 @@ const ListingsIndex = () => {
 				<br/>
 				{sessionUser &&
 				<>
-					{/* <p>{sessionUser.email}</p> */}
-					{/* <p>{listings["1"].title}</p> */}
+					<p>{sessionUser.email}</p>
+					<p>{listings["1"].title}</p>
 
           <img src={sessionUser.photoUrl} />  
 				</>
-        }
+        } */}
+
+				<br/>
+				<br/>
 			</div>
 		</>
 	)

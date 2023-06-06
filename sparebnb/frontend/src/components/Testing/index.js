@@ -6,12 +6,19 @@ import { useSelector } from "react-redux";
 import { fetchListings } from "../../store/listings";
 import { useState } from "react";
 
+
+const words = "apple banana cherry";
+const array = words.split(" ");
+
+export const photoFileNames = "architectural-wonder beach-niantic dining-jersey fossatun-iceland hilltop-haven mirror-glass-cabin mountain-retreat sample-pool-listing tower-def-treehouse unique-treehouse".split(" ");
+
 const PlaceholderListingData = ({listing, num}) => {
 	// debugger
 	return (
 		<div className={`grid-item grid-item-${num}`}>
 					<div className="listings-photo-container">
-						<img className="listings-photo" src={require("../../images/listings/pool-1/sample-pool-listing.png")} />
+						{/* <img className="listings-photo" src={require("../../images/listings/sample-pool-listing.png")} /> */}
+						<img className="listings-photo" src={require(`../../images/listings/${photoFileNames[num-1]}.png`)} />
 					</div>
 					{/* <p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
@@ -22,7 +29,7 @@ const PlaceholderListingData = ({listing, num}) => {
 					<p>{`${listing.title}`}</p>
 					<p>{`${listing.city}, ${listing.state}`}</p>
 					<p>June 15 - 22</p>
-					<p>{`$${listing.baseNightlyRate} night`}</p>
+					<p className="listings-index-price-para"><div className="listings-index-price-figure">{`$${listing.baseNightlyRate}`}</div><div>&nbsp;night</div></p>
 		</div>
 	)
 }
@@ -47,7 +54,7 @@ const Testing = (props) => {
 	// if(listings !== {}){
 	if(Object.keys(listings).length !== 0){
 		// debugger
-		for(let i = 1; i < numTestListings; i++) {
+		for(let i = 1; i <= numTestListings; i++) {
 			testListingsArray.push(
 				<PlaceholderListingData listing={listings[`${i}`]} num={i} />
 				// <PlaceholderListingData listing={listingsArray[i]} num={i} />
