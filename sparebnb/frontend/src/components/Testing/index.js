@@ -1,32 +1,68 @@
 import "./Testing.css";
 
-const PlaceholderListingData = ({num}) => {
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { fetchListings } from "../../store/listings";
+import { useState } from "react";
+
+
+const words = "apple banana cherry";
+const array = words.split(" ");
+
+export const photoFileNames = "architectural-wonder beach-niantic dining-jersey fossatun-iceland hilltop-haven mirror-glass-cabin mountain-retreat sample-pool-listing tower-def-treehouse unique-treehouse".split(" ");
+
+const PlaceholderListingData = ({listing, num}) => {
+	// debugger
 	return (
 		<div className={`grid-item grid-item-${num}`}>
+					<div className="listing-favorite-button"><i className="fa-regular fa-heart"></i></div>
 					<div className="listings-photo-container">
-						<img className="listings-photo" src={require("../../images/listings/pool-1/sample-pool-listing.png")} />
+						<img className="listings-photo" src={require(`../../images/listings/${photoFileNames[num-1]}.png`)} />
 					</div>
 					{/* <p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
 					</p> */}
-					<p>Townsville, Stateland</p>
-					<p>On Lake Waterwharf</p>
-					<p>June 15 - 22</p>
-					<p>$1,399 night</p>
+					{/* <p>{`${listing.city}, ${listing.state}`}</p>
+					<p>On Lake Waterwharf</p> */}
+					<div className="listings-text-container">
+						<p>{`${listing.title}`}</p>
+						<p>{`${listing.city}, ${listing.state}`}</p>
+						<p>June 15 - 22</p>
+						<p className="listings-index-price-para"><div className="listings-index-price-figure">{`$${listing.baseNightlyRate}`}</div><div>&nbsp;night</div></p>
+					</div>
 		</div>
 	)
 }
 
 const Testing = (props) => {
-	const numTestListings = 16;
-	const testListingsArray = [];
-	for(let i = 1; i < numTestListings; i++) {
-		testListingsArray.push(
-			<PlaceholderListingData num={i} />
-		)
-	}
+	const dispatch = useDispatch();
+	const listings = useSelector(state => state.entities?.listings ? state.entities.listings : null)
+	// const [listingsArray, setListingsArray] = useState(listings);
+	useEffect(() => {
+		dispatch(fetchListings())
+	}, [])
 
+	// useEffect(() => {
+	// 	setListingsArray(Object.values(listings))
+	// }, [listings])
+	// debugger
+	const numTestListings = 10;
+	const testListingsArray = [];
+	// debugger
+
+	// THIS WAS GIVING ERROR - IN CHECKING IF EMPTY OBJECT. MEMORY CHECK EQUALITY?
+	// if(listings !== {}){
+	if(Object.keys(listings).length !== 0){
+		// debugger
+		for(let i = 1; i <= numTestListings; i++) {
+			testListingsArray.push(
+				<PlaceholderListingData listing={listings[`${i}`]} num={i} />
+				// <PlaceholderListingData listing={listingsArray[i]} num={i} />
+			)
+		}
+	}
 
 	return (
 		<>

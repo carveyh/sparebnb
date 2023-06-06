@@ -1,6 +1,10 @@
-import Testing from "../../Testing";
-import "./ListingsIndex.css";
+import ListingsIndex from "./ListingsIndex";
+
+import "./ListingsCarousel.css";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchListings } from "../../store/listings";
 
 const ListingsFilter = () => {
 	
@@ -108,26 +112,23 @@ const ListingsFilter = () => {
 	)
 }
 
-const ListingsIndex = () => {
+const ListingsMain = () => {
 	const sessionUser = useSelector(state => state.session?.user )
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(fetchListings())
+	}, [])
+	
+	const listings = useSelector(state => state.entities?.listings)
 	return (
 		<>
 			<ListingsFilter/>
-			<Testing />
+			<ListingsIndex />
 			<div className="listings-main">
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				Listings grid goes here.
-				<br/>
-				{sessionUser &&
-          <img src={sessionUser.photoUrl} />  
-        }
+          {/* <img src={sessionUser.photoUrl} />   */}
 			</div>
 		</>
 	)
 }
 
-export default ListingsIndex;
+export default ListingsMain;

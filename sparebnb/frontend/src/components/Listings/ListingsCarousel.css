@@ -9,7 +9,7 @@
 	background-color: white;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.08);
 	padding: 0px 80px;
-	z-index: 100;
+	z-index: 99;
 }
 
 
@@ -59,10 +59,4 @@
 
 .category-selector > i {
 	font-size: 24px;
-}
-
-.listings-main {
-	height: 2000px;
-	padding: 0px 80px;
-	/* margin: 0px 80px; */
 }

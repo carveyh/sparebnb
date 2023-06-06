@@ -91,6 +91,12 @@
 	}
 }
 
+
+
+.listings-main {
+	padding: 0px 80px;
+}
+
 .grid-container-container {
 	/* display: flex; */
 	display: block;
@@ -168,9 +174,11 @@
 }
 
 .grid-item {
-	display: flex;
-	flex-direction: column;
-	/* width: 100%; */
+	/* display: flex; */
+	/* flex-direction: column; */
+	display: grid;
+	grid-template-rows: auto 88px;
+
 }
 
 .listings-photo-container {
@@ -179,18 +187,64 @@
 	min-width: 0px;
 	border-radius: 12px;
 	overflow: hidden;
+	margin-bottom: 12px;
+	/* THIS IS VERY IMPORTANT FOR CONTROLLING GRID ITEM DIMENSIONS~!!! */
+	/* Here, since WxH are functions, the input is the container grid column width for W. */
+	aspect-ratio: 325/309;
 }
 
 .listings-photo {
-	/* display: block; */
-	/* object-fit: scale-down; */
-	max-width: 100%;
-	/* flex: 1; */
-	/* min-width: 0; */
+	/* Code needed for the image to fit its container in a certain way. */
+	width: 100%;
+	height: 100%;
+	object-fit:cover;
+}
+
+.listing-favorite-button {
+	position: absolute;
+  top: 18px;
+  right: 18px;
+}
+
+.listing-favorite-button > i {
+	font-size: 20px;
+	/* text-shadow: 0px 0px 2px white; */
+	/* Will override color (regardless of order) */
+	-webkit-text-fill-color: black; 
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+	/* -webkit-text-stroke: 1px #F8F8F8; */
 }
 
 .grid-item * {
-	font-size: 14px;
+	font-size: 15px;
+}
+
+.listings-text-container p {
+	display: flex;
+	/* width: 80%; */
+	padding-top: 5px;
+	font-weight: 300;
+	color: rgb(113,113,113)
+}
+
+.listings-index-price-para * {
+	padding-top: 5px;
+	color: rgb(0,0,0);
+}
+
+.listings-text-container > p:nth-of-type(1), .listings-index-price-figure {
+	font-weight: 600;
+	color: rgb(0,0,0);
+}
+
+.listings-text-container > p:nth-of-type(1) {
+	padding-top: 0px;
+}
+
+.listings-index-price-para {
+	display: flex;
+	flex-direction: row;
 }
 
 .grid-item-1 {
@@ -281,68 +335,4 @@
   top: 10px;
   right: 15px;
   font-weight: bold;
-}
-
-.grid-item-1::after {
-  content: '1';
-}
-
-.grid-item-2::after {
-  content: '2';
-}
-
-.grid-item-3::after {
-  content: '3';
-}
-
-.grid-item-4::after {
-  content: '4';
-}
-
-.grid-item-5::after {
-  content: '5';
-}
-
-.grid-item-6::after {
-  content: '6';
-}
-
-.grid-item-7::after {
-  content: '7';
-}
-
-.grid-item-8::after {
-  content: '8';
-}
-
-.grid-item-9::after {
-  content: '9';
-}
-
-.grid-item-10::after {
-  content: '10';
-}
-
-.grid-item-11::after {
-  content: '11';
-}
-
-.grid-item-12::after {
-  content: '12';
-}
-
-.grid-item-13::after {
-  content: '13';
-}
-
-.grid-item-14::after {
-  content: '14';
-}
-
-.grid-item-15::after {
-  content: '15';
-}
-
-.grid-item-16::after {
-  content: '16';
 }
