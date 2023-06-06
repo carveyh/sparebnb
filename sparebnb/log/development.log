@@ -7907,3 +7907,10 @@ Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 0.4ms | Allocations: 1705)
   [1m[36mListing Create (0.3ms)[0m  [1m[32mINSERT INTO "listings" ("title", "host_id", "latitude", "longitude", "address", "city", "state", "zip", "num_beds", "num_baths", "max_guests", "description", "base_nightly_rate", "category", "created_at", "updated_at", "num_bedrooms") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING "id"[0m  [["title", "Zealous Handsome Wendy's Dumpster"], ["host_id", 9], ["latitude", "-10.467349"], ["longitude", "99.780964"], ["address", "169 Jacinto Spur"], ["city", "Lake Adan"], ["state", "Oklahoma"], ["zip", "89595"], ["num_beds", 1], ["num_baths", 7], ["max_guests", 9], ["description", "[\"Doloribus numquam laborum.\", \"Sunt cum doloremque.\", \"Sit eligendi ipsum.\", \"Sint minus et.\", \"Dolor quasi mollitia.\"]"], ["base_nightly_rate", 7483], ["category", "fitness"], ["created_at", "2023-06-06 05:26:28.073594"], ["updated_at", "2023-06-06 05:26:28.073594"], ["num_bedrooms", 19]]
   [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT[0m
   [1m[36mListing Load (1.3ms)[0m  [1m[34mSELECT "listings".* FROM "listings"[0m
+Started GET "/api/session" for 127.0.0.1 at 2023-06-06 01:41:29 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:14:in `current_user'
+Completed 200 OK in 27ms (Views: 0.3ms | ActiveRecord: 8.8ms | Allocations: 7784)
+
+
