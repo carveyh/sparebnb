@@ -1,9 +1,57 @@
-.show-header-full-header {
-	
-	height: 86px;
-	/* max-width: 1440px;
-	box-sizing: border-box; */
+/* ------------------ GLOBAL STYLES ------------------ */
+.heading-1 {
+	width: 100%;
+	font-size: 26px;
+	font-weight: 500;
+	margin-bottom: 4px;
+	text-wrap: nowrap;
+}
+
+.heading-2 {
+	width: 100%;
+	font-size: 22px;
+	font-weight: 500;
+	margin-bottom: 4px;
+	text-wrap: nowrap;
+}
+
+.stats-text-small {
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.plain-text {
+	font-size: 16px;
+	font-weight: 300;
+}
+
+
+.horizontal-rule-top-border {
+	border-top: 1px solid rgb(221, 221, 221);
+}
+
+/* ------------------ HEADER ------------------ */
+/* ------------------ HEADER ------------------ */
+/* ------------------ HEADER ------------------ */
+
+.show-page-outer-container {
+	container-type: inline-size;
+	container-name: overall-page-width;
+	display: flex;
+	justify-content: center;
+}
+
+.show-page-dynamic-inner-container {
+	min-width: 1440px;
 	padding: 0px 160px;
+	box-sizing: border-box;
+}
+
+
+.show-header-full-header {
+	/* background-color: pink; */
+	width: 100%;
+	height: 86px;
 	display: flex;
 	align-items: stretch;
 	justify-content: flex-start;
@@ -16,30 +64,28 @@
 }
 
 .show-title {
-	width: 100%;
+	/* width: 100%;
 	font-size: 26px;
 	font-weight: 600px;
 	margin-bottom: 4px;
-	text-wrap: nowrap;
-	/* height: 33.5px; */
+	text-wrap: nowrap; */
 }
 
 .show-header-details {
 	/* background-color: beige; */
-	/* height: 28px; */
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-end;
 }
 
 .rating-review-stats {
+	/* background-color: lightgray; */
 	display: flex;
 	align-items: center;
 	margin-top: 8px;
 	height: 24px;
-	font-size: 13px;
-	font-weight: 500;
-	background-color: lightgray;
+	/* font-size: 13px;
+	font-weight: 500; */
 }
 
 .star-icon {
@@ -50,37 +96,280 @@
 	padding-left: 4px;
 }
 
+.show-header-buttons {
+	/* background-color: lightgray; */
+	padding-bottom: 5px;
+	/* font-size: 14px; */
+}
+
+/* ------------------ PHOTOS ------------------ */
+/* ------------------ PHOTOS ------------------ */
 /* ------------------ PHOTOS ------------------ */
 
-.photo-wall-container {
+/* 'Crown' of photo wall - side padding, and upper padding. */
+.photo-wall-crown {
+	/* background-color: lightcyan; */
+	width: 100%;
 	box-sizing: border-box;
-	padding: 0px 160px;
-	background-color: lightcyan;
 	padding-top: 24px;
+	display: flex;
+	justify-content: center;
+}
+
+/* Actual photo wall nestled within 'crown' */
+.photo-wall-container {
+	/* background-color: pink; */
+	/* border: 1px black solid; */
+
+	/* ACTUALLY - need it to not shrink, airbnb maintains a static height */
+	/* for approx full to half screen browser widths... */
+	/* UPDATE - this dynamic width setting needs to work for more than just photos */
+
+	/* INCORRECT LOGIC, BUT HONORABLE MENTIONS: */
+	/* min-width: 1120px; */
+	/* aspect-ratio: 1120/394.5; */
+	height: 394px;
+	width: 100%;
+	/* border-radius: 12px; */
+	display: block;
+	
+}
+
+
+@container overall-page-width (width < 1270px) {
+	.show-page-dynamic-inner-container {
+		min-width: unset;
+		width: 100%;
+		padding: 0px 80px;
+		
+	}
+}
+@container overall-page-width (width < 1120px) {
+	.show-page-dynamic-inner-container {
+		min-width: unset;
+		width: 100%;
+		padding: 0px 40px;
+		
+	}
+}
+
+/* airbnb gives exactly entire left half of photo wall space to one big photo */
+.photo-wall-halver {
+	/* background-color: orange; */
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: stretch;
+	align-items: stretch;
+}
+
+/* the remaining right half is split into quadrants, */
+/* AFTER first applying a padding-left within that half */
+.photo-wall-big {
+	/* background-color: blue; */
+	flex-basis: 33%;
+	flex-grow: 1;
+	box-sizing: border-box;
 }
 
 .photo-wall-grid {
-	height: 395px;
+	/* background-color: purple; */
+	flex-basis: 33%;
+	flex-grow: 1;
 	box-sizing: border-box;
-	border-radius: 12px;
-	border: 1px black solid;
+	padding-left: 8px;
+	/* Above ensures as a flex item, this is exactly half of entire photo wall, */
+	/* including its padding-left. flex-basis shared evenly among 2 flex items */
+	/* must be 50% or below, and box-sizing: border-box is needed if padding. */
+	/* Below, setup as grid container. */
 	display: grid;
-	grid-gap: 8px 8px;
 	grid-template-areas: 
-		"big big .   one  . two "
-		"big big .    .   .   . "
-		"big big .  three . four"
-	;
-	grid-template-columns: 35fr 17fr 17fr;
-	grid-template-rows: 1fr 1fr;
+		"one two"
+		"three four"
+		;
+	gap: 8px;
 }
 
-.photo-wall-item {
+.photo-wall-individual-photo-div {
+	/* background-color: lightcyan; */
+	/* border: 1px solid blue; */
+	overflow: hidden;
+
+}
+
+.listings-show-photo {
+	width:100%;
+	height:100%;
+	object-fit: cover;
+}
+
+.photo-wall-big > img {
+	border-top-left-radius: 12px;
+	border-bottom-left-radius: 12px;
+}
+
+.photo-wall-one {
+	grid-area: one;
+}
+
+.photo-wall-two {
+	grid-area: two;
+}
+.photo-wall-two > img {
+	border-top-right-radius: 12px;
+}
+
+.photo-wall-three {
+	grid-area: three;
+}
+.photo-wall-four {
+	grid-area: four;
+}
+.photo-wall-four > img {
+	border-bottom-right-radius: 12px;
+}
+
+/* ------------------ LISTING DETAILS ------------------ */
+/* ------------------ LISTING DETAILS ------------------ */
+/* ------------------ LISTING DETAILS ------------------ */
+
+/* Outer container for main div which is the flex container for entire section */
+.details-outer-container{
+	/* background-color: pink; */
+	width: 100%;
+	/* height: 100px; */
+	display: block;
+	/* position: sticky; */
+	/* top: 300px; */
+}
+
+/* Main div for listing details, flex */
+.details-main-container{
+	/* background-color: purple; */
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: stretch;
+	align-items: flex-start;
+	/* height: 100%; */
+}
+
+
+/* ------------------ LISTING DETAILS LEFT SIDE ------------------ */
+/* ------------------ LISTING DETAILS LEFT SIDE ------------------ */
+/* ------------------ LISTING DETAILS LEFT SIDE ------------------ */
+
+.details-left-container {
+	flex-grow: 1;
+	flex-basis: 58.33%;	background-color: bisque;
+	display: block;
+	/* height: 100%; */
+	/* flex-direction: column; */
+	/* position: relative; */
+}
+
+.details-stats-card-container {
+	background-color: red;
+	height: 100%;
+	width: 100%;
+}
+
+.details-stats-card-padder {
+	background-color: aliceblue;
+	padding-top: 48px;
+	padding-bottom: 24px;
+}
+
+.details-stats-card-horizontal-splitter {
 	background-color: pink;
+	display: flex;
+	justify-content: space-between;
 }
 
-.photo-wall-big {grid-area: big;}
-.photo-wall-one {grid-area: one;}
-.photo-wall-two {grid-area: two;}
-.photo-wall-three {grid-area: three;}
-.photo-wall-four {grid-area: four;}
+.details-stats-card-profile-thumbnail {
+	background-color: white;
+	margin-left: 16px;
+	width: 56px;
+	height: 56px;
+}
+
+.details-stats-card-text-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.details-stats-card-text-top {
+
+}
+
+.details-stats-card-text-bottom {
+
+}
+
+
+
+
+
+
+
+
+
+/* ------------------ LISTING DETAILS RIGHT SIDE ------------------ */
+/* ------------------ LISTING DETAILS RIGHT SIDE ------------------ */
+/* ------------------ LISTING DETAILS RIGHT SIDE ------------------ */
+
+.details-right-container {
+	flex-grow: 1;
+	flex-basis: 41.67%;
+	/* background-color: yellow; */
+	display: block;
+	/* How else to get this container of sticky container to stretch to its full container height?  */
+	/* height; */
+	/* flex-direction: column; */
+	position: relative;
+	/* min-height: 150px; */
+	/* height: 100%; */
+	align-self: stretch;
+	box-sizing: border-box;
+	padding-left: 93.32px;
+}
+
+
+
+.floating-form-container {
+	overflow: scroll;
+	width: 100%;
+	height: 229px;
+	height: 323px;
+	background-color: aqua;
+	position: sticky;
+	
+	padding-bottom: 142px;
+	padding-bottom: 48px;
+
+	padding-top: 48px;
+	/* padding-bottom: 48px;; */
+	margin-top: 48px;
+	/* margin-bottom: 48px; */
+
+	/* top:80px; */
+	top:80px;
+	/* bottom: 80px; */
+	/* box-sizing: content-box; */
+	/* z-index: 6; */
+	/* overflow: hidden; */
+}
+
+.floating-form-inner-container {
+	background-color: purple;
+	/* height: 323px; */
+	height: 100%;
+	overflow: scroll;
+
+}
+
+.floating-reservation-box-endpoint {
+	border-bottom: 1px solid rgb(221, 221, 221);
+}

@@ -1,0 +1,28 @@
+h1,
+h2,
+h3 {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  margin:0;
+}
+
+h1 {
+  background-color: red;
+  height: 35px;
+  z-index:3;
+}
+
+h2 {
+  background-color: blue;
+  height: 25px;
+  top:35px;
+  z-index:2;
+}
+
+h3 {
+  background-color: green;
+  height: 20px;
+  top:60px;
+  z-index:1;
+}
