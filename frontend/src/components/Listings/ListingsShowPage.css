@@ -1,3 +1,30 @@
+/* ------------------ GLOBAL STYLES ------------------ */
+.heading-1 {
+	width: 100%;
+	font-size: 26px;
+	font-weight: 500;
+	margin-bottom: 4px;
+	text-wrap: nowrap;
+}
+
+.heading-2 {
+	width: 100%;
+	font-size: 22px;
+	font-weight: 500;
+	margin-bottom: 4px;
+	text-wrap: nowrap;
+}
+
+.stats-text-small {
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.plain-text {
+	font-size: 16px;
+	font-weight: 300;
+}
+
 /* ------------------ HEADER ------------------ */
 /* ------------------ HEADER ------------------ */
 /* ------------------ HEADER ------------------ */
@@ -32,11 +59,11 @@
 }
 
 .show-title {
-	width: 100%;
+	/* width: 100%;
 	font-size: 26px;
 	font-weight: 600px;
 	margin-bottom: 4px;
-	text-wrap: nowrap;
+	text-wrap: nowrap; */
 }
 
 .show-header-details {
@@ -47,13 +74,13 @@
 }
 
 .rating-review-stats {
-	background-color: lightgray;
+	/* background-color: lightgray; */
 	display: flex;
 	align-items: center;
 	margin-top: 8px;
 	height: 24px;
-	font-size: 13px;
-	font-weight: 500;
+	/* font-size: 13px;
+	font-weight: 500; */
 }
 
 .star-icon {
@@ -65,7 +92,9 @@
 }
 
 .show-header-buttons {
-	background-color: lightgray;
+	/* background-color: lightgray; */
+	padding-bottom: 5px;
+	/* font-size: 14px; */
 }
 
 /* ------------------ PHOTOS ------------------ */
@@ -221,17 +250,74 @@
 	/* height: 100%; */
 }
 
+.details-horizontal-rule-top-border {
+	border-top: 1px solid rgb(221, 221, 221);
+}
+
+/* ------------------ LISTING DETAILS LEFT SIDE ------------------ */
+/* ------------------ LISTING DETAILS LEFT SIDE ------------------ */
+/* ------------------ LISTING DETAILS LEFT SIDE ------------------ */
+
 .details-left-container {
 	flex-grow: 1;
-	flex-basis: 58.33%;
-	/* height: 100%; */
-	
-
-	background-color: green;
+	flex-basis: 58.33%;	background-color: bisque;
 	display: block;
+	/* height: 100%; */
 	/* flex-direction: column; */
 	/* position: relative; */
 }
+
+.details-stats-card-container {
+	background-color: red;
+	height: 100%;
+	width: 100%;
+}
+
+.details-stats-card-padder {
+	background-color: aliceblue;
+	padding-top: 48px;
+	padding-bottom: 24px;
+}
+
+.details-stats-card-horizontal-splitter {
+	background-color: pink;
+	display: flex;
+	justify-content: space-between;
+}
+
+.details-stats-card-profile-thumbnail {
+	background-color: white;
+	margin-left: 16px;
+	width: 56px;
+	height: 56px;
+}
+
+.details-stats-card-text-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.details-stats-card-text-top {
+
+}
+
+.details-stats-card-text-bottom {
+
+}
+
+
+
+
+
+
+
+
+
+/* ------------------ LISTING DETAILS RIGHT SIDE ------------------ */
+/* ------------------ LISTING DETAILS RIGHT SIDE ------------------ */
+/* ------------------ LISTING DETAILS RIGHT SIDE ------------------ */
+
 .details-right-container {
 	flex-grow: 1;
 	flex-basis: 41.67%;
