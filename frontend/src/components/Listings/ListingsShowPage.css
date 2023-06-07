@@ -1,9 +1,29 @@
+/* ------------------ HEADER ------------------ */
+/* ------------------ HEADER ------------------ */
+/* ------------------ HEADER ------------------ */
+
+.show-page-outer-container {
+	container-type: inline-size;
+	display: flex;
+	justify-content: center;
+}
+
+.show-page-dynamic-inner-container {
+	/* width: 100%; */
+	min-width: 1440px;
+	padding: 0px 160px;
+	box-sizing: border-box;
+}
+
+
 .show-header-full-header {
-	
+	background-color: pink;
+	/* min-width: 1120px; */
+	width: 100%;
 	height: 86px;
 	/* max-width: 1440px;
 	box-sizing: border-box; */
-	padding: 0px 160px;
+	/* padding: 0px 160px; */
 	display: flex;
 	align-items: stretch;
 	justify-content: flex-start;
@@ -55,31 +75,58 @@
 /* ------------------ PHOTOS ------------------ */
 
 /* 'Crown' of photo wall - side padding, and upper padding. */
-.photo-wall-padding {
+.photo-wall-crown {
+	width: 100%;
 	background-color: lightcyan;
 	box-sizing: border-box;
-	padding: 24px 160px 0px;
+	/* padding: 24px 160px 0px; */
 	/* display: flex; */
 	/* justify-content: stretch; */
 	/* align-items: stretch; */
-	/* padding-top: 24px; */
+	padding-top: 24px;
+	display: flex;
+	justify-content: center;
+	/* container-type: inline-size; */
 }
 
 /* Actual photo wall nestled within 'crown' */
 .photo-wall-container {
 	border: 1px black solid;
-	background-color: pink;
-	width: 100%;
-	aspect-ratio: 1120/394.5;
-	border-radius: 12px;
-	box-sizing: border-box;
-	display: block;
+	/* background-color: pink; */
 
+	/* ACTUALLY - need it to not shrink, airbnb maintains a static height */
+	/* for approx full to half screen browser widths... */
+	height: 394px;
+	/* min-width: 1120px; */
+	width: 100%;
+	/* aspect-ratio: 1120/394.5; */
+	border-radius: 12px;
+	/* box-sizing: border-box; */
+	display: block;
+	/* padding: 0px 160px; */
+	/* align-self: center; */
+	
+}
+
+
+@container (width < 1270px) {
+	.show-page-dynamic-inner-container {
+		min-width: unset;
+		width: 100%;
+		padding: 0px 80px;
+		
+	}
+}
+@container (width < 800px) {
+	.photo-wall-container {
+		/* width: 100%; */
+		/* padding: 0px 40px; */
+	}
 }
 
 /* airbnb gives exactly entire left half of photo wall space to one big photo */
 .photo-wall-halver {
-	background-color: orange;
+	/* background-color: orange; */
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -91,14 +138,16 @@
 /* the remaining right half is split into quadrants, */
 /* AFTER first applying a padding-left within that half */
 .photo-wall-big {
-	background-color: blue;
+	/* background-color: blue; */
 	flex-basis: 33%;
 	flex-grow: 1;
 	box-sizing: border-box;
+	border-top-left-radius: 12px;
+	border-bottom-left-radius: 12px;
 }
 
 .photo-wall-grid {
-	background-color: purple;
+	/* background-color: purple; */
 	flex-basis: 33%;
 	flex-grow: 1;
 	box-sizing: border-box;
@@ -115,21 +164,29 @@
 	gap: 8px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-.photo-wall-item {
+.photo-wall-photo-container {
 	background-color: pink;
+	/* border: 1px solid blue; */
+
 }
-/* .photo-wall-one {grid-area: one;} */
-/* .photo-wall-two {grid-area: two;} */
-/* .photo-wall-three {grid-area: three;} */
-/* .photo-wall-four {grid-area: four;} */
+
+.listings-show-photo {
+	width:100%;
+	height:100%;
+	object-fit: cover;
+}
+
+.photo-wall-one {
+	grid-area: one;
+}
+.photo-wall-two {
+	grid-area: two;
+	border-top-right-radius: 12px;
+}
+.photo-wall-three {
+	grid-area: three;
+}
+.photo-wall-four {
+	grid-area: four;
+	border-bottom-right-radius: 12px;
+}
