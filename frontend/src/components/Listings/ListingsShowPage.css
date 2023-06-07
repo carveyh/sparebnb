@@ -25,6 +25,11 @@
 	font-weight: 300;
 }
 
+
+.horizontal-rule-top-border {
+	border-top: 1px solid rgb(221, 221, 221);
+}
+
 /* ------------------ HEADER ------------------ */
 /* ------------------ HEADER ------------------ */
 /* ------------------ HEADER ------------------ */
@@ -250,9 +255,6 @@
 	/* height: 100%; */
 }
 
-.details-horizontal-rule-top-border {
-	border-top: 1px solid rgb(221, 221, 221);
-}
 
 /* ------------------ LISTING DETAILS LEFT SIDE ------------------ */
 /* ------------------ LISTING DETAILS LEFT SIDE ------------------ */
@@ -321,7 +323,7 @@
 .details-right-container {
 	flex-grow: 1;
 	flex-basis: 41.67%;
-	background-color: yellow;
+	/* background-color: yellow; */
 	display: block;
 	/* How else to get this container of sticky container to stretch to its full container height?  */
 	/* height; */
