@@ -5,6 +5,9 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchListings } from "../../store/listings";
+import { Route, Switch } from "react-router-dom";
+import ListingsShowPage from "./ListingsShowPage";
+import Testing from "../Testing";
 
 const ListingsFilterCarousel = () => {
 	
@@ -124,9 +127,24 @@ const ListingsMain = () => {
 		<>
 			<ListingsFilterCarousel/>
 			<ListingsIndex />
-			<div className="listings-main">
-          {/* <img src={sessionUser.photoUrl} />   */}
-			</div>
+
+			{/* <Switch>
+				<Route exact path={`/${listingId}`}>
+				<Route exact path={`/show`}>
+					<ListingsShowPage />
+				</Route>
+				<Route>
+					<Testing />
+					<ListingsFilterCarousel/>
+					<ListingsIndex />
+				</Route>
+			</Switch> */}
+
+
+
+			{/* <div className="listings-main">
+          <img src={sessionUser.photoUrl} />  
+			</div> */}
 		</>
 	)
 }
