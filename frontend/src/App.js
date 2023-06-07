@@ -19,7 +19,7 @@ function App() {
           <Route exact path="/">
             {<ListingsIndex/>}
           </Route>
-          <Route exact path="/show">
+          <Route exact path="/listings/:listingId">
             <ListingsShowPage/>
           </Route>
           <Route><h1>404 - page not found.</h1></Route>

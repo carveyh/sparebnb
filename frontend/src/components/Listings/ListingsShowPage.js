@@ -5,21 +5,43 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { fetchListings } from "../../store/listings";
 import { useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { formatTwoDigitNumberString } from "../../utils/urlFormatter";
 
-export const ListingsShowPhoto = (folderNum, imageNum) => {
+export const ListingsShowPhoto = ({listingId, imageNum}) => {
+	// const formatTwoDigitNumberString = (unformattedNum) => {
+	// 	const formattedNum = unformattedNum.toString();
+	// 	return formattedNum.length < 2 ? "0".concat(formattedNum) : formattedNum;
+	// }
+	
+	const nums = [1,2,3,4,5,6]
+	listingId ||= nums[Math.floor(Math.random() * nums.length)];;
+	listingId = formatTwoDigitNumberString(listingId);
+	imageNum ||= nums[Math.floor(Math.random() * nums.length)];
+	imageNum = formatTwoDigitNumberString(imageNum);
+	console.log(listingId)
 	return(
 		<>
-			<img className="listings-show-photo" src={require(`../../images/listings/02/01.png`)} />
+			<img className="listings-show-photo" src={require(`../../images/listings/${listingId}/${imageNum}.png`)} />
 		</>
 	)
 }
 
-const ListingsShowPage = () => {
-	const photoDirPath = "";
+// export const ListingsShowPhotoFourPane = (listingId) => {
+// 	const fourPanePhotos = [];
+// 	for(let i = 1; i <= 4; i++){
+// 		fourPanePhotos.push(<ListingsShowPhoto listingId={listingId} imageNum={i}/>)
+// 	}
+// 	return fourPanePhotos;
+// }
+
+const ListingsShowPage = (props) => {
+	// const photoDirPath = "";
+	const dispatch = useDispatch();
+	const { listingId } = useParams()
+	const listing = useSelector(state => state.entities?.listings? state.entities.listings[`${listingId}`] : {})
 
 
-
-	console.log("redirected!")
 	
 	return (
 		<div className="show-page-outer-container">
@@ -29,7 +51,7 @@ const ListingsShowPage = () => {
 				<div className="show-header-full-header">
 					<div className="show-header-inner-header">
 						<div className="show-title heading-1">
-						Lake Tent #4 @ The Silverlaken Estate
+						{`${listing?.title}`}
 						</div>
 						<div className="show-header-details">
 							<div className="show-header-stats">
@@ -55,19 +77,21 @@ const ListingsShowPage = () => {
 				<div className="photo-wall-crown">
 					<div className="photo-wall-container">
 						<div className="photo-wall-halver">
-							<div className="photo-wall-individual-photo-div photo-wall-big"><ListingsShowPhoto/></div>
+							<div className="photo-wall-individual-photo-div photo-wall-big">
+								<ListingsShowPhoto listingId={listingId} imageNum={1}/>
+							</div>
 							<div className="photo-wall-grid">
 								<div className="photo-wall-individual-photo-div photo-wall-one">
-									<ListingsShowPhoto/>
+									<ListingsShowPhoto listingId={listingId} imageNum={2}/>
 								</div>
 								<div className="photo-wall-individual-photo-div photo-wall-two">
-									<ListingsShowPhoto/>
+									<ListingsShowPhoto listingId={listingId} imageNum={3}/>
 								</div>
 								<div className="photo-wall-individual-photo-div photo-wall-three">
-									<ListingsShowPhoto/>
+									<ListingsShowPhoto listingId={listingId} imageNum={4}/>
 								</div>
 								<div className="photo-wall-individual-photo-div photo-wall-four">
-									<ListingsShowPhoto/>
+									<ListingsShowPhoto listingId={listingId} imageNum={5}/>
 								</div>
 
 							</div>
