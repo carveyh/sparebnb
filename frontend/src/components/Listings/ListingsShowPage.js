@@ -43,19 +43,19 @@ const ListingsShowPage = () => {
 				<div className="photo-wall-crown">
 					<div className="photo-wall-container">
 						<div className="photo-wall-halver">
-							<div className="photo-wall-photo-container photo-wall-big"><ListingsShowPhoto/></div>
+							<div className="photo-wall-individual-photo-div photo-wall-big"><ListingsShowPhoto/></div>
 							<div className="photo-wall-grid">
-								<div className="photo-wall-photo-container photo-wall-one">
-									ONE
+								<div className="photo-wall-individual-photo-div photo-wall-one">
+									<ListingsShowPhoto/>
 								</div>
-								<div className="photo-wall-photo-container photo-wall-two">
-									TWO
+								<div className="photo-wall-individual-photo-div photo-wall-two">
+									<ListingsShowPhoto/>
 								</div>
-								<div className="photo-wall-photo-container photo-wall-three">
-									THREE
+								<div className="photo-wall-individual-photo-div photo-wall-three">
+									<ListingsShowPhoto/>
 								</div>
-								<div className="photo-wall-photo-container photo-wall-four">
-									FOUR
+								<div className="photo-wall-individual-photo-div photo-wall-four">
+									<ListingsShowPhoto/>
 								</div>
 
 							</div>
@@ -65,18 +65,20 @@ const ListingsShowPage = () => {
 				</div>
 				{/* PHOTO WALL END */}
 				{/* PHOTO WALL END */}
+				
+
+
+
+
+
+
+
 				<br/>
 				<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
 				<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
 				<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
 				<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
 				<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-
-
-
-
-
-
 
 			</div>
 		</div>

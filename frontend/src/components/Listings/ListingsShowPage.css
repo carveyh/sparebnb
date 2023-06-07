@@ -4,12 +4,12 @@
 
 .show-page-outer-container {
 	container-type: inline-size;
+	container-name: overall-page-width;
 	display: flex;
 	justify-content: center;
 }
 
 .show-page-dynamic-inner-container {
-	/* width: 100%; */
 	min-width: 1440px;
 	padding: 0px 160px;
 	box-sizing: border-box;
@@ -17,13 +17,9 @@
 
 
 .show-header-full-header {
-	background-color: pink;
-	/* min-width: 1120px; */
+	/* background-color: pink; */
 	width: 100%;
 	height: 86px;
-	/* max-width: 1440px;
-	box-sizing: border-box; */
-	/* padding: 0px 160px; */
 	display: flex;
 	align-items: stretch;
 	justify-content: flex-start;
@@ -41,12 +37,10 @@
 	font-weight: 600px;
 	margin-bottom: 4px;
 	text-wrap: nowrap;
-	/* height: 33.5px; */
 }
 
 .show-header-details {
 	/* background-color: beige; */
-	/* height: 28px; */
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-end;
@@ -76,40 +70,35 @@
 
 /* 'Crown' of photo wall - side padding, and upper padding. */
 .photo-wall-crown {
+	/* background-color: lightcyan; */
 	width: 100%;
-	background-color: lightcyan;
 	box-sizing: border-box;
-	/* padding: 24px 160px 0px; */
-	/* display: flex; */
-	/* justify-content: stretch; */
-	/* align-items: stretch; */
 	padding-top: 24px;
 	display: flex;
 	justify-content: center;
-	/* container-type: inline-size; */
 }
 
 /* Actual photo wall nestled within 'crown' */
 .photo-wall-container {
-	border: 1px black solid;
 	/* background-color: pink; */
+	/* border: 1px black solid; */
 
 	/* ACTUALLY - need it to not shrink, airbnb maintains a static height */
 	/* for approx full to half screen browser widths... */
-	height: 394px;
+	/* UPDATE - this dynamic width setting needs to work for more than just photos */
+
+	/* INCORRECT LOGIC, BUT HONORABLE MENTIONS: */
 	/* min-width: 1120px; */
-	width: 100%;
 	/* aspect-ratio: 1120/394.5; */
-	border-radius: 12px;
-	/* box-sizing: border-box; */
+	height: 394px;
+	width: 100%;
+	/* border-radius: 12px; */
 	display: block;
-	/* padding: 0px 160px; */
-	/* align-self: center; */
 	
 }
 
 
-@container (width < 1270px) {
+@container overall-page-width (width < 1270px) {
 	.show-page-dynamic-inner-container {
 		min-width: unset;
 		width: 100%;
@@ -117,10 +106,12 @@
 		
 	}
 }
-@container (width < 800px) {
-	.photo-wall-container {
-		/* width: 100%; */
-		/* padding: 0px 40px; */
+@container overall-page-width (width < 1120px) {
+	.show-page-dynamic-inner-container {
+		min-width: unset;
+		width: 100%;
+		padding: 0px 40px;
+		
 	}
 }
 
@@ -142,8 +133,6 @@
 	flex-basis: 33%;
 	flex-grow: 1;
 	box-sizing: border-box;
-	border-top-left-radius: 12px;
-	border-bottom-left-radius: 12px;
 }
 
 .photo-wall-grid {
@@ -164,9 +153,10 @@
 	gap: 8px;
 }
 
-.photo-wall-photo-container {
-	background-color: pink;
+.photo-wall-individual-photo-div {
+	/* background-color: lightcyan; */
 	/* border: 1px solid blue; */
+	overflow: hidden;
 
 }
 
@@ -176,17 +166,28 @@
 	object-fit: cover;
 }
 
+.photo-wall-big > img {
+	border-top-left-radius: 12px;
+	border-bottom-left-radius: 12px;
+}
+
 .photo-wall-one {
 	grid-area: one;
 }
+
 .photo-wall-two {
 	grid-area: two;
+}
+.photo-wall-two > img {
 	border-top-right-radius: 12px;
 }
+
 .photo-wall-three {
 	grid-area: three;
 }
 .photo-wall-four {
 	grid-area: four;
+}
+.photo-wall-four > img {
 	border-bottom-right-radius: 12px;
 }
