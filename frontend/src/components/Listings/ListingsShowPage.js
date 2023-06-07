@@ -160,6 +160,8 @@ const ListingsShowPage = () => {
 						</div>
 						<div className="details-right-container">
 							<div className="floating-form-container">
+								<div className="floating-form-inner-container">
+
 								Yoollo.
 								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
 								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
@@ -176,6 +178,7 @@ const ListingsShowPage = () => {
 								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
 								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
 								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
+								</div>
 							</div>
 						</div>
 						{/* <div className="floating-reservation-box-endpoint"></div> */}
