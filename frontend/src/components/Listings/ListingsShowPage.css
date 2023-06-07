@@ -202,9 +202,9 @@
 
 /* Outer container for main div which is the flex container for entire section */
 .details-outer-container{
-	background-color: pink;
+	/* background-color: pink; */
 	width: 100%;
-	height: 100px;
+	/* height: 100px; */
 	display: block;
 	/* position: sticky; */
 	/* top: 300px; */
@@ -212,21 +212,50 @@
 
 /* Main div for listing details, flex */
 .details-main-container{
-	background-color: purple;
+	/* background-color: purple; */
 	width: 100%;
-	height: 100%;
-	/* position: sticky;
-	top:150px;
-	z-index: 6; */
+	display: flex;
+	flex-direction: row;
+	justify-content: stretch;
+	align-items: flex-start;
+}
+
+.details-left-container {
+	flex-grow: 1;
+	flex-basis: 58.33%;
 	
 
+	background-color: green;
+	display: block;
+	/* flex-direction: column; */
+	/* position: relative; */
 }
+.details-right-container {
+	flex-grow: 1;
+	flex-basis: 41.67%;
+	background-color: yellow;
+	display: block;
+	height:fit-content;
+	/* flex-direction: column; */
+	position: relative;
+	min-height: 150px;
+	/* height: 100%; */
+	align-self: stretch;
+}
+
+
 
 .sticky-tester {
 	width: 100%;
-	height: 100px;
+	height: 30px;
 	background-color: aqua;
 	position: sticky;
+	top:80px;
 	top:128px;
 	margin: 20px 0px;
+	/* z-index: 6; */
+}
+
+.floating-reservation-box-endpoint {
+	border-bottom: 1px solid rgb(221, 221, 221);
 }
