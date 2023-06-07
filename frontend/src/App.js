@@ -2,6 +2,7 @@ import { Route, Switch } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Testing from "./components/Testing";
 import ListingsIndex from "./components/Listings";
+import { TestingConceptsPage } from "./components/Testing/TestingConcepts";
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
 
         <Switch>
           <Route exact path="/testing"><Testing /></Route>
+          <Route exact path="/testing-concepts"><TestingConceptsPage /></Route>
           <Route exact path="/">
             {<ListingsIndex/>}
           </Route>

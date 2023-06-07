@@ -47,13 +47,13 @@
 }
 
 .rating-review-stats {
+	background-color: lightgray;
 	display: flex;
 	align-items: center;
 	margin-top: 8px;
 	height: 24px;
 	font-size: 13px;
 	font-weight: 500;
-	background-color: lightgray;
 }
 
 .star-icon {
@@ -62,6 +62,10 @@
 
 .header-review-count {
 	padding-left: 4px;
+}
+
+.show-header-buttons {
+	background-color: lightgray;
 }
 
 /* ------------------ PHOTOS ------------------ */
@@ -190,4 +194,39 @@
 }
 .photo-wall-four > img {
 	border-bottom-right-radius: 12px;
+}
+
+/* ------------------ LISTING DETAILS ------------------ */
+/* ------------------ LISTING DETAILS ------------------ */
+/* ------------------ LISTING DETAILS ------------------ */
+
+/* Outer container for main div which is the flex container for entire section */
+.details-outer-container{
+	background-color: pink;
+	width: 100%;
+	height: 100px;
+	display: block;
+	/* position: sticky; */
+	/* top: 300px; */
+}
+
+/* Main div for listing details, flex */
+.details-main-container{
+	background-color: purple;
+	width: 100%;
+	height: 100%;
+	/* position: sticky;
+	top:150px;
+	z-index: 6; */
+	
+
+}
+
+.sticky-tester {
+	width: 100%;
+	height: 100px;
+	background-color: aqua;
+	position: sticky;
+	top:128px;
+	margin: 20px 0px;
 }
