@@ -1,0 +1,86 @@
+.show-header-full-header {
+	
+	height: 86px;
+	/* max-width: 1440px;
+	box-sizing: border-box; */
+	padding: 0px 160px;
+	display: flex;
+	align-items: stretch;
+	justify-content: flex-start;
+}
+
+.show-header-inner-header {
+	padding-top: 24px;
+	width: 100%;
+	display: block;
+}
+
+.show-title {
+	width: 100%;
+	font-size: 26px;
+	font-weight: 600px;
+	margin-bottom: 4px;
+	text-wrap: nowrap;
+	/* height: 33.5px; */
+}
+
+.show-header-details {
+	/* background-color: beige; */
+	/* height: 28px; */
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+
+.rating-review-stats {
+	display: flex;
+	align-items: center;
+	margin-top: 8px;
+	height: 24px;
+	font-size: 13px;
+	font-weight: 500;
+	background-color: lightgray;
+}
+
+.star-icon {
+	margin-right: 4px;
+}
+
+.header-review-count {
+	padding-left: 4px;
+}
+
+/* ------------------ PHOTOS ------------------ */
+
+.photo-wall-container {
+	box-sizing: border-box;
+	padding: 0px 160px;
+	background-color: lightcyan;
+	padding-top: 24px;
+}
+
+.photo-wall-grid {
+	height: 395px;
+	box-sizing: border-box;
+	border-radius: 12px;
+	border: 1px black solid;
+	display: grid;
+	grid-gap: 8px 8px;
+	grid-template-areas: 
+		"big big .   one  . two "
+		"big big .    .   .   . "
+		"big big .  three . four"
+	;
+	grid-template-columns: 35fr 17fr 17fr;
+	grid-template-rows: 1fr 1fr;
+}
+
+.photo-wall-item {
+	background-color: pink;
+}
+
+.photo-wall-big {grid-area: big;}
+.photo-wall-one {grid-area: one;}
+.photo-wall-two {grid-area: two;}
+.photo-wall-three {grid-area: three;}
+.photo-wall-four {grid-area: four;}

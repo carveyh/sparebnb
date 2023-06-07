@@ -5,126 +5,21 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { fetchListings } from "../../store/listings";
 import { useState } from "react";
+import ListingsShowPage from "../Listings/ListingsShowPage";
 
-
-const words = "apple banana cherry";
-const array = words.split(" ");
-
-export const photoFileNames = "architectural-wonder beach-niantic dining-jersey fossatun-iceland hilltop-haven mirror-glass-cabin mountain-retreat sample-pool-listing tower-def-treehouse unique-treehouse".split(" ");
-
-const PlaceholderListingData = ({listing, num}) => {
-	return (
-		<div className={`grid-item grid-item-${num}`}>
-					<div className="listing-favorite-button"><i className="fa-regular fa-heart"></i></div>
-					<div className="listings-photo-container">
-						{/* <img className="listings-photo" src={require(`../../images/listings/${photoFileNames[num-1]}.png`)} /> */}
-					</div>
-					{/* <p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
-					</p> */}
-					{/* <p>{`${listing.city}, ${listing.state}`}</p>
-					<p>On Lake Waterwharf</p> */}
-					<div className="listings-text-container">
-						<p>{`${listing.title}`}</p>
-						<p>{`${listing.city}, ${listing.state}`}</p>
-						<p>June 15 - 22</p>
-						<p className="listings-index-price-para"><div className="listings-index-price-figure">{`$${listing.baseNightlyRate}`}</div><div>&nbsp;night</div></p>
-					</div>
-		</div>
-	)
-}
 
 const Testing = (props) => {
-	const dispatch = useDispatch();
-	const listings = useSelector(state => state.entities?.listings ? state.entities.listings : null)
-	// const [listingsArray, setListingsArray] = useState(listings);
-	useEffect(() => {
-		dispatch(fetchListings())
-	}, [])
-
-	// useEffect(() => {
-	// 	setListingsArray(Object.values(listings))
-	// }, [listings])
-	const numTestListings = 10;
-	const testListingsArray = [];
-
-	// THIS WAS GIVING ERROR - IN CHECKING IF EMPTY OBJECT. MEMORY CHECK EQUALITY?
-	// if(listings !== {}){
-	if(Object.keys(listings).length !== 0){
-		for(let i = 1; i <= numTestListings; i++) {
-			testListingsArray.push(
-				<PlaceholderListingData listing={listings[`${i}`]} num={i} />
-				// <PlaceholderListingData listing={listingsArray[i]} num={i} />
-			)
-		}
-	}
+	
 
 	return (
 		<>
-		<div className="grid-container-container">
-			<div className="grid-container">
-				{testListingsArray}
-				{/* <div className="grid-item grid-item-1">
-					<PlaceholderListingData />
-				</div>
-				<div className="grid-item grid-item-2">
-					<PlaceholderListingData />
-				</div>
-				<div className="grid-item grid-item-3"></div>
-				<div className="grid-item grid-item-4"></div>
-				<div className="grid-item grid-item-5"></div>
-				<div className="grid-item grid-item-6"></div>
-				<div className="grid-item grid-item-7"></div>
-				<div className="grid-item grid-item-8"></div>
-				<div className="grid-item grid-item-9"></div>
-				<div className="grid-item grid-item-10"></div>
-				<div className="grid-item grid-item-11"></div>
-				<div className="grid-item grid-item-12"></div>
-				<div className="grid-item grid-item-13"></div>
-				<div className="grid-item grid-item-14"></div>
-				<div className="grid-item grid-item-15"></div>
-				<div className="grid-item grid-item-16"></div> */}
-			</div>
-		</div>
+			<ListingsShowPage />
 		</>
 	)
 }
 
 
 
-
-
-
-
-
-
-
-// const Testing = (props) => {
-// 	return (
-// 		<>
-// 			<div className="main-test-div" >
-// 				<div className="fake-header">
-// 					Hello from testing!
-// 				</div>
-// 				<br />
-// 				<p>
-// 					This para. Default font-size is 16. 
-// 					<ul>
-// 						<li>`font-size: #rem` makes a factor of root's font-size.</li>
-// 						<li>`font-size: #em` makes a factor of container's font-size.</li>
-// 					</ul>
-// 				</p>
-
-// 				<div className="ani-parent">
-// 					<div className="ani-child"></div>
-// 				</div>
-
-
-// 			</div>
-// 		</>
-// 	)
-// }
 
 export default Testing;
 
