@@ -22,15 +22,28 @@ const ListingsShowPage = () => {
 			</div>
 
 			{/* PHOTO WALL */}
-			<div className="photo-wall-container">
-				<div className="photo-wall-grid">
-					<div className="photo-wall-item photo-wall-big">BIG</div>
-					<div className="photo-wall-item photo-wall-one">ONE</div>
-					<div className="photo-wall-item photo-wall-two">TWO</div>
-					<div className="photo-wall-item photo-wall-three">THREE</div>
-					<div className="photo-wall-item photo-wall-four">FOUR</div>
+			<div className="photo-wall-padding">
+				<div className="photo-wall-container">
+					<div className="photo-wall-halver">
+						<div className="photo-wall-item photo-wall-big"></div>
+						<div className="third-test-div">Pink test div here therefore 
+						Pink test div here therefore 
+						Pink test div here therefore </div>
+						<div className="photo-wall-grid">photo-wall-item photo-wall-one
+						photo-wall-item photo-wall-one
+						photo-wall-item photo-wall-one
+						photo-wall-item photo-wall-one
+						photo-wall-item photo-wall-one
+						photo-wall-item photo-wall-one
+							{/* <div className="photo-wall-item photo-wall-one">ONE</div>
+							<div className="photo-wall-item photo-wall-two">TWO</div>
+							<div className="photo-wall-item photo-wall-three">THREE</div>
+							<div className="photo-wall-item photo-wall-four">FOUR</div> */}
 
-				</div>
+						</div>
+					</div>
+					
+				</div>	
 			</div>
 		</>
 	)

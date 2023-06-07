@@ -52,35 +52,88 @@
 
 /* ------------------ PHOTOS ------------------ */
 
-.photo-wall-container {
-	box-sizing: border-box;
-	padding: 0px 160px;
+.photo-wall-padding {
 	background-color: lightcyan;
-	padding-top: 24px;
+	box-sizing: border-box;
+	padding: 24px 160px 0px;
+	/* display: flex; */
+	/* justify-content: stretch; */
+	/* align-items: stretch; */
+	/* padding-top: 24px; */
 }
 
-.photo-wall-grid {
-	height: 395px;
-	box-sizing: border-box;
-	border-radius: 12px;
+.photo-wall-container {
 	border: 1px black solid;
-	display: grid;
-	grid-gap: 8px 8px;
-	grid-template-areas: 
-		"big big .   one  . two "
-		"big big .    .   .   . "
-		"big big .  three . four"
-	;
-	grid-template-columns: 35fr 17fr 17fr;
-	grid-template-rows: 1fr 1fr;
+	background-color: pink;
+	width: 100%;
+	aspect-ratio: 1120/394.5;
+	border-radius: 12px;
+	box-sizing: border-box;
+	display: block;
+
 }
+
+
+
+.photo-wall-halver {
+	background-color: orange;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: stretch;
+	align-items: stretch;
+}
+
+/* THESE 3 FLEX ITEM DIVS NESTED WITHIN ABOVE FLEX CONTAINER DIV (ignore name of "halver") */
+/* TO STRETCH THOSE FLEX ITEMS AT DESIRED PROPORTION TO EACH OTHER TO FILL ENTIRE CONTAINER,  */
+/* - FLEX CONTAINER JUSTIFY-CONTENT & ALIGN-ITEMS : STRETCH */
+/* - FLEX ITEMS EACH HAVE FLEX-GROW OF 1 (OR MORE IF AN INDIVIDUAL ITEM GROWS AT GREATER RATE) */
+/* - GIVE THEM EACH THE SAME FLEX BASIS %, THEY CANNOT TOTAL MORE THAN 100% */
+/* ---- IF YOU WANT FLEX ITEMS TO HAVE PADDING, BUT PREVENT PADDING FROM BEING INCLUDED IN */
+/* ---- THE FLEX ITEM'S FLEX BASIS SIZE, USE BOX-SIZING: BORDER-BOX */
+/* NOTE: DOES NOT WORKING WITH MARGINS */
+
+.photo-wall-big {
+	/* aspect-ratio: 560/394.4; */
+	background-color: blue;
+	flex-basis: 33%;
+	flex-grow: 1;
+	box-sizing: border-box;
+}
+
+.third-test-div {
+	background-color: pink;
+	flex-basis: 33%;
+	flex-grow: 1;
+	box-sizing: border-box;
+	padding-left: 70px;
+}
+/* TO MAKE FLEX ITEMS EVEN FILL UP A FLEX CONTAINER WITH STRETCH!!, IGNORING PADDING/MARGIN: */
+/* Specify identical flex-basis on each item, and flex grow to 1 */
+.photo-wall-grid {
+	background-color: purple;
+	flex-basis: 33%;
+	flex-grow: 1;
+	box-sizing: border-box;
+	padding-left: 60px;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 .photo-wall-item {
-	background-color: pink;
+	/* background-color: pink; */
 }
-
-.photo-wall-big {grid-area: big;}
-.photo-wall-one {grid-area: one;}
-.photo-wall-two {grid-area: two;}
-.photo-wall-three {grid-area: three;}
-.photo-wall-four {grid-area: four;}
+/* .photo-wall-one {grid-area: one;} */
+/* .photo-wall-two {grid-area: two;} */
+/* .photo-wall-three {grid-area: three;} */
+/* .photo-wall-four {grid-area: four;} */
