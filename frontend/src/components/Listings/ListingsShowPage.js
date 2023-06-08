@@ -40,8 +40,9 @@ const ListingsShowPage = (props) => {
 	return (
 		<div className="show-page-outer-container">
 			<div className="show-page-dynamic-inner-container">
-				{/* HEADER START */}
-				{/* HEADER START */}
+
+				{/* HEADER - START */}
+				{/* HEADER - START */}
 				<div className="show-header-full-header">
 					<div className="show-header-inner-header">
 						<div className="show-title heading-1">
@@ -63,11 +64,11 @@ const ListingsShowPage = (props) => {
 						</div>
 					</div>
 				</div>
-				{/* HEADER END */}
-				{/* HEADER END */}
+				{/* HEADER - END */}
+				{/* HEADER - END */}
 
-				{/* PHOTO WALL START */}
-				{/* PHOTO WALL START */}
+				{/* PHOTO WALL - START */}
+				{/* PHOTO WALL - START */}
 				<div className="photo-wall-crown">
 					<div className="photo-wall-container">
 						<div className="photo-wall-halver">
@@ -87,49 +88,23 @@ const ListingsShowPage = (props) => {
 								<div className="photo-wall-individual-photo-div photo-wall-four">
 									<ListingsShowPhoto listingId={listingId} imageNum={5}/>
 								</div>
-
 							</div>
 						</div>
-						
 					</div>	
 				</div>
-				{/* PHOTO WALL END */}
-				{/* PHOTO WALL END */}
+				{/* PHOTO WALL - END */}
+				{/* PHOTO WALL - END */}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-				{/* LISTING DETAILS START */}
-				{/* LISTING DETAILS START */}
+				{/* LISTING DETAILS - START */}
+				{/* LISTING DETAILS - START */}
 				<div className="details-outer-container">
 					<div className="details-main-container">
 						{/* LEFT SIDE - START */}
 						{/* LEFT SIDE - START */}
 						<div className="details-left-container">
-							{/* DETAILS CARD - STATS - START */}
-							{/* DETAILS CARD - STATS - START */}
+							{/* DETAILS CARD | STATS - START */}
+							{/* DETAILS CARD | STATS - START */}
 							<div className="details-card-stats-container">
 								<div className="details-card-stats-padder">
 									<div className="details-card-stats-horizontal-splitter">
@@ -147,19 +122,22 @@ const ListingsShowPage = (props) => {
 									</div>
 								</div>
 							</div>
-							{/* DETAILS CARD - STATS - END */}
-							{/* DETAILS CARD - STATS - END */}
-
-							<div className="details-card-stats-padder horizontal-rule-top-border">
-								Sup
+							{/* DETAILS CARD | STATS - END */}
+							{/* DETAILS CARD | STATS - END */}
+							
+							{/* DETAILS CARD | HIGHLIGHTS - START */}
+							{/* DETAILS CARD | HIGHLIGHTS - START */}
+							<div className="details-card-higlights-container horizontal-rule-top-border">
+								<div className="details-card-higlights-padder">
+									Dedicated workspace
+									A common area with wifi that’s well-suited for working.
+									Self check-in
+									Check yourself in with the lockbox.
+									Free cancellation for 48 hours.
+								</div>
 							</div>
-
-
-
-
-
-
-
+							{/* DETAILS CARD | HIGHLIGHTS - END */}
+							{/* DETAILS CARD | HIGHLIGHTS - END */}
 
 							<br/>
 							<br/>
@@ -167,16 +145,6 @@ const ListingsShowPage = (props) => {
 							<br/>
 							<br/>
 							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-
-
-							
 								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
 								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
 								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
@@ -216,39 +184,12 @@ const ListingsShowPage = (props) => {
 								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
 								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
 								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-							
 						</div>
 						{/* LEFT SIDE - END */}
 						{/* LEFT SIDE - END */}
 
-
-
-
-
-
-
-
+						{/* RIGHT SIDE - START */}
+						{/* RIGHT SIDE - START */}
 						<div className="details-right-container">
 							<div className="floating-form-container">
 								<div className="floating-form-inner-container">
@@ -272,38 +213,14 @@ const ListingsShowPage = (props) => {
 								</div>
 							</div>
 						</div>
-						{/* <div className="floating-reservation-box-endpoint"></div> */}
-
+						{/* RIGHT SIDE - END */}
+						{/* RIGHT SIDE - END */}
 						
 
 					</div>
-					{/* <div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div> */}
 				</div>
-				
-				
-				{/* <div>
-					<div className="floating-form-container">
-						Yoollo.
-					</div>
-					<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-					<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-					<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-					<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-					<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-					<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-					<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-					<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-					<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-				</div>
-
-				<div className="details-outer-container">
-						<div className="details-main-container">
-						
-						</div>
-				</div> */}
-
-				{/* LISTING DETAILS END */}
-				{/* LISTING DETAILS END */}
+				{/* LISTING DETAILS - END */}
+				{/* LISTING DETAILS - END */}
 
 
 
