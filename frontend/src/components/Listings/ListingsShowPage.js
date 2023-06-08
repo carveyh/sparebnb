@@ -128,7 +128,7 @@ const ListingsShowPage = (props) => {
 							{/* DETAILS CARD | HIGHLIGHTS - START */}
 							{/* DETAILS CARD | HIGHLIGHTS - START */}
 							<div className="details-card-higlights-container horizontal-rule-top-border">
-								<div className="details-card-higlights-padder">
+								<div className="details-card-higlights-padder plain-text">
 									Dedicated workspace
 									A common area with wifi that’s well-suited for working.
 									Self check-in
@@ -143,7 +143,7 @@ const ListingsShowPage = (props) => {
 							{/* DETAILS CARD | DESCRIPTION - START */}
 							{/* DETAILS CARD | DESCRIPTION - START */}
 							<div className="details-card-description-container horizontal-rule-top-border">
-								<div className="show-page-general-padder">
+								<div className="show-page-general-padder plain-text">
 									{listing.description}
 								</div>
 							</div>
@@ -153,7 +153,7 @@ const ListingsShowPage = (props) => {
 							{/* DETAILS CARD | AMENITIES - START */}
 							{/* DETAILS CARD | AMENITIES - START */}
 							<div className="details-card-amenities-container horizontal-rule-top-border">
-								<div className="show-page-general-padder">
+								<div className="show-page-general-padder plain-text">
 								What this place offers
 								Lake access
 								Kitchen
@@ -173,11 +173,12 @@ const ListingsShowPage = (props) => {
 							{/* DETAILS CARD | CALENDAR - START */}
 							{/* DETAILS CARD | CALENDAR - START */}
 							<div className="details-card-amenities-container horizontal-rule-top-border">
-								<div className="show-page-general-padder">
-								CALENDAR
-								<br/>
-								<br/>
-								CALENDAR
+								<div className="show-page-general-padder plain-text">
+									<br/><br/><br/><br/><br/>
+									CALENDAR
+									<br/><br/><br/><br/><br/>
+									CALENDAR
+									<br/><br/><br/><br/><br/>
 								</div>
 							</div>
 							{/* DETAILS CARD | CALENDAR - END */}
@@ -193,11 +194,11 @@ const ListingsShowPage = (props) => {
 						<div className="details-right-container">
 							<div className="floating-form-container">
 								<div className="floating-form-inner-container">
-									<div>
-										{listing.baseNightlyRate} &nbsp; night
+									<div className="form-stats-header-container">
+										<div className="heading-2">${listing.baseNightlyRate}</div> &nbsp; <div className="plain-text">night</div>
 										<i class="fa-solid fa-star"></i> &nbsp; 4.93 · 15 reviews
 									</div>
-									<form className="show-reservation-form">
+									<form className="reservation-form">
 										<input type="date"/>
 										<input type="date"/>
 										<input type="text" placeholder="Number of guests"/>
@@ -210,6 +211,9 @@ const ListingsShowPage = (props) => {
 									<div>Sparebnb service fee - #350</div>
 									<div className="horizontal-rule-top-border"></div>
 									<div>Total before taxes - {listing.baseNightlyRate}</div>
+								</div>
+								<div className="report-button-container">
+									<div className="report-button"><i class="fa-solid fa-flag"></i> &nbsp; Report this listing</div>
 								</div>
 							</div>
 						</div>
@@ -225,22 +229,22 @@ const ListingsShowPage = (props) => {
 				{/* LISTING DETAILS - END */}
 
 
-				<div className="horizontal-rule-top-border">
-				<br/><br/><br/><br/><br/>
+				<div className="horizontal-rule-top-border plain-text">
+					<br/><br/><br/><br/><br/>
 					<div>Reviews</div>
 					<br/><br/><br/><br/><br/>
 				</div>
-				<div className="horizontal-rule-top-border">
+				<div className="horizontal-rule-top-border plain-text">
 					<br/><br/><br/><br/><br/>
 					<div>Maps</div>
 					<br/><br/><br/><br/><br/>
 				</div>
-				<div className="horizontal-rule-top-border">
+				<div className="horizontal-rule-top-border plain-text">
 					<br/><br/><br/><br/><br/>
 					<div>Host details</div>
 					<br/><br/><br/><br/><br/>
 				</div>
-				<div className="horizontal-rule-top-border">
+				<div className="horizontal-rule-top-border plain-text">
 					<br/><br/><br/><br/><br/>
 					<div>Footer</div>
 					<br/><br/><br/><br/><br/>
