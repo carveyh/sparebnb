@@ -66,6 +66,7 @@ const ListingsShowPage = (props) => {
 	}
 
 	const handleSubmit = (e) => {
+		e.preventDefault();
 		// LOGIC TO ATTEMPT TO CREATE A RES
 	}
 
@@ -279,7 +280,13 @@ const ListingsShowPage = (props) => {
 												<div className="checkout-placeholder">CHECK-OUT</div>
 											</div>
 
-											<input className="num-guests-input" type="text" placeholder="Number of guests"/>
+											<input className="num-guests-input" 
+												placeholder="Number of guests"
+												type="text" 
+												value={numGuests}
+												onChange={e => setNumGuests(e.target.value)}
+												required
+											/>
 										</div>
 										<br/>
 										<button type="submit" className="reserve-button plain-text">Reserve</button>
