@@ -47,7 +47,7 @@ const SignupForm = ({setShowSignUpModal}) => {
 	}
 
 	const maxDate = () => {
-		const month = String(new Date().getMonth())
+		const month = String(new Date().getMonth() + 1)
 		const date = String(new Date().getDate())
 		return `${new Date().getFullYear()}-${month.length < 2 ? '0' + month : month}-${date.length < 2 ? '0' + date : date}`
 	}

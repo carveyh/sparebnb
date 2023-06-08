@@ -8,6 +8,8 @@ import { fetchUser } from "../../store/user";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { formatTwoDigitNumberString } from "../../utils/urlFormatter";
+import { useState } from "react";
+import { createReservation } from "../../store/reservation";
 
 export const ListingsShowPhoto = ({listingId, imageNum}) => {
 	listingId = formatTwoDigitNumberString(listingId);
@@ -34,7 +36,39 @@ const ListingsShowPage = (props) => {
 		dispatch(fetchUser(listing?.hostId));
 	}, [])
 
+	const [checkIn, setCheckIn] = useState();
+	const [checkOut, setCheckOut] = useState();
+	const [numGuests, setNumGuests] = useState();
+	const [dayAfter, setDayAfter] = useState();
+
+	const handleChangeCheckIn = e => {
+		setCheckIn(e.target.value);
+		setDayAfter(dayAfterCalculator(e.target.value));
+	}
+
+	const dayAfterCalculator = (oldDate) => {
+		console.log(oldDate)
+		const tomorrow = new Date(oldDate)
+		console.log(tomorrow)
+		tomorrow.setDate(tomorrow.getDate() + 2)
+		console.log(tomorrow)
+		const month = String(tomorrow.getMonth() + 1)
+		const date = String(tomorrow.getDate())
+		console.log(`${tomorrow.getFullYear()}-${month.length < 2 ? '0'.concat(month) : month}-${date.length < 2 ? '0' + date : date}`)
+		return `${tomorrow.getFullYear()}-${month.length < 2 ? '0'.concat(month) : month}-${date.length < 2 ? '0' + date : date}`
+		
+	}
 	
+	const minDate = () => {
+		const month = String(new Date().getMonth() + 1)
+		const date = String(new Date().getDate())
+		return `${new Date().getFullYear()}-${month.length < 2 ? '0'.concat(month) : month}-${date.length < 2 ? '0' + date : date}`
+	}
+
+	const handleSubmit = (e) => {
+		// LOGIC TO ATTEMPT TO CREATE A RES
+	}
+
 	if(!listing || !host) return null;
 
 	return (
@@ -221,22 +255,34 @@ const ListingsShowPage = (props) => {
 									</div>
 									{/* FORM - START */}
 									{/* FORM - START */}
-									<form className="reservation-form">
+									<form className="reservation-form" onSubmit={handleSubmit}>
 										<div className="form-inputs">
 											<div className="checkin-button">
-												<input className="checkin-input" type="date"/>
+												<input className="checkin-input" 
+													type="date"
+													value={checkIn}
+													min={minDate()}
+													onChange={handleChangeCheckIn}
+													required
+												/>
 												<div className="checkin-placeholder">CHECK-IN</div>
 											</div>
 
 											<div className="checkout-button">
-												<input className="checkout-input" type="date"/>
+												<input className="checkout-input" 
+													type="date"
+													value={checkOut}
+													min={checkIn ? dayAfter : null}
+													onChange={e => setCheckOut(e.target.value)}
+													required
+												/>
 												<div className="checkout-placeholder">CHECK-OUT</div>
 											</div>
 
 											<input className="num-guests-input" type="text" placeholder="Number of guests"/>
 										</div>
 										<br/>
-										<button className="reserve-button plain-text">Reserve</button>
+										<button type="submit" className="reserve-button plain-text">Reserve</button>
 									</form>
 									{/* FORM - END */}
 									{/* FORM - END */}
