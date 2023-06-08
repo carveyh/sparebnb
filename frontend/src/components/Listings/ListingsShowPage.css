@@ -333,10 +333,11 @@
 
 .sleep-carousel-container {
 	overflow-x: scroll;
+	overscroll-behavior: contain;
   white-space: nowrap;
 	width: 100%;
 	scroll-snap-type: x mandatory;
-	scroll-behavior: smooth;
+	/* scroll-behavior: smooth; */
 	/* white-space:nowrap; */
 }
 
@@ -353,13 +354,21 @@
 .carousel-photo {
 
 	display: inline-block;
-  width: calc(50% - 0px); /* Two items per row with some spacing */
+  width: calc(50% - 16px); /* Two items per row with some spacing */
+  width: calc(50%); /* Two items per row with some spacing */
   margin-right: 16px;
-  background-color: #ccc;
+  /* background-color: #ccc; */
   /* padding: 20px; */
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
 	aspect-ratio: 3/2;
 	scroll-snap-align: start;
+
+	/* With border radius, actually causes next item to bleed through on edge after scroll snap somtimes... */
+	/* border-radius: 8px; */
+}
+.carousel-photo > img {
+	/* With border radius, actually causes next item to bleed through on edge after scroll snap somtimes... */
+	/* border-radius: 8px; */
 }
 
 .sleep-carousel-container::-webkit-scrollbar {
