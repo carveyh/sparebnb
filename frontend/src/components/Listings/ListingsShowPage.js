@@ -150,6 +150,27 @@ const ListingsShowPage = (props) => {
 							{/* DETAILS CARD | DESCRIPTION - END */}
 							{/* DETAILS CARD | DESCRIPTION - END */}
 
+							{/* DETAILS CARD | BED-PHOTOS - START */}
+							{/* DETAILS CARD | BED-PHOTOS - START */}
+							<div className="details-card-description-container horizontal-rule-top-border">
+								<div className="show-page-general-padder plain-text">
+									<div className="sleep-header heading-2">Where you'll sleep</div>
+									<div className="sleep-carousel-container">
+										<div className="sleep-carousel">
+											<div className="carousel-photo"><ListingsShowPhoto listingId={listingId} imageNum={6}/></div>
+											<div className="carousel-photo"><ListingsShowPhoto listingId={listingId} imageNum={5}/></div>
+											<div className="carousel-photo"><ListingsShowPhoto listingId={listingId} imageNum={4}/></div>
+											<div className="carousel-photo"><ListingsShowPhoto listingId={listingId} imageNum={3}/></div>
+											<div className="carousel-photo"><ListingsShowPhoto listingId={listingId} imageNum={2}/></div>
+											<div className="carousel-photo"><ListingsShowPhoto listingId={listingId} imageNum={1}/></div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+							{/* DETAILS CARD | BED-PHOTOS - END */}
+							{/* DETAILS CARD | BED-PHOTOS - END */}
+
 							{/* DETAILS CARD | AMENITIES - START */}
 							{/* DETAILS CARD | AMENITIES - START */}
 							<div className="details-card-amenities-container horizontal-rule-top-border">
@@ -198,19 +219,32 @@ const ListingsShowPage = (props) => {
 										<div className="heading-2">${listing.baseNightlyRate}</div> &nbsp; <div className="plain-text">night</div>
 										<i class="fa-solid fa-star"></i> &nbsp; 4.93 · 15 reviews
 									</div>
+									{/* FORM - START */}
+									{/* FORM - START */}
 									<form className="reservation-form">
-										<input type="date"/>
-										<input type="date"/>
+										
+										<div className="checkin-button">
+											<input className="checkin-input" type="date"/>
+											<div className="checkin-placeholder">CHECK-IN</div>
+										</div>
+
+										<div className="checkout-button">
+											<input className="checkout-input" type="date"/>
+											<div className="checkout-placeholder">CHECK-OUT</div>
+										</div>
+
 										<input type="text" placeholder="Number of guests"/>
 										<br/>
 										<button>Reserve</button>
 									</form>
-									<div>You won't be charged yet</div>
+									{/* FORM - END */}
+									{/* FORM - END */}
+									<div className="plain-text report-button-container wont-charged">You won't be charged yet</div>
 									<div>{listing.baseNightlyRate} &nbsp; x &nbsp; # &nbsp; nights - {listing.baseNightlyRate}</div>
-									<div>Cleaning fee - $350</div>
-									<div>Sparebnb service fee - #350</div>
-									<div className="horizontal-rule-top-border"></div>
-									<div>Total before taxes - {listing.baseNightlyRate}</div>
+									<div className="plain-text form-padding-top">Cleaning fee - $350</div>
+									<div className="plain-text form-padding-top form-padding-bottom ">Sparebnb service fee - #350</div>
+									<div className="plain-text horizontal-rule-top-border"></div>
+									<div className="plain-text form-padding-top">Total before taxes - {listing.baseNightlyRate}</div>
 								</div>
 								<div className="report-button-container">
 									<div className="report-button"><i class="fa-solid fa-flag"></i> &nbsp; Report this listing</div>
