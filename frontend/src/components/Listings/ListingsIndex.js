@@ -63,6 +63,11 @@ const ListingsIndex = (props) => {
 		<div className="grid-container-container">
 			<div className="grid-container">
 				{listingCards}
+				{listingCards}
+				{listingCards}
+				{listingCards}
+				{listingCards}
+				{listingCards}
 			</div>
 		</div>
 		</>
