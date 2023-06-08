@@ -27,14 +27,16 @@ const ListingsShowPage = (props) => {
 	const { listingId } = useParams()
 	const listing = useSelector(state => state.entities?.listings ? state.entities.listings[`${listingId}`] : {})
 	const host = useSelector(state => state.entities?.users ? state.entities.users[`${listing?.hostId}`] : {})
+	const hostIdFormatted = formatTwoDigitNumberString(host?.id);	
+
 	useEffect(() => {
 		dispatch(fetchListing(listingId));
 		dispatch(fetchUser(listing?.hostId));
 	}, [])
 
 	
-	
-	// debugger
+	if(!listing || !host) return null;
+
 	return (
 		<div className="show-page-outer-container">
 			<div className="show-page-dynamic-inner-container">
@@ -121,29 +123,36 @@ const ListingsShowPage = (props) => {
 
 				{/* LISTING DETAILS START */}
 				{/* LISTING DETAILS START */}
-
 				<div className="details-outer-container">
 					<div className="details-main-container">
+						{/* LEFT SIDE - START */}
+						{/* LEFT SIDE - START */}
 						<div className="details-left-container">
-							<div className="details-stats-card-container">
-								<div className="details-stats-card-padder">
-									<div className="details-stats-card-horizontal-splitter">
-										<div className="details-stats-card-text-container">
-												<div className="details-stats-card-text-top heading-2">
-													Entire home hosted by {`${host?.firstName}`}
+							{/* DETAILS CARD - STATS - START */}
+							{/* DETAILS CARD - STATS - START */}
+							<div className="details-card-stats-container">
+								<div className="details-card-stats-padder">
+									<div className="details-card-stats-horizontal-splitter">
+										<div className="details-card-stats-text-container">
+												<div className="details-card-stats-text-top heading-2">
+													Entire home hosted by {`${host.firstName}`}
 												</div>
-												<div className="details-stats-card-text-bottom plain-text">
-													10 guests · 5 bedrooms · 6 beds · 3.5 baths
+												<div className="details-card-stats-text-bottom plain-text">
+													{`${listing.maxGuests}`} guests · {`${listing.numBedrooms}`} bedrooms · {`${listing?.numBeds}`} beds · {`${listing?.numBaths}`} baths
 												</div>
 										</div>
-										<div className="details-stats-card-profile-thumbnail">Prof pic</div>
+										<div className="details-card-stats-profile-thumbnail">
+											<img className="fit-photo" src={require(`../../images/profilepics/${hostIdFormatted}.png`)}/>
+										</div>
 									</div>
 								</div>
-								<div className="details-stats-card-padder horizontal-rule-top-border">
-									Sup
-								</div>
 							</div>
+							{/* DETAILS CARD - STATS - END */}
+							{/* DETAILS CARD - STATS - END */}
 
+							<div className="details-card-stats-padder horizontal-rule-top-border">
+								Sup
+							</div>
 
 
 
@@ -230,7 +239,8 @@ const ListingsShowPage = (props) => {
 								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
 							
 						</div>
-
+						{/* LEFT SIDE - END */}
+						{/* LEFT SIDE - END */}
 
 
 
