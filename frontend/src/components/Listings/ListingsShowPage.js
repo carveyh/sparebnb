@@ -240,11 +240,11 @@ const ListingsShowPage = (props) => {
 									{/* FORM - END */}
 									{/* FORM - END */}
 									<div className="plain-text report-button-container wont-charged">You won't be charged yet</div>
-									<div>{listing.baseNightlyRate} &nbsp; x &nbsp; # &nbsp; nights - {listing.baseNightlyRate}</div>
+									<div>${listing.baseNightlyRate} &nbsp; x &nbsp; # nights - ${listing.baseNightlyRate}</div>
 									<div className="plain-text form-padding-top">Cleaning fee - $350</div>
 									<div className="plain-text form-padding-top form-padding-bottom ">Sparebnb service fee - #350</div>
 									<div className="plain-text horizontal-rule-top-border"></div>
-									<div className="plain-text form-padding-top">Total before taxes - {listing.baseNightlyRate}</div>
+									<div className="plain-text form-padding-top">Total before taxes - ${listing.baseNightlyRate}</div>
 								</div>
 								<div className="report-button-container">
 									<div className="report-button"><i class="fa-solid fa-flag"></i> &nbsp; Report this listing</div>
