@@ -70,6 +70,19 @@ const ListingsShowPage = (props) => {
 		// LOGIC TO ATTEMPT TO CREATE A RES
 	}
 
+	const numGuestsSelector = () => {
+		const options = [];
+		for(let i = 1; i <= (listing ? listing.maxGuests : 0); i ++){
+			options.push(<option value={i}>{i}</option>)
+		}
+
+		return (
+			<select>
+				{options}
+			</select>
+		)
+	}
+
 	if(!listing || !host) return null;
 
 	return (
@@ -280,13 +293,27 @@ const ListingsShowPage = (props) => {
 												<div className="checkout-placeholder">CHECK-OUT</div>
 											</div>
 
-											<input className="num-guests-input" 
+
+
+
+
+
+											{/* <input className="num-guests-input" 
 												placeholder="Number of guests"
 												type="text" 
 												value={numGuests}
 												onChange={e => setNumGuests(e.target.value)}
 												required
-											/>
+											/> */}
+
+											{numGuestsSelector()}
+
+
+
+
+
+
+
 										</div>
 										<br/>
 										<button type="submit" className="reserve-button plain-text">Reserve</button>
