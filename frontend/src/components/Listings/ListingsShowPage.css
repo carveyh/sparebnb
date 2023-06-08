@@ -8,7 +8,7 @@
 }
 
 .heading-2 {
-	width: 100%;
+	/* width: 100%; */
 	font-size: 22px;
 	font-weight: 500;
 	margin-bottom: 4px;
@@ -25,6 +25,15 @@
 	font-weight: 300;
 }
 
+.fit-photo {
+	width:100%;
+	height:100%;
+	object-fit: cover;
+}
+
+.show-page-general-padder {
+	padding: 48px 0px;
+}
 
 .horizontal-rule-top-border {
 	border-top: 1px solid rgb(221, 221, 221);
@@ -260,59 +269,111 @@
 /* ------------------ LISTING DETAILS LEFT SIDE ------------------ */
 /* ------------------ LISTING DETAILS LEFT SIDE ------------------ */
 
+
 .details-left-container {
 	flex-grow: 1;
-	flex-basis: 58.33%;	background-color: bisque;
+	flex-basis: 58.33%;	
+	/* background-color: bisque; */
 	display: block;
 	/* height: 100%; */
 	/* flex-direction: column; */
 	/* position: relative; */
 }
 
-.details-stats-card-container {
-	background-color: red;
+.details-card-stats-container {
+	/* background-color: red; */
 	height: 100%;
 	width: 100%;
 }
 
-.details-stats-card-padder {
-	background-color: aliceblue;
+.details-card-stats-padder {
+	/* background-color: aliceblue; */
 	padding-top: 48px;
 	padding-bottom: 24px;
 }
 
-.details-stats-card-horizontal-splitter {
-	background-color: pink;
+.details-card-stats-horizontal-splitter {
+	/* background-color: pink; */
 	display: flex;
 	justify-content: space-between;
 }
 
-.details-stats-card-profile-thumbnail {
+.details-card-stats-profile-thumbnail {
 	background-color: white;
 	margin-left: 16px;
 	width: 56px;
 	height: 56px;
 }
 
-.details-stats-card-text-container {
+.details-card-stats-profile-thumbnail > img {
+	border-radius: 50%;
+}
+
+.details-card-stats-text-container {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 }
 
-.details-stats-card-text-top {
-
+.details-card-stats-text-top {
+	/*  */
 }
 
-.details-stats-card-text-bottom {
-
+.details-card-stats-text-bottom {
+	/*  */
 }
 
+.details-card-higlights-padder {
+	padding: 32px 0px;
+}
 
+.sleep-header {
+	padding-bottom: 24px;
+}
 
+.sleep-carousel-container {
+	overflow-x: scroll;
+	overscroll-behavior: contain;
+  white-space: nowrap;
+	width: 100%;
+	scroll-snap-type: x mandatory;
+	/* scroll-behavior: smooth; */
+	/* white-space:nowrap; */
+}
 
+.sleep-carousel {
+	/* display: inline-block; */
+	/* width: 100%; */
+	/* display: flex; */
+	/* overflow-x: hidden; */
+	/* white-space: nowrap; */
 
+  /* padding: 10px; */
+}
 
+.carousel-photo {
+
+	display: inline-block;
+  width: calc(50% - 16px); /* Two items per row with some spacing */
+  width: calc(50%); /* Two items per row with some spacing */
+  margin-right: 16px;
+  /* background-color: #ccc; */
+  /* padding: 20px; */
+  /* box-sizing: border-box; */
+	aspect-ratio: 3/2;
+	scroll-snap-align: start;
+
+	/* With border radius, actually causes next item to bleed through on edge after scroll snap somtimes... */
+	/* border-radius: 8px; */
+}
+.carousel-photo > img {
+	/* With border radius, actually causes next item to bleed through on edge after scroll snap somtimes... */
+	/* border-radius: 8px; */
+}
+
+.sleep-carousel-container::-webkit-scrollbar {
+	display: none;
+}
 
 
 
@@ -336,40 +397,97 @@
 	padding-left: 93.32px;
 }
 
-
-
 .floating-form-container {
 	overflow: scroll;
 	width: 100%;
-	height: 229px;
-	height: 323px;
-	background-color: aqua;
+	/* height: 323px; */
+	/* background-color: aqua; */
 	position: sticky;
 	
-	padding-bottom: 142px;
-	padding-bottom: 48px;
-
-	padding-top: 48px;
-	/* padding-bottom: 48px;; */
 	margin-top: 48px;
+	
+	padding-top: 48px;
+	padding-bottom: 48px;
 	/* margin-bottom: 48px; */
 
-	/* top:80px; */
 	top:80px;
-	/* bottom: 80px; */
-	/* box-sizing: content-box; */
-	/* z-index: 6; */
-	/* overflow: hidden; */
 }
 
 .floating-form-inner-container {
-	background-color: purple;
-	/* height: 323px; */
+	/* IMPORTANT!!!! */
+	/* THESE TWO LINES PREVENT INNER CONTAINER CONTENT FROM */
+	/* SPILLING INTO OUTER CONTAINER PADDING */
 	height: 100%;
 	overflow: scroll;
-
+	
+	padding: 24px;
+	border: 1px solid rgb(221, 221, 221);
+	border-radius: 12px;
+	/* border-image-repeat: stretch; */
+	/* border-image-slice: 100%; */
+	box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
 }
 
-.floating-reservation-box-endpoint {
-	border-bottom: 1px solid rgb(221, 221, 221);
+.floating-form-inner-container > * {
+	display: flex;
+	flex-direction: column;
+}
+
+.form-stats-header-container {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-bottom: 24px;
+}
+
+.checkin-button, .checkout-button {
+	position: relative;
+	width: 100%;
+}
+
+.checkin-input, .checkout-input {
+	width: 100%;
+	max-width: 100%;
+}
+
+.checkin-placeholder, .checkout-placeholder {
+	position: absolute;
+	font-size: 10px;
+	font-weight: 600;
+	top: 4px;
+	left: 200px;
+	z-index: 5;
+	
+}
+
+.reservation-form {
+	/* border: 1px solid blue; */
+	border-radius: 8px;
+}
+
+.reservation-form > * {
+	outline: 0px solid transparent;
+}
+
+.report-button-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 24px;
+	/* margin-bottom: 24px; */
+	/* width: 100%; */
+	/* background-color: aqua; */
+}
+
+.wont-charged {
+	padding-bottom: 24px;
+}
+
+.form-padding-top {
+	padding-top: 24px;
+}
+
+.form-padding-bottom {
+	padding-bottom: 24px;
 }

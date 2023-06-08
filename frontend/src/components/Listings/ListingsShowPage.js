@@ -27,19 +27,22 @@ const ListingsShowPage = (props) => {
 	const { listingId } = useParams()
 	const listing = useSelector(state => state.entities?.listings ? state.entities.listings[`${listingId}`] : {})
 	const host = useSelector(state => state.entities?.users ? state.entities.users[`${listing?.hostId}`] : {})
+	const hostIdFormatted = formatTwoDigitNumberString(host?.id);	
+
 	useEffect(() => {
 		dispatch(fetchListing(listingId));
 		dispatch(fetchUser(listing?.hostId));
 	}, [])
 
 	
-	
-	// debugger
+	if(!listing || !host) return null;
+
 	return (
 		<div className="show-page-outer-container">
 			<div className="show-page-dynamic-inner-container">
-				{/* HEADER START */}
-				{/* HEADER START */}
+
+				{/* HEADER - START */}
+				{/* HEADER - START */}
 				<div className="show-header-full-header">
 					<div className="show-header-inner-header">
 						<div className="show-title heading-1">
@@ -61,11 +64,11 @@ const ListingsShowPage = (props) => {
 						</div>
 					</div>
 				</div>
-				{/* HEADER END */}
-				{/* HEADER END */}
+				{/* HEADER - END */}
+				{/* HEADER - END */}
 
-				{/* PHOTO WALL START */}
-				{/* PHOTO WALL START */}
+				{/* PHOTO WALL - START */}
+				{/* PHOTO WALL - START */}
 				<div className="photo-wall-crown">
 					<div className="photo-wall-container">
 						<div className="photo-wall-halver">
@@ -85,263 +88,200 @@ const ListingsShowPage = (props) => {
 								<div className="photo-wall-individual-photo-div photo-wall-four">
 									<ListingsShowPhoto listingId={listingId} imageNum={5}/>
 								</div>
-
 							</div>
 						</div>
-						
 					</div>	
 				</div>
-				{/* PHOTO WALL END */}
-				{/* PHOTO WALL END */}
+				{/* PHOTO WALL - END */}
+				{/* PHOTO WALL - END */}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-				{/* LISTING DETAILS START */}
-				{/* LISTING DETAILS START */}
-
+				{/* LISTING DETAILS - START */}
+				{/* LISTING DETAILS - START */}
 				<div className="details-outer-container">
 					<div className="details-main-container">
+						{/* LEFT SIDE - START */}
+						{/* LEFT SIDE - START */}
 						<div className="details-left-container">
-							<div className="details-stats-card-container">
-								<div className="details-stats-card-padder">
-									<div className="details-stats-card-horizontal-splitter">
-										<div className="details-stats-card-text-container">
-												<div className="details-stats-card-text-top heading-2">
-													Entire home hosted by {`${host?.firstName}`}
+							{/* DETAILS CARD | STATS - START */}
+							{/* DETAILS CARD | STATS - START */}
+							<div className="details-card-stats-container">
+								<div className="details-card-stats-padder">
+									<div className="details-card-stats-horizontal-splitter">
+										<div className="details-card-stats-text-container">
+												<div className="details-card-stats-text-top heading-2">
+													Entire home hosted by {`${host.firstName}`}
 												</div>
-												<div className="details-stats-card-text-bottom plain-text">
-													10 guests · 5 bedrooms · 6 beds · 3.5 baths
+												<div className="details-card-stats-text-bottom plain-text">
+													{`${listing.maxGuests}`} guests · {`${listing.numBedrooms}`} bedrooms · {`${listing?.numBeds}`} beds · {`${listing?.numBaths}`} baths
 												</div>
 										</div>
-										<div className="details-stats-card-profile-thumbnail">Prof pic</div>
+										<div className="details-card-stats-profile-thumbnail">
+											<img className="fit-photo" src={require(`../../images/profilepics/${hostIdFormatted}.png`)}/>
+										</div>
 									</div>
 								</div>
-								<div className="details-stats-card-padder horizontal-rule-top-border">
-									Sup
+							</div>
+							{/* DETAILS CARD | STATS - END */}
+							{/* DETAILS CARD | STATS - END */}
+							
+							{/* DETAILS CARD | HIGHLIGHTS - START */}
+							{/* DETAILS CARD | HIGHLIGHTS - START */}
+							<div className="details-card-higlights-container horizontal-rule-top-border">
+								<div className="details-card-higlights-padder plain-text">
+									Dedicated workspace
+									A common area with wifi that’s well-suited for working.
+									Self check-in
+									Check yourself in with the lockbox.
+									Free cancellation for 48 hours.
 								</div>
 							</div>
-
-
-
-
-
-
-
-
-
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-
+							{/* DETAILS CARD | HIGHLIGHTS - END */}
+							{/* DETAILS CARD | HIGHLIGHTS - END */}
 
 							
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-							
+							{/* DETAILS CARD | DESCRIPTION - START */}
+							{/* DETAILS CARD | DESCRIPTION - START */}
+							<div className="details-card-description-container horizontal-rule-top-border">
+								<div className="show-page-general-padder plain-text">
+									{listing.description}
+								</div>
+							</div>
+							{/* DETAILS CARD | DESCRIPTION - END */}
+							{/* DETAILS CARD | DESCRIPTION - END */}
+
+							{/* DETAILS CARD | BED-PHOTOS - START */}
+							{/* DETAILS CARD | BED-PHOTOS - START */}
+							<div className="details-card-description-container horizontal-rule-top-border">
+								<div className="show-page-general-padder plain-text">
+									<div className="sleep-header heading-2">Where you'll sleep</div>
+									<div className="sleep-carousel-container">
+										<div className="sleep-carousel">
+											<div className="carousel-photo"><ListingsShowPhoto listingId={listingId} imageNum={6}/></div>
+											<div className="carousel-photo"><ListingsShowPhoto listingId={listingId} imageNum={5}/></div>
+											<div className="carousel-photo"><ListingsShowPhoto listingId={listingId} imageNum={4}/></div>
+											<div className="carousel-photo"><ListingsShowPhoto listingId={listingId} imageNum={3}/></div>
+											<div className="carousel-photo"><ListingsShowPhoto listingId={listingId} imageNum={2}/></div>
+											<div className="carousel-photo"><ListingsShowPhoto listingId={listingId} imageNum={1}/></div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+							{/* DETAILS CARD | BED-PHOTOS - END */}
+							{/* DETAILS CARD | BED-PHOTOS - END */}
+
+							{/* DETAILS CARD | AMENITIES - START */}
+							{/* DETAILS CARD | AMENITIES - START */}
+							<div className="details-card-amenities-container horizontal-rule-top-border">
+								<div className="show-page-general-padder plain-text">
+								What this place offers
+								Lake access
+								Kitchen
+								Wifi
+								Dedicated workspace
+								Free parking on premises
+								Private pool
+								Private hot tub
+								TV
+								Free washer – In unit
+								Free dryer – In unit
+								</div>
+							</div>
+							{/* DETAILS CARD | AMENITIES - END */}
+							{/* DETAILS CARD | AMENITIES - END */}
+
+							{/* DETAILS CARD | CALENDAR - START */}
+							{/* DETAILS CARD | CALENDAR - START */}
+							<div className="details-card-amenities-container horizontal-rule-top-border">
+								<div className="show-page-general-padder plain-text">
+									<br/><br/><br/><br/><br/>
+									CALENDAR
+									<br/><br/><br/><br/><br/>
+									CALENDAR
+									<br/><br/><br/><br/><br/>
+								</div>
+							</div>
+							{/* DETAILS CARD | CALENDAR - END */}
+							{/* DETAILS CARD | CALENDAR - END */}
+
+
 						</div>
+						{/* LEFT SIDE - END */}
+						{/* LEFT SIDE - END */}
 
-
-
-
-
-
-
-
-
+						{/* RIGHT SIDE - START */}
+						{/* RIGHT SIDE - START */}
 						<div className="details-right-container">
 							<div className="floating-form-container">
 								<div className="floating-form-inner-container">
+									<div className="form-stats-header-container">
+										<div className="heading-2">${listing.baseNightlyRate}</div> &nbsp; <div className="plain-text">night</div>
+										<i class="fa-solid fa-star"></i> &nbsp; 4.93 · 15 reviews
+									</div>
+									{/* FORM - START */}
+									{/* FORM - START */}
+									<form className="reservation-form">
+										
+										<div className="checkin-button">
+											<input className="checkin-input" type="date"/>
+											<div className="checkin-placeholder">CHECK-IN</div>
+										</div>
 
-								Yoollo.
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-								<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
+										<div className="checkout-button">
+											<input className="checkout-input" type="date"/>
+											<div className="checkout-placeholder">CHECK-OUT</div>
+										</div>
+
+										<input type="text" placeholder="Number of guests"/>
+										<br/>
+										<button>Reserve</button>
+									</form>
+									{/* FORM - END */}
+									{/* FORM - END */}
+									<div className="plain-text report-button-container wont-charged">You won't be charged yet</div>
+									<div>{listing.baseNightlyRate} &nbsp; x &nbsp; # &nbsp; nights - {listing.baseNightlyRate}</div>
+									<div className="plain-text form-padding-top">Cleaning fee - $350</div>
+									<div className="plain-text form-padding-top form-padding-bottom ">Sparebnb service fee - #350</div>
+									<div className="plain-text horizontal-rule-top-border"></div>
+									<div className="plain-text form-padding-top">Total before taxes - {listing.baseNightlyRate}</div>
+								</div>
+								<div className="report-button-container">
+									<div className="report-button"><i class="fa-solid fa-flag"></i> &nbsp; Report this listing</div>
 								</div>
 							</div>
 						</div>
-						{/* <div className="floating-reservation-box-endpoint"></div> */}
-
+						{/* RIGHT SIDE - END */}
+						{/* RIGHT SIDE - END */}
 						
 
 					</div>
-					{/* <div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div> */}
 				</div>
-				
-				
-				{/* <div>
-					<div className="floating-form-container">
-						Yoollo.
-					</div>
-					<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-					<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-					<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-					<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-					<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-					<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-					<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-					<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-					<div>afawei aowefjaowijefaowief oawjiefawojiefjiwae aowefjaowiefijawj e</div>
-				</div>
+				{/* LISTING DETAILS - END */}
+				{/* LISTING DETAILS - END */}
 
-				<div className="details-outer-container">
-						<div className="details-main-container">
-						
-						</div>
-				</div> */}
-
-				{/* LISTING DETAILS END */}
-				{/* LISTING DETAILS END */}
+				{/* LISTING DETAILS - END */}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-				<br/>
-				<div className="horizontal-rule-top-border">
-					<br/>
+				<div className="horizontal-rule-top-border plain-text">
+					<br/><br/><br/><br/><br/>
 					<div>Reviews</div>
-					<br/>
+					<br/><br/><br/><br/><br/>
 				</div>
-				<div className="horizontal-rule-top-border">
-					<br/>
+				<div className="horizontal-rule-top-border plain-text">
+					<br/><br/><br/><br/><br/>
 					<div>Maps</div>
-					<br/>
+					<br/><br/><br/><br/><br/>
 				</div>
-				<div className="horizontal-rule-top-border">
-					<br/>
-					<div>Just to scroll</div>
-					<br/>
-					<div>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</div>
-					<div>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</div>
-					<div>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</div>
-					<div>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</div>
-					<div>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</div>
-					<div>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</div>
-					<div>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</div>
-					<div>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</div>
-					<div>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</div>
-					<div>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</div>
-					<div>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</div>
-					<br/>
+				<div className="horizontal-rule-top-border plain-text">
+					<br/><br/><br/><br/><br/>
+					<div>Host details</div>
+					<br/><br/><br/><br/><br/>
+				</div>
+				<div className="horizontal-rule-top-border plain-text">
+					<br/><br/><br/><br/><br/>
+					<div>Footer</div>
+					<br/><br/><br/><br/><br/>
 				</div>
 			</div>
 		</div>
