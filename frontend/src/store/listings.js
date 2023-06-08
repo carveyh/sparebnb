@@ -30,9 +30,7 @@ export const fetchListings = (category) => async dispatch => {
 }
 
 export const fetchListing = (listingId) => async dispatch => {
-	let url = `/api/listings/${listingId}`;
-	const res = await csrfFetch(url);
-	// const res = await csrfFetch(`/api/foo`);
+	const res = await csrfFetch(`/api/listings/${listingId}`);
 	debugger
 	if(res.ok) {
 		debugger

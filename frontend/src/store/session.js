@@ -32,7 +32,7 @@ export const removeSession = () => ({
 // REDUX THUNK ACTION CREATORS
 export const loginUser = (user) => async dispatch => {
 	const {credential, password} = user;
-	const res = await csrfFetch('api/session', {
+	const res = await csrfFetch('/api/session', {
 		method: 'POST',
 		body: JSON.stringify({credential, password})
 	})
@@ -50,7 +50,7 @@ export const loginUser = (user) => async dispatch => {
 
 export const signupUser = (user) => async dispatch => {
 	const {firstName, lastName, birthDate, email, password} = user;
-	const res = await csrfFetch('api/users', {
+	const res = await csrfFetch('/api/users', {
 		method: 'POST',
 		body: JSON.stringify({firstName, lastName, birthDate, email, password})
 	})
@@ -66,7 +66,7 @@ export const signupUser = (user) => async dispatch => {
 }
 
 export const logoutUser = () => async dispatch => {
-	const res = await csrfFetch('api/session', {
+	const res = await csrfFetch('/api/session', {
 		method: 'DELETE'
 	})
 	if(res.ok) {

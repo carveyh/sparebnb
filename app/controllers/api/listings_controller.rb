@@ -25,10 +25,6 @@ class Api::ListingsController < ApplicationController
     end
   end
 
-  def foo
-    render json: { message: ['Hello from foo']}, status: 200
-  end
-
   private
 
   def listing_params
