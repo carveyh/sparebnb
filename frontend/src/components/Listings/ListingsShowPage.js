@@ -233,7 +233,7 @@ const ListingsShowPage = (props) => {
 												<div className="checkout-placeholder">CHECK-OUT</div>
 											</div>
 
-											<input type="text" placeholder="Number of guests"/>
+											<input className="num-guests-input" type="text" placeholder="Number of guests"/>
 										</div>
 										<br/>
 										<button className="reserve-button plain-text">Reserve</button>
