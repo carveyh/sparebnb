@@ -24,6 +24,7 @@ const ListingCard = ({listing, num}) => {
 	return (
 		<Link to={`/listings/${listing?.id}`}>
 			<div className={`grid-item grid-item-${num}`} >
+						<div className="listing-favorite-button-background"><i class="fa-solid fa-heart"></i></div>
 						<div className="listing-favorite-button"><i className="fa-regular fa-heart"></i></div>
 						<div className="listings-photo-container">
 							{/* <img className="listings-photo" src={require(`../../images/listings/${photoFileNames[num-1]}.png`)} /> */}
