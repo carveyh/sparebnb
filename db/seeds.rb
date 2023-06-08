@@ -122,6 +122,11 @@ ApplicationRecord.transaction do
 	
 	puts "Creating listings..."
 	
+	desc = ""
+	8.times do
+		desc += Faker::TvShows::TheOffice.quote + ' '
+	end
+
 	10.times do
 		Listing.create!({
 			title: 
@@ -137,7 +142,7 @@ ApplicationRecord.transaction do
 			num_beds: (1..20).to_a.sample,
 			num_baths: (1..10).to_a.sample,
 			max_guests: (1..20).to_a.sample,
-			description: Faker::Lorem.sentences(number: 5),
+			description: Faker::TvShows::TheOffice.quote + ' ' + Faker::TvShows::TheOffice.quote + ' ' + Faker::TvShows::TheOffice.quote + ' ' + Faker::TvShows::TheOffice.quote + ' ',
 			base_nightly_rate: (59..2999).to_a.sample,
 			category: %w(amazing-pools rooms adapted beachfront treehouses mountains trending mansions majestic arctic woods govt-secret private-escapes home-theater studios gaming-dens fitness creme-de-la-creme green rustic urban tornado camps 420-friendly).sample
 

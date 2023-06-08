@@ -348,15 +348,6 @@
 	padding-left: 93.32px;
 }
 
-
-
-
-
-
-
-
-
-
 .floating-form-container {
 	overflow: scroll;
 	width: 100%;
@@ -382,4 +373,9 @@
 	height: 100%;
 	overflow: scroll;
 
+}
+
+.floating-form-inner-container * {
+	display: flex;
+	flex-direction: column;
 }
