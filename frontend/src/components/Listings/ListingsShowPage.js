@@ -222,20 +222,21 @@ const ListingsShowPage = (props) => {
 									{/* FORM - START */}
 									{/* FORM - START */}
 									<form className="reservation-form">
-										
-										<div className="checkin-button">
-											<input className="checkin-input" type="date"/>
-											<div className="checkin-placeholder">CHECK-IN</div>
-										</div>
+										<div className="form-inputs">
+											<div className="checkin-button">
+												<input className="checkin-input" type="date"/>
+												<div className="checkin-placeholder">CHECK-IN</div>
+											</div>
 
-										<div className="checkout-button">
-											<input className="checkout-input" type="date"/>
-											<div className="checkout-placeholder">CHECK-OUT</div>
-										</div>
+											<div className="checkout-button">
+												<input className="checkout-input" type="date"/>
+												<div className="checkout-placeholder">CHECK-OUT</div>
+											</div>
 
-										<input type="text" placeholder="Number of guests"/>
+											<input type="text" placeholder="Number of guests"/>
+										</div>
 										<br/>
-										<button>Reserve</button>
+										<button className="reserve-button plain-text">Reserve</button>
 									</form>
 									{/* FORM - END */}
 									{/* FORM - END */}
