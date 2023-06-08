@@ -25,6 +25,11 @@ class Listing < ApplicationRecord
   belongs_to :host,
     foreign_key: :host_id,
     class_name: :User
+  
+  has_many :reservers,
+    foreign_key: :listing_id,
+    class_name: :Reservation,
+    dependent: :destroy
 
   validates :title, :description, :category, length: { minimum: 1 }
   validates :latitude, :longitude, presence: true

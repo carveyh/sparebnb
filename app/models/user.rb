@@ -41,6 +41,11 @@ class User < ApplicationRecord
     class_name: :Listing,
     dependent: :destroy
 
+  has_many :reservations,
+    foreign_key: :reserver_id,
+    class_name: :Reservation,
+    dependent: :destroy
+
   # TESTING: 
   # attributes = {email: 'phone@demo.io', first_name: 'Demo', last_name: 'Lition', birth_date: Time.new(1993,3,8), password: 'password', phone_number: '5551239999'}
   # User.create(attributes).tap(&:valid?).errors.messages
