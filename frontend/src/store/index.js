@@ -3,10 +3,12 @@ import thunk from 'redux-thunk'
 import sessionReducer from './session';
 import listingsReducer from './listings';
 import usersReducer from './user';
+import reservationsReducer from './reservation';
 
 const entitiesReducer = combineReducers({
 	listings: listingsReducer,
-	users: usersReducer
+	users: usersReducer,
+	reservations: reservationsReducer
 })
 
 const rootReducer = combineReducers({
