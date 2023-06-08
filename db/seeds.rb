@@ -21,30 +21,30 @@ ApplicationRecord.transaction do
 
 
 
-	puts "Pulling photos..."
-	# Create an instance of the S3 client
-	s3 = Aws::S3::Client.new(
-		region: 'us-east-1',
-		credentials: Aws::Credentials.new(
-			Rails.application.credentials.aws[:access_key_id],
-			Rails.application.credentials.aws[:secret_access_key]
-		)
-	)
+	# puts "Pulling photos..."
+	# # Create an instance of the S3 client
+	# s3 = Aws::S3::Client.new(
+	# 	region: 'us-east-1',
+	# 	credentials: Aws::Credentials.new(
+	# 		Rails.application.credentials.aws[:access_key_id],
+	# 		Rails.application.credentials.aws[:secret_access_key]
+	# 	)
+	# )
 	
-	# Specify the bucket name and folder prefix
-	bucket_name = 'sparebnb-madison-seeds'
-	folder_prefix = 'photos_for_upload/'
+	# # Specify the bucket name and folder prefix
+	# bucket_name = 'sparebnb-madison-seeds'
+	# folder_prefix = 'photos_for_upload/'
 	
-	# Retrieve the list of objects (files) inside the folder
-	response = s3.list_objects_v2(bucket: bucket_name, prefix: folder_prefix)
+	# # Retrieve the list of objects (files) inside the folder
+	# response = s3.list_objects_v2(bucket: bucket_name, prefix: folder_prefix)
 	
-	# Extract the URLs of the objects
-	photo_urls = response.contents.map do |object|
-		object.key # Object key is the file path within the bucket
-	end
+	# # Extract the URLs of the objects
+	# photo_urls = response.contents.map do |object|
+	# 	object.key # Object key is the file path within the bucket
+	# end
 	
-	# Shuffle the array of photo URLs randomly
-	shuffled_urls = photo_urls.shuffle
+	# # Shuffle the array of photo URLs randomly
+	# shuffled_urls = photo_urls.shuffle
 	
 	# users.each do |user|
 	# 	# Assign the first URL from the shuffled array
@@ -138,7 +138,7 @@ ApplicationRecord.transaction do
 			num_baths: (1..10).to_a.sample,
 			max_guests: (1..20).to_a.sample,
 			description: Faker::Lorem.sentences(number: 5),
-			base_nightly_rate: (29..7999).to_a.sample,
+			base_nightly_rate: (59..2999).to_a.sample,
 			category: %w(amazing-pools rooms adapted beachfront treehouses mountains trending mansions majestic arctic woods govt-secret private-escapes home-theater studios gaming-dens fitness creme-de-la-creme green rustic urban tornado camps 420-friendly).sample
 
 		})

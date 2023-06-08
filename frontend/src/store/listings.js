@@ -21,7 +21,7 @@ export const fetchListings = (category) => async dispatch => {
 	// let requestString; 
 	// URLSearchParams()
 	// category ? requestString = 'api/listings/${}' : 'api/listings'
-	const res = await csrfFetch('api/listings');
+	const res = await csrfFetch('/api/listings');
 	if(res.ok) {
 		const data = await res.json();
 		dispatch(receiveListings(data.listings))
@@ -30,7 +30,7 @@ export const fetchListings = (category) => async dispatch => {
 }
 
 export const fetchListing = (listingId) => async dispatch => {
-	const res = await csrfFetch(`api/listings/${listingId}`);
+	const res = await csrfFetch(`/api/listings/${listingId}`);
 	if(res.ok) {
 		const data = await res.json();
 		dispatch(receiveListing(data.listing));
@@ -38,7 +38,7 @@ export const fetchListing = (listingId) => async dispatch => {
 	return res;
 }
 
-// Session Reducer
+// SESSION REDUCER
 // How session slice of state's :user gets restored to a currentUser from sessionStorage, if any.
 const listingsReducer = (state = {}, action) => {
 	Object.freeze(state);
@@ -46,7 +46,7 @@ const listingsReducer = (state = {}, action) => {
 		case RECEIVE_LISTINGS:
 			return action.listings;
 		case RECEIVE_LISTING:
-			return {...state, [action.listing.id]: action.listing}
+			return {[action.listing.id]: action.listing}
 		default:
 			return state;
 	}
