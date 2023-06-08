@@ -333,7 +333,7 @@
 
 .sleep-carousel-container {
 	overflow-x: scroll;
-	overscroll-behavior: contain;
+	overscroll-behavior-x: contain;
   white-space: nowrap;
 	width: 100%;
 	scroll-snap-type: x mandatory;
@@ -365,6 +365,10 @@
 
 	/* With border radius, actually causes next item to bleed through on edge after scroll snap somtimes... */
 	/* border-radius: 8px; */
+}
+
+.carousel-photo:last-child{
+	margin-right: 0px;
 }
 .carousel-photo > img {
 	/* With border radius, actually causes next item to bleed through on edge after scroll snap somtimes... */

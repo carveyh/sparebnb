@@ -10,7 +10,7 @@ div.login-form, div.signup-form {
 	background-color: white;
 	animation: slideIn 0.4s both, fadeInModal 0.5s forwards;
 	max-width: 568px;
-	overscroll-behavior: contain;
+	overscroll-behavior-x: contain;
 }
 
 div.signup-form {
