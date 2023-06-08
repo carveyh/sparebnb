@@ -31,11 +31,8 @@ export const fetchListings = (category) => async dispatch => {
 
 export const fetchListing = (listingId) => async dispatch => {
 	const res = await csrfFetch(`/api/listings/${listingId}`);
-	debugger
 	if(res.ok) {
-		debugger
 		const data = await res.json();
-		debugger
 		dispatch(receiveListing(data.listing));
 	}
 	return res;
@@ -49,7 +46,6 @@ const listingsReducer = (state = {}, action) => {
 		case RECEIVE_LISTINGS:
 			return action.listings;
 		case RECEIVE_LISTING:
-			debugger 
 			return {[action.listing.id]: action.listing}
 		default:
 			return state;

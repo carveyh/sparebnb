@@ -16,7 +16,7 @@ export const receiveUser = (user) => ({
 export const fetchUser = (userId) => async dispatch => {
 	const res = await csrfFetch(`/api/users/${userId}`);
 	if(res.ok) {
-		const data = res.json();
+		const data = await res.json();
 		dispatch(receiveUser(data.user))
 	}
 	return res;

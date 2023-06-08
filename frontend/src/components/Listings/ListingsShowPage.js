@@ -4,16 +4,13 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { fetchListing, fetchListings } from "../../store/listings";
+import { fetchUser } from "../../store/user";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { formatTwoDigitNumberString } from "../../utils/urlFormatter";
 
 export const ListingsShowPhoto = ({listingId, imageNum}) => {
-	
-	// const nums = [1,2,3,4,5,6]
-	// listingId ||= nums[Math.floor(Math.random() * nums.length)];;
 	listingId = formatTwoDigitNumberString(listingId);
-	// imageNum ||= nums[Math.floor(Math.random() * nums.length)];
 	imageNum = formatTwoDigitNumberString(imageNum);
 	const photoDirPath = `../../images/listings/${listingId}/${imageNum}.png`;
 	
@@ -28,10 +25,11 @@ export const ListingsShowPhoto = ({listingId, imageNum}) => {
 const ListingsShowPage = (props) => {
 	const dispatch = useDispatch();
 	const { listingId } = useParams()
-	const listing = useSelector(state => state.entities?.listings? state.entities.listings[`${listingId}`] : {})
+	const listing = useSelector(state => state.entities?.listings ? state.entities.listings[`${listingId}`] : {})
+	const host = useSelector(state => state.entities?.users ? state.entities.users[`${listing?.hostId}`] : {})
 	useEffect(() => {
 		dispatch(fetchListing(listingId));
-		// fetch the host user to get their profile pic
+		dispatch(fetchUser(listing?.hostId));
 	}, [])
 
 	
@@ -132,7 +130,7 @@ const ListingsShowPage = (props) => {
 									<div className="details-stats-card-horizontal-splitter">
 										<div className="details-stats-card-text-container">
 												<div className="details-stats-card-text-top heading-2">
-													Entire home hosted by Garret
+													Entire home hosted by {`${host?.firstName}`}
 												</div>
 												<div className="details-stats-card-text-bottom plain-text">
 													10 guests · 5 bedrooms · 6 beds · 3.5 baths
