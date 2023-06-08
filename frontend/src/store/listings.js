@@ -41,7 +41,7 @@ export const fetchListing = (listingId) => async dispatch => {
 	return res;
 }
 
-// Session Reducer
+// SESSION REDUCER
 // How session slice of state's :user gets restored to a currentUser from sessionStorage, if any.
 const listingsReducer = (state = {}, action) => {
 	Object.freeze(state);
@@ -51,7 +51,6 @@ const listingsReducer = (state = {}, action) => {
 		case RECEIVE_LISTING:
 			debugger 
 			return {[action.listing.id]: action.listing}
-			// return {...state, [action.listing.id]: action.listing}
 		default:
 			return state;
 	}

@@ -31,6 +31,7 @@ const ListingsShowPage = (props) => {
 	const listing = useSelector(state => state.entities?.listings? state.entities.listings[`${listingId}`] : {})
 	useEffect(() => {
 		dispatch(fetchListing(listingId));
+		// fetch the host user to get their profile pic
 	}, [])
 
 	
