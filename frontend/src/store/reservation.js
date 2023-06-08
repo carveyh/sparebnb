@@ -26,6 +26,7 @@ export const removeReservation = (reservationId) => ({
 // REDUX THUNK ACTION CREATORS
 
 export const fetchReservations = (listingId) => async dispatch => {
+	let requestUrl;
 	if(listingId){
 		requestUrl = `/api/listings/${listingId}/reservations`;
 	} else {
