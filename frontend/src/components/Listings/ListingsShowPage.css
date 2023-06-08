@@ -365,7 +365,7 @@
 }
 
 .floating-form-inner-container {
-	background-color: purple;
+	background-color: pink;
 
 	/* IMPORTANT!!!! */
 	/* THESE TWO LINES PREVENT INNER CONTAINER CONTENT FROM */
@@ -378,4 +378,11 @@
 .floating-form-inner-container * {
 	display: flex;
 	flex-direction: column;
+}
+
+.show-reservation-form {
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid blue;
+	border-radius: 12px;
 }

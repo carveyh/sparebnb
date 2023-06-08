@@ -197,10 +197,11 @@ const ListingsShowPage = (props) => {
 										{listing.baseNightlyRate} &nbsp; night
 										<i class="fa-solid fa-star"></i> &nbsp; 4.93 · 15 reviews
 									</div>
-									<form>
+									<form className="show-reservation-form">
 										<input type="date"/>
 										<input type="date"/>
-										<input type="text"/>
+										<input type="text" placeholder="Number of guests"/>
+										<br/>
 										<button>Reserve</button>
 									</form>
 									<div>You won't be charged yet</div>
