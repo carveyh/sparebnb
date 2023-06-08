@@ -3,46 +3,39 @@ import "./ListingsShowPage.css";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { fetchListings } from "../../store/listings";
+import { fetchListing, fetchListings } from "../../store/listings";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { formatTwoDigitNumberString } from "../../utils/urlFormatter";
 
 export const ListingsShowPhoto = ({listingId, imageNum}) => {
-	// const formatTwoDigitNumberString = (unformattedNum) => {
-	// 	const formattedNum = unformattedNum.toString();
-	// 	return formattedNum.length < 2 ? "0".concat(formattedNum) : formattedNum;
-	// }
 	
-	const nums = [1,2,3,4,5,6]
-	listingId ||= nums[Math.floor(Math.random() * nums.length)];;
+	// const nums = [1,2,3,4,5,6]
+	// listingId ||= nums[Math.floor(Math.random() * nums.length)];;
 	listingId = formatTwoDigitNumberString(listingId);
-	imageNum ||= nums[Math.floor(Math.random() * nums.length)];
+	// imageNum ||= nums[Math.floor(Math.random() * nums.length)];
 	imageNum = formatTwoDigitNumberString(imageNum);
-	console.log(listingId)
+	const photoDirPath = `../../images/listings/${listingId}/${imageNum}.png`;
+	
 	return(
 		<>
+			{/* Why can't I replace string with photoDirPath...? */}
 			<img className="listings-show-photo" src={require(`../../images/listings/${listingId}/${imageNum}.png`)} />
 		</>
 	)
 }
 
-// export const ListingsShowPhotoFourPane = (listingId) => {
-// 	const fourPanePhotos = [];
-// 	for(let i = 1; i <= 4; i++){
-// 		fourPanePhotos.push(<ListingsShowPhoto listingId={listingId} imageNum={i}/>)
-// 	}
-// 	return fourPanePhotos;
-// }
-
 const ListingsShowPage = (props) => {
-	// const photoDirPath = "";
 	const dispatch = useDispatch();
 	const { listingId } = useParams()
 	const listing = useSelector(state => state.entities?.listings? state.entities.listings[`${listingId}`] : {})
-
+	useEffect(() => {
+		dispatch(fetchListing(listingId));
+	}, [])
 
 	
+	
+	// debugger
 	return (
 		<div className="show-page-outer-container">
 			<div className="show-page-dynamic-inner-container">

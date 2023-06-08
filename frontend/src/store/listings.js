@@ -21,7 +21,7 @@ export const fetchListings = (category) => async dispatch => {
 	// let requestString; 
 	// URLSearchParams()
 	// category ? requestString = 'api/listings/${}' : 'api/listings'
-	const res = await csrfFetch('api/listings');
+	const res = await csrfFetch('/api/listings');
 	if(res.ok) {
 		const data = await res.json();
 		dispatch(receiveListings(data.listings))
@@ -30,9 +30,14 @@ export const fetchListings = (category) => async dispatch => {
 }
 
 export const fetchListing = (listingId) => async dispatch => {
-	const res = await csrfFetch(`api/listings/${listingId}`);
+	let url = `/api/listings/${listingId}`;
+	const res = await csrfFetch(url);
+	// const res = await csrfFetch(`/api/foo`);
+	debugger
 	if(res.ok) {
+		debugger
 		const data = await res.json();
+		debugger
 		dispatch(receiveListing(data.listing));
 	}
 	return res;
@@ -46,7 +51,9 @@ const listingsReducer = (state = {}, action) => {
 		case RECEIVE_LISTINGS:
 			return action.listings;
 		case RECEIVE_LISTING:
-			return {...state, [action.listing.id]: action.listing}
+			debugger 
+			return {[action.listing.id]: action.listing}
+			// return {...state, [action.listing.id]: action.listing}
 		default:
 			return state;
 	}

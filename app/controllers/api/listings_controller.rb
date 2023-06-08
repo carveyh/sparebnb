@@ -15,6 +15,7 @@ class Api::ListingsController < ApplicationController
   end
   
   def show
+    # debugger
     @listing = Listing.find_by(id: params[:id])
     if @listing
       render :show
@@ -22,6 +23,10 @@ class Api::ListingsController < ApplicationController
     else
       render json: { errors: ['Listing not found...check out some other amazing places!'] }, status: :unprocessable_entity
     end
+  end
+
+  def foo
+    render json: { message: ['Hello from foo']}, status: 200
   end
 
   private
