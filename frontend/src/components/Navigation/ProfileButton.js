@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../store/session";
 import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { formatTwoDigitNumberString } from "../../utils/urlFormatter";
 
 import "./Navigation.css";
@@ -50,7 +51,7 @@ const ProfileButton = ({setShowSignUpModal, setShowLogInModal}) => {
 				<li onClick={e => setShowSignUpModal(true)}>Sign up</li>
 				<li onClick={e => setShowLogInModal(true)}>Log in</li>
 				<li className="menu-divider-li"><MenuDivider /></li>
-				<li>Sparebnb your home</li>
+				<li><a href="https://www.linkedin.com/in/carvey-hor/">LinkedIn</a></li>
 				<li>Help</li>
 			</>
 		)
@@ -62,11 +63,12 @@ const ProfileButton = ({setShowSignUpModal, setShowLogInModal}) => {
 				<li>2023 Summer Release NEW</li>
 				<li className="menu-divider-li"><MenuDivider /></li>
 				<li>Messages</li>
-				<li>Trips</li>
+				<li><Link to={`/users/${sessionUser.id}`}>Trips</Link></li>
 				<li>Wishlists</li>
 			</div>
 			<li className="menu-divider-li"><MenuDivider /></li>
-				<li>Sparebnb your home</li>
+				{/* <li>Sparebnb your home</li> */}
+				<li><a href="https://www.linkedin.com/in/carvey-hor/">LinkedIn</a></li>
 				<li>Account</li>
 				<li className="menu-divider-li"><MenuDivider /></li>
 				<li>Help</li>
