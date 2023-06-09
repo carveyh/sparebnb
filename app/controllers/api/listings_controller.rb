@@ -7,6 +7,9 @@ class Api::ListingsController < ApplicationController
     if params[:category]
       @listings = Listing.where(category: params[:category]) #where for retrieving all matching record
       # @listings = Listing.find_by(category: params[:category]) #find_by for retrieving one matching record
+
+    # if params.has_key?(:user_id)
+    #   @listings = Listing.where(reserver_id: params[:user_id])
     else
       @listings = Listing.all
     end

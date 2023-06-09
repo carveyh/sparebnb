@@ -5,8 +5,13 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchReservations } from "../../store/reservation";
+import { fetchListings, fetchUsersListings } from "../../store/listings";
+import { fetchUser } from "../../store/user";
 
-export const TripCard = (props) => {
+export const TripCard = ({reservation, listing}) => {
+	// debugger
+
+	// if(!reservation || !listing) return null;
 	return (
 		<>
 			<div className="trip-card">
@@ -15,10 +20,10 @@ export const TripCard = (props) => {
 				<div className="trip-text-main">
 					<div className="trip-text-title-main">
 						<div className="trip-text-title-actual heading-1">
-							Newtown
+							{listing?.title}
 						</div>
 						<div className="trip-text-title-host stats-text-small">
-							Entire cabin hosted by Moss Mountain Team
+							Entire cabin hosted by ...
 						</div>
 					</div>
 					<div className="trip-text-details-main">
@@ -48,7 +53,9 @@ export const TripCard = (props) => {
 	)
 }
 
-export const TripMenu = (props) => {
+export const TripMenu = ({reservation, listing}) => {
+
+	// if(!reservation) return null;
 	return (
 		<>
 			<div className="trip-menu">
@@ -62,21 +69,43 @@ const ProfilePage = (props) => {
 	const dispatch = useDispatch();
 	const { userId } = useParams();
 	const sessionUser = useSelector(state => state.session?.user)
-	const reservations = useSelector(state => state.entities?.reservations ? state.entities.reservations : {})
-	// debugger
+	const reservations = useSelector(state => state.entities?.reservations ? state.entities.reservations : null)
+	const listings = useSelector(state => state.entities?.listings ? state.entities.listings : null)
+	// debugger 
 	useEffect(() => {
 		// dispatch(fetchReservations(userId))
 		dispatch(fetchReservations({id: userId, type: "user"}))
+		
+		// // Wish to achieve this. But out of time. REVISIT
+		// dispatch(fetchUsersListings(userId))
+
+		dispatch(fetchListings())
+		dispatch(fetchUser)
 	}, [])
 
+	const tripTiles = [];
+	if(reservations){
+		const reservationsArray = Object.values(reservations)
+		for(let i = 0; i < reservationsArray.length; i++){
+			// reservationsArray[i].listingId
+			const filteredListing = Object.values(listings).filter(listing => listing.id === reservationsArray[i].listingId)[0]
+			// debugger
+			tripTiles.push(
+				<TripCard reservation={reservationsArray[i]} listing={filteredListing}/>
+			)
+			tripTiles.push(
+				<TripMenu reservation={reservationsArray[i]} listing={filteredListing}/>
+			)
+			// debugger
+		}
+	}
 
 
-	
 
 
 
 	// if(!sessionUser || sessionUser?.id !== userId) return null;
-	if(!reservations) return null;	
+	if(!reservations || !listings) return null;	
 
 	return (
 		<>
@@ -97,10 +126,7 @@ const ProfilePage = (props) => {
 						</div>
 						<div className="trip-cards-main-container">
 							{/* ALL CARDS FOR PAST RESEREVATIONS */}
-							<TripCard />
-							<TripMenu />
-							<TripCard />
-							<TripMenu />
+							{tripTiles}
 						</div>
 					</div>
 					{/* TRIP CARDS - UPCOMING */}

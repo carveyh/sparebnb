@@ -46,6 +46,11 @@ class User < ApplicationRecord
     class_name: :Reservation,
     dependent: :destroy
 
+  # NEED TO CONFIRM SYNTAX FOR THIS
+  has_many :reserved_listings,
+    through: :reservations,
+    source: :listing
+
   # TESTING: 
   # attributes = {email: 'phone@demo.io', first_name: 'Demo', last_name: 'Lition', birth_date: Time.new(1993,3,8), password: 'password', phone_number: '5551239999'}
   # User.create(attributes).tap(&:valid?).errors.messages
