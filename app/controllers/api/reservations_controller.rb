@@ -7,6 +7,8 @@ class Api::ReservationsController < ApplicationController
   def index
     if params.has_key?(:listing_id)
       @reservations = Reservation.where(listing_id: params[:listing_id])
+    elsif params.has_key?(:user_id)
+      @reservations = Reservation.where(reserver_id: params[:user_id])
     else
       @reservations = Reservation.all
     end

@@ -110,7 +110,7 @@ ApplicationRecord.transaction do
 	)
 
 	# Randomized seed data
-	10.times do
+	12.times do
 		User.create!({
 			email: Faker::Internet.unique.email,
 			first_name: Faker::Name.first_name,
@@ -125,10 +125,10 @@ ApplicationRecord.transaction do
 	
 	desc = ""
 	8.times do
-		desc += Faker::TvShows::TheOffice.quote + ' '
+		desc += Faker::Movies::HarryPotter.quote + ' '
 	end
 
-	10.times do
+	13.times do
 		Listing.create!({
 			title: 
 				Faker::Adjective.positive.capitalize() + ' ' + Faker::Adjective.positive.capitalize() + ' ' + (%w(Apartment House Dwelling Mansion Getaway Resort Tent ) + ['Parking Lot', 'Suspicious Back Alley', 'Port-a-Potty', 'Coding Bootcamp', 'Cardboard Box', "Wendy\'s Dumpster"]).sample + (((0..1).to_a.sample % 2 == 0) ? (' ' + 'Inspired by' + ' ' + Faker::Movie.title) : ""),
@@ -143,12 +143,29 @@ ApplicationRecord.transaction do
 			num_beds: (1..20).to_a.sample,
 			num_baths: (1..10).to_a.sample,
 			max_guests: (1..20).to_a.sample,
-			description: Faker::TvShows::TheOffice.quote + ' ' + Faker::TvShows::TheOffice.quote + ' ' + Faker::TvShows::TheOffice.quote + ' ' + Faker::TvShows::TheOffice.quote + ' ',
+			description: Faker::Movies::HarryPotter.quote + ' ' + Faker::Movies::HarryPotter.quote + ' ' + Faker::Movies::HarryPotter.quote + ' ' + Faker::Movies::HarryPotter.quote + ' ',
 			base_nightly_rate: (59..2999).to_a.sample,
-			category: %w(amazing-pools rooms adapted beachfront treehouses mountains trending mansions majestic arctic woods govt-secret private-escapes home-theater studios gaming-dens fitness creme-de-la-creme green rustic urban tornado camps 420-friendly).sample
+			category: %w(amazing-pools rooms beachfront).sample
+			# category: %w(amazing-pools rooms beachfront treehouses adapted mountains trending mansions majestic arctic woods govt-secret private-escapes home-theater studios gaming-dens fitness creme-de-la-creme green rustic urban tornado camps 420-friendly).sample
 
 		})
 	end
+
+	Listing.find(4).update(category: "amazing-pools")
+	
+	Listing.find(2).update(category: "beachfront")
+	Listing.find(6).update(category: "beachfront")
+	
+	Listing.find(1).update(category: "rooms")
+	Listing.find(3).update(category: "rooms")
+	Listing.find(5).update(category: "rooms")
+	Listing.find(7).update(category: "rooms")
+	Listing.find(8).update(category: "rooms")
+	Listing.find(9).update(category: "rooms")
+	Listing.find(10).update(category: "rooms")
+	Listing.find(11).update(category: "rooms")
+	Listing.find(12).update(category: "rooms")
+	Listing.find(13).update(category: "rooms")
 
 	puts "Setting up dummy reservations..."
 
@@ -158,8 +175,8 @@ ApplicationRecord.transaction do
 		Reservation.create!({
 			reserver_id: 1,
 			listing_id: i + 1,
-			start_date: Faker::Date.forward(days: rand(1..7)),
-			end_date: Faker::Date.forward(days: rand(1..7) + 8),
+			start_date: Faker::Date.forward(days: rand(1..5)),
+			end_date: Faker::Date.forward(days: rand(9..11)),
 			num_guests: 1,
 			base_nightly_rate: 399
 		})

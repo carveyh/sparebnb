@@ -1,5 +1,6 @@
 import "./Navigation.css";
 import { NavLink} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 import ProfileButton from "./ProfileButton"
 import LoginForm from "../LoginFormModal/LoginForm";
@@ -25,9 +26,10 @@ return (
 				<div className="upper-navbar-container">
 					<div className="upper-navbar-logo-div">
 						<div className="upper-navbar-logo">
-							<NavLink to="/">
+							{/* This onClick will force page to reload if click on Link when already on the to path */}
+							<Link onClick={() => window.location.pathname === "/" ? window.location.reload(): null} to="/">
 								<img src={require("../../images/sparebnb_logo_2.png")} style={{width:"140px", height:"32px"}}/>
-							</NavLink>
+							</Link>
 						</div>
 					</div>
 					<div className="upper-navbar-search-container">

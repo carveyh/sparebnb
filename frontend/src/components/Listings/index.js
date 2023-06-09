@@ -1,6 +1,7 @@
 import ListingsIndex from "./ListingsIndex";
 
 import "./ListingsCarousel.css";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -9,30 +10,30 @@ import { Route, Switch } from "react-router-dom";
 import ListingsShowPage from "./ListingsShowPage";
 import Testing from "../Testing";
 
-const ListingsFilterCarousel = () => {
+const ListingsFilterCarousel = ({setFilter}) => {
 	
 	return (
 		<div className="carousel-container">
 			<div className="carousel-main">
-				<div className="category-selector">
+				<div className="category-selector" onClick={e => setFilter("amazing-pools")}>
 					<i className="fa-solid fa-water-ladder"></i>
 					<span>Amazing pools</span>
 				</div>
-				<div className="category-selector">
+				<div className="category-selector" onClick={e => setFilter("rooms")}>
 					<i className="fa-solid fa-bed"></i>
 					<span>Rooms</span>
 				</div>
-				<div className="category-selector">
-					<i className="fa-brands fa-accessible-icon"></i>
-					<span>Adapted</span>
-				</div>
-				<div className="category-selector">
+				<div className="category-selector" onClick={e => setFilter("beachfront")}>
 					<i className="fa-solid fa-umbrella-beach"></i>
 					<span>Beachfront</span>
 				</div>
 				<div className="category-selector">
 					<i class="fa-solid fa-tower-observation"></i>
 					<span>Treehouses</span>
+				</div>
+				<div className="category-selector">
+					<i className="fa-brands fa-accessible-icon"></i>
+					<span>Adapted</span>
 				</div>
 				<div className="category-selector">
 					<i className="fa-solid fa-mountain-sun"></i>
@@ -118,6 +119,7 @@ const ListingsFilterCarousel = () => {
 const ListingsMain = () => {
 	// const sessionUser = useSelector(state => state.session?.user )
 	const dispatch = useDispatch();
+	const [filter, setFilter] = useState(null);
 	useEffect(() => {
 		dispatch(fetchListings())
 	}, [])
@@ -125,8 +127,8 @@ const ListingsMain = () => {
 	const listings = useSelector(state => state.entities?.listings)
 	return (
 		<>
-			<ListingsFilterCarousel/>
-			<ListingsIndex />
+			<ListingsFilterCarousel setFilter={setFilter}/>
+			<ListingsIndex filter={filter} />
 
 			{/* <Switch>
 				<Route exact path={`/${listingId}`}>

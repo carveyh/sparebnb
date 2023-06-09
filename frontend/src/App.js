@@ -4,6 +4,7 @@ import Testing from "./components/Testing";
 import ListingsIndex from "./components/Listings";
 import { TestingConceptsPage } from "./components/Testing/TestingConcepts";
 import ListingsShowPage from "./components/Listings/ListingsShowPage";
+import ProfilePage from "./components/Profile";
 
 function App() {
   console.log("redirected!")
@@ -18,6 +19,9 @@ function App() {
           <Route exact path="/testing-concepts"><TestingConceptsPage /></Route>
           <Route exact path="/">
             {<ListingsIndex/>}
+          </Route>
+          <Route exact path="/users/:userId">
+            <ProfilePage />
           </Route>
           <Route exact path="/listings/:listingId">
             <ListingsShowPage/>
