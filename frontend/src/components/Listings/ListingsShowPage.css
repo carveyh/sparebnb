@@ -596,9 +596,27 @@
 	/* background-color: aqua; */
 }
 
-.wont-charged {
+.reservation-complete {
+	width: 100%;
+	height: 100%;
 	padding-bottom: 24px;
 	font-size: 14px;
+	font-weight: 500;
+}
+
+.reservation-incomplete {
+	width: 100%;
+	height: 100%;
+	padding-bottom: 24px;
+	font-size: 14px;
+}
+
+.reservation-incomplete::after {
+	/* content: "Sup" */
+}
+
+.reservation-incomplete:hover {
+	/* color: green; */
 }
 
 .total-before-taxes {

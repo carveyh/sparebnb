@@ -43,6 +43,8 @@ const ListingsShowPage = (props) => {
 	const [dayAfter, setDayAfter] = useState();
 	const [dayBefore, setDayBefore] = useState();
 	const [errors, setErrors] = useState([]);
+	const [bookingConfirmed, setBookingConfirmed] = useState(false);
+	const [buttonClickable, setButtonClickable] = useState(true);
 
 	const handleChangeCheckIn = e => {
 		setCheckIn(e.target.value);
@@ -79,7 +81,7 @@ const ListingsShowPage = (props) => {
 		if(!checkIn || !checkOut) return null;
 		const diffTime = Math.abs(new Date(checkOut) - new Date(checkIn));
 		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-		debugger
+		// debugger
 		return diffDays;
 	}
 
@@ -96,7 +98,7 @@ const ListingsShowPage = (props) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		if(!sessionUser) {
+		if(!sessionUser || !buttonClickable) {
 			console.log("Must be logged in to register")
 			return
 		} else {
@@ -105,6 +107,14 @@ const ListingsShowPage = (props) => {
 				baseNightlyRate: listing.baseNightlyRate
 			};
 			dispatch(createReservation(reservation))
+				.then(() => {
+					setBookingConfirmed(true);
+					setButtonClickable(false);
+					setTimeout(() => {
+						setBookingConfirmed(false);
+						setButtonClickable(true);
+					}, 2000);
+				})
 				.catch(async (res) => {
 				let data;
 				try {
@@ -358,14 +368,17 @@ const ListingsShowPage = (props) => {
 										</div>
 										<br/>
 										<button type="submit" 
-											className={sessionUser ? `reserve-button plain-text` : `disabled-reserve-button plain-text`}
+											className={(sessionUser && buttonClickable) ? `reserve-button plain-text` : `disabled-reserve-button plain-text`}
 										>
 											Reserve
 										</button>
 									</form>
 									{/* FORM - END */}
 									{/* FORM - END */}
-									<div className="plain-text report-button-container wont-charged">You won't be charged yet</div>
+									{/* <div className="plain-text report-button-container wont-charged">You won't be charged yet</div> */}
+									<div className={`plain-text report-button-container ${bookingConfirmed ? "reservation-complete" : "reservation-incomplete"}`}>
+										{bookingConfirmed ? "Reservation complete!" : "What are you waiting for?"}
+									</div>
 									<div>${listing.baseNightlyRate} x {numNights() ? numNights() : "-"} nights - ${baseTotalCost()}</div>
 									<div className="plain-text form-padding-top">Cleaning fee - ${cleaningFee}</div>
 									<div className="plain-text form-padding-top form-padding-bottom ">Sparebnb service fee - ${totalServiceFee()}</div>
