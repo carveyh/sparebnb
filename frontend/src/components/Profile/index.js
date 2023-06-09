@@ -47,6 +47,35 @@ export const TripCard = ({reservation, listing}) => {
 							<div>{`${listing?.city}, ${listing?.state}`}</div>
 							<div>United States</div>
 						</div>
+						
+						{/* UDPATE FORM */}
+						<div className="update-form-container">
+							<form>
+								<div className="update-form-inner-container">
+									<div className="update-field ">
+										Check in date:
+										<input type="date"/>
+									</div>
+									<div className="update-field ">
+										Check out date:
+										<input type="date"/>
+									</div>
+									<div className="update-field ">
+										Number of guests:
+										<input type="text"/>
+									</div>
+									<div className="update-field ">
+										<input type="button" value="Update reservation"/>
+										<input type="button" value="Delete reservation"/>
+									</div>
+
+									
+									
+								</div>	
+							</form>
+						</div>
+						{/* UDPATE FORM */}
+
 					</div>
 				</div>
 				{/* LEFT SIDE */}
