@@ -144,12 +144,14 @@
 }
 
 .trip-text-details-date-info > *, .trip-text-details-address-info > * {
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: 300;
 	width: 100%;
 }
 
 .trip-text-details-date-info > *:last-child, .trip-text-details-address-info > *:last-child {
+	padding-top: 8px;
+	/* padding-bottom: 4px; */
 	font-size: 14px;
 	font-weight: 300;
 }
