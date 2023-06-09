@@ -299,8 +299,12 @@ const ListingsShowPage = (props) => {
 							<div className="floating-form-container">
 								<div className="floating-form-inner-container">
 									<div className="form-stats-header-container">
-										<div className="heading-2">${listing.baseNightlyRate}</div> &nbsp; <div className="plain-text">night</div>
-										<i class="fa-solid fa-star"></i> &nbsp; 4.93 · 15 reviews
+										<div>
+											<div className="heading-2">${listing.baseNightlyRate}</div> &nbsp; <div className="plain-text">night</div>
+										</div>
+										<div className="stats-text-small">
+											<i class="fa-solid fa-star"></i> &nbsp; 4.93 · 15 reviews
+										</div>
 									</div>
 									{/* FORM - START */}
 									{/* FORM - START */}
