@@ -109,9 +109,12 @@ const ListingsShowPage = (props) => {
 		}
 
 		return (
-			<select className="num-guests-selector" value={numGuests} onChange={e => setNumGuests(e.target.value)}>
-				{options}
-			</select>
+			<div className="num-guests-container">
+				<select className="num-guests-selector" value={numGuests} onChange={e => setNumGuests(e.target.value)}>
+					{options}
+				</select>
+				<div className="num-guests-placeholder">GUESTS</div>
+			</div>
 		)
 	}
 

@@ -462,6 +462,10 @@
 	width: 100%;
 	max-width: 100%;
 	height: 56px;
+	text-indent: 8px;
+	font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+	font-size: 14px;
+	padding-top: 6px;
 	/* border-radius: 8px;
 	border-top: 0px;
 	border-left: 0px;
@@ -484,12 +488,21 @@
 	position: absolute;
 	font-size: 10px;
 	font-weight: 600;
-	top: 5px;
-	left: 50px;
+	top: 7px;
+	left: 20px;
 	z-index: 5;	
 }
 
+.num-guests-container {
+	position: relative;
+	width: 100%;
+	/* display: flex;
+	justify-content: stretch; */
+}
+
 .num-guests-selector {
+	width: 100%;
+	/* position: relative; */
 	height: 56px;
 	/* outline:none; */
 	border:none;
@@ -497,6 +510,19 @@
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
 	border-top:none;
+	/* text-align-last: center; */
+	text-indent: 14px;
+	font-size: 14px;
+	padding-top: 6px;
+}
+
+.num-guests-placeholder {
+	position: absolute;
+	font-size: 10px;
+	font-weight: 600;
+	top: 7px;
+	left: 20px;
+	z-index: 5;	
 }
 
 .reserve-button {
