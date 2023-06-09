@@ -8,9 +8,13 @@ import { fetchReservations } from "../../store/reservation";
 import { fetchListings, fetchUsersListings } from "../../store/listings";
 import { fetchUser } from "../../store/user";
 import { formatTwoDigitNumberString } from "../../utils/urlFormatter";
+import { destroyReservation, updateReservation } from "../../store/reservation";
 
 export const TripCard = ({reservation, listing}) => {
-	// debugger
+	const dispatch = useDispatch();
+	const [checkIn, setCheckIn] = useState(reservation.startDate)
+	const [checkOut, setCheckOut] = useState(reservation.endDate)
+	const [numGuests, setNumGuests] = useState(reservation.numGuests)
 
 	const monthNames = ["January", "February", "March", "April", "May", "June",
   	"July", "August", "September", "October", "November", "December"
@@ -20,6 +24,15 @@ export const TripCard = ({reservation, listing}) => {
 	const endDate = new Date(reservation?.endDate)
 	let startDateMonth;
 	if(startDate) startDateMonth = monthNames[startDate?.getMonth()]
+
+	const handleUpdate = e => {
+		e.preventDefault();
+	}
+
+	const handleDelete = e => {
+		e.preventDefault();
+		dispatch(destroyReservation(e.target.id))
+	}
 
 	// if(!reservation || !listing) return null;
 	return (
@@ -54,19 +67,19 @@ export const TripCard = ({reservation, listing}) => {
 								<div className="update-form-inner-container">
 									<div className="update-field ">
 										Check in date:
-										<input type="date"/>
+										<input type="date" value={checkIn} onChange={e => setCheckIn(e.target.value)}/>
 									</div>
 									<div className="update-field ">
 										Check out date:
-										<input type="date"/>
+										<input type="date" value={checkOut} onChange={e => setCheckOut(e.target.value)}/>
 									</div>
 									<div className="update-field ">
 										Number of guests:
-										<input type="text"/>
+										<input type="text" value={numGuests} onChange={e => setNumGuests(e.target.value)}/>
 									</div>
 									<div className="update-field ">
 										<input type="button" value="Update reservation"/>
-										<input type="button" value="Delete reservation"/>
+										<input type="button" id={reservation?.id} onClick={handleDelete} value="Delete reservation"/>
 									</div>
 
 									
