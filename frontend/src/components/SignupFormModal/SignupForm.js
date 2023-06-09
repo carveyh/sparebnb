@@ -94,7 +94,7 @@ const SignupForm = ({setShowSignUpModal}) => {
 			})
 	}
 
-	if(sessionUser) return <Redirect to="/" />
+	// if(sessionUser) return <Redirect to="/" />
 
 	return (
 		<div className="signup-form">
