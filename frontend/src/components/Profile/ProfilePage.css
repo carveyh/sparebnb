@@ -119,7 +119,7 @@
 }
 
 .update-form-container {
-	padding: 24px;
+	padding-left: 24px;
 	border-left: 1px solid rgb(221,221,221);
 	display: flex;
 	justify-content: stretch;
