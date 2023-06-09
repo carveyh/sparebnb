@@ -314,6 +314,11 @@ ul.nav-bar-links {
 	background-color: rgb(247,247,247);
 }
 
+.menu-divider-li:hover {
+	/* Yes this is a bit cheaty... */
+	background-color: white !important;
+}
+
 .profile-drop-menu li:nth-child(1) {
 	font-weight: 500;
 }

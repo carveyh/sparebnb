@@ -49,7 +49,7 @@ const ProfileButton = ({setShowSignUpModal, setShowLogInModal}) => {
 			<>
 				<li onClick={e => setShowSignUpModal(true)}>Sign up</li>
 				<li onClick={e => setShowLogInModal(true)}>Log in</li>
-				<li><MenuDivider /></li>
+				<li className="menu-divider-li"><MenuDivider /></li>
 				<li>Sparebnb your home</li>
 				<li>Help</li>
 			</>
@@ -60,15 +60,15 @@ const ProfileButton = ({setShowSignUpModal, setShowLogInModal}) => {
 			<>
 			<div className="profile-drop-menu-bold-item">
 				<li>2023 Summer Release NEW</li>
-				<li><MenuDivider /></li>
+				<li className="menu-divider-li"><MenuDivider /></li>
 				<li>Messages</li>
 				<li>Trips</li>
 				<li>Wishlists</li>
 			</div>
-				<li><MenuDivider /></li>
+			<li className="menu-divider-li"><MenuDivider /></li>
 				<li>Sparebnb your home</li>
 				<li>Account</li>
-				<li><MenuDivider /></li>
+				<li className="menu-divider-li"><MenuDivider /></li>
 				<li>Help</li>
 				<li onClick={handleLogout}>Logout</li>
 			</>
@@ -95,7 +95,7 @@ const ProfileButton = ({setShowSignUpModal, setShowLogInModal}) => {
 					{sessionUser && <img className="fit-photo" src={require(`../../images/profilepics/${formatTwoDigitNumberString((sessionUser.id % 12) + 1)}.png`)} />}
 				</div>
 			</button>
-			{showMenu&& <ProfileDropMenu />}
+			{showMenu && <ProfileDropMenu />}
 		</>
 	)
 }

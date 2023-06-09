@@ -57,24 +57,30 @@ const SignupForm = ({setShowSignUpModal}) => {
 		// if(password === confirmPassword){
 			const user = {firstName, lastName, birthDate, email, password}
 			return dispatch(signupUser(user))
-			.catch(async (res) => {
-				let data;
-				try {
-					data = await res.clone().json();
-				} catch {
-					data = await res.text()
-				}
-				if(data?.errors) setErrors(data.errors)
-				else if(data) setErrors([data])
-				else setErrors([res.statusText]);
-				
-			})
+				.then(() => {
+					setShowSignUpModal(false)
+				})
+				.catch(async (res) => {
+					let data;
+					try {
+						data = await res.clone().json();
+					} catch {
+						data = await res.text()
+					}
+					if(data?.errors) setErrors(data.errors)
+					else if(data) setErrors([data])
+					else setErrors([res.statusText]);
+					
+				})
 	}
 
 	const loginDemo = (e) => {
 		e.preventDefault();
 		const user = {email:'demo@user.io', password:'password'}
 		dispatch(loginUser(user))
+			.then(() => {
+				setShowSignUpModal(false)
+			})
 			.catch(async (res) => {
 				let data;
 				try {
