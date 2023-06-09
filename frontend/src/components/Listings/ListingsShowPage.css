@@ -601,6 +601,10 @@
 	font-size: 14px;
 }
 
+.total-before-taxes {
+	font-weight: 400;;
+}
+
 .form-padding-top {
 	padding-top: 24px;
 }

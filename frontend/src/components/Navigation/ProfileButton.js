@@ -91,7 +91,8 @@ const ProfileButton = ({setShowSignUpModal, setShowLogInModal}) => {
 				<i className="fa-solid fa-bars"></i>
 				<div className="user-icon">
 					{!sessionUser && <i className="fa-solid fa-user"></i>}
-					{sessionUser && <img className="fit-photo" src={require(`../../images/profilepics/${formatTwoDigitNumberString(sessionUser.id)}.png`)} />}
+					{/* Profile photo is set up so that it cycles thru existing seed set of 12 photos, even if sessionUser.id exceeds 12 */}
+					{sessionUser && <img className="fit-photo" src={require(`../../images/profilepics/${formatTwoDigitNumberString((sessionUser.id % 12) + 1)}.png`)} />}
 				</div>
 			</button>
 			{showMenu&& <ProfileDropMenu />}

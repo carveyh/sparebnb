@@ -75,6 +75,25 @@ const ListingsShowPage = (props) => {
 		return `${new Date().getFullYear()}-${month.length < 2 ? '0'.concat(month) : month}-${date.length < 2 ? '0' + date : date}`
 	}
 
+	const numNights = () => {
+		if(!checkIn || !checkOut) return null;
+		const diffTime = Math.abs(new Date(checkOut) - new Date(checkIn));
+		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+		debugger
+		return diffDays;
+	}
+
+	const baseTotalCost = () => {
+		return numNights() ? numNights() * listing.baseNightlyRate : listing.baseNightlyRate;
+	}
+
+	const cleaningFee = 350;
+	const baseServiceFee = 350;
+
+	const totalServiceFee = () => {
+		return numNights() ? numNights() * baseServiceFee : baseServiceFee;
+	}
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if(!sessionUser) {
@@ -119,6 +138,8 @@ const ListingsShowPage = (props) => {
 	}
 
 	if(!listing || !host) return null;
+
+	// debugger
 
 	return (
 		<div className="show-page-outer-container">
@@ -345,11 +366,11 @@ const ListingsShowPage = (props) => {
 									{/* FORM - END */}
 									{/* FORM - END */}
 									<div className="plain-text report-button-container wont-charged">You won't be charged yet</div>
-									<div>${listing.baseNightlyRate} x # nights - ${listing.baseNightlyRate}</div>
-									<div className="plain-text form-padding-top">Cleaning fee - $350</div>
-									<div className="plain-text form-padding-top form-padding-bottom ">Sparebnb service fee - #350</div>
+									<div>${listing.baseNightlyRate} x {numNights() ? numNights() : "-"} nights - ${baseTotalCost()}</div>
+									<div className="plain-text form-padding-top">Cleaning fee - ${cleaningFee}</div>
+									<div className="plain-text form-padding-top form-padding-bottom ">Sparebnb service fee - ${totalServiceFee()}</div>
 									<div className="plain-text horizontal-rule-top-border"></div>
-									<div className="plain-text form-padding-top">Total before taxes - ${listing.baseNightlyRate}</div>
+									<div className="total-before-taxes plain-text form-padding-top">Total before taxes - ${baseTotalCost() + cleaningFee + totalServiceFee()}</div>
 								</div>
 								<div className="report-button-container">
 									<div className="report-button"><i class="fa-solid fa-flag"></i> &nbsp; Report this listing</div>
