@@ -7,9 +7,19 @@ import { useEffect, useState } from "react";
 import { fetchReservations } from "../../store/reservation";
 import { fetchListings, fetchUsersListings } from "../../store/listings";
 import { fetchUser } from "../../store/user";
+import { formatTwoDigitNumberString } from "../../utils/urlFormatter";
 
 export const TripCard = ({reservation, listing}) => {
 	// debugger
+
+	const monthNames = ["January", "February", "March", "April", "May", "June",
+  	"July", "August", "September", "October", "November", "December"
+	];
+
+	const startDate = new Date(reservation?.startDate)
+	const endDate = new Date(reservation?.endDate)
+	let startDateMonth;
+	if(startDate) startDateMonth = monthNames[startDate?.getMonth()]
 
 	// if(!reservation || !listing) return null;
 	return (
@@ -28,13 +38,13 @@ export const TripCard = ({reservation, listing}) => {
 					</div>
 					<div className="trip-text-details-main">
 						<div className="trip-text-details-date-info">
-							<div>Jul</div>
-							<div>21 - 23</div>
-							<div>2023</div>
+							<div>{startDateMonth}</div>
+							<div>{`${startDate?.getDate()} - ${endDate?.getDate()}`}</div>
+							<div>{`${startDate?.getFullYear()}`}</div>
 						</div>
 						<div className="trip-text-details-address-info">
-							<div>201 Huntington Road Newtown</div>
-							<div>Newtown, Connecticut</div>
+							<div>{listing?.address}</div>
+							<div>{`${listing?.city}, ${listing?.state}`}</div>
 							<div>United States</div>
 						</div>
 					</div>
@@ -44,7 +54,7 @@ export const TripCard = ({reservation, listing}) => {
 				{/* RIGHT SIDE */}
 				<div className="trip-photo-main">
 					{/* <img className="" src={require(`../../images/listings/${listingId}/${imageNum}.png`)} /> */}
-					<img className="trip-photo-img" src={require(`../../images/listings/01/01.png`)} />
+					{listing && <img className="trip-photo-img" src={require(`../../images/listings/${formatTwoDigitNumberString(listing?.id)}/01.png`)} />}
 				</div>
 				{/* RIGHT SIDE */}
 
@@ -83,17 +93,17 @@ const ProfilePage = (props) => {
 		dispatch(fetchUser)
 	}, [])
 
-	const tripTiles = [];
+	const upcomingTripTiles = [];
 	if(reservations){
 		const reservationsArray = Object.values(reservations)
 		for(let i = 0; i < reservationsArray.length; i++){
 			// reservationsArray[i].listingId
 			const filteredListing = Object.values(listings).filter(listing => listing.id === reservationsArray[i].listingId)[0]
 			// debugger
-			tripTiles.push(
+			upcomingTripTiles.push(
 				<TripCard reservation={reservationsArray[i]} listing={filteredListing}/>
 			)
-			tripTiles.push(
+			upcomingTripTiles.push(
 				<TripMenu reservation={reservationsArray[i]} listing={filteredListing}/>
 			)
 			// debugger
@@ -126,7 +136,7 @@ const ProfilePage = (props) => {
 						</div>
 						<div className="trip-cards-main-container">
 							{/* ALL CARDS FOR PAST RESEREVATIONS */}
-							{tripTiles}
+							{upcomingTripTiles}
 						</div>
 					</div>
 					{/* TRIP CARDS - UPCOMING */}
@@ -140,10 +150,7 @@ const ProfilePage = (props) => {
 						</div>
 						<div className="trip-cards-main-container">
 							{/* ALL CARDS FOR PAST RESEREVATIONS */}
-							<TripCard />
-							<TripMenu />
-							<TripCard />
-							<TripMenu />
+							<div className="trips-not-found">This list is empty.</div>
 						</div>
 					</div>
 					{/* TRIP CARDS - PAST */}

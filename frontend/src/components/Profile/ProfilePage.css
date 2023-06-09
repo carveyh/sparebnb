@@ -123,7 +123,9 @@
 	font-weight: 300;
 }
 
-
+.trips-not-found {
+	font-style: italic;
+}
 
 
 
