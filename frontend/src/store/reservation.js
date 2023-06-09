@@ -25,20 +25,47 @@ export const removeReservation = (reservationId) => ({
 
 // REDUX THUNK ACTION CREATORS
 
-export const fetchReservations = (listingId) => async dispatch => {
+
+//THIS BELOW NOT WORKING - a dynamic fetchReservations that can diff types wildcard.
+//REVISIT! 
+export const fetchReservations = ({id, type}) => async dispatch => {
+	// debugger
 	let requestUrl;
-	if(listingId){
+	if(id && type === "listing"){
+		const listingId = id;
 		requestUrl = `/api/listings/${listingId}/reservations`;
+	} else if(id && type === "user") {
+		// debugger
+		const userId = id;
+		requestUrl = `/api/users/${userId}/reservations`;
 	} else {
 		requestUrl = `/api/reservations`;
 	}
 	const res = await csrfFetch(requestUrl);
 	if(res.ok){
 		const data = await res.json();
-		dispatchEvent(receiveReservations(data.reservations));
+		dispatch(receiveReservations(data.reservations));
 	}
 	return res;
 }
+
+// export const fetchReservations = (userId) => async dispatch => {
+// 	let requestUrl;
+// 	if(userId){
+// 		requestUrl = `/api/users/${userId}/reservations`;
+// 	} else {
+// 		requestUrl = `/api/reservations`;
+// 	}
+// 	debugger
+// 	const res = await csrfFetch(requestUrl);
+// 	if(res.ok){
+// 		debugger
+// 		const data = await res.json();
+// 		debugger
+// 		dispatch(receiveReservations(data.reservations));
+// 	}
+// 	return res;
+// }
 
 export const fetchReservation = (reservationId) => async dispatch => {
 	const res = await csrfFetch(`/api/reservations/${reservationId}`);

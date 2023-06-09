@@ -40,11 +40,15 @@
 }
 
 .trip-cards-main-container {
-	margin-top: 24px;
-	display: grid;
-	grid-template-columns: 2fr 1fr;
+	/* margin-top: 24px; */
+	/* display: grid; */
+	/* grid-template-columns: 2fr 1fr;
 	column-gap: 52px;
-	row-gap: 24px;
+	row-gap: 24px; */
+	display: flex;
+	flex-direction: column;
+	padding-top: 24px;
+
 }
 
 /* TRIP CARD MAIN */
@@ -61,6 +65,7 @@
 	display: flex;
 	flex-direction: row;
 	align-items: stretch;
+	margin-bottom: 24px;
 }
 
 .trip-text-main {
@@ -110,20 +115,50 @@
 	border-left: 1px solid rgb(221,221,221);
 	display: flex;
 	flex-direction: column;
+	margin-right: 24px;
+}
+
+.update-form-container {
+	padding: 24px;
+	border-left: 1px solid rgb(221,221,221);
+	display: flex;
+	justify-content: stretch;
+	align-items: stretch;
+}
+
+.update-form-inner-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	gap: 16px;
+	font-size: 14px;
+}
+
+.update-field {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	gap: 4px;
 }
 
 .trip-text-details-date-info > *, .trip-text-details-address-info > * {
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: 300;
 	width: 100%;
 }
 
 .trip-text-details-date-info > *:last-child, .trip-text-details-address-info > *:last-child {
+	padding-top: 8px;
+	/* padding-bottom: 4px; */
 	font-size: 14px;
 	font-weight: 300;
 }
 
-
+.trips-not-found {
+	font-style: italic;
+}
 
 
 
@@ -135,7 +170,8 @@
 .trip-photo-main {
 	border-top-right-radius: 12px;
 	border-bottom-right-radius: 12px;
-	width: 100%;
+	/* width: 100%; */
+	width: 383px;
 	flex-grow: 1;
 	background-color: pink;
 }

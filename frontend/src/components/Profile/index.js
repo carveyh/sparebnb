@@ -1,7 +1,27 @@
 import "./ProfilePage.css";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { fetchReservations } from "../../store/reservation";
+import { fetchListings, fetchUsersListings } from "../../store/listings";
+import { fetchUser } from "../../store/user";
+import { formatTwoDigitNumberString } from "../../utils/urlFormatter";
 
-export const TripCard = (props) => {
+export const TripCard = ({reservation, listing}) => {
+	// debugger
+
+	const monthNames = ["January", "February", "March", "April", "May", "June",
+  	"July", "August", "September", "October", "November", "December"
+	];
+
+	const startDate = new Date(reservation?.startDate)
+	const endDate = new Date(reservation?.endDate)
+	let startDateMonth;
+	if(startDate) startDateMonth = monthNames[startDate?.getMonth()]
+
+	// if(!reservation || !listing) return null;
 	return (
 		<>
 			<div className="trip-card">
@@ -10,23 +30,52 @@ export const TripCard = (props) => {
 				<div className="trip-text-main">
 					<div className="trip-text-title-main">
 						<div className="trip-text-title-actual heading-1">
-							Newtown
+							{listing?.title}
 						</div>
 						<div className="trip-text-title-host stats-text-small">
-							Entire cabin hosted by Moss Mountain Team
+							Entire cabin hosted by ...
 						</div>
 					</div>
 					<div className="trip-text-details-main">
 						<div className="trip-text-details-date-info">
-							<div>Jul</div>
-							<div>21 - 23</div>
-							<div>2023</div>
+							<div>{startDateMonth}</div>
+							<div>{`${startDate?.getDate()} - ${endDate?.getDate()}`}</div>
+							<div>{`${startDate?.getFullYear()}`}</div>
 						</div>
 						<div className="trip-text-details-address-info">
-							<div>201 Huntington Road Newtown</div>
-							<div>Newtown, Connecticut</div>
+							<div>{listing?.address}</div>
+							<div>{`${listing?.city}, ${listing?.state}`}</div>
 							<div>United States</div>
 						</div>
+						
+						{/* UDPATE FORM */}
+						<div className="update-form-container">
+							<form>
+								<div className="update-form-inner-container">
+									<div className="update-field ">
+										Check in date:
+										<input type="date"/>
+									</div>
+									<div className="update-field ">
+										Check out date:
+										<input type="date"/>
+									</div>
+									<div className="update-field ">
+										Number of guests:
+										<input type="text"/>
+									</div>
+									<div className="update-field ">
+										<input type="button" value="Update reservation"/>
+										<input type="button" value="Delete reservation"/>
+									</div>
+
+									
+									
+								</div>	
+							</form>
+						</div>
+						{/* UDPATE FORM */}
+
 					</div>
 				</div>
 				{/* LEFT SIDE */}
@@ -34,7 +83,7 @@ export const TripCard = (props) => {
 				{/* RIGHT SIDE */}
 				<div className="trip-photo-main">
 					{/* <img className="" src={require(`../../images/listings/${listingId}/${imageNum}.png`)} /> */}
-					<img className="trip-photo-img" src={require(`../../images/listings/01/01.png`)} />
+					{listing && <img className="trip-photo-img" src={require(`../../images/listings/${formatTwoDigitNumberString(listing?.id)}/01.png`)} />}
 				</div>
 				{/* RIGHT SIDE */}
 
@@ -43,7 +92,9 @@ export const TripCard = (props) => {
 	)
 }
 
-export const TripMenu = (props) => {
+export const TripMenu = ({reservation, listing}) => {
+
+	// if(!reservation) return null;
 	return (
 		<>
 			<div className="trip-menu">
@@ -54,6 +105,47 @@ export const TripMenu = (props) => {
 }
 
 const ProfilePage = (props) => {
+	const dispatch = useDispatch();
+	const { userId } = useParams();
+	const sessionUser = useSelector(state => state.session?.user)
+	const reservations = useSelector(state => state.entities?.reservations ? state.entities.reservations : null)
+	const listings = useSelector(state => state.entities?.listings ? state.entities.listings : null)
+	// debugger 
+	useEffect(() => {
+		// dispatch(fetchReservations(userId))
+		dispatch(fetchReservations({id: userId, type: "user"}))
+		
+		// // Wish to achieve this. But out of time. REVISIT
+		// dispatch(fetchUsersListings(userId))
+
+		dispatch(fetchListings())
+		dispatch(fetchUser)
+	}, [])
+
+	const upcomingTripTiles = [];
+	if(reservations){
+		const reservationsArray = Object.values(reservations)
+		for(let i = 0; i < reservationsArray.length; i++){
+			// reservationsArray[i].listingId
+			const filteredListing = Object.values(listings).filter(listing => listing.id === reservationsArray[i].listingId)[0]
+			// debugger
+			upcomingTripTiles.push(
+				<TripCard reservation={reservationsArray[i]} listing={filteredListing}/>
+			)
+			// upcomingTripTiles.push(
+			// 	<TripMenu reservation={reservationsArray[i]} listing={filteredListing}/>
+			// )
+			// debugger
+		}
+	}
+
+
+
+
+
+	// if(!sessionUser || sessionUser?.id !== userId) return null;
+	if(!reservations || !listings) return null;	
+
 	return (
 		<>
 			<div className="profile-page-outer-container">
@@ -73,10 +165,7 @@ const ProfilePage = (props) => {
 						</div>
 						<div className="trip-cards-main-container">
 							{/* ALL CARDS FOR PAST RESEREVATIONS */}
-							<TripCard />
-							<TripMenu />
-							<TripCard />
-							<TripMenu />
+							{upcomingTripTiles}
 						</div>
 					</div>
 					{/* TRIP CARDS - UPCOMING */}
@@ -90,10 +179,7 @@ const ProfilePage = (props) => {
 						</div>
 						<div className="trip-cards-main-container">
 							{/* ALL CARDS FOR PAST RESEREVATIONS */}
-							<TripCard />
-							<TripMenu />
-							<TripCard />
-							<TripMenu />
+							<div className="trips-not-found">This list is empty.</div>
 						</div>
 					</div>
 					{/* TRIP CARDS - PAST */}
