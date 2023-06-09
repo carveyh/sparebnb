@@ -103,9 +103,9 @@ const ProfilePage = (props) => {
 			upcomingTripTiles.push(
 				<TripCard reservation={reservationsArray[i]} listing={filteredListing}/>
 			)
-			upcomingTripTiles.push(
-				<TripMenu reservation={reservationsArray[i]} listing={filteredListing}/>
-			)
+			// upcomingTripTiles.push(
+			// 	<TripMenu reservation={reservationsArray[i]} listing={filteredListing}/>
+			// )
 			// debugger
 		}
 	}
