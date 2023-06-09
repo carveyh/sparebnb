@@ -1,0 +1,25 @@
+.profile-page-outer-container {
+	/* container-type: inline-size; */
+	/* container-name: overall-page-width; */
+	display: flex;
+	justify-content: center;
+	background-color: lightcyan;
+}
+
+.profile-page-inner-container {
+	min-width: 1440px;
+	padding: 0px 80px;
+	box-sizing: border-box;
+	background-color: pink;
+}
+
+.heading-container {
+	width: 100%;
+	padding-top: 36px;
+	padding-bottom: 24px;
+}
+
+.heading-container-text {
+	font-size: 32px;
+}
+
