@@ -3,14 +3,14 @@
 	/* container-name: overall-page-width; */
 	display: flex;
 	justify-content: center;
-	background-color: lightcyan;
+	/* background-color: lightcyan; */
 }
 
 .profile-page-inner-container {
 	min-width: 1440px;
 	padding: 0px 80px;
 	box-sizing: border-box;
-	background-color: pink;
+	/* background-color: lightskyblue; */
 }
 
 .heading-container {
@@ -23,3 +23,33 @@
 	font-size: 32px;
 }
 
+.trip-cards-outer-container-upcoming {
+	padding-top: 24px;
+	padding-bottom: 24px;
+	border-bottom: 1px solid rgb(221,221,221);
+}
+
+.trip-cards-outer-container-past {
+	padding-top: 24px;
+	padding-bottom: 48px;
+	border-bottom: 1px solid rgb(221,221,221);
+}
+
+.trip-cards-main-container {
+	margin-top: 24px;
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	column-gap: 40px;
+	row-gap: 24px;
+}
+
+.trip-card {
+	width: 100%;
+	border-radius: 12px;
+	border: 1px solid black;
+}
+
+.footer-container {
+	padding-top: 24px;
+	padding-bottom: 36px;
+}

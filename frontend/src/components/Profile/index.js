@@ -1,5 +1,25 @@
 import "./ProfilePage.css";
 
+export const TripCard = (props) => {
+	return (
+		<>
+			<div className="trip-card">
+				CARD
+			</div>
+		</>
+	)
+}
+
+export const TripMenu = (props) => {
+	return (
+		<>
+			<div className="trip-menu">
+				MENU
+			</div>
+		</>
+	)
+}
+
 const ProfilePage = (props) => {
 	return (
 		<>
@@ -15,11 +35,15 @@ const ProfilePage = (props) => {
 
 					{/* TRIP CARDS - UPCOMING */}
 					<div className="trip-cards-outer-container-upcoming">
-						<div className="trip-cards-header">
+						<div className="trip-cards-header heading-2">
 							Upcoming reservations
 						</div>
 						<div className="trip-cards-main-container">
 							{/* ALL CARDS FOR PAST RESEREVATIONS */}
+							<TripCard />
+							<TripMenu />
+							<TripCard />
+							<TripMenu />
 						</div>
 					</div>
 					{/* TRIP CARDS - UPCOMING */}
@@ -27,12 +51,16 @@ const ProfilePage = (props) => {
 						{/* HORIZONTAL RULEEEEEEEEEEEEEEEEEEEEE */}
 					
 					{/* TRIP CARDS - PAST */}
-					<div className="trip-cards-outer-container-upcoming">
-						<div className="trip-cards-header">
+					<div className="trip-cards-outer-container-past">
+						<div className="trip-cards-header heading-2">
 							Past reservations
 						</div>
 						<div className="trip-cards-main-container">
 							{/* ALL CARDS FOR PAST RESEREVATIONS */}
+							<TripCard />
+							<TripMenu />
+							<TripCard />
+							<TripMenu />
 						</div>
 					</div>
 					{/* TRIP CARDS - PAST */}
