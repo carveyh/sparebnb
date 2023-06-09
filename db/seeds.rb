@@ -151,6 +151,22 @@ ApplicationRecord.transaction do
 		})
 	end
 
+	Listing.find(4).update(category: "amazing-pools")
+	
+	Listing.find(2).update(category: "beachfront")
+	Listing.find(6).update(category: "beachfront")
+	
+	Listing.find(1).update(category: "rooms")
+	Listing.find(3).update(category: "rooms")
+	Listing.find(5).update(category: "rooms")
+	Listing.find(7).update(category: "rooms")
+	Listing.find(8).update(category: "rooms")
+	Listing.find(9).update(category: "rooms")
+	Listing.find(10).update(category: "rooms")
+	Listing.find(11).update(category: "rooms")
+	Listing.find(12).update(category: "rooms")
+	Listing.find(13).update(category: "rooms")
+
 	puts "Setting up dummy reservations..."
 
 	3.times do |i|
@@ -159,8 +175,8 @@ ApplicationRecord.transaction do
 		Reservation.create!({
 			reserver_id: 1,
 			listing_id: i + 1,
-			start_date: Faker::Date.forward(days: rand(1..7)),
-			end_date: Faker::Date.forward(days: rand(1..7) + 10),
+			start_date: Faker::Date.forward(days: rand(1..5)),
+			end_date: Faker::Date.forward(days: rand(9..11)),
 			num_guests: 1,
 			base_nightly_rate: 399
 		})
