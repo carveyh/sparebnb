@@ -1,5 +1,10 @@
 import "./ProfilePage.css";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { fetchReservations } from "../../store/reservation";
 
 export const TripCard = (props) => {
 	return (
@@ -54,6 +59,25 @@ export const TripMenu = (props) => {
 }
 
 const ProfilePage = (props) => {
+	const dispatch = useDispatch();
+	const { userId } = useParams();
+	const sessionUser = useSelector(state => state.session?.user)
+	const reservations = useSelector(state => state.entities?.reservations ? state.entities.reservations : {})
+	// debugger
+	useEffect(() => {
+		// dispatch(fetchReservations(userId))
+		dispatch(fetchReservations({id: userId, type: "user"}))
+	}, [])
+
+
+
+	
+
+
+
+	// if(!sessionUser || sessionUser?.id !== userId) return null;
+	if(!reservations) return null;	
+
 	return (
 		<>
 			<div className="profile-page-outer-container">
