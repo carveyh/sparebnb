@@ -4,7 +4,13 @@ export const TripCard = (props) => {
 	return (
 		<>
 			<div className="trip-card">
-				CARD
+				<div className="trip-text-main">
+					Hi
+				</div>
+				<div className="trip-photo-main">
+				{/* <img className="" src={require(`../../images/listings/${listingId}/${imageNum}.png`)} /> */}
+				<img className="trip-photo-img" src={require(`../../images/listings/01/01.png`)} />
+				</div>
 			</div>
 		</>
 	)
@@ -70,7 +76,9 @@ const ProfilePage = (props) => {
 					{/* FOOTER */}
 					<div className="footer-container">
 						<div className="footer-text">
-							Can't find your reservation here? <div className="footer-links">Github</div> <div className="footer-links">LinkedIn</div> 
+							<div>Can't find your reservation here?</div> 
+							<div className="footer-links">Github</div> 
+							<div className="footer-links">LinkedIn</div> 
 						</div>
 					</div>
 					{/* FOOTER */}

@@ -1,3 +1,7 @@
+/* PROFILE PAGE MAIN */
+/* PROFILE PAGE MAIN */
+/* PROFILE PAGE MAIN */
+
 .profile-page-outer-container {
 	/* container-type: inline-size; */
 	/* container-name: overall-page-width; */
@@ -39,17 +43,59 @@
 	margin-top: 24px;
 	display: grid;
 	grid-template-columns: 2fr 1fr;
-	column-gap: 40px;
+	column-gap: 52px;
 	row-gap: 24px;
 }
 
+/* TRIP CARD MAIN */
+/* TRIP CARD MAIN */
+/* TRIP CARD MAIN */
+
 .trip-card {
+	box-sizing: border-box;
 	width: 100%;
+	/* height: (210 - 24 - 24)px; */
+	height: 210px;
 	border-radius: 12px;
-	border: 1px solid black;
+	box-shadow: rgba(0, 0, 0, 0.17) 0px 0px 22px;
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
 }
+
+.trip-text-main {
+	padding: 24px;
+	width: 100%;
+	flex-grow: 1;
+}
+
+.trip-photo-main {
+	border-top-right-radius: 12px;
+	border-bottom-right-radius: 12px;
+	width: 100%;
+	flex-grow: 1;
+	background-color: pink;
+}
+
+.trip-photo-main > img {
+	border-top-right-radius: 12px;
+	border-bottom-right-radius: 12px;
+	width:100%;
+	height:100%;
+	object-fit: cover;
+}
+
+/* FOOTER */
+/* FOOTER */
+/* FOOTER */
 
 .footer-container {
 	padding-top: 24px;
 	padding-bottom: 36px;
+}
+
+.footer-text {
+	gap: 8px;
+	display: flex;
+	flex-direction: row;
 }
