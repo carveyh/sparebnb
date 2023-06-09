@@ -126,7 +126,7 @@
 	align-items: stretch;
 }
 
-.update-form-inner-container {
+.update-form-inner-container { 
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
