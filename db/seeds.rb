@@ -18,6 +18,7 @@ ApplicationRecord.transaction do
 	puts "Resetting primary keys..."
 	ApplicationRecord.connection.reset_pk_sequence!('users')
 	ApplicationRecord.connection.reset_pk_sequence!('listings')
+	ApplicationRecord.connection.reset_pk_sequence!('reservations')
 
 
 
@@ -148,6 +149,22 @@ ApplicationRecord.transaction do
 
 		})
 	end
+
+	puts "Setting up dummy reservations..."
+
+	3.times do |i|
+		listing_id = rand(1..1)
+		# debugger
+		Reservation.create!({
+			reserver_id: 1,
+			listing_id: i + 1,
+			start_date: Faker::Date.forward(days: rand(1..7)),
+			end_date: Faker::Date.forward(days: rand(1..7) + 8),
+			num_guests: 1,
+			base_nightly_rate: 399
+		})
+	end
+
 
 	puts "Done!"
 

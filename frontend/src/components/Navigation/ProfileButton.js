@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../store/session";
 import { Redirect } from "react-router-dom";
+import { formatTwoDigitNumberString } from "../../utils/urlFormatter";
 
 import "./Navigation.css";
 
@@ -89,7 +90,9 @@ const ProfileButton = ({setShowSignUpModal, setShowLogInModal}) => {
 			<button className="session-menu-button" onClick={toggleMenu}>
 				<i className="fa-solid fa-bars"></i>
 				<div className="user-icon">
-					<i className="fa-solid fa-user"></i>
+					{!sessionUser && <i className="fa-solid fa-user"></i>}
+					{/* Profile photo is set up so that it cycles thru existing seed set of 12 photos, even if sessionUser.id exceeds 12 */}
+					{sessionUser && <img className="fit-photo" src={require(`../../images/profilepics/${formatTwoDigitNumberString((sessionUser.id % 12) + 1)}.png`)} />}
 				</div>
 			</button>
 			{showMenu&& <ProfileDropMenu />}

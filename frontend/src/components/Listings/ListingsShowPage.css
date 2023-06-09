@@ -333,7 +333,7 @@
 
 .sleep-carousel-container {
 	overflow-x: scroll;
-	overscroll-behavior: contain;
+	overscroll-behavior-x: contain;
   white-space: nowrap;
 	width: 100%;
 	scroll-snap-type: x mandatory;
@@ -365,6 +365,10 @@
 
 	/* With border radius, actually causes next item to bleed through on edge after scroll snap somtimes... */
 	/* border-radius: 8px; */
+}
+
+.carousel-photo:last-child{
+	margin-right: 0px;
 }
 .carousel-photo > img {
 	/* With border radius, actually causes next item to bleed through on edge after scroll snap somtimes... */
@@ -438,7 +442,30 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	align-items: center;
 	padding-bottom: 24px;
+}
+.form-stats-header-container > div:first-child {
+	width: 50%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+.form-stats-header-container > div:last-child {
+	width: 50%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+	
+}
+
+.date-inputs {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 .checkin-button, .checkout-button {
@@ -447,18 +474,91 @@
 }
 
 .checkin-input, .checkout-input {
+	box-sizing: border-box;
 	width: 100%;
 	max-width: 100%;
+	height: 56px;
+	text-indent: 8px;
+	font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+	font-size: 14px;
+	padding-top: 6px;
+	padding-right: 8px;
+	/* border-radius: 8px;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px; */
+}
+
+.checkin-input {
+	border:1px rgb(221, 221, 221) solid;
+	border-top-left-radius: 8px;
+}
+
+.checkout-input {
+	border: 1px rgb(221, 221, 221) solid;
+	border-top-right-radius: 8px;
+	border-left: none;
+
 }
 
 .checkin-placeholder, .checkout-placeholder {
 	position: absolute;
 	font-size: 10px;
 	font-weight: 600;
-	top: 4px;
-	left: 200px;
-	z-index: 5;
-	
+	top: 7px;
+	left: 20px;
+	z-index: 5;	
+}
+
+.num-guests-container {
+	position: relative;
+	width: 100%;
+	/* display: flex;
+	justify-content: stretch; */
+}
+
+.num-guests-selector {
+	width: 100%;
+	/* position: relative; */
+	height: 56px;
+	/* outline:none; */
+	border:none;
+	border:1px rgb(221, 221, 221) solid;
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
+	border-top:none;
+	/* text-align-last: center; */
+	text-indent: 14px;
+	font-size: 14px;
+	padding-top: 6px;
+	padding-right: 8px;
+	/* appearance: none; */
+}
+
+.num-guests-placeholder {
+	position: absolute;
+	font-size: 10px;
+	font-weight: 600;
+	top: 7px;
+	left: 20px;
+	z-index: 5;	
+}
+
+.reserve-button {
+	background-color: #FF0000;
+	color: white;
+	padding: 14px 24px;
+	border-radius: 8px;
+	border: none;
+	cursor: pointer;
+}
+
+.disabled-reserve-button {
+	background-color: rgb(221, 221, 221);
+	color: gray;
+	padding: 14px 24px;
+	border-radius: 8px;
+	border: none;
 }
 
 .reservation-form {
@@ -468,6 +568,22 @@
 
 .reservation-form > * {
 	outline: 0px solid transparent;
+}
+
+.num-guests-input{
+	width: 100%;
+	outline: 0;
+	border-width: 0px;
+	border-color:rgba(0, 0, 0, 0);
+}
+
+.form-inputs {
+	/* border: 1px solid rgb(221, 221, 221); */
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	/* border-radius: 12px; */
+	box-sizing: border-box;
 }
 
 .report-button-container {
@@ -482,6 +598,11 @@
 
 .wont-charged {
 	padding-bottom: 24px;
+	font-size: 14px;
+}
+
+.total-before-taxes {
+	font-weight: 400;;
 }
 
 .form-padding-top {

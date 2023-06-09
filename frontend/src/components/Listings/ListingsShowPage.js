@@ -8,6 +8,8 @@ import { fetchUser } from "../../store/user";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { formatTwoDigitNumberString } from "../../utils/urlFormatter";
+import { useState } from "react";
+import { createReservation } from "../../store/reservation";
 
 export const ListingsShowPhoto = ({listingId, imageNum}) => {
 	listingId = formatTwoDigitNumberString(listingId);
@@ -25,6 +27,7 @@ export const ListingsShowPhoto = ({listingId, imageNum}) => {
 const ListingsShowPage = (props) => {
 	const dispatch = useDispatch();
 	const { listingId } = useParams()
+	const sessionUser = useSelector(state => state.session?.user)
 	const listing = useSelector(state => state.entities?.listings ? state.entities.listings[`${listingId}`] : {})
 	const host = useSelector(state => state.entities?.users ? state.entities.users[`${listing?.hostId}`] : {})
 	const hostIdFormatted = formatTwoDigitNumberString(host?.id);	
@@ -34,8 +37,109 @@ const ListingsShowPage = (props) => {
 		dispatch(fetchUser(listing?.hostId));
 	}, [])
 
+	const [checkIn, setCheckIn] = useState();
+	const [checkOut, setCheckOut] = useState();
+	const [numGuests, setNumGuests] = useState(1);
+	const [dayAfter, setDayAfter] = useState();
+	const [dayBefore, setDayBefore] = useState();
+	const [errors, setErrors] = useState([]);
+
+	const handleChangeCheckIn = e => {
+		setCheckIn(e.target.value);
+		setDayAfter(daysApartCalculator(e.target.value, 2));
+	}
+
+	const handleChangeCheckOut = e => {
+		setCheckOut(e.target.value);
+		setDayBefore(daysApartCalculator(e.target.value, -0));
+	}
+
+
+
+	const daysApartCalculator = (oldDate, delta) => {
+		console.log(oldDate)
+		const tomorrow = new Date(oldDate)
+		console.log(tomorrow)
+		tomorrow.setDate(tomorrow.getDate() + delta)
+		console.log(tomorrow)
+		const month = String(tomorrow.getMonth() + 1)
+		const date = String(tomorrow.getDate())
+		console.log(`${tomorrow.getFullYear()}-${month.length < 2 ? '0'.concat(month) : month}-${date.length < 2 ? '0' + date : date}`)
+		return `${tomorrow.getFullYear()}-${month.length < 2 ? '0'.concat(month) : month}-${date.length < 2 ? '0' + date : date}`
+		
+	}
 	
+	const minDate = () => {
+		const month = String(new Date().getMonth() + 1)
+		const date = String(new Date().getDate())
+		return `${new Date().getFullYear()}-${month.length < 2 ? '0'.concat(month) : month}-${date.length < 2 ? '0' + date : date}`
+	}
+
+	const numNights = () => {
+		if(!checkIn || !checkOut) return null;
+		const diffTime = Math.abs(new Date(checkOut) - new Date(checkIn));
+		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+		debugger
+		return diffDays;
+	}
+
+	const baseTotalCost = () => {
+		return numNights() ? numNights() * listing.baseNightlyRate : listing.baseNightlyRate;
+	}
+
+	const cleaningFee = 350;
+	const baseServiceFee = 350;
+
+	const totalServiceFee = () => {
+		return numNights() ? numNights() * baseServiceFee : baseServiceFee;
+	}
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		if(!sessionUser) {
+			console.log("Must be logged in to register")
+			return
+		} else {
+			const reservation = { checkIn, checkOut, numGuests, listingId,
+				reserverId: sessionUser.id,
+				baseNightlyRate: listing.baseNightlyRate
+			};
+			dispatch(createReservation(reservation))
+				.catch(async (res) => {
+				let data;
+				try {
+					data = await res.clone().json();
+				} catch {
+					data = await res.text()
+				}
+				if(data?.errors) setErrors(data.errors)
+				else if(data) setErrors([data])
+				else setErrors([res.statusText]);
+				console.log(errors);
+				debugger
+			})
+		}
+	}
+
+	const numGuestsSelector = () => {
+		const options = [];
+		for(let i = 1; i <= (listing ? listing.maxGuests : 0); i ++){
+			options.push(<option value={i}>{i}</option>)
+		}
+
+		return (
+			<div className="num-guests-container">
+				<select className="num-guests-selector" value={numGuests} onChange={e => setNumGuests(e.target.value)}>
+					{options}
+				</select>
+				<div className="num-guests-placeholder">GUESTS</div>
+			</div>
+		)
+	}
+
 	if(!listing || !host) return null;
+
+	// debugger
 
 	return (
 		<div className="show-page-outer-container">
@@ -216,35 +320,57 @@ const ListingsShowPage = (props) => {
 							<div className="floating-form-container">
 								<div className="floating-form-inner-container">
 									<div className="form-stats-header-container">
-										<div className="heading-2">${listing.baseNightlyRate}</div> &nbsp; <div className="plain-text">night</div>
-										<i class="fa-solid fa-star"></i> &nbsp; 4.93 · 15 reviews
+										<div>
+											<div className="heading-2">${listing.baseNightlyRate}</div> &nbsp; <div className="plain-text">night</div>
+										</div>
+										<div className="stats-text-small">
+											<i class="fa-solid fa-star"></i> &nbsp; 4.93 · 15 reviews
+										</div>
 									</div>
 									{/* FORM - START */}
 									{/* FORM - START */}
-									<form className="reservation-form">
-										
-										<div className="checkin-button">
-											<input className="checkin-input" type="date"/>
-											<div className="checkin-placeholder">CHECK-IN</div>
+									<form className="reservation-form" onSubmit={handleSubmit}>
+										<div className="form-inputs">
+											<div className="date-inputs">
+												<div className="checkin-button">
+													<input className="checkin-input" 
+														type="date"
+														value={checkIn}
+														min={minDate()}
+														max={checkOut ? dayBefore : null}
+														onChange={handleChangeCheckIn}
+														required
+													/>
+													<div className="checkin-placeholder">CHECK-IN</div>
+												</div>
+												<div className="checkout-button">
+													<input className="checkout-input" 
+														type="date"
+														value={checkOut}
+														min={checkIn ? dayAfter : null}
+														onChange={handleChangeCheckOut}
+														required
+													/>
+													<div className="checkout-placeholder">CHECK-OUT</div>
+												</div>
+											</div>
+											{numGuestsSelector()}
 										</div>
-
-										<div className="checkout-button">
-											<input className="checkout-input" type="date"/>
-											<div className="checkout-placeholder">CHECK-OUT</div>
-										</div>
-
-										<input type="text" placeholder="Number of guests"/>
 										<br/>
-										<button>Reserve</button>
+										<button type="submit" 
+											className={sessionUser ? `reserve-button plain-text` : `disabled-reserve-button plain-text`}
+										>
+											Reserve
+										</button>
 									</form>
 									{/* FORM - END */}
 									{/* FORM - END */}
 									<div className="plain-text report-button-container wont-charged">You won't be charged yet</div>
-									<div>{listing.baseNightlyRate} &nbsp; x &nbsp; # &nbsp; nights - {listing.baseNightlyRate}</div>
-									<div className="plain-text form-padding-top">Cleaning fee - $350</div>
-									<div className="plain-text form-padding-top form-padding-bottom ">Sparebnb service fee - #350</div>
+									<div>${listing.baseNightlyRate} x {numNights() ? numNights() : "-"} nights - ${baseTotalCost()}</div>
+									<div className="plain-text form-padding-top">Cleaning fee - ${cleaningFee}</div>
+									<div className="plain-text form-padding-top form-padding-bottom ">Sparebnb service fee - ${totalServiceFee()}</div>
 									<div className="plain-text horizontal-rule-top-border"></div>
-									<div className="plain-text form-padding-top">Total before taxes - {listing.baseNightlyRate}</div>
+									<div className="total-before-taxes plain-text form-padding-top">Total before taxes - ${baseTotalCost() + cleaningFee + totalServiceFee()}</div>
 								</div>
 								<div className="report-button-container">
 									<div className="report-button"><i class="fa-solid fa-flag"></i> &nbsp; Report this listing</div>
