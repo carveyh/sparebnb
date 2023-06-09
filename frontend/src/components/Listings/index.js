@@ -23,16 +23,16 @@ const ListingsFilterCarousel = () => {
 					<span>Rooms</span>
 				</div>
 				<div className="category-selector">
-					<i className="fa-brands fa-accessible-icon"></i>
-					<span>Adapted</span>
-				</div>
-				<div className="category-selector">
 					<i className="fa-solid fa-umbrella-beach"></i>
 					<span>Beachfront</span>
 				</div>
 				<div className="category-selector">
 					<i class="fa-solid fa-tower-observation"></i>
 					<span>Treehouses</span>
+				</div>
+				<div className="category-selector">
+					<i className="fa-brands fa-accessible-icon"></i>
+					<span>Adapted</span>
 				</div>
 				<div className="category-selector">
 					<i className="fa-solid fa-mountain-sun"></i>

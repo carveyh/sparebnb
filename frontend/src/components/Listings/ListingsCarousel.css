@@ -49,6 +49,21 @@
 	margin-right: 0px;
 }
 
+.category-selector:hover {
+	cursor: pointer;
+	animation: fadeIn 0.2s ease-in 0.0s 1 normal forwards;
+	/* animation: name duration timing-function delay iteration-count direction fill-mode; */
+}
+
+@keyframes fadeIn {
+	0% {
+		color:rgba(0,0,0,0.6);
+	}
+	100% {
+		color: red;
+	}
+}
+
 .category-selector > span {
 	display: inline-flex;
 	font-size: 12px;
