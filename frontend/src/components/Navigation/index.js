@@ -83,7 +83,7 @@ return (
 				<SignupForm setShowSignUpModal={setShowSignUpModal}/>
 			</Modal>}
 			{showLogInModal && <Modal onClose={e => setShowLogInModal(false)}>
-				<LoginForm />
+				<LoginForm setShowLogInModal={setShowLogInModal}/>
 			</Modal>}
 		</>
 	)

@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../../store/session";
 import { useEffect } from 'react';
 
-const LoginForm = () => {
+const LoginForm = ({setShowLogInModal}) => {
 	useEffect(() => {
 		document.getElementById("credential-input").focus({focusVisible:true, preventScroll:false})
 	}, [])
@@ -29,6 +29,9 @@ const LoginForm = () => {
 		e.preventDefault();
 		const user = {credential, password}
 		dispatch(loginUser(user))
+			.then(() => {
+				setShowLogInModal(false)
+			})
 			.catch(async (res) => {
 				let data;
 				try {
@@ -46,6 +49,9 @@ const LoginForm = () => {
 		e.preventDefault();
 		const user = {email:'demo@user.io', password:'password'}
 		dispatch(loginUser(user))
+			.then(() => {
+				setShowLogInModal(false)
+			})
 			.catch(async (res) => {
 				let data;
 				try {

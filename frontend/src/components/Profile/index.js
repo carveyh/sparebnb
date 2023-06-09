@@ -8,9 +8,16 @@ import { fetchReservations } from "../../store/reservation";
 import { fetchListings, fetchUsersListings } from "../../store/listings";
 import { fetchUser } from "../../store/user";
 import { formatTwoDigitNumberString } from "../../utils/urlFormatter";
+import { destroyReservation, updateReservation } from "../../store/reservation";
 
 export const TripCard = ({reservation, listing}) => {
-	// debugger
+	const dispatch = useDispatch();
+	const [checkIn, setCheckIn] = useState(reservation.startDate)
+	const [checkOut, setCheckOut] = useState(reservation.endDate)
+	const [numGuests, setNumGuests] = useState(reservation.numGuests)
+
+	const [dayAfter, setDayAfter] = useState();
+	const [dayBefore, setDayBefore] = useState();
 
 	const monthNames = ["January", "February", "March", "April", "May", "June",
   	"July", "August", "September", "October", "November", "December"
@@ -20,6 +27,63 @@ export const TripCard = ({reservation, listing}) => {
 	const endDate = new Date(reservation?.endDate)
 	let startDateMonth;
 	if(startDate) startDateMonth = monthNames[startDate?.getMonth()]
+
+	const minDate = () => {
+		const month = String(new Date().getMonth() + 1)
+		const date = String(new Date().getDate())
+		return `${new Date().getFullYear()}-${month.length < 2 ? '0'.concat(month) : month}-${date.length < 2 ? '0' + date : date}`
+	}
+
+	const handleChangeCheckIn = e => {
+		setCheckIn(e.target.value);
+		setDayAfter(daysApartCalculator(e.target.value, 2));
+	}
+
+	const handleChangeCheckOut = e => {
+		setCheckOut(e.target.value);
+		setDayBefore(daysApartCalculator(e.target.value, -0));
+	}
+
+	const numGuestsSelector = () => {
+		const options = [];
+		for(let i = 1; i <= (listing ? listing.maxGuests : 0); i ++){
+			options.push(<option value={i}>{i}</option>)
+		}
+
+		return (
+			<div className="num-guests-container">
+				<select className="num-guests-selector" value={numGuests} onChange={e => setNumGuests(e.target.value)}>
+					{options}
+				</select>
+				<div className="num-guests-placeholder">GUESTS</div>
+			</div>
+		)
+	}
+
+	const daysApartCalculator = (oldDate, delta) => {
+		console.log(oldDate)
+		const tomorrow = new Date(oldDate)
+		console.log(tomorrow)
+		tomorrow.setDate(tomorrow.getDate() + delta)
+		console.log(tomorrow)
+		const month = String(tomorrow.getMonth() + 1)
+		const date = String(tomorrow.getDate())
+		console.log(`${tomorrow.getFullYear()}-${month.length < 2 ? '0'.concat(month) : month}-${date.length < 2 ? '0' + date : date}`)
+		return `${tomorrow.getFullYear()}-${month.length < 2 ? '0'.concat(month) : month}-${date.length < 2 ? '0' + date : date}`
+		
+	}
+
+	const handleUpdate = e => {
+		e.preventDefault();
+		const newReservation = {...reservation, startDate: checkIn, endDate: checkOut, numGuests: parseInt(numGuests)};
+		// debugger
+		dispatch(updateReservation(newReservation));
+	}
+
+	const handleDelete = e => {
+		e.preventDefault();
+		dispatch(destroyReservation(e.target.id))
+	}
 
 	// if(!reservation || !listing) return null;
 	return (
@@ -54,19 +118,34 @@ export const TripCard = ({reservation, listing}) => {
 								<div className="update-form-inner-container">
 									<div className="update-field ">
 										Check in date:
-										<input type="date"/>
+										{/* <input type="date" value={checkIn} onChange={e => setCheckIn(e.target.value)}/> */}
+										<input className="checkin-input" 
+											type="date"
+											value={checkIn}
+											min={minDate()}
+											max={checkOut ? dayBefore : null}
+											onChange={handleChangeCheckIn}
+											required
+										/>
 									</div>
 									<div className="update-field ">
 										Check out date:
-										<input type="date"/>
+										{/* <input type="date" value={checkOut} onChange={e => setCheckOut(e.target.value)}/> */}
+										<input className="checkout-input" 
+											type="date"
+											value={checkOut}
+											min={checkIn ? dayAfter : null}
+											onChange={handleChangeCheckOut}
+											required
+										/>
 									</div>
 									<div className="update-field ">
 										Number of guests:
-										<input type="text"/>
+										{numGuestsSelector()}
 									</div>
 									<div className="update-field ">
-										<input type="button" value="Update reservation"/>
-										<input type="button" value="Delete reservation"/>
+										<input type="button" onClick={handleUpdate} value="Update reservation"/>
+										<input type="button" id={reservation?.id} onClick={handleDelete} value="Delete reservation"/>
 									</div>
 
 									

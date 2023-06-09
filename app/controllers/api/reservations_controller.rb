@@ -1,5 +1,5 @@
 class Api::ReservationsController < ApplicationController
-  wrap_parameters include: Reservation.attribute_names + %w(startDate, endDate, numGuests, listingId, reserverId, baseNightlyRate)
+  # wrap_parameters include: Reservation.attribute_names + %w(startDate, endDate, numGuests, listingId, reserverId, baseNightlyRate)
   wrap_parameters include: Reservation.attribute_names + ['startDate', 'endDate', 'numGuests', 'listingId', 'reserverId', 'baseNightlyRate']
   # wrap_parameters include: Reservation.attribute_names
   # CHECK WRAP PARAMS - when creating/updating reservation!
@@ -38,6 +38,7 @@ class Api::ReservationsController < ApplicationController
   end
 
   def update
+    # debugger
     @reservation = Reservation.find_by(id: params[:id])
     if @reservation && @reservation.update(reservation_params)
       render :show
