@@ -1,6 +1,7 @@
 import ListingsIndex from "./ListingsIndex";
 
 import "./ListingsCarousel.css";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -118,6 +119,7 @@ const ListingsFilterCarousel = () => {
 const ListingsMain = () => {
 	// const sessionUser = useSelector(state => state.session?.user )
 	const dispatch = useDispatch();
+	const [filter, setFilter] = useState(null);
 	useEffect(() => {
 		dispatch(fetchListings())
 	}, [])
@@ -126,7 +128,7 @@ const ListingsMain = () => {
 	return (
 		<>
 			<ListingsFilterCarousel/>
-			<ListingsIndex />
+			<ListingsIndex filter={filter} />
 
 			{/* <Switch>
 				<Route exact path={`/${listingId}`}>

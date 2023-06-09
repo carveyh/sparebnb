@@ -41,14 +41,17 @@ const ListingCard = ({listing, num}) => {
 	)
 }
 
-const ListingsIndex = (props) => {
+const ListingsIndex = ({filter}) => {
 	const dispatch = useDispatch();
 	const listings = useSelector(state => state.entities?.listings ? state.entities.listings : {})
-	// const listings = useSelector(state => state.listings ? state.listings : {})
+	// debugger
+
+
+	// const sortedListings = 
 	useEffect(() => {
 		dispatch(fetchListings())
 	}, [])
-	const numTestListings = 10;
+	const numTestListings = 13;
 	const listingCards = [];
 
 	if(Object.keys(listings).length !== 0){

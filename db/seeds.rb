@@ -110,7 +110,7 @@ ApplicationRecord.transaction do
 	)
 
 	# Randomized seed data
-	10.times do
+	12.times do
 		User.create!({
 			email: Faker::Internet.unique.email,
 			first_name: Faker::Name.first_name,
@@ -128,7 +128,7 @@ ApplicationRecord.transaction do
 		desc += Faker::Movies::HarryPotter.quote + ' '
 	end
 
-	10.times do
+	13.times do
 		Listing.create!({
 			title: 
 				Faker::Adjective.positive.capitalize() + ' ' + Faker::Adjective.positive.capitalize() + ' ' + (%w(Apartment House Dwelling Mansion Getaway Resort Tent ) + ['Parking Lot', 'Suspicious Back Alley', 'Port-a-Potty', 'Coding Bootcamp', 'Cardboard Box', "Wendy\'s Dumpster"]).sample + (((0..1).to_a.sample % 2 == 0) ? (' ' + 'Inspired by' + ' ' + Faker::Movie.title) : ""),
@@ -146,7 +146,7 @@ ApplicationRecord.transaction do
 			description: Faker::Movies::HarryPotter.quote + ' ' + Faker::Movies::HarryPotter.quote + ' ' + Faker::Movies::HarryPotter.quote + ' ' + Faker::Movies::HarryPotter.quote + ' ',
 			base_nightly_rate: (59..2999).to_a.sample,
 			category: %w(amazing-pools rooms beachfront).sample
-			category: %w(amazing-pools rooms beachfront treehouses adapted mountains trending mansions majestic arctic woods govt-secret private-escapes home-theater studios gaming-dens fitness creme-de-la-creme green rustic urban tornado camps 420-friendly).sample
+			# category: %w(amazing-pools rooms beachfront treehouses adapted mountains trending mansions majestic arctic woods govt-secret private-escapes home-theater studios gaming-dens fitness creme-de-la-creme green rustic urban tornado camps 420-friendly).sample
 
 		})
 	end
@@ -160,7 +160,7 @@ ApplicationRecord.transaction do
 			reserver_id: 1,
 			listing_id: i + 1,
 			start_date: Faker::Date.forward(days: rand(1..7)),
-			end_date: Faker::Date.forward(days: rand(1..7) + 8),
+			end_date: Faker::Date.forward(days: rand(1..7) + 10),
 			num_guests: 1,
 			base_nightly_rate: 399
 		})
