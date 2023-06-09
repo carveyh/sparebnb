@@ -10,20 +10,20 @@ import { Route, Switch } from "react-router-dom";
 import ListingsShowPage from "./ListingsShowPage";
 import Testing from "../Testing";
 
-const ListingsFilterCarousel = () => {
+const ListingsFilterCarousel = ({setFilter}) => {
 	
 	return (
 		<div className="carousel-container">
 			<div className="carousel-main">
-				<div className="category-selector">
+				<div className="category-selector" onClick={e => setFilter("amazing-pools")}>
 					<i className="fa-solid fa-water-ladder"></i>
 					<span>Amazing pools</span>
 				</div>
-				<div className="category-selector">
+				<div className="category-selector" onClick={e => setFilter("rooms")}>
 					<i className="fa-solid fa-bed"></i>
 					<span>Rooms</span>
 				</div>
-				<div className="category-selector">
+				<div className="category-selector" onClick={e => setFilter("beachfront")}>
 					<i className="fa-solid fa-umbrella-beach"></i>
 					<span>Beachfront</span>
 				</div>
@@ -127,7 +127,7 @@ const ListingsMain = () => {
 	const listings = useSelector(state => state.entities?.listings)
 	return (
 		<>
-			<ListingsFilterCarousel/>
+			<ListingsFilterCarousel setFilter={setFilter}/>
 			<ListingsIndex filter={filter} />
 
 			{/* <Switch>

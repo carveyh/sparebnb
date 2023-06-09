@@ -45,7 +45,12 @@ const ListingsIndex = ({filter}) => {
 	const dispatch = useDispatch();
 	const listings = useSelector(state => state.entities?.listings ? state.entities.listings : {})
 	// debugger
-
+	let filteredListings;
+	if(filter) {
+		filteredListings = Object.values(listings).filter(listing => listing.category === filter)
+	} else {
+		filteredListings = Object.values(listings)
+	}
 
 	// const sortedListings = 
 	useEffect(() => {
@@ -54,11 +59,19 @@ const ListingsIndex = ({filter}) => {
 	const numTestListings = 13;
 	const listingCards = [];
 
-	if(Object.keys(listings).length !== 0){
-		for(let i = 1; i <= numTestListings; i++) {
-			listingCards.push(
-				<ListingCard listing={listings[`${i}`]} num={i} />
-			)
+	if(filteredListings.length !== 0){
+		if(!filter){
+			for(let i = 1; i <= numTestListings; i++) {
+				listingCards.push(
+					<ListingCard listing={filteredListings[i % filteredListings.length]} num={i} />
+				)
+			}
+		} else {
+			for(let i = 1; i <= filteredListings.length; i++) {
+				listingCards.push(
+					<ListingCard listing={filteredListings[i % filteredListings.length]} num={i} />
+				)
+			}
 		}
 	}
 	
@@ -66,12 +79,17 @@ const ListingsIndex = ({filter}) => {
 		<>
 		<div className="grid-container-container">
 			<div className="grid-container">
-				{listingCards}
-				{listingCards}
-				{listingCards}
-				{listingCards}
-				{listingCards}
-				{listingCards}
+				{filter && listingCards}
+				{!filter &&
+					<>
+						{listingCards}
+						{listingCards}
+						{listingCards}
+						{listingCards}
+						{listingCards}
+						{listingCards}
+					</>
+				}
 			</div>
 		</div>
 		</>

@@ -312,11 +312,13 @@ ul.nav-bar-links {
 
 .profile-drop-menu li:hover {
 	background-color: rgb(247,247,247);
+	cursor: pointer;
 }
 
 .menu-divider-li:hover {
 	/* Yes this is a bit cheaty... */
 	background-color: white !important;
+	cursor:unset !important;
 }
 
 .profile-drop-menu li:nth-child(1) {
