@@ -67,7 +67,70 @@
 	padding: 24px;
 	width: 100%;
 	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
 }
+
+.trip-text-title-main {
+	height: 100%;
+	flex-grow: 1;
+	margin-bottom: 24px;
+}
+
+.trip-text-title-actual {
+	/*  */
+}
+
+.trip-text-title-host {
+	margin-top: 6px;
+	font-size: 14px;
+	font-weight: 300;
+}
+
+.trip-text-details-main {
+	height: 100%;
+	padding-top: 16px;
+	padding-bottom: 1px;
+	border-top: 1px solid rgb(221,221,221);
+	flex-grow: 1;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.trip-text-details-date-info {
+	margin-right: 24px;
+	display: flex;
+	flex-direction: column;
+}
+
+.trip-text-details-address-info {
+	padding-left: 24px;
+	border-left: 1px solid rgb(221,221,221);
+	display: flex;
+	flex-direction: column;
+}
+
+.trip-text-details-date-info > *, .trip-text-details-address-info > * {
+	font-size: 18px;
+	font-weight: 300;
+	width: 100%;
+}
+
+.trip-text-details-date-info > *:last-child, .trip-text-details-address-info > *:last-child {
+	font-size: 14px;
+	font-weight: 300;
+}
+
+
+
+
+
+/* PHOTO SIDE */
+/* PHOTO SIDE */
+/* PHOTO SIDE */
+
 
 .trip-photo-main {
 	border-top-right-radius: 12px;
@@ -98,4 +161,8 @@
 	gap: 8px;
 	display: flex;
 	flex-direction: row;
+}
+
+.footer-links {
+	text-decoration: underline;
 }

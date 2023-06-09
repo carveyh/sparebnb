@@ -1,16 +1,43 @@
 import "./ProfilePage.css";
+import { Link } from "react-router-dom";
 
 export const TripCard = (props) => {
 	return (
 		<>
 			<div className="trip-card">
+
+				{/* LEFT SIDE */}
 				<div className="trip-text-main">
-					Hi
+					<div className="trip-text-title-main">
+						<div className="trip-text-title-actual heading-1">
+							Newtown
+						</div>
+						<div className="trip-text-title-host stats-text-small">
+							Entire cabin hosted by Moss Mountain Team
+						</div>
+					</div>
+					<div className="trip-text-details-main">
+						<div className="trip-text-details-date-info">
+							<div>Jul</div>
+							<div>21 - 23</div>
+							<div>2023</div>
+						</div>
+						<div className="trip-text-details-address-info">
+							<div>201 Huntington Road Newtown</div>
+							<div>Newtown, Connecticut</div>
+							<div>United States</div>
+						</div>
+					</div>
 				</div>
+				{/* LEFT SIDE */}
+
+				{/* RIGHT SIDE */}
 				<div className="trip-photo-main">
-				{/* <img className="" src={require(`../../images/listings/${listingId}/${imageNum}.png`)} /> */}
-				<img className="trip-photo-img" src={require(`../../images/listings/01/01.png`)} />
+					{/* <img className="" src={require(`../../images/listings/${listingId}/${imageNum}.png`)} /> */}
+					<img className="trip-photo-img" src={require(`../../images/listings/01/01.png`)} />
 				</div>
+				{/* RIGHT SIDE */}
+
 			</div>
 		</>
 	)
@@ -77,8 +104,8 @@ const ProfilePage = (props) => {
 					<div className="footer-container">
 						<div className="footer-text">
 							<div>Can't find your reservation here?</div> 
-							<div className="footer-links">Github</div> 
-							<div className="footer-links">LinkedIn</div> 
+							<div className="footer-links"><a href="https://github.com/carveyh">Github</a></div> 
+							<div className="footer-links"><a href="https://www.linkedin.com/in/carvey-hor/">LinkedIn</a></div> 
 						</div>
 					</div>
 					{/* FOOTER */}

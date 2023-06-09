@@ -58,7 +58,8 @@ return (
 					<div className="upper-navbar-right-div">
 						<nav className="upper-navbar-right"> 
 							<div className="host-lang-buttons">
-								<NavLink className="host-home-link" to="/">Sparebnb your home</NavLink>
+								{/* <NavLink className="host-home-link" to="/">Sparebnb your home</NavLink> */}
+								<a className="host-home-link" href="https://www.linkedin.com/in/carvey-hor/">LinkedIn</a>
 								<div className="lang-button-div">
 									<button className="lang-button" >
 										<i className="fa-brands fa-github"></i>
