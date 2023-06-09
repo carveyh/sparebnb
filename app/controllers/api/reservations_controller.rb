@@ -1,5 +1,7 @@
 class Api::ReservationsController < ApplicationController
-  wrap_parameters include: Reservation.attribute_names
+  wrap_parameters include: Reservation.attribute_names + %w(startDate, endDate, numGuests, listingId, reserverId, baseNightlyRate)
+  wrap_parameters include: Reservation.attribute_names + ['startDate', 'endDate', 'numGuests', 'listingId', 'reserverId', 'baseNightlyRate']
+  # wrap_parameters include: Reservation.attribute_names
   # CHECK WRAP PARAMS - when creating/updating reservation!
 
   def index
@@ -21,11 +23,14 @@ class Api::ReservationsController < ApplicationController
   end
 
   def create
+    # debugger
     @reservation = Reservation.new(reservation_params)
+    
     @reservation.reserver_id = current_user.id
     if(@reservation.save)
       render :show 
     else
+      # debugger
       render json: { errors: @reservation.errors.messages }, status: :unprocessable_entity
     end
   end
@@ -45,10 +50,10 @@ class Api::ReservationsController < ApplicationController
     render :show
   end
 
-  private 
+  # private 
 
   def reservation_params
-    params.require(:reservation).permit(:start_date, :end_date, :num_guests, :base_nightly_rate)
+    params.require(:reservation).permit(:start_date, :end_date, :num_guests, :base_nightly_rate, :listing_id, :reserver_id)
   end
 
 end

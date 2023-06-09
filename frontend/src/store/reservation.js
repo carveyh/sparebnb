@@ -69,8 +69,26 @@ export const updateReservation = (reservation) => async dispatch => {
 }
 
 export const createReservation = (reservation) => async dispatch => {
-	const res = await csrfFetch(`/api/reservations/${reservation.id}`, {
-		method: 'PATCH'
+	debugger
+	const {
+		checkIn, 
+		checkOut, 
+		numGuests,
+		listingId,
+		reserverId,
+		baseNightlyRate
+	} = reservation;
+	debugger
+	const res = await csrfFetch(`/api/listings/${listingId}/reservations`, {
+		method: 'POST',
+		body: JSON.stringify({
+			startDate: checkIn, 
+			endDate: checkOut, 
+			numGuests,
+			listingId,
+			reserverId,
+			baseNightlyRate
+		})
 	})
 	if(res.ok){
 		const data = await res.json();

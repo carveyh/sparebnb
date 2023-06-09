@@ -27,6 +27,7 @@ export const ListingsShowPhoto = ({listingId, imageNum}) => {
 const ListingsShowPage = (props) => {
 	const dispatch = useDispatch();
 	const { listingId } = useParams()
+	const sessionUser = useSelector(state => state.session?.user)
 	const listing = useSelector(state => state.entities?.listings ? state.entities.listings[`${listingId}`] : {})
 	const host = useSelector(state => state.entities?.users ? state.entities.users[`${listing?.hostId}`] : {})
 	const hostIdFormatted = formatTwoDigitNumberString(host?.id);	
@@ -38,19 +39,28 @@ const ListingsShowPage = (props) => {
 
 	const [checkIn, setCheckIn] = useState();
 	const [checkOut, setCheckOut] = useState();
-	const [numGuests, setNumGuests] = useState();
+	const [numGuests, setNumGuests] = useState(1);
 	const [dayAfter, setDayAfter] = useState();
+	const [dayBefore, setDayBefore] = useState();
+	const [errors, setErrors] = useState([]);
 
 	const handleChangeCheckIn = e => {
 		setCheckIn(e.target.value);
-		setDayAfter(dayAfterCalculator(e.target.value));
+		setDayAfter(daysApartCalculator(e.target.value, 2));
 	}
 
-	const dayAfterCalculator = (oldDate) => {
+	const handleChangeCheckOut = e => {
+		setCheckOut(e.target.value);
+		setDayBefore(daysApartCalculator(e.target.value, -0));
+	}
+
+
+
+	const daysApartCalculator = (oldDate, delta) => {
 		console.log(oldDate)
 		const tomorrow = new Date(oldDate)
 		console.log(tomorrow)
-		tomorrow.setDate(tomorrow.getDate() + 2)
+		tomorrow.setDate(tomorrow.getDate() + delta)
 		console.log(tomorrow)
 		const month = String(tomorrow.getMonth() + 1)
 		const date = String(tomorrow.getDate())
@@ -67,7 +77,29 @@ const ListingsShowPage = (props) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// LOGIC TO ATTEMPT TO CREATE A RES
+		if(!sessionUser) {
+			console.log("Must be logged in to register")
+			return
+		} else {
+			const reservation = { checkIn, checkOut, numGuests, listingId,
+				reserverId: sessionUser.id,
+				baseNightlyRate: listing.baseNightlyRate
+			};
+			dispatch(createReservation(reservation))
+				.catch(async (res) => {
+				let data;
+				try {
+					data = await res.clone().json();
+				} catch {
+					data = await res.text()
+				}
+				if(data?.errors) setErrors(data.errors)
+				else if(data) setErrors([data])
+				else setErrors([res.statusText]);
+				console.log(errors);
+				debugger
+			})
+		}
 	}
 
 	const numGuestsSelector = () => {
@@ -77,7 +109,7 @@ const ListingsShowPage = (props) => {
 		}
 
 		return (
-			<select>
+			<select value={numGuests} onChange={e => setNumGuests(e.target.value)}>
 				{options}
 			</select>
 		)
@@ -276,6 +308,7 @@ const ListingsShowPage = (props) => {
 													type="date"
 													value={checkIn}
 													min={minDate()}
+													max={checkOut ? dayBefore : null}
 													onChange={handleChangeCheckIn}
 													required
 												/>
@@ -287,7 +320,7 @@ const ListingsShowPage = (props) => {
 													type="date"
 													value={checkOut}
 													min={checkIn ? dayAfter : null}
-													onChange={e => setCheckOut(e.target.value)}
+													onChange={handleChangeCheckOut}
 													required
 												/>
 												<div className="checkout-placeholder">CHECK-OUT</div>
@@ -316,12 +349,16 @@ const ListingsShowPage = (props) => {
 
 										</div>
 										<br/>
-										<button type="submit" className="reserve-button plain-text">Reserve</button>
+										<button type="submit" 
+											className={sessionUser ? `reserve-button plain-text` : `disabled-reserve-button plain-text`}
+										>
+											Reserve
+										</button>
 									</form>
 									{/* FORM - END */}
 									{/* FORM - END */}
 									<div className="plain-text report-button-container wont-charged">You won't be charged yet</div>
-									<div>${listing.baseNightlyRate} &nbsp; x &nbsp; # nights - ${listing.baseNightlyRate}</div>
+									<div>${listing.baseNightlyRate} x # nights - ${listing.baseNightlyRate}</div>
 									<div className="plain-text form-padding-top">Cleaning fee - $350</div>
 									<div className="plain-text form-padding-top form-padding-bottom ">Sparebnb service fee - #350</div>
 									<div className="plain-text horizontal-rule-top-border"></div>

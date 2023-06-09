@@ -471,6 +471,15 @@
 	padding: 14px 24px;
 	border-radius: 8px;
 	border: none;
+	cursor: pointer;
+}
+
+.disabled-reserve-button {
+	background-color: rgb(221, 221, 221);
+	color: gray;
+	padding: 14px 24px;
+	border-radius: 8px;
+	border: none;
 }
 
 .reservation-form {
