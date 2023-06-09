@@ -109,7 +109,7 @@ const ListingsShowPage = (props) => {
 		}
 
 		return (
-			<select value={numGuests} onChange={e => setNumGuests(e.target.value)}>
+			<select className="num-guests-selector" value={numGuests} onChange={e => setNumGuests(e.target.value)}>
 				{options}
 			</select>
 		)
@@ -303,50 +303,30 @@ const ListingsShowPage = (props) => {
 									{/* FORM - START */}
 									<form className="reservation-form" onSubmit={handleSubmit}>
 										<div className="form-inputs">
-											<div className="checkin-button">
-												<input className="checkin-input" 
-													type="date"
-													value={checkIn}
-													min={minDate()}
-													max={checkOut ? dayBefore : null}
-													onChange={handleChangeCheckIn}
-													required
-												/>
-												<div className="checkin-placeholder">CHECK-IN</div>
+											<div className="date-inputs">
+												<div className="checkin-button">
+													<input className="checkin-input" 
+														type="date"
+														value={checkIn}
+														min={minDate()}
+														max={checkOut ? dayBefore : null}
+														onChange={handleChangeCheckIn}
+														required
+													/>
+													<div className="checkin-placeholder">CHECK-IN</div>
+												</div>
+												<div className="checkout-button">
+													<input className="checkout-input" 
+														type="date"
+														value={checkOut}
+														min={checkIn ? dayAfter : null}
+														onChange={handleChangeCheckOut}
+														required
+													/>
+													<div className="checkout-placeholder">CHECK-OUT</div>
+												</div>
 											</div>
-
-											<div className="checkout-button">
-												<input className="checkout-input" 
-													type="date"
-													value={checkOut}
-													min={checkIn ? dayAfter : null}
-													onChange={handleChangeCheckOut}
-													required
-												/>
-												<div className="checkout-placeholder">CHECK-OUT</div>
-											</div>
-
-
-
-
-
-
-											{/* <input className="num-guests-input" 
-												placeholder="Number of guests"
-												type="text" 
-												value={numGuests}
-												onChange={e => setNumGuests(e.target.value)}
-												required
-											/> */}
-
 											{numGuestsSelector()}
-
-
-
-
-
-
-
 										</div>
 										<br/>
 										<button type="submit" 
