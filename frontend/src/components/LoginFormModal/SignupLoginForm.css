@@ -13,6 +13,12 @@ div.login-form, div.signup-form {
 	overscroll-behavior-x: contain;
 }
 
+.login-form{
+	padding: 24px;
+	height: auto;
+	/* background-color: rgba(255,255,255,0.0); */
+}
+
 div.signup-form {
 	align-self: center;
 	align-self: stretch;
