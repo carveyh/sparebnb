@@ -11,6 +11,8 @@ import { formatTwoDigitNumberString } from "../../utils/urlFormatter";
 import { useState } from "react";
 import { createReservation } from "../../store/reservation";
 
+import {AnimatePresence, motion} from "framer-motion";
+
 export const ListingsShowPhoto = ({listingId, imageNum}) => {
 	listingId = formatTwoDigitNumberString(listingId);
 	imageNum = formatTwoDigitNumberString(imageNum);
@@ -152,7 +154,9 @@ const ListingsShowPage = (props) => {
 	// debugger
 
 	return (
-		<div className="show-page-outer-container">
+		// <AnimatePresence>
+		// <motion.div className="show-page-outer-container" initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
+		<div className="show-page-outer-container" initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
 			<div className="show-page-dynamic-inner-container">
 
 				{/* HEADER - START */}
@@ -424,6 +428,8 @@ const ListingsShowPage = (props) => {
 				</div>
 			</div>
 		</div>
+		// </motion.div>
+		// </AnimatePresence>
 	)
 }
 
