@@ -8,6 +8,8 @@ import { useHistory } from "react-router-dom";
 import { formatTwoDigitNumberString } from "../../utils/urlFormatter";
 import { Link } from "react-router-dom";
 
+import {AnimatePresence, motion} from "framer-motion";
+
 // export const photoFileNames = "architectural-wonder beach-niantic dining-jersey fossatun-iceland hilltop-haven mirror-glass-cabin mountain-retreat sample-pool-listing tower-def-treehouse unique-treehouse".split(" ");
 
 const ListingCard = ({listing, num}) => {
@@ -22,6 +24,7 @@ const ListingCard = ({listing, num}) => {
 
 
 	return (
+		<motion.div key={num} animate={{opacity:1}} exit={{opacity: 0}}>
 		<Link to={`/listings/${listing?.id}`}>
 			<div className={`grid-item grid-item-${num}`} >
 						<div className="listing-favorite-button-background"><i class="fa-solid fa-heart"></i></div>
@@ -38,6 +41,7 @@ const ListingCard = ({listing, num}) => {
 						</div>
 			</div>
 		</Link>
+		</motion.div>
 	)
 }
 
@@ -76,9 +80,11 @@ const ListingsIndex = ({filter}) => {
 	}
 	
 	return (
-		<>
-		<div className="grid-container-container">
+		// <>
+		<AnimatePresence>
+		<motion.div className="grid-container-container" key="grid" initial={{opacity:0}} animate={{opacity: 1, transition:{duration: 0.3, ease:'easeIn'} }} exit={{opacity: 0, backgroundColor:"blue", transition:{duration: 0.1, ease:'easeIn'} }}>
 			<div className="grid-container">
+				<AnimatePresence mode="wait">
 				{filter && listingCards}
 				{!filter &&
 					<>
@@ -90,9 +96,11 @@ const ListingsIndex = ({filter}) => {
 						{listingCards}
 					</>
 				}
+				</AnimatePresence>
 			</div>
-		</div>
-		</>
+		</motion.div>
+		</AnimatePresence>
+		// </>
 	)
 }
 
