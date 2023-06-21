@@ -5,7 +5,6 @@ class Api::ReservationsController < ApplicationController
   # CHECK WRAP PARAMS - when creating/updating reservation!
 
   def index
-    debugger
     if params.has_key?(:listing_id)
       @reservations = Reservation.where(listing_id: params[:listing_id])
     elsif params.has_key?(:user_id)
@@ -17,7 +16,6 @@ class Api::ReservationsController < ApplicationController
   end
 
   def show
-    debugger
     @reservation = Reservation.find_by(id: params[:id])
     if @reservation
       render :show
@@ -27,20 +25,17 @@ class Api::ReservationsController < ApplicationController
   end
 
   def create
-    # debugger
     @reservation = Reservation.new(reservation_params)
     
     @reservation.reserver_id = current_user.id
     if(@reservation.save)
       render :show 
     else
-      # debugger
       render json: { errors: @reservation.errors.messages }, status: :unprocessable_entity
     end
   end
 
   def update
-    # debugger
     @reservation = Reservation.find_by(id: params[:id])
     if @reservation && @reservation.update(reservation_params)
       render :show

@@ -1,5 +1,6 @@
 import "./ProfilePage.css";
 import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -229,10 +230,10 @@ const ProfilePage = (props) => {
 
 
 
+	debugger
 
-
-	// if(!sessionUser || sessionUser?.id !== userId) return null;
-	if(!reservations || !listings) return null;	
+	// if(!reservations || !listings) return null;	
+	if(!reservations || !listings || !sessionUser) return <Redirect to="/" />;	
 
 	return (
 		<>

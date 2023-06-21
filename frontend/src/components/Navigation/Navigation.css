@@ -225,6 +225,10 @@ div.search-people-unopened-magnifying {
 	background-color: white;
 }
 
+.session-menu-button:hover {
+	cursor: pointer;
+}
+
 .session-menu-button > i:nth-child(1) {
 	font-size: 14px;
 }

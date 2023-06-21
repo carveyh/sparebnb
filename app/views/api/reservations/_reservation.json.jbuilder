@@ -1,4 +1,3 @@
-debugger
 json.extract! reservation, 
 	:id,
 	:reserver_id,

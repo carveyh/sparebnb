@@ -16,11 +16,8 @@ json.listings do
 end
 
 json.hosts do
-	# debugger
 	@reservations.each do |reservation|
-		# debugger
 		json.set! reservation.host.id do
-			# debugger
 			json.extract! reservation.host,
 				:first_name
 		end
