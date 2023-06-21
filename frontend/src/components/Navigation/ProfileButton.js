@@ -51,7 +51,7 @@ const ProfileButton = ({setShowSignUpModal, setShowLogInModal}) => {
 				<li onClick={e => setShowSignUpModal(true)}>Sign up</li>
 				<li onClick={e => setShowLogInModal(true)}>Log in</li>
 				<li className="menu-divider-li"><MenuDivider /></li>
-				<li><a href="https://www.linkedin.com/in/carvey-hor/">LinkedIn</a></li>
+				<a target="_blank" href="https://www.linkedin.com/in/carvey-hor/"><li>LinkedIn</li></a>
 				<li>Help</li>
 			</>
 		)
@@ -63,12 +63,12 @@ const ProfileButton = ({setShowSignUpModal, setShowLogInModal}) => {
 				<li>2023 Summer Release NEW</li>
 				<li className="menu-divider-li"><MenuDivider /></li>
 				<li>Messages</li>
-				<li><Link to={`/users/${sessionUser.id}`}>Trips</Link></li>
+				<Link to={`/users/${sessionUser.id}`}><li>Trips</li></Link>
 				<li>Wishlists</li>
 			</div>
 			<li className="menu-divider-li"><MenuDivider /></li>
 				{/* <li>Sparebnb your home</li> */}
-				<li><a href="https://www.linkedin.com/in/carvey-hor/">LinkedIn</a></li>
+				<a target="_blank" href="https://www.linkedin.com/in/carvey-hor/"><li>LinkedIn</li></a>
 				<li>Account</li>
 				<li className="menu-divider-li"><MenuDivider /></li>
 				<li>Help</li>

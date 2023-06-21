@@ -77,7 +77,16 @@ export const TripCard = ({reservation, listing}) => {
 		e.preventDefault();
 		const newReservation = {...reservation, startDate: checkIn, endDate: checkOut, numGuests: parseInt(numGuests)};
 		// debugger
-		dispatch(updateReservation(newReservation));
+
+		// NEED TO TRY - CATCH
+		try {
+			dispatch(updateReservation(newReservation));
+		} catch(err) {
+			// can update err via state variable, or dispatch(receiveErrors), component can useSelector on errors.
+			// dispatch(receieveUpdateReservationError)
+			// so errorrs slice of state can point to key of errors: {updatedRservationError : {[backendmessage, numgeustserorr, endateerror]},  }
+			// OR!!! could justhave a local useState for component.
+		}
 	}
 
 	const handleDelete = e => {
@@ -269,8 +278,8 @@ const ProfilePage = (props) => {
 					<div className="footer-container">
 						<div className="footer-text">
 							<div>Can't find your reservation here?</div> 
-							<div className="footer-links"><a href="https://github.com/carveyh">Github</a></div> 
-							<div className="footer-links"><a href="https://www.linkedin.com/in/carvey-hor/">LinkedIn</a></div> 
+							<div className="footer-links"><a target="_blank" href="https://github.com/carveyh">Github</a></div> 
+							<div className="footer-links"><a target="_blank" href="https://www.linkedin.com/in/carvey-hor/">LinkedIn</a></div> 
 						</div>
 					</div>
 					{/* FOOTER */}
