@@ -34,7 +34,7 @@ export const fetchReservations = ({id, type}) => async dispatch => {
 	if(id && type === "listing"){
 		const listingId = id;
 		requestUrl = `/api/listings/${listingId}/reservations`;
-	} else if(id && type === "user") {
+	} else if (id && type === "user") {
 		// debugger
 		const userId = id;
 		requestUrl = `/api/users/${userId}/reservations`;
@@ -87,8 +87,8 @@ export const destroyReservation = (reservationId) => async dispatch => {
 export const updateReservation = (reservation) => async dispatch => {
 	// debugger
 	const {
-		checkIn, 
-		checkOut, 
+		startDate, 
+		endDate, 
 		numGuests,
 		listingId,
 		reserverId,
@@ -98,8 +98,8 @@ export const updateReservation = (reservation) => async dispatch => {
 	const res = await csrfFetch(`/api/reservations/${reservation.id}`, {
 		method: 'PATCH',
 		body: JSON.stringify({
-			startDate: checkIn, 
-			endDate: checkOut, 
+			startDate, 
+			endDate, 
 			numGuests,
 			listingId,
 			reserverId,
@@ -111,8 +111,11 @@ export const updateReservation = (reservation) => async dispatch => {
 		const data = await res.json();
 		// debugger
 		dispatch(receiveReservation(data.reservation));
+	} else {
+		// error handling here!
+		
 	}
-	return res;
+	return res; //return res either way
 }
 
 export const createReservation = (reservation) => async dispatch => {
@@ -151,6 +154,7 @@ const reservationsReducer = (state = {}, action) => {
 	switch (action.type) {
 		case RECEIVE_RESERVATIONS:
 			return {...state, ...action.reservations};
+			// return {...action.reservations};
 		case RECEIVE_RESERVATION:
 			return {...state, [action.reservation.id]: action.reservation};
 		case REMOVE_RESERVATION:

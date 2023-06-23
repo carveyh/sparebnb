@@ -190,9 +190,7 @@ div.search-people-unopened-magnifying {
 
 .lang-button-div {
 	height: 42px;
-	/* width: 40px; */
 	padding: 0px;
-
 	box-sizing: border-box;
 }
 
@@ -204,6 +202,7 @@ div.search-people-unopened-magnifying {
 	border: 0px;
 	padding: 12px;
 	background-color: rgba(0,0,0,0);
+	cursor: pointer;
 }
 
 .lang-button > i {
@@ -224,6 +223,10 @@ div.search-people-unopened-magnifying {
 	border-radius: 21px;
 	border: 1px solid rgb(221,221,221);
 	background-color: white;
+}
+
+.session-menu-button:hover {
+	cursor: pointer;
 }
 
 .session-menu-button > i:nth-child(1) {
@@ -315,19 +318,22 @@ ul.nav-bar-links {
 	cursor: pointer;
 }
 
-.menu-divider-li:hover {
-	/* Yes this is a bit cheaty... */
-	background-color: white !important;
-	cursor:unset !important;
-}
-
-.profile-drop-menu li:nth-child(1) {
+.profile-drop-menu > ul > li:nth-child(1) {
 	font-weight: 500;
 }
 
-.profile-drop-menu-bold-item {
+.profile-drop-menu-bold-item li {
 	/* Not overriding... */
 	font-weight: 500;
+}
+
+.profile-drop-menu li.menu-divider-li {
+	padding: 0px 0px;
+}
+
+.profile-drop-menu li.menu-divider-li:hover {
+	background-color: white;
+	cursor:unset;
 }
 
 .menu-divider {

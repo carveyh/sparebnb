@@ -26,16 +26,27 @@ const ProfileButton = ({setShowSignUpModal, setShowLogInModal}) => {
 		setShowMenu(oldShowMenu => !oldShowMenu);
 	}
 
-	useEffect(() => {
-		if(showMenu){
-			const closeMenu = () => {
-				setShowMenu(false)
-			}	
-			document.addEventListener("click", closeMenu)
-			return () => document.removeEventListener("click", closeMenu)
-		}
-	}, [showMenu])
+	const closeMenu = () => {
+		setShowMenu(false)
+	}	
 
+	const handleCloseDropDown = (e) => {
+		// debugger
+		const dropDownMenu = document.querySelector(".profile-drop-menu")
+		const dropDownMenuLinks = dropDownMenu?.querySelectorAll("a");
+		// debugger
+		const profileButton = document.querySelector(".session-menu-button")
+		// debugger
+		// if(!dropDownMenu?.contains(e.target) && !profileButton?.contains(e.target)) closeMenu()
+		if(!profileButton?.contains(e.target)) closeMenu()
+		// if((!profileButton?.contains(e.target) && !profileButton?.contains(e.target)) || Array.from(dropDownMenuLinks)?.some(el => el.contains(e.target))) closeMenu()
+		// closeMenu()
+	}
+
+	useEffect(() => {
+		document.addEventListener("click", handleCloseDropDown)
+		// return document.removeEventListener("click", handleCloseDropDown)
+	}, [])
 
 	const MenuDivider = () => {
 		return (
@@ -51,7 +62,7 @@ const ProfileButton = ({setShowSignUpModal, setShowLogInModal}) => {
 				<li onClick={e => setShowSignUpModal(true)}>Sign up</li>
 				<li onClick={e => setShowLogInModal(true)}>Log in</li>
 				<li className="menu-divider-li"><MenuDivider /></li>
-				<li><a href="https://www.linkedin.com/in/carvey-hor/">LinkedIn</a></li>
+				<a target="_blank" href="https://www.linkedin.com/in/carvey-hor/"><li>LinkedIn</li></a>
 				<li>Help</li>
 			</>
 		)
@@ -63,12 +74,12 @@ const ProfileButton = ({setShowSignUpModal, setShowLogInModal}) => {
 				<li>2023 Summer Release NEW</li>
 				<li className="menu-divider-li"><MenuDivider /></li>
 				<li>Messages</li>
-				<li><Link to={`/users/${sessionUser.id}`}>Trips</Link></li>
+				<Link to={`/users/${sessionUser.id}`}><li>Trips</li></Link>
 				<li>Wishlists</li>
 			</div>
 			<li className="menu-divider-li"><MenuDivider /></li>
 				{/* <li>Sparebnb your home</li> */}
-				<li><a href="https://www.linkedin.com/in/carvey-hor/">LinkedIn</a></li>
+				<a target="_blank" href="https://www.linkedin.com/in/carvey-hor/"><li>LinkedIn</li></a>
 				<li>Account</li>
 				<li className="menu-divider-li"><MenuDivider /></li>
 				<li>Help</li>
@@ -79,6 +90,7 @@ const ProfileButton = ({setShowSignUpModal, setShowLogInModal}) => {
 
 	const ProfileDropMenu = () => {
 		return (
+			// <div className="profile-drop-menu" onBlur={e => setShowMenu(false)}>
 			<div className="profile-drop-menu">
 				<ul>
 					{sessionLinks}

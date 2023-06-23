@@ -59,12 +59,14 @@ return (
 						<nav className="upper-navbar-right"> 
 							<div className="host-lang-buttons">
 								{/* <NavLink className="host-home-link" to="/">Sparebnb your home</NavLink> */}
-								<a className="host-home-link" href="https://www.linkedin.com/in/carvey-hor/">LinkedIn</a>
-								<div className="lang-button-div">
-									<button className="lang-button" >
+								<a target="_blank" className="host-home-link" href="https://www.linkedin.com/in/carvey-hor/">LinkedIn</a>
+								<a target="_blank" href="https://github.com/carveyh/">
+									<div className="lang-button-div">
+										<button className="lang-button" >
 										<i className="fa-brands fa-github"></i>
-									</button>
-								</div>
+										</button>
+									</div>
+								</a>
 							</div>
 							<div className="session-menu-div">
 								<ProfileButton 

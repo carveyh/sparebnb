@@ -12,6 +12,11 @@ class Reservation < ApplicationRecord
     foreign_key: :listing_id,
     class_name: :Listing
 
+    # TEST!!! NEW ASSOC
+  has_one :host,
+    through: :listing,
+    source: :host
+
   private
 
   # This is not accepted in rails, results in a NilError because start_date is nil.

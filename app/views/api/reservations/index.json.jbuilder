@@ -1,14 +1,25 @@
 json.reservations do
 	@reservations.each do |reservation|
 		json.set! reservation.id do
-			json.extract! reservation,
-				:id,
-				:reserver_id,
-				:listing_id,
-				:start_date,
-				:end_date,
-				:num_guests,
-				:base_nightly_rate
+			json.partial! 'api/reservations/reservation', reservation: reservation
+		end
+	end
+end
+
+json.listings do
+ @reservations.each do |reservation|
+	json.set! reservation.listing.id do
+		# json.extract! reservation.listing,
+
+	end
+ end
+end
+
+json.hosts do
+	@reservations.each do |reservation|
+		json.set! reservation.host.id do
+			json.extract! reservation.host,
+				:first_name
 		end
 	end
 end

@@ -25,20 +25,17 @@ class Api::ReservationsController < ApplicationController
   end
 
   def create
-    # debugger
     @reservation = Reservation.new(reservation_params)
     
     @reservation.reserver_id = current_user.id
     if(@reservation.save)
       render :show 
     else
-      # debugger
       render json: { errors: @reservation.errors.messages }, status: :unprocessable_entity
     end
   end
 
   def update
-    # debugger
     @reservation = Reservation.find_by(id: params[:id])
     if @reservation && @reservation.update(reservation_params)
       render :show
