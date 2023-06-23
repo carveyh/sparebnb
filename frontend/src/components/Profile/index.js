@@ -230,7 +230,7 @@ const ProfilePage = (props) => {
 
 
 
-	debugger
+	// debugger
 
 	// if(!reservations || !listings) return null;	
 	if(!reservations || !listings || !sessionUser) return <Redirect to="/" />;	
