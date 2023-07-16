@@ -99,7 +99,7 @@ const ListingsShowPage = (props) => {
 	}
 
 	const handleSubmit = (e) => {
-		debugger
+		// debugger
 		e.preventDefault();
 		if(!sessionUser || !buttonClickable) {
 			console.log("Must be logged in to register")

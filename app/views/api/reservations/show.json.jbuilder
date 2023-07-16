@@ -1,4 +1,4 @@
 json.reservation do
-	debugger
+	# debugger
 	json.partial! 'api/reservations/reservation', reservation: @reservation 
 end
