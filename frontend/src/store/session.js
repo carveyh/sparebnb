@@ -14,6 +14,7 @@
 	// }
 
 import csrfFetch from "./csrf"
+import { clearAllReservations } from "./reservation"
 
 // ACTION TYPE CONSTANTS
 export const SET_CURRENT_USER = "session/setCurrentUser"
@@ -71,6 +72,7 @@ export const logoutUser = () => async dispatch => {
 	})
 	if(res.ok) {
 		storeCurrentUser(null)
+		dispatch(clearAllReservations())
 		dispatch(removeSession())
 	}
 	return res;
