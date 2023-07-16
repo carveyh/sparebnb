@@ -5,6 +5,7 @@ import csrfFetch from "./csrf"
 export const RECEIVE_RESERVATIONS = "reservations/RECEIVE_RESERVATIONS"
 export const RECEIVE_RESERVATION = "reservations/RECEIVE_RESERVATION"
 export const REMOVE_RESERVATION = "reservations/REMOVE_RESERVATION"
+export const CLEAR_ALL_RESERVATIONS = "reservations/CLEAR_ALL_RESERVATIONS"
 
 // REDUX ACTION CREATORS
 
@@ -21,6 +22,10 @@ export const receiveReservation = (reservation) => ({
 export const removeReservation = (reservationId) => ({
 	type: REMOVE_RESERVATION,
 	reservationId
+})
+
+export const removeAllReservationsFromState = () => ({
+	type: CLEAR_ALL_RESERVATIONS
 })
 
 // REDUX THUNK ACTION CREATORS
@@ -82,6 +87,10 @@ export const destroyReservation = (reservationId) => async dispatch => {
 	})
 	dispatch(removeReservation(reservationId));
 	return res;
+}
+
+export const clearAllReservations = () => async dispatch => {
+	dispatch(removeAllReservationsFromState());
 }
 
 export const updateReservation = (reservation) => async dispatch => {
@@ -161,6 +170,8 @@ const reservationsReducer = (state = {}, action) => {
 			const newState = {...state};
 			delete newState[action.reservationId];
 			return newState;
+		case CLEAR_ALL_RESERVATIONS:
+			return {};
 		default:
 			return state;
 	}
