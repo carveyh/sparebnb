@@ -101,13 +101,14 @@ div.signup-form, div.login-form {
 }
 
 .auth-form-body {
+	box-sizing: border-box;
 	display: flex;
 	padding: 24px;
-	/* overflow-y:scroll; */
+	overflow-y:scroll;
 
 }
 .auth-form-body::-webkit-scrollbar {
-	display: none;
+	/* display: none; */
 }
 
 p {
@@ -146,12 +147,14 @@ p {
 .show-pw-toggle {
 	position: absolute;
 	top: 20px;
-	right: 12px;
+	right: 6px;
 	color: black;
 	text-decoration: underline;
-	font-size: 14px;
+	font-size: 13px;
 	font-weight: 500;
 	cursor: pointer;
+	border: none;
+	background-color: white;
 }
 
 .name-entry-label:focus-within .floating-placeholder:nth-child(1) {
@@ -221,6 +224,12 @@ p {
 	white-space: wrap;
 }
 
+.signup-link {
+	font-weight: 600;
+	text-decoration: underline;
+	color:#0038AB;
+}
+
 
 .session-btn {
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -244,8 +253,13 @@ p {
 
 	transition: box-shadow 0.2s linear, transform 0.1s linear;
 }
+
 .session-btn:focus {
 	outline: none;
 	transition: box-shadow 0.2s linear;
 	box-shadow: 0 0 0 2px rgba(255,255,255,0.8), 0 0 0 4px #222222;
+}
+
+.session-btn:last-child {
+	margin-bottom: 24px;
 }
