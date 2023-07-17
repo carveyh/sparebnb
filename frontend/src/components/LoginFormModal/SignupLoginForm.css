@@ -1,5 +1,5 @@
 div.login-form, div.signup-form {
-	/* box-sizing: border-box; */
+	box-sizing: border-box;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	border-radius: 12px;
 	max-width: 400px;
@@ -70,7 +70,7 @@ div.signup-form, div.login-form {
 	border:none;
 	padding: 0px;
 	background-color:inherit;
-
+	border-radius: 50%;
 	position: absolute;
 	top: 24px;
 	left: 24px;
@@ -86,10 +86,10 @@ div.signup-form, div.login-form {
 	left: 50%;
 	transform: translateY(-50%) translateX(-50%);
 	border-radius: 50%;
+	cursor: pointer;
 }
 
 .x-close:hover::before {
-	background-color: aliceblue;	
 	background-color: rgb(247,247,247);
 }
 
@@ -115,6 +115,7 @@ p {
 }
 
 .name-entry-div {
+	box-sizing: border-box;
 	border-radius: 8px;
 	border: 1px solid rgb(176, 176, 176);
 }
@@ -141,25 +142,26 @@ p {
 
 .signup-form .floating-placeholder {
 	position: absolute;
-	/* top: 110px; */
+	top: 20px;
 	left: 12px;
+	/* right: 12px; */
 	color: rgb(113, 113, 113);
 	font-size: 18px;
 	font-weight: 300;
-}
-
-.signup-form .first-name-floating {
-	top: 20px;
-}
-
-.signup-form .last-name-floating {
-	top: 20px;
+	transition: all 0.15s;
+	transform-origin: 0% 0%;
 }
 
 .name-entry-label:focus-within .floating-placeholder:nth-child(1) {
-	color: blue;
-	font-size: 13px;
+	/* color: blue; */
+	transform: translateY(-8px) scale(0.75);
+	/* transform-origin: 0% 0%; */
+	/* font-size: 13px; */
+	/* top: */
+}
 
+.input-placeholder-not-empty {
+	transform: translateY(-8px) scale(0.75);
 }
 
 .first-name-box {
@@ -173,15 +175,15 @@ p {
 	display: flex;
 }
 .name-entry-label:focus {
-	outline: 1px solid purple;
+	/* outline: 1px solid purple; */
 }
 
-#first-name-input, #last-name-input {
+#first-name-input, #last-name-input, #birthdate, #email {
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	box-sizing: border-box;
 	width: 520px;
 	height: 56px;
 	padding: 26px 12px 6px 12px;
-
 	border-radius: 8px;
 	/* Weird, these two borders prevent missing corner otherwise... START */
 	border: 1px solid rgb(176, 176, 176);
@@ -195,10 +197,18 @@ p {
 	font-weight: 100;
 }
 
-.name-tooltip {
+.input-tooltip {
 	margin: 8px 0px;
 	font-size: 12px;
 	font-weight: 100;
 	letter-spacing: 0.3px;
 	color: #717171;
+}
+
+.error-tooltip {
+	margin: 8px 0px;
+	font-size: 12px;
+	font-weight: 100;
+	letter-spacing: 0.3px;
+	color: red;
 }

@@ -21,6 +21,8 @@ const SignupForm = ({setShowSignUpModal}) => {
 	const [email, setEmail] = useState('');	
 	const [password, setPassword] = useState('');	
 	const [errors, setErrors] = useState({});
+	const [focusInput, setFocusInput] = useState(null);
+	
 
 	const handleFirstName = (e) => {
 		e.preventDefault();
@@ -98,7 +100,7 @@ const SignupForm = ({setShowSignUpModal}) => {
 	// if(sessionUser) return <Redirect to="/" />
 
 	return (
-		<div className="signup-form">
+		<div className="signup-form" >
 			<header className="auth-form-header">
 				<button autoFocus className='x-close' onClick={e => setShowSignUpModal(false)}><i class="fa-solid fa-x"></i></button>
 				{/* <div className='x-close' onClick={e => setShowSignUpModal(false)}><i class="fa-solid fa-xmark"></i></div> */}
@@ -112,14 +114,17 @@ const SignupForm = ({setShowSignUpModal}) => {
 							<label className='name-entry-label'>
 								<div className='floating-placeholder-container'>
 
-									<div className='first-name-floating floating-placeholder'>First name</div>
+									<div className={`floating-placeholder ${firstName === "" ? "" : "input-placeholder-not-empty" }`}>First name</div>
 									{/* <div className='floating-placeholder'></div> */}
 									<input
 										id="first-name-input"
 										type="text"
 										value={firstName}
 										onChange={handleFirstName}
-										// placeholder='First name'
+										onFocus={e => setFocusInput("firstName")}
+										onBlur={e =>setFocusInput(null)}
+										placeholder={(focusInput === "firstName") ? "First Name" : ""}
+										placeholderColor="green"
 										required
 									/>
 								</div>
@@ -128,60 +133,84 @@ const SignupForm = ({setShowSignUpModal}) => {
 						<div className='last-name-box'>
 						<label className='name-entry-label'>
 								<div className='floating-placeholder-container'>
-
-									<div className='last-name-floating floating-placeholder'>Last name</div>
+									<div className={`floating-placeholder ${lastName === "" ? "" : "input-placeholder-not-empty" }`}>Last name</div>
 									<input
 										id="last-name-input"
 										type="text"
 										value={lastName}
 										onChange={handleLastName}
-										// placeholder='Last name'
+										onFocus={e => setFocusInput("lastName")}
+										onBlur={e =>setFocusInput(null)}
+										placeholder={(focusInput === "lastName") ? "Last Name" : ""}
 										required
 									/>
 								</div>
 							</label>
 						</div>
 					</div>
-					<div className='name-tooltip'>Make sure it matches the name on your government ID.</div>
-
-
+					<div className='input-tooltip'>Make sure it matches the name on your government ID.</div>
 
 					{/* NAME STYLING - END */}
 
+					<br />
+					<div className='name-entry-div'>
+						<div className=''>
+							<label className='name-entry-label'>
+								<div className='floating-placeholder-container'>
+									<div className={`floating-placeholder ${birthDate === "" ? "" : "input-placeholder-not-empty" }`}>Birthdate</div>
+									<input
+										id="birthdate"
+										type={(focusInput === "birthDate") ? `date`: `text`}
+										value={birthDate}
+										max={maxDate()}
+										onChange={handleBirthdate}
+										onFocus={e => setFocusInput("birthDate")}
+										onBlur={e =>setFocusInput(null)}
+										placeholder={(focusInput === "birthDate") ? "mm/dd/yyyy" : ""}
+										// placeholder='Birthdate'
+										required
+									/>
+								</div>
+							</label>
+						</div>	
+					</div>
+					{errors.birth_date ? 
+						<div className='error-tooltip'><i class="fa-solid fa-circle-exclamation"></i> {errors.birth_date}</div>
+						:
+						<div className='input-tooltip'>To sign up, you need to be at least 18. Your birthday won’t be shared with other people who use Airbnb.</div>
+					}
+					<br />
+					{/* <br /> */}
 
-					<br />
-					<label>Birthdate:&nbsp;
-						<input
-							type="date"
-							value={birthDate}
-							max={maxDate()}
-							onChange={handleBirthdate}
-							placeholder='Birthdate'
-							required
-						/>
-					</label>
-					{errors.birth_date && 
-						<>
-							<br />
-							<div style={{color:'red'}}>{errors.birth_date}</div>
-						</>}
-					<br />
-					<br />
 
-					<label>Email:&nbsp;
-						<input
-							id="email"
-							type="text"
-							value={email}
-							onChange={handleEmail}
-							required
-						/>
-					</label>
-					{errors.email && 
-						<>
-							<br />
-							<div style={{color:'red'}}>Email {errors.email}</div>
-						</>}
+					<div className='name-entry-div'>
+						<div className=''>
+							<label className='name-entry-label'>
+								<div className='floating-placeholder-container'>
+									<div className={`floating-placeholder ${email === "" ? "" : "input-placeholder-not-empty" }`}>Email</div>
+									<input
+										id="email"
+										type="text"
+										value={email}
+										onChange={handleEmail}
+										onFocus={e => setFocusInput("email")}
+										onBlur={e =>setFocusInput(null)}
+										placeholder={(focusInput === "email") ? "Email" : ""}
+										required
+									/>
+								</div>
+							</label>
+						</div>	
+					</div>
+					{errors.email ? 
+						<div className='error-tooltip'><i class="fa-solid fa-circle-exclamation"></i> Enter a valid email.</div>
+						:
+						<div className='input-tooltip'>We'll email you trip confirmations and receipts.</div>
+					}
+
+
+
+
 					<br />
 					<br />
 
