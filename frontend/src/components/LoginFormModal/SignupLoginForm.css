@@ -149,9 +149,11 @@ p {
 	right: 12px;
 	color: black;
 	text-decoration: underline;
-	font-size: 14px;
+	font-size: 13px;
 	font-weight: 500;
 	cursor: pointer;
+	border: none;
+	background-color: white;
 }
 
 .name-entry-label:focus-within .floating-placeholder:nth-child(1) {
@@ -219,6 +221,12 @@ p {
 	/* flex-direction: row; */
 	/* flex-wrap: wrap; */
 	white-space: wrap;
+}
+
+.signup-link {
+	font-weight: 600;
+	text-decoration: underline;
+	color:#0038AB;
 }
 
 

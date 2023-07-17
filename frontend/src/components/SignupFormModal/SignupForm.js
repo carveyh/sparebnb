@@ -213,7 +213,6 @@ const SignupForm = ({setShowSignUpModal}) => {
 
 
 					<br />
-					<br />
 
 
 					<div className='name-entry-div'>
@@ -221,7 +220,7 @@ const SignupForm = ({setShowSignUpModal}) => {
 							<label className='name-entry-label'>
 								<div className='floating-placeholder-container'>
 									<div className={`floating-placeholder ${password === "" ? "" : "input-placeholder-not-empty" }`}>Password</div>
-									<div className='show-pw-toggle' onClick={e => setShowPassword(old => !old)}>{showPassword ? 'Hide' : "Show"}</div>
+									<button type="button" className='show-pw-toggle' onClick={e => setShowPassword(old => !old)}>{showPassword ? 'Hide' : "Show"}</button>
 									<input
 										id="password"
 										type={showPassword ? `text` : `password`}
@@ -246,9 +245,10 @@ const SignupForm = ({setShowSignUpModal}) => {
 					
 					<div className='signup-tooltip'>
 						By selecting <span style={{fontWeight: "600"}}>Agree and continue</span>, 
-						I agree to Airbnb’s Terms of Service, 
-						Payments Terms of Service, 
-						and Nondiscrimination Policy and acknowledge the Privacy Policy.
+						I agree to Airbnb’s <a target="_blank" className="signup-link" href="https://www.linkedin.com/in/carvey-hor/">Terms of Service</a>,&nbsp;
+						<a target="_blank" className="signup-link" href="https://www.linkedin.com/in/carvey-hor/">Payments Terms of Service</a>, 
+						and <a target="_blank" className="signup-link" href="https://www.linkedin.com/in/carvey-hor/">Nondiscrimination Policy</a>
+						&nbsp;and acknowledge the <a target="_blank" className="signup-link" href="https://www.linkedin.com/in/carvey-hor/">Privacy Policy</a>.
 					</div>
 
 					<br />
