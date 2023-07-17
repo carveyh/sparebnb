@@ -7,7 +7,7 @@ import ListingsShowPage from "./components/Listings/ListingsShowPage";
 import ProfilePage from "./components/Profile";
 
 function App() {
-  console.log("redirected!")
+  // console.log("redirected!")
   return (
     <div>
       <Navigation />
