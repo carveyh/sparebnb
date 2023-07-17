@@ -1,5 +1,5 @@
 div.login-form, div.signup-form {
-
+	/* box-sizing: border-box; */
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	border-radius: 12px;
 	max-width: 400px;
@@ -8,25 +8,33 @@ div.login-form, div.signup-form {
 	justify-content: flex-start;
 	align-items: stretch;
 	background-color: white;
-	animation: slideIn 0.4s both, fadeInModal 0.5s forwards;
+	animation: slideIn 0.4s both, fadeInModal 0.4s forwards;
+	/* animation: slideIn 0.4s both; */
 	max-width: 568px;
 	overscroll-behavior-x: contain;
+	/* opacity: 0; */
+}
+
+div.login-form input, div.signup-form input {
+	/* background-color: inherit; */
+}
+
+div.signup-form, div.login-form {
+	justify-self: center;
+	align-self: center;
+	max-height: 682px;
+	height: 682px;
+	align-self: center;
+	/* align-self: stretch; */
 }
 
 .login-form{
 	padding: 24px;
-	height: auto;
-	/* background-color: rgba(255,255,255,0.0); */
-}
-
-div.signup-form {
-	align-self: center;
-	align-self: stretch;
 }
 
 @keyframes slideIn {
 	0% {
-		transform: translateY(400%);
+		transform: translateY(50%);
 	}
 	100% {
 		transform: translateY(0%);
@@ -35,10 +43,12 @@ div.signup-form {
 
 @keyframes fadeInModal {
 	0% {
-		background-color: rgba(255,255,255,0.0);
+		/* background-color: rgba(255,255,255,0.0); */
+		opacity: 0;
 	}
 	100% {
-		background-color: rgba(255,255,255,1.0);
+		/* background-color: rgba(255,255,255,1.0); */
+		opacity: 1;
 	}
 }
 
