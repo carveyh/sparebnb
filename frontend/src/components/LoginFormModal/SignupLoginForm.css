@@ -78,7 +78,28 @@ div.signup-form, div.login-form {
 	left: 27px;
 }
 
-.x-close::before {
+.session-buffer-box {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 520px;
+	height: 47px;
+	cursor: pointer;
+}
+	
+.session-buffer {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border:none;
+	padding: 0px;
+	background-color:inherit;
+	border-radius: 50%;
+}
+
+.x-close::before, .session-buffer::before {
 	content: "";
 	width: 32px;
 	height: 32px;
@@ -90,7 +111,7 @@ div.signup-form, div.login-form {
 	cursor: pointer;
 }
 
-.x-close:hover::before {
+.x-close:hover::before, .session-buffer:hover::before {
 	background-color: rgb(247,247,247);
 }
 
@@ -105,7 +126,7 @@ div.signup-form, div.login-form {
 	display: flex;
 	padding: 24px;
 	overflow-y:scroll;
-
+	scroll-behavior: smooth;
 }
 .auth-form-body::-webkit-scrollbar {
 	/* display: none; */
@@ -117,6 +138,7 @@ p {
 
 .name-entry-div {
 	box-sizing: border-box;
+	width: 520px;
 	border-radius: 8px;
 	border: 1px solid rgb(176, 176, 176);
 }
@@ -158,11 +180,11 @@ p {
 }
 
 .name-entry-label:focus-within .floating-placeholder:nth-child(1) {
-	transform: translateY(-8px) scale(0.75);
+	transform: translateY(-9px) scale(0.75);
 }
 
 .input-placeholder-not-empty {
-	transform: translateY(-8px) scale(0.75);
+	transform: translateY(-9px) scale(0.75);
 }
 
 .first-name-box {
@@ -179,9 +201,11 @@ p {
 #first-name-input, #last-name-input, #birthdate, #email, #password {
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	box-sizing: border-box;
-	width: 520px;
+	width: 518px;
+	/* width: 100%; */
 	height: 56px;
 	padding: 26px 12px 6px 12px;
+	padding: 23px 12px 9px 12px;
 	border-radius: 8px;
 	/* Weird, these two borders prevent missing corner otherwise... START */
 	border: 1px solid rgb(176, 176, 176);
@@ -191,7 +215,7 @@ p {
 	outline-color: black;
 	-moz-outline-radius: 8px;
 
-	font-size: 16px;
+	font-size: 17px;
 	font-weight: 100;
 }
 
@@ -263,3 +287,4 @@ p {
 .session-btn:last-child {
 	margin-bottom: 24px;
 }
+

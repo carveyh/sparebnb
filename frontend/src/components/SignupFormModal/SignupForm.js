@@ -98,6 +98,12 @@ const SignupForm = ({setShowSignUpModal}) => {
 			})
 	}
 
+	const scrollBottomForm = (e) => {
+		e.preventDefault();
+		const form = document.querySelector('.auth-form-body');
+		form.scrollTop = form.scrollHeight;
+	}
+
 	// if(sessionUser) return <Redirect to="/" />
 
 	return (
@@ -124,7 +130,7 @@ const SignupForm = ({setShowSignUpModal}) => {
 										onChange={handleFirstName}
 										onFocus={e => setFocusInput("firstName")}
 										onBlur={e =>setFocusInput(null)}
-										placeholder={(focusInput === "firstName") ? "First Name" : ""}
+										placeholder={(focusInput === "firstName") ? "First name" : ""}
 										placeholderColor="green"
 										required
 									/>
@@ -142,7 +148,7 @@ const SignupForm = ({setShowSignUpModal}) => {
 										onChange={handleLastName}
 										onFocus={e => setFocusInput("lastName")}
 										onBlur={e =>setFocusInput(null)}
-										placeholder={(focusInput === "lastName") ? "Last Name" : ""}
+										placeholder={(focusInput === "lastName") ? "Last name" : ""}
 										required
 									/>
 								</div>
@@ -254,8 +260,12 @@ const SignupForm = ({setShowSignUpModal}) => {
 					<br />
 					<br />
 					<input className="session-btn" type="submit" value="Agree and continue" />
-					<br />
-					<br />
+					{/* <br /> */}
+					<div className='session-buffer-box'>
+						<button className='session-buffer' onClick={scrollBottomForm}><i class="fa-solid fa-chevron-down fa-fade"></i></button>
+					</div>
+						
+					{/* <br /> */}
 					<input className="session-btn" type="submit" value="Demo Login" onClick={loginDemo} />
 					{/* <p>Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text </p> */}
 				</form>
