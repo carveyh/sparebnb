@@ -100,7 +100,7 @@ const ProfileButton = ({setShowSignUpModal, setShowLogInModal}) => {
 	}
 
 	return (
-		<>
+		<div className="session-menu-button-container">
 			<button className="session-menu-button" onClick={toggleMenu}>
 				<i className="fa-solid fa-bars"></i>
 				<div className="user-icon">
@@ -110,7 +110,7 @@ const ProfileButton = ({setShowSignUpModal, setShowLogInModal}) => {
 				</div>
 			</button>
 			{showMenu && <ProfileDropMenu />}
-		</>
+		</div>
 	)
 }
 
