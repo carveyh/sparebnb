@@ -9,7 +9,8 @@ import { loginUser } from '../../store/session';
 
 const SignupForm = ({setShowSignUpModal}) => {
 	useEffect(() => {
-		document.getElementById("first-name-input").focus({preventScroll:false, focusVisible: true});
+		// document.getElementById("first-name-input").focus({preventScroll:false, focusVisible: true});
+		document.querySelector(".x-close").focus({preventScroll:false, focusVisible: true});
 	}, [])
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state = {}) => state.session?.user)
@@ -99,7 +100,8 @@ const SignupForm = ({setShowSignUpModal}) => {
 	return (
 		<div className="signup-form">
 			<header className="auth-form-header">
-				<div className='x-close' onClick={e => setShowSignUpModal(false)}><i class="fa-solid fa-xmark"></i></div>
+				<button autoFocus className='x-close' onClick={e => setShowSignUpModal(false)}><i class="fa-solid fa-x"></i></button>
+				{/* <div className='x-close' onClick={e => setShowSignUpModal(false)}><i class="fa-solid fa-xmark"></i></div> */}
 				<div className="auth-form-title">Finish signing up</div>
 			</header>
 			<div className="auth-form-body">

@@ -55,8 +55,10 @@ div.signup-form, div.login-form {
 .auth-form-header {
 	display: flex;
 	justify-content: center;
-	border-bottom: 0.5px solid rgb(221, 221, 221);
-	padding: 24px 24px;
+	box-sizing: border-box;
+	/* border-bottom: 0.5px solid rgb(221, 221, 221); */
+	border-bottom: 1px solid #EBEBEB;
+	padding: 23px 24px;
 	font-size:17px;
 }
 
@@ -65,8 +67,37 @@ div.signup-form, div.login-form {
 }
 
 .x-close {
+	border:none;
+	padding: 0px;
+	background-color:inherit;
+
 	position: absolute;
+	top: 24px;
 	left: 24px;
+	left: 27px;
+}
+
+.x-close::before {
+	content: "";
+	width: 32px;
+	height: 32px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateY(-50%) translateX(-50%);
+	border-radius: 50%;
+}
+
+.x-close:hover::before {
+	background-color: aliceblue;	
+	background-color: rgb(247,247,247);
+}
+
+.fa-x {
+	font-size: 0.9em;
+	/* font-weight: 400; */
+	transform: scaleY(0.9);
+	transform: scaleX(1.2);
 }
 
 .auth-form-body {
@@ -166,6 +197,8 @@ p {
 
 .name-tooltip {
 	margin: 8px 0px;
-	font-size: 13px;
+	font-size: 12px;
 	font-weight: 100;
+	letter-spacing: 0.3px;
+	color: #717171;
 }
