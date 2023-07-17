@@ -12,7 +12,6 @@ div.login-form, div.signup-form {
 	/* animation: slideIn 0.4s both; */
 	max-width: 568px;
 	overscroll-behavior-x: contain;
-	/* opacity: 0; */
 }
 
 div.login-form input, div.signup-form input {
@@ -25,7 +24,7 @@ div.signup-form, div.login-form {
 	max-height: 682px;
 	height: 682px;
 	align-self: center;
-	/* align-self: stretch; */
+	overflow-y:scroll;
 }
 
 .login-form{
@@ -43,16 +42,18 @@ div.signup-form, div.login-form {
 
 @keyframes fadeInModal {
 	0% {
-		/* background-color: rgba(255,255,255,0.0); */
 		opacity: 0;
 	}
 	100% {
-		/* background-color: rgba(255,255,255,1.0); */
 		opacity: 1;
 	}
 }
 
 .auth-form-header {
+	position: sticky;
+	top: 0px;
+	z-index: 1;
+	background-color: white;
 	display: flex;
 	justify-content: center;
 	box-sizing: border-box;
@@ -95,7 +96,6 @@ div.signup-form, div.login-form {
 
 .fa-x {
 	font-size: 0.9em;
-	/* font-weight: 400; */
 	transform: scaleY(0.9);
 	transform: scaleX(1.2);
 }
@@ -103,7 +103,7 @@ div.signup-form, div.login-form {
 .auth-form-body {
 	display: flex;
 	padding: 24px;
-	overflow-y:scroll;
+	/* overflow-y:scroll; */
 
 }
 .auth-form-body::-webkit-scrollbar {
@@ -120,7 +120,7 @@ p {
 	border: 1px solid rgb(176, 176, 176);
 }
 
-.name-entry-div > * {
+.name-entry-div > div {
 	height: 56px;
 	display: flex;
 	align-items: center;
@@ -130,15 +130,6 @@ p {
 	/* USE THIS TO ANCHOR INNER POSITION:ABSOLUTE STUFF */
 	position: relative;
 }
-
-/* .signup-form .floating-placeholder:nth-of-type(1) {
-	position: absolute;
-	top: 110px;
-	left: 36px;
-	color: rgb(113, 113, 113);
-	font-size: 18px;
-	font-weight: 300;
-} */
 
 .signup-form .floating-placeholder {
 	position: absolute;
@@ -152,12 +143,19 @@ p {
 	transform-origin: 0% 0%;
 }
 
+.show-pw-toggle {
+	position: absolute;
+	top: 20px;
+	right: 12px;
+	color: black;
+	text-decoration: underline;
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+}
+
 .name-entry-label:focus-within .floating-placeholder:nth-child(1) {
-	/* color: blue; */
 	transform: translateY(-8px) scale(0.75);
-	/* transform-origin: 0% 0%; */
-	/* font-size: 13px; */
-	/* top: */
 }
 
 .input-placeholder-not-empty {
@@ -174,11 +172,8 @@ p {
 .name-entry-label {
 	display: flex;
 }
-.name-entry-label:focus {
-	/* outline: 1px solid purple; */
-}
 
-#first-name-input, #last-name-input, #birthdate, #email {
+#first-name-input, #last-name-input, #birthdate, #email, #password {
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	box-sizing: border-box;
 	width: 520px;
@@ -199,7 +194,7 @@ p {
 
 .input-tooltip {
 	margin: 8px 0px;
-	font-size: 12px;
+	font-size: 13px;
 	font-weight: 100;
 	letter-spacing: 0.3px;
 	color: #717171;
@@ -207,8 +202,50 @@ p {
 
 .error-tooltip {
 	margin: 8px 0px;
-	font-size: 12px;
+	font-size: 13px;
 	font-weight: 100;
 	letter-spacing: 0.3px;
 	color: red;
+}
+
+.signup-tooltip {
+	margin: 8px 0px;
+	font-size: 13px;
+	font-weight: 100;
+	letter-spacing: 0.3px;
+	color: black;
+	display: inline;
+	/* display: flex; */
+	/* flex-direction: row; */
+	/* flex-wrap: wrap; */
+	white-space: wrap;
+}
+
+
+.session-btn {
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	box-sizing: border-box;
+	width: 520px;
+	height: 48px;
+	border-radius: 8px;
+	/* Weird, these two borders prevent missing corner otherwise... START */
+	background-color: #FF0000;
+	letter-spacing: 1px;
+	color: white;
+	border: 0px;
+	/* Weird, these two borders prevent missing corners otherwise... END */
+
+	/* outline-color: black; */
+	/* -moz-outline-radius: 8px; */
+
+	font-size:17px;
+	font-weight: 500;
+	cursor: pointer;
+
+	transition: box-shadow 0.2s linear, transform 0.1s linear;
+}
+.session-btn:focus {
+	outline: none;
+	transition: box-shadow 0.2s linear;
+	box-shadow: 0 0 0 2px rgba(255,255,255,0.8), 0 0 0 4px #222222;
 }

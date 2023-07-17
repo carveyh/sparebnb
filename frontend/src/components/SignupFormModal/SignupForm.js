@@ -22,6 +22,7 @@ const SignupForm = ({setShowSignUpModal}) => {
 	const [password, setPassword] = useState('');	
 	const [errors, setErrors] = useState({});
 	const [focusInput, setFocusInput] = useState(null);
+	const [showPassword, setShowPassword] = useState(false);
 	
 
 	const handleFirstName = (e) => {
@@ -214,25 +215,48 @@ const SignupForm = ({setShowSignUpModal}) => {
 					<br />
 					<br />
 
-					<label>Password:&nbsp;
-						<input
-							type="password"
-							value={password}
-							onChange={handlePassword}
-							required
-						/>
-					</label>
-					{errors.password && 
-						<>
-							<br />
-							<div style={{color:'red'}}>Password {errors.password}</div>
-						</>}
+
+					<div className='name-entry-div'>
+						<div className=''>
+							<label className='name-entry-label'>
+								<div className='floating-placeholder-container'>
+									<div className={`floating-placeholder ${password === "" ? "" : "input-placeholder-not-empty" }`}>Password</div>
+									<div className='show-pw-toggle' onClick={e => setShowPassword(old => !old)}>{showPassword ? 'Hide' : "Show"}</div>
+									<input
+										id="password"
+										type={showPassword ? `text` : `password`}
+										value={password}
+										onChange={handlePassword}
+										onFocus={e => setFocusInput("password")}
+										onBlur={e =>setFocusInput(null)}
+										placeholder={(focusInput === "password") ? "Password" : ""}
+										required
+									/>
+								</div>
+							</label>
+						</div>	
+					</div>
+					{errors.password ? 
+						<div className='error-tooltip'><i class="fa-solid fa-circle-xmark"></i> At least 8 characters</div>
+						:
+						null
+					}
+					
+					<br />
+					
+					<div className='signup-tooltip'>
+						By selecting <span style={{fontWeight: "600"}}>Agree and continue</span>, 
+						I agree to Airbnb’s Terms of Service, 
+						Payments Terms of Service, 
+						and Nondiscrimination Policy and acknowledge the Privacy Policy.
+					</div>
+
 					<br />
 					<br />
-					<input type="submit" value="Signup" />
+					<input className="session-btn" type="submit" value="Agree and continue" />
 					<br />
 					<br />
-					<input type="submit" value="Demo Login" onClick={loginDemo} />
+					<input className="session-btn" type="submit" value="Demo Login" onClick={loginDemo} />
 					{/* <p>Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text </p> */}
 				</form>
 			</div>

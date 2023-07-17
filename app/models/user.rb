@@ -28,7 +28,7 @@ class User < ApplicationRecord
     format: { with: /\A\d{10}\z/ },
     allow_nil: true
   validates :session_token, presence: true, uniqueness: true
-  validates :password, length: { in: 6..255 }, allow_nil: true
+  validates :password, length: { in: 8..255 }, allow_nil: true
   validate :birth_date, :validate_age
 
   before_validation :ensure_session_token
