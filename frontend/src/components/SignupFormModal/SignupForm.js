@@ -104,8 +104,8 @@ const SignupForm = ({setShowSignUpModal}) => {
 		<div className="signup-form" >
 			<header className="auth-form-header">
 				<button autoFocus className='x-close' onClick={e => setShowSignUpModal(false)}><i class="fa-solid fa-x"></i></button>
-				{/* <div className='x-close' onClick={e => setShowSignUpModal(false)}><i class="fa-solid fa-xmark"></i></div> */}
-				<div className="auth-form-title">Finish signing up</div>
+				{/* <div className="auth-form-title">Finish signing up</div> */}
+				<div className="auth-form-title">Sign up</div>
 			</header>
 			<div className="auth-form-body">
 				<form onSubmit={handleSubmit}>
