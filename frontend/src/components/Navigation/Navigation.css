@@ -256,6 +256,11 @@ div.search-people-unopened-magnifying {
 	font-size: 18px;
 }
 
+.session-menu-button > .fa-bars {
+	transform: scaleX(1.2);
+	/* transform: scaleY(0.9); */
+}
+
 /****************************/
 /* NAV BAR CONTAINER */
 /****************************/
@@ -288,10 +293,16 @@ ul.nav-bar-links {
 /* DROP DOWN MENU */
 /****************************/
 
+.session-menu-button-container {
+	position: relative;
+}
+
 .profile-drop-menu {
 	position: absolute;
-	top: 40px;
-	right: 80px;
+	/* top: 40px; */
+	/* right: 80px; */
+	top: 20px;
+	right: 0px;
 	box-sizing: border-box;
 	box-shadow: 0px 0px 10px rgba(0,0,0,0.12);
 	border-radius: 12px;
