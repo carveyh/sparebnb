@@ -85,7 +85,7 @@ div.signup-form, div.login-form {
 	align-items: center;
 	width: 520px;
 	height: 47px;
-	cursor: pointer;
+	/* cursor: pointer; */
 }
 	
 .session-buffer {
@@ -97,6 +97,7 @@ div.signup-form, div.login-form {
 	padding: 0px;
 	background-color:inherit;
 	border-radius: 50%;
+	cursor: pointer;
 }
 
 .x-close::before, .session-buffer::before {
