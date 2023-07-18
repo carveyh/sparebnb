@@ -1,3 +1,10 @@
+# [Sparebnb](https://sparebnb-bya6.onrender.com)
+
+### Introduction
+
+Sparebnb is a near pixel-perfect clone of Airbnb, where people can reserve short-term stays at locations hosted by other users.
+
+<!-- 
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -22,3 +29,4 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+-->
