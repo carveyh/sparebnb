@@ -14,6 +14,11 @@ class ReservationReview < ApplicationRecord
 		foreign_key: :reviewer_id,
 		class_name: :User
 
-	# config/routes - RESTful member and collection routes
+	belongs_to :listing,
+		through: :reservation,
+		source: :listing
 
+	# config/routes - RESTful member and collection routes
+	# controller - define actions corresponding to RESTful routes
+	# json view templates
 end
