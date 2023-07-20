@@ -35,6 +35,10 @@ class Listing < ApplicationRecord
     through: :reservations,
     source: :reserver
 
+  has_many :reviews,
+    through: :reservations,
+    source: :review
+
   validates :title, :description, :category, length: { minimum: 1 }
   validates :latitude, :longitude, presence: true
   validates :address, :city, :state, :zip, length: { minimum: 1 }

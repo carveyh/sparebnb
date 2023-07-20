@@ -7,12 +7,12 @@ json.reservations do
 end
 
 json.listings do
- @reservations.each do |reservation|
-	json.set! reservation.listing.id do
-		# json.extract! reservation.listing,
+	@reservations.each do |reservation|
+		json.set! reservation.listing.id do
+			# json.extract! reservation.listing,
 
+		end
 	end
- end
 end
 
 json.hosts do

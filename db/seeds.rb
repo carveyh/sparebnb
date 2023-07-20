@@ -14,11 +14,14 @@ ApplicationRecord.transaction do
 	# Unnecessary if using `rails db:seed:replant`
 	User.destroy_all
 	Listing.destroy_all
+	Reservation.destroy_all
+	ReservationReview.destroy_all
 
 	puts "Resetting primary keys..."
 	ApplicationRecord.connection.reset_pk_sequence!('users')
 	ApplicationRecord.connection.reset_pk_sequence!('listings')
 	ApplicationRecord.connection.reset_pk_sequence!('reservations')
+	ApplicationRecord.connection.reset_pk_sequence!('reservation_reviews')
 
 
 
@@ -167,7 +170,7 @@ ApplicationRecord.transaction do
 	Listing.find(12).update(category: "rooms")
 	Listing.find(13).update(category: "rooms")
 
-	puts "Setting up dummy reservations..."
+	puts "Creating sample reservations..."
 
 	3.times do |i|
 		listing_id = rand(1..1)
@@ -175,14 +178,31 @@ ApplicationRecord.transaction do
 		Reservation.create!({
 			reserver_id: 1,
 			listing_id: i + 1,
-			start_date: Faker::Date.forward(days: rand(1..5)),
-			end_date: Faker::Date.forward(days: rand(9..11)),
+			start_date: Faker::Date.between(from: '2023-07-12', to: '2023-07-15'),
+			end_date: Faker::Date.between(from: '2023-07-16', to: '2023-08-04'),
 			num_guests: 1,
 			base_nightly_rate: 399
 		})
 	end
 
+	puts "Creating sample reservation reviews..."
 
+	3.times do |i|
+		ReservationReview.create!({
+			reservation_id: i + 1,
+			reviewer_id: 1,
+			body: Faker::Movies::LordOfTheRings.quote + ' ' + Faker::Movies::LordOfTheRings.quote,
+			private_message: "Oh my goodness gracious. I thought I had reserved a place in " + Faker::Australia.state + ", Australia...nevertheless, it was quite the " + Faker::Adjective.positive + " experience. The complimentary " + Faker::Food.dish + " was an especially nice touch. Thank you for being so flexible and for your hospitality!",
+			overall_rating: (3..5).to_a.sample,
+			cleanliness: (3..5).to_a.sample,
+			communication: (3..5).to_a.sample,
+			checkin: (2..5).to_a.sample,
+			accuracy: (3..5).to_a.sample,
+			location: (4..5).to_a.sample,
+			value: (1..5).to_a.sample,
+		})
+	end
+			
 	puts "Done!"
 
 end

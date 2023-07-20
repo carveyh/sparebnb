@@ -1,4 +1,4 @@
-# == Schema Information
+  # == Schema Information
 #
 # Table name: users
 #
@@ -44,6 +44,11 @@ class User < ApplicationRecord
   has_many :reservations,
     foreign_key: :reserver_id,
     class_name: :Reservation,
+    dependent: :destroy
+
+  has_many :reviews,
+    foreign_key: :reviewer_id,
+    class_name: :ReservationReview,
     dependent: :destroy
 
   # NEED TO CONFIRM SYNTAX FOR THIS

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_08_133109) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_19_004751) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -73,6 +73,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_133109) do
     t.index ["zip"], name: "index_listings_on_zip"
   end
 
+  create_table "reservation_reviews", force: :cascade do |t|
+    t.bigint "reservation_id", null: false
+    t.bigint "reviewer_id", null: false
+    t.text "body", null: false
+    t.text "private_message"
+    t.integer "overall_rating", null: false
+    t.integer "cleanliness", null: false
+    t.integer "communication", null: false
+    t.integer "checkin", null: false
+    t.integer "accuracy", null: false
+    t.integer "location", null: false
+    t.integer "value", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reservation_id"], name: "index_reservation_reviews_on_reservation_id"
+    t.index ["reviewer_id"], name: "index_reservation_reviews_on_reviewer_id"
+  end
+
   create_table "reservations", force: :cascade do |t|
     t.bigint "reserver_id", null: false
     t.bigint "listing_id", null: false
@@ -107,6 +125,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_133109) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "listings", "users", column: "host_id"
+  add_foreign_key "reservation_reviews", "reservations"
+  add_foreign_key "reservation_reviews", "users", column: "reviewer_id"
   add_foreign_key "reservations", "listings"
   add_foreign_key "reservations", "users", column: "reserver_id"
 end

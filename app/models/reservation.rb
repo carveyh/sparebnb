@@ -12,6 +12,11 @@ class Reservation < ApplicationRecord
     foreign_key: :listing_id,
     class_name: :Listing
 
+  has_one :review,
+    foreign_key: :reservation_id,
+    class_name: :ReservationReview,
+    dependent: :destroy
+
     # TEST!!! NEW ASSOC
   has_one :host,
     through: :listing,
