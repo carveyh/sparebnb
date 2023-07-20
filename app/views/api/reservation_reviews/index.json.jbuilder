@@ -19,7 +19,16 @@ json.listings do
 	@reservation_reviews.each do |reservation_review|
 		listing = reservation_review.listing
 		json.set! listing.id do
-			json.partial! 
+			json.partial! 'api/listings/listing', listing: listing
+		end
+	end
+end
+
+json.hosts do
+	@reservation_reviews.each do |reservation_review|
+		host = reservation_review.host
+		json.set! host.id do
+			json.partial! 'api/users/user', user: host
 		end
 	end
 end

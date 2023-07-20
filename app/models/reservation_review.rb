@@ -18,6 +18,10 @@ class ReservationReview < ApplicationRecord
 		through: :reservation,
 		source: :listing
 
+	belongs_to :host,
+		through: :reservation,
+		source: :host
+
 	# config/routes - RESTful member and collection routes
 	# controller - define actions corresponding to RESTful routes
 	# json view templates
