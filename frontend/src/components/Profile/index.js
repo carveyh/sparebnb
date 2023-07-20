@@ -62,14 +62,10 @@ export const TripCard = ({reservation, listing}) => {
 	}
 
 	const daysApartCalculator = (oldDate, delta) => {
-		console.log(oldDate)
 		const tomorrow = new Date(oldDate)
-		console.log(tomorrow)
 		tomorrow.setDate(tomorrow.getDate() + delta)
-		console.log(tomorrow)
 		const month = String(tomorrow.getMonth() + 1)
 		const date = String(tomorrow.getDate())
-		console.log(`${tomorrow.getFullYear()}-${month.length < 2 ? '0'.concat(month) : month}-${date.length < 2 ? '0' + date : date}`)
 		return `${tomorrow.getFullYear()}-${month.length < 2 ? '0'.concat(month) : month}-${date.length < 2 ? '0' + date : date}`
 		
 	}
@@ -77,7 +73,7 @@ export const TripCard = ({reservation, listing}) => {
 	const handleUpdate = e => {
 		e.preventDefault();
 		const newReservation = {...reservation, startDate: checkIn, endDate: checkOut, numGuests: parseInt(numGuests)};
-		// debugger
+		
 
 		// NEED TO TRY - CATCH
 		try {
@@ -199,7 +195,7 @@ const ProfilePage = (props) => {
 	const sessionUser = useSelector(state => state.session?.user)
 	const reservations = useSelector(state => state.entities?.reservations ? state.entities.reservations : null)
 	const listings = useSelector(state => state.entities?.listings ? state.entities.listings : null)
-	// debugger 
+	 
 	useEffect(() => {
 		// dispatch(fetchReservations(userId))
 		dispatch(fetchReservations({id: userId, type: "user"}))
@@ -217,20 +213,20 @@ const ProfilePage = (props) => {
 		for(let i = 0; i < reservationsArray.length; i++){
 			// reservationsArray[i].listingId
 			const filteredListing = Object.values(listings).filter(listing => listing.id === reservationsArray[i].listingId)[0]
-			// debugger
+			
 			upcomingTripTiles.push(
 				<TripCard reservation={reservationsArray[i]} listing={filteredListing}/>
 			)
 			// upcomingTripTiles.push(
 			// 	<TripMenu reservation={reservationsArray[i]} listing={filteredListing}/>
 			// )
-			// debugger
+			
 		}
 	}
 
 
 
-	// debugger
+	
 
 	// if(!reservations || !listings) return null;	
 	if(!reservations || !listings || !sessionUser) return <Redirect to="/" />;	

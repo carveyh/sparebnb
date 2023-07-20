@@ -40,12 +40,9 @@ export const fetchListing = (listingId) => async dispatch => {
 
 // // Tried to implement, not working - revisit.
 // export const fetchUsersListings = (userId) => async dispatch => {
-// 	debugger
 // 	const res = await csrfFetch(`/api/users/${userId}/listings`);
-// 	debugger
 // 	if(res.ok) {
 // 		const data = await res.json();
-// 		debugger
 // 		dispatch(receiveListings(data.listings));
 // 	}
 // 	return res;

@@ -14,11 +14,13 @@ class ReservationReview < ApplicationRecord
 		foreign_key: :reviewer_id,
 		class_name: :User
 
-	belongs_to :listing,
+	# belongs_to :listing, #This will trigger a `ArgumentError - Unknown key: :through` error upon clicking to delete a reservation on website.
+	has_one :listing,
 		through: :reservation,
 		source: :listing
 
-	belongs_to :host,
+	# belongs_to :listing, #This will trigger a `ArgumentError - Unknown key: :through` error upon clicking to delete a reservation on website.
+	has_one :host,
 		through: :reservation,
 		source: :host
 

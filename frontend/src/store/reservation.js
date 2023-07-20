@@ -34,13 +34,11 @@ export const removeAllReservationsFromState = () => ({
 //THIS BELOW NOT WORKING - a dynamic fetchReservations that can diff types wildcard.
 //REVISIT! 
 export const fetchReservations = ({id, type}) => async dispatch => {
-	// debugger
 	let requestUrl;
 	if(id && type === "listing"){
 		const listingId = id;
 		requestUrl = `/api/listings/${listingId}/reservations`;
 	} else if (id && type === "user") {
-		// debugger
 		const userId = id;
 		requestUrl = `/api/users/${userId}/reservations`;
 	} else {
@@ -61,12 +59,9 @@ export const fetchReservations = ({id, type}) => async dispatch => {
 // 	} else {
 // 		requestUrl = `/api/reservations`;
 // 	}
-// 	debugger
 // 	const res = await csrfFetch(requestUrl);
 // 	if(res.ok){
-// 		debugger
 // 		const data = await res.json();
-// 		debugger
 // 		dispatch(receiveReservations(data.reservations));
 // 	}
 // 	return res;
@@ -94,7 +89,6 @@ export const clearAllReservations = () => async dispatch => {
 }
 
 export const updateReservation = (reservation) => async dispatch => {
-	// debugger
 	const {
 		startDate, 
 		endDate, 
@@ -116,9 +110,7 @@ export const updateReservation = (reservation) => async dispatch => {
 		})
 	})
 	if(res.ok){
-		// debugger
 		const data = await res.json();
-		// debugger
 		dispatch(receiveReservation(data.reservation));
 	} else {
 		// error handling here!
@@ -128,7 +120,6 @@ export const updateReservation = (reservation) => async dispatch => {
 }
 
 export const createReservation = (reservation) => async dispatch => {
-	// debugger
 	const {
 		checkIn, 
 		checkOut, 
@@ -137,7 +128,6 @@ export const createReservation = (reservation) => async dispatch => {
 		reserverId,
 		baseNightlyRate
 	} = reservation;
-	// debugger
 	const res = await csrfFetch(`/api/listings/${listingId}/reservations`, {
 		method: 'POST',
 		body: JSON.stringify({

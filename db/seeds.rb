@@ -174,7 +174,6 @@ ApplicationRecord.transaction do
 
 	3.times do |i|
 		listing_id = rand(1..1)
-		# debugger
 		Reservation.create!({
 			reserver_id: 1,
 			listing_id: i + 1,

@@ -61,14 +61,10 @@ const ListingsShowPage = (props) => {
 
 
 	const daysApartCalculator = (oldDate, delta) => {
-		console.log(oldDate)
 		const tomorrow = new Date(oldDate)
-		console.log(tomorrow)
 		tomorrow.setDate(tomorrow.getDate() + delta)
-		console.log(tomorrow)
 		const month = String(tomorrow.getMonth() + 1)
 		const date = String(tomorrow.getDate())
-		console.log(`${tomorrow.getFullYear()}-${month.length < 2 ? '0'.concat(month) : month}-${date.length < 2 ? '0' + date : date}`)
 		return `${tomorrow.getFullYear()}-${month.length < 2 ? '0'.concat(month) : month}-${date.length < 2 ? '0' + date : date}`
 		
 	}
@@ -83,7 +79,6 @@ const ListingsShowPage = (props) => {
 		if(!checkIn || !checkOut) return null;
 		const diffTime = Math.abs(new Date(checkOut) - new Date(checkIn));
 		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-		// debugger
 		return diffDays;
 	}
 
@@ -99,10 +94,8 @@ const ListingsShowPage = (props) => {
 	}
 
 	const handleSubmit = (e) => {
-		// debugger
 		e.preventDefault();
 		if(!sessionUser || !buttonClickable) {
-			console.log("Must be logged in to register")
 			return
 		} else {
 			const reservation = { checkIn, checkOut, numGuests, listingId,
@@ -128,8 +121,6 @@ const ListingsShowPage = (props) => {
 				if(data?.errors) setErrors(data.errors)
 				else if(data) setErrors([data])
 				else setErrors([res.statusText]);
-				console.log(errors);
-				// debugger
 			})
 		}
 	}
@@ -151,8 +142,6 @@ const ListingsShowPage = (props) => {
 	}
 
 	if(!listing || !host) return null;
-
-	// debugger
 
 	return (
 		// <AnimatePresence>

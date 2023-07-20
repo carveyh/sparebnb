@@ -26,7 +26,6 @@ class Reservation < ApplicationRecord
 
   # This is not accepted in rails, results in a NilError because start_date is nil.
   # def validate_date_range
-  #   debugger
   #   if start_date >= end_date
   #     errors.add('End date must occur after start date')
   #   end
@@ -34,7 +33,6 @@ class Reservation < ApplicationRecord
 
   # For some reason listing_id is nil here as well.
   # def user_does_not_book_own_listing
-  #   debugger
   #   if reserver_id == Listing.find(listing_id).host_id
   #     errors.add('Cannot book own listing')
   #   end
