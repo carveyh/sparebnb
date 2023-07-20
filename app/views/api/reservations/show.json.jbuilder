@@ -7,5 +7,5 @@ json.listing do
 end
 
 json.host do
-	json.partial! 'api/users/user', user: @listing.host
+	json.partial! 'api/users/user', user: @reservation.host
 end

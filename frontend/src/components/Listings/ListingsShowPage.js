@@ -129,7 +129,7 @@ const ListingsShowPage = (props) => {
 				else if(data) setErrors([data])
 				else setErrors([res.statusText]);
 				console.log(errors);
-				debugger
+				// debugger
 			})
 		}
 	}
