@@ -28,7 +28,7 @@ export const fetchResReview = (id) => async (dispatch) => {
 	const res = await csrfFetch(`/api/reservation_reviews/${id}`);
 	if(res.ok){
 		const data = await res.json();
-		dispatch(receiveResReview(data.reservation_review))
+		dispatch(receiveResReview(data.reservationReview))
 	}
 	return res;
 }
@@ -37,7 +37,7 @@ export const fetchResReviewForReservation = (reservationId) => async (dispatch) 
 	const res = await csrfFetch(`/api/reservations/${reservationId}/reservation_reviews`)
 	if(res.ok){
 		const data = await res.json();
-		dispatch(receiveResReview(data.reservation_review))
+		dispatch(receiveResReview(data.reservationReview))
 	}
 	return res;
 }
@@ -46,7 +46,7 @@ export const fetchResReviewsForListing = (listingId) => async (dispatch) => {
 	const res = await csrfFetch(`/api/listings/${listingId}/reservation_reviews`)
 	if(res.ok){
 		const data = await res.json();
-		dispatch(receiveResReviews(data.reservation_reviews))
+		dispatch(receiveResReviews(data.reservationReviews))
 	}
 	return res;
 }
@@ -55,7 +55,7 @@ export const fetchResReviewsForGuest = (guestId) => async (dispatch) => {
 	const res = await csrfFetch(`/api/users/${guestId}/reservation_reviews`)
 	if(res.ok){
 		const data = await res.json();
-		dispatch(receiveResReviews(data.reservation_reviews))
+		dispatch(receiveResReviews(data.reservationReviews))
 	}
 	return res;
 }
@@ -70,7 +70,7 @@ export const createResReview = (review) => async (dispatch) => {
 	})
 	if(res.ok){
 		const data = await res.json();
-		dispatch(receiveResReview(data.reservation_review))
+		dispatch(receiveResReview(data.reservationReview))
 	}
 	return res;
 }
@@ -83,7 +83,7 @@ export const updateResReview = (review) => async (dispatch) => {
 	})
 	if(res.ok){
 		const data = await res.json();
-		dispatch(receiveResReview(data.reservation_review))
+		dispatch(receiveResReview(data.reservationReview))
 	}
 	return res;
 }

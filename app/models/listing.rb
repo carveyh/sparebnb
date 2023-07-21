@@ -33,14 +33,27 @@ class Listing < ApplicationRecord
 
   has_many :reservers,
     through: :reservations,
-    source: :reserver
+    source: :reserver,
+    dependent: :destroy
 
   has_many :reviews,
     through: :reservations,
-    source: :review
+    source: :review,
+    dependent: :destroy
 
   validates :title, :description, :category, length: { minimum: 1 }
   validates :latitude, :longitude, presence: true
   validates :address, :city, :state, :zip, length: { minimum: 1 }
   validates :num_bedrooms, :num_beds, :num_baths, :max_guests, :base_nightly_rate, numericality: { greater_than: 0 }
+
+  def average_ratings
+    categories = %i(overall_rating cleanliness communication checkin accuracy location value)
+    averages = {};
+    total_reviews = reviews.length
+    categories.each do |category|
+      averages[category] = total_reviews > 0 ? self.reviews.sum(0) {|review| review[category]} / total_reviews.to_f.round(2) : 0
+    end
+    averages
+  end
+
 end

@@ -20,7 +20,8 @@ class Reservation < ApplicationRecord
     # TEST!!! NEW ASSOC
   has_one :host,
     through: :listing,
-    source: :host
+    source: :host,
+    dependent: :destroy
 
   private
 

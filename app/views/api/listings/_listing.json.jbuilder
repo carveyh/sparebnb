@@ -17,3 +17,5 @@ json.extract! listing,
 	:category,
 	:created_at,
 	:updated_at
+json.average_ratings listing.average_ratings
+json.num_ratings listing.reviews.length

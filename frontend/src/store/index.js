@@ -4,11 +4,13 @@ import sessionReducer from './session';
 import listingsReducer from './listings';
 import usersReducer from './user';
 import reservationsReducer from './reservation';
+import reservationReviewsReducer from './reservation_reviews';
 
 const entitiesReducer = combineReducers({
 	listings: listingsReducer,
 	users: usersReducer,
-	reservations: reservationsReducer
+	reservations: reservationsReducer,
+	res_reviews: reservationReviewsReducer,
 })
 
 const rootReducer = combineReducers({

@@ -12,6 +12,7 @@ import { useState } from "react";
 import { createReservation } from "../../store/reservation";
 
 import {AnimatePresence, motion} from "framer-motion";
+import { fetchResReviewsForListing } from "../../store/reservation_reviews";
 
 export const ListingsShowPhoto = ({listingId, imageNum}) => {
 	listingId = formatTwoDigitNumberString(listingId);
@@ -37,6 +38,7 @@ const ListingsShowPage = (props) => {
 	useEffect(() => {
 		dispatch(fetchListing(listingId));
 		dispatch(fetchUser(listing?.hostId));
+		dispatch(fetchResReviewsForListing(listingId));
 	}, [])
 
 	const [checkIn, setCheckIn] = useState();
@@ -399,6 +401,8 @@ const ListingsShowPage = (props) => {
 				{/* REVIEWS - START */}
 				<div className="horizontal-rule-top-border plain-text">
 					<br/><br/><br/><br/><br/>
+					<div>No reviews (yet) if none</div>
+					<br/>
 					<div>STAR, #.## · # reviews</div>
 					<br/>
 					<div>Cleanliness bar #.#</div>
@@ -420,7 +424,7 @@ const ListingsShowPage = (props) => {
 					<br/>
 					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
 					<br/>
-					<div>Show all # reviews</div>
+					<div>Show all # reviews if more than 6</div>
 					<br/><br/><br/><br/><br/>
 				</div>
 			{/* REVIEWS - END */}
