@@ -40,18 +40,15 @@ export const fetchListing = (listingId) => async dispatch => {
 
 // // Tried to implement, not working - revisit.
 // export const fetchUsersListings = (userId) => async dispatch => {
-// 	debugger
 // 	const res = await csrfFetch(`/api/users/${userId}/listings`);
-// 	debugger
 // 	if(res.ok) {
 // 		const data = await res.json();
-// 		debugger
 // 		dispatch(receiveListings(data.listings));
 // 	}
 // 	return res;
 // }
 
-// SESSION REDUCER
+// LISTINGS REDUCER
 // How session slice of state's :user gets restored to a currentUser from sessionStorage, if any.
 const listingsReducer = (state = {}, action) => {
 	Object.freeze(state);

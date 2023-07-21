@@ -11,4 +11,5 @@ json.extract! reservation_review,
 	:accuracy,
 	:location,
 	:value
+json.hostId reservation_review.host.id
 json.listingId reservation_review.listing.id

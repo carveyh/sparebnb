@@ -7,9 +7,8 @@ import ListingsShowPage from "./components/Listings/ListingsShowPage";
 import ProfilePage from "./components/Profile";
 
 function App() {
-  // console.log("redirected!")
   return (
-    <div>
+    <div className="under-modal">
       <Navigation />
 
       <div id="main-body">

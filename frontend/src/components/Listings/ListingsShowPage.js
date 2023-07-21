@@ -12,6 +12,7 @@ import { useState } from "react";
 import { createReservation } from "../../store/reservation";
 
 import {AnimatePresence, motion} from "framer-motion";
+import { fetchResReviewsForListing } from "../../store/reservation_reviews";
 
 export const ListingsShowPhoto = ({listingId, imageNum}) => {
 	listingId = formatTwoDigitNumberString(listingId);
@@ -37,6 +38,7 @@ const ListingsShowPage = (props) => {
 	useEffect(() => {
 		dispatch(fetchListing(listingId));
 		dispatch(fetchUser(listing?.hostId));
+		dispatch(fetchResReviewsForListing(listingId));
 	}, [])
 
 	const [checkIn, setCheckIn] = useState();
@@ -61,14 +63,10 @@ const ListingsShowPage = (props) => {
 
 
 	const daysApartCalculator = (oldDate, delta) => {
-		console.log(oldDate)
 		const tomorrow = new Date(oldDate)
-		console.log(tomorrow)
 		tomorrow.setDate(tomorrow.getDate() + delta)
-		console.log(tomorrow)
 		const month = String(tomorrow.getMonth() + 1)
 		const date = String(tomorrow.getDate())
-		console.log(`${tomorrow.getFullYear()}-${month.length < 2 ? '0'.concat(month) : month}-${date.length < 2 ? '0' + date : date}`)
 		return `${tomorrow.getFullYear()}-${month.length < 2 ? '0'.concat(month) : month}-${date.length < 2 ? '0' + date : date}`
 		
 	}
@@ -83,7 +81,6 @@ const ListingsShowPage = (props) => {
 		if(!checkIn || !checkOut) return null;
 		const diffTime = Math.abs(new Date(checkOut) - new Date(checkIn));
 		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-		// debugger
 		return diffDays;
 	}
 
@@ -99,10 +96,8 @@ const ListingsShowPage = (props) => {
 	}
 
 	const handleSubmit = (e) => {
-		// debugger
 		e.preventDefault();
 		if(!sessionUser || !buttonClickable) {
-			console.log("Must be logged in to register")
 			return
 		} else {
 			const reservation = { checkIn, checkOut, numGuests, listingId,
@@ -128,8 +123,6 @@ const ListingsShowPage = (props) => {
 				if(data?.errors) setErrors(data.errors)
 				else if(data) setErrors([data])
 				else setErrors([res.statusText]);
-				console.log(errors);
-				debugger
 			})
 		}
 	}
@@ -151,8 +144,6 @@ const ListingsShowPage = (props) => {
 	}
 
 	if(!listing || !host) return null;
-
-	// debugger
 
 	return (
 		// <AnimatePresence>
@@ -406,12 +397,39 @@ const ListingsShowPage = (props) => {
 
 				{/* LISTING DETAILS - END */}
 
-
+				{/* REVIEWS - START */}
+				{/* REVIEWS - START */}
 				<div className="horizontal-rule-top-border plain-text">
 					<br/><br/><br/><br/><br/>
-					<div>Reviews</div>
+					<div>No reviews (yet) if none</div>
+					<br/>
+					<div>STAR, #.## · # reviews</div>
+					<br/>
+					<div>Cleanliness bar #.#</div>
+					<div>Communication bar #.#</div>
+					<div>Check-in bar #.#</div>
+					<div>Accuracy bar #.#</div>
+					<div>Location bar #.#</div>
+					<div>Value bar #.#</div>
+					<br/>
+					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+					<br/>
+					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+					<br/>
+					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+					<br/>
+					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+					<br/>
+					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+					<br/>
+					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+					<br/>
+					<div>Show all # reviews if more than 6</div>
 					<br/><br/><br/><br/><br/>
 				</div>
+			{/* REVIEWS - END */}
+			{/* REVIEWS - END */}
+
 				<div className="horizontal-rule-top-border plain-text">
 					<br/><br/><br/><br/><br/>
 					<div>Maps</div>

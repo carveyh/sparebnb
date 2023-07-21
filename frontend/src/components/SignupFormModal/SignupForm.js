@@ -8,9 +8,24 @@ import { useEffect } from 'react';
 import { loginUser } from '../../store/session';
 
 const SignupForm = ({setShowSignUpModal}) => {
+
+	const disableOtherScroll = (e) => {
+		const underModal = document.querySelector(".under-Modal")
+		e.preventDefault();
+		e.stopPropogation();
+		return;
+	}
+
 	useEffect(() => {
 		// document.getElementById("first-name-input").focus({preventScroll:false, focusVisible: true});
+
+		const underModal = document.querySelector(".under-modal")
+		// underModal.addEventListener("wheel", disableOtherScroll)
+
 		document.querySelector(".x-close").focus({preventScroll:false, focusVisible: true});
+		return () => {
+			// underModal.removeEventListener("wheel", disableOtherScroll);
+		}
 	}, [])
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state = {}) => state.session?.user)

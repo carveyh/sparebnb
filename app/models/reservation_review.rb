@@ -14,9 +14,17 @@ class ReservationReview < ApplicationRecord
 		foreign_key: :reviewer_id,
 		class_name: :User
 
-	belongs_to :listing,
+	# belongs_to :listing, #This will trigger a `ArgumentError - Unknown key: :through` error upon clicking to delete a reservation on website.
+	has_one :listing,
 		through: :reservation,
-		source: :listing
+		source: :listing,
+    dependent: :destroy
+
+	# same compromise as above error
+	has_one :host,
+		through: :reservation,
+		source: :host,
+    dependent: :destroy
 
 	# config/routes - RESTful member and collection routes
 	# controller - define actions corresponding to RESTful routes

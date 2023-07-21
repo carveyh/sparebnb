@@ -16,8 +16,6 @@ const ListingCard = ({listing, num}) => {
 	// const history = useHistory();
 	// const handleClick = e => {
 	// 	e.preventDefault();
-	// 	// debugger
-	// 	console.log("hi")
 	// 	history.push(`/listings/${num}`)
 	// }
 
@@ -48,7 +46,6 @@ const ListingCard = ({listing, num}) => {
 const ListingsIndex = ({filter}) => {
 	const dispatch = useDispatch();
 	const listings = useSelector(state => state.entities?.listings ? state.entities.listings : {})
-	// debugger
 	let filteredListings;
 	if(filter) {
 		filteredListings = Object.values(listings).filter(listing => listing.category === filter)

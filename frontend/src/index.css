@@ -14,6 +14,11 @@
 	/* padding: 0px 80px; */
 }
 
+* {
+	/* overflow-y: auto; */
+	/* scrollbar-gutter: stable; */
+}
+
 .active {
 	/* color: red; */
 }
@@ -58,4 +63,24 @@ p {
 	position:sticky;
 	top: 60px;
 	background-color: white;
+}
+
+.under-modal {
+	/* scrollbar-gutter: inherit; */
+	/* overflow: auto; */
+	width: 100%;
+	height: 100%;
+}
+
+html {
+	scrollbar-gutter: stable;
+	/* overflow: auto; */
+	/* overflow-y: hidden; */
+}
+
+body {
+	/* overflow-y: hidden !important; */
+	/* overflow-x: hidden !important; */
+	overflow-x: hidden;
+
 }
