@@ -20,7 +20,7 @@
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	/* overflow-x:scroll; */
+	overflow-x:scroll;
 	/* This is shorthand for overscroll-behavior-x and -y and prevents scrolling of */
 	/* other elements, "bounce" effect, and refresh/back/fwd navigation with trackpad scrolling */
 	overscroll-behavior: contain;
