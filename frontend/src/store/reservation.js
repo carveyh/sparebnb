@@ -146,7 +146,7 @@ export const createReservation = (reservation) => async dispatch => {
 	return res;
 }
 
-// SESSION REDUCER
+// RESERVATIONS REDUCER
 
 const reservationsReducer = (state = {}, action) => {
 	Object.freeze(state);

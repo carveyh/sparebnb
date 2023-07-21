@@ -96,4 +96,24 @@ export const destroyResReview = (reviewId) => async (dispatch) => {
 	return res;
 }
 
-// REDUCER
+// RESERVATION_REVIEWS REDUCER
+
+const reservationReviewsReducer = (state = {}, action) => {
+	Object.freeze(state);
+	const newState = {...state};
+	switch (action.type) {
+		case RECEIVE_RES_REVIEWS:
+			return {...newState, ...action.reviews};
+		case RECEIVE_RES_REVIEW:
+			newState[action.review.id] = action.review;
+			return newState;
+		case REMOVE_RES_REVIEW:
+			delete newState[action.reviewId];
+			return newState;
+
+		default:
+			return newState;
+	}
+}
+
+export default reservationReviewsReducer;

@@ -48,7 +48,7 @@ export const fetchListing = (listingId) => async dispatch => {
 // 	return res;
 // }
 
-// SESSION REDUCER
+// LISTINGS REDUCER
 // How session slice of state's :user gets restored to a currentUser from sessionStorage, if any.
 const listingsReducer = (state = {}, action) => {
 	Object.freeze(state);

@@ -22,7 +22,7 @@ export const fetchUser = (userId) => async dispatch => {
 	return res;
 }
 
-// SESSION REDUCER
+// USER REDUCER
 const usersReducer = (state = {}, action) => {
 	Object.freeze(state);
 	switch(action.type) {

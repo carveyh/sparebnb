@@ -409,7 +409,7 @@
 	/* background-color: aqua; */
 	position: sticky;
 	
-	margin-top: 48px;
+	/* margin-top: 48px; */
 	
 	padding-top: 48px;
 	padding-bottom: 48px;
@@ -492,12 +492,12 @@
 }
 
 .checkin-input {
-	border:1px rgb(221, 221, 221) solid;
+	border:1px rgb(176, 176, 176) solid;
 	border-top-left-radius: 8px;
 }
 
 .checkout-input {
-	border: 1px rgb(221, 221, 221) solid;
+	border: 1px rgb(176, 176, 176) solid;
 	border-top-right-radius: 8px;
 	border-left: none;
 
@@ -525,7 +525,7 @@
 	height: 56px;
 	/* outline:none; */
 	border:none;
-	border:1px rgb(221, 221, 221) solid;
+	border:1px rgb(176, 176, 176) solid;
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
 	border-top:none;

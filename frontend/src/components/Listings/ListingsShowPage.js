@@ -395,12 +395,37 @@ const ListingsShowPage = (props) => {
 
 				{/* LISTING DETAILS - END */}
 
-
+				{/* REVIEWS - START */}
+				{/* REVIEWS - START */}
 				<div className="horizontal-rule-top-border plain-text">
 					<br/><br/><br/><br/><br/>
-					<div>Reviews</div>
+					<div>STAR, #.## · # reviews</div>
+					<br/>
+					<div>Cleanliness bar #.#</div>
+					<div>Communication bar #.#</div>
+					<div>Check-in bar #.#</div>
+					<div>Accuracy bar #.#</div>
+					<div>Location bar #.#</div>
+					<div>Value bar #.#</div>
+					<br/>
+					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+					<br/>
+					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+					<br/>
+					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+					<br/>
+					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+					<br/>
+					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+					<br/>
+					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+					<br/>
+					<div>Show all # reviews</div>
 					<br/><br/><br/><br/><br/>
 				</div>
+			{/* REVIEWS - END */}
+			{/* REVIEWS - END */}
+
 				<div className="horizontal-rule-top-border plain-text">
 					<br/><br/><br/><br/><br/>
 					<div>Maps</div>
