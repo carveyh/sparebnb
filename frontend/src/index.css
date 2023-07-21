@@ -75,4 +75,12 @@ p {
 html {
 	scrollbar-gutter: stable;
 	/* overflow: auto; */
+	/* overflow-y: hidden; */
+}
+
+body {
+	/* overflow-y: hidden !important; */
+	/* overflow-x: hidden !important; */
+	overflow-x: hidden;
+
 }

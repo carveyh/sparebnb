@@ -16,9 +16,11 @@ const Navigation = () => {
 	// Disables page scrolling if a modal is open!
 	if(showLogInModal || showSignUpModal){
 		// This was working fine before, but as of 7/20, it will cause site to expand to cover the missing scroll bar...need to check how to prevent this change in layout on page.
-		document.body.style.overflow = "hidden";
+		// document.body.style.overflow = "hidden";
+		document.querySelector('body').style.overflowY = "hidden";
 	} else {
-		document.body.style.overflow = "scroll";
+		// document.body.style.overflow = "scroll";
+		document.querySelector('body').style.overflowY = "scroll";
 	}
 
 return (
