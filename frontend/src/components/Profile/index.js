@@ -250,7 +250,7 @@ const ProfilePage = (props) => {
 						</div>
 						<div className="trip-cards-main-container">
 							{/* ALL CARDS FOR PAST RESEREVATIONS */}
-							{upcomingTripTiles}
+							{upcomingTripTiles.length ? upcomingTripTiles : <div className="trips-not-found">This list is empty.</div> }
 						</div>
 					</div>
 					{/* TRIP CARDS - UPCOMING */}

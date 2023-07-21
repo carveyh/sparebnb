@@ -173,7 +173,7 @@ ApplicationRecord.transaction do
 	puts "Creating sample reservations..."
 
 	3.times do |i|
-		listing_id = rand(1..1)
+		# listing_id = rand(1..1)
 		Reservation.create!({
 			reserver_id: 1,
 			listing_id: i + 1,
@@ -183,6 +183,17 @@ ApplicationRecord.transaction do
 			base_nightly_rate: 399
 		})
 	end
+
+	Reservation.create!({
+		reserver_id: 1,
+		listing_id: 1,
+		start_date: '2023-07-01',
+		end_date: '2023-07-03',
+		num_guests: 1,
+		base_nightly_rate: 399
+	})
+
+
 
 	puts "Creating sample reservation reviews..."
 

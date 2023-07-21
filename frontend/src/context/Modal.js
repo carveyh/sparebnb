@@ -24,7 +24,7 @@ export const ModalProvider = (props) => {
 	return (
 		<div>
 			<ModalContext.Provider value={value} >
-				{/* What happens if we don't explicitly do below...? Do children not render? */}
+				{/* What happens if we don't explicitly do below...? Do children not render? - They do not*/}
 				{props.children} 
 			</ModalContext.Provider>
 			<div ref={modalRef} >

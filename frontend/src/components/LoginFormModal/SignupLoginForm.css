@@ -24,7 +24,7 @@ div.signup-form, div.login-form {
 	max-height: 682px;
 	height: 682px;
 	align-self: center;
-	overflow-y:scroll;
+	overflow-y:hidden;
 }
 
 .login-form{

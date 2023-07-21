@@ -8,7 +8,7 @@ import ProfilePage from "./components/Profile";
 
 function App() {
   return (
-    <div>
+    <div className="under-modal">
       <Navigation />
 
       <div id="main-body">
