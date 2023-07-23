@@ -197,6 +197,9 @@ const ProfilePage = (props) => {
 	const listings = useSelector(state => state.entities?.listings ? state.entities.listings : null)
 	 
 	useEffect(() => {
+
+		window.scrollTo(0, 0);
+		
 		// dispatch(fetchReservations(userId))
 		dispatch(fetchReservations({id: userId, type: "user"}))
 		
