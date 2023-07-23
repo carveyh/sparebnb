@@ -36,6 +36,8 @@ const ListingsShowPage = (props) => {
 	const hostIdFormatted = formatTwoDigitNumberString(host?.id);	
 
 	useEffect(() => {
+		// Add this line to try to always be at top of a page when navigationg from a dff one
+		window.scrollTo(0, 0);
 		dispatch(fetchListing(listingId));
 		dispatch(fetchUser(listing?.hostId));
 		dispatch(fetchResReviewsForListing(listingId));

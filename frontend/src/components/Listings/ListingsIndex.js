@@ -55,6 +55,7 @@ const ListingsIndex = ({filter}) => {
 
 	// const sortedListings = 
 	useEffect(() => {
+		window.scrollTo(0, 0);
 		dispatch(fetchListings())
 	}, [])
 	const numTestListings = 13;
