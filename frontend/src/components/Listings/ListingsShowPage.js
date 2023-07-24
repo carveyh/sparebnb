@@ -38,6 +38,8 @@ const ListingsShowPage = (props) => {
 	useEffect(() => {
 		// Add this line to try to always be at top of a page when navigationg from a dff one
 		window.scrollTo(0, 0);
+
+		// debugger
 		dispatch(fetchListing(listingId));
 		dispatch(fetchUser(listing?.hostId));
 		dispatch(fetchResReviewsForListing(listingId));
@@ -405,7 +407,8 @@ const ListingsShowPage = (props) => {
 					<br/><br/><br/><br/><br/>
 					<div>No reviews (yet) if none</div>
 					<br/>
-					<div>STAR, #.## · # reviews</div>
+					{/* <div>STAR, #.## · # reviews</div> */}
+					<div><i class="fa-solid fa-star"></i> {`${listing?.averageRatings.overallRating}`} · {`${listing?.numRatings}`} reviews</div>
 					<br/>
 					<div>Cleanliness bar #.#</div>
 					<div>Communication bar #.#</div>
