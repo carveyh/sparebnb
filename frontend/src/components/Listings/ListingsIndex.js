@@ -25,7 +25,7 @@ const ListingCard = ({listing, num}) => {
 		<motion.div key={num} animate={{opacity:1}} exit={{opacity: 0}}>
 		<Link to={`/listings/${listing?.id}`}>
 			<div className={`grid-item grid-item-${num}`} >
-						<div className="listing-favorite-button-background"><i class="fa-solid fa-heart"></i></div>
+						<div className="listing-favorite-button-background"><i className="fa-solid fa-heart"></i></div>
 						<div className="listing-favorite-button"><i className="fa-regular fa-heart"></i></div>
 						<div className="listings-photo-container">
 							{/* <img className="listings-photo" src={require(`../../images/listings/${photoFileNames[num-1]}.png`)} /> */}
@@ -65,13 +65,13 @@ const ListingsIndex = ({filter}) => {
 		if(!filter){
 			for(let i = 1; i <= numTestListings; i++) {
 				listingCards.push(
-					<ListingCard listing={filteredListings[i % filteredListings.length]} num={i} />
+					<ListingCard key={filteredListings[(i % filteredListings.length) - 1]?.id} listing={filteredListings[((i - 1) % filteredListings.length)]} num={i} />
 				)
 			}
 		} else {
 			for(let i = 1; i <= filteredListings.length; i++) {
 				listingCards.push(
-					<ListingCard listing={filteredListings[i % filteredListings.length]} num={i} />
+					<ListingCard key={filteredListings[(i % filteredListings.length) - 1]?.id} listing={filteredListings[((i - 1) % filteredListings.length)]} num={i} />
 				)
 			}
 		}
@@ -87,11 +87,11 @@ const ListingsIndex = ({filter}) => {
 				{!filter &&
 					<>
 						{listingCards}
-						{listingCards}
-						{listingCards}
-						{listingCards}
-						{listingCards}
-						{listingCards}
+						{/* {listingCards} */}
+						{/* {listingCards} */}
+						{/* {listingCards} */}
+						{/* {listingCards} */}
+						{/* {listingCards} */}
 					</>
 				}
 				</AnimatePresence>

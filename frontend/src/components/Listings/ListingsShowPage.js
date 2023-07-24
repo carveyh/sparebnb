@@ -99,6 +99,33 @@ const ListingsShowPage = (props) => {
 		return numNights() ? numNights() * baseServiceFee : baseServiceFee;
 	}
 
+	// REVIEWS DISPLAY DATA - START
+	// Be able to parse return string in 3 different locations: 
+	// (1) Page header
+	// (2) Create res box top-right corner
+	// (3) Reviews section 
+
+	// const reviewsSummary = () => {
+	// 	const summaryObj = {
+	// 		icon: null,
+	// 		numReviews: listing.numReviews,
+	// 		overallRating: listing.averageRatings.overallRating,
+	// 	}
+	// 	switch(true) {
+	// 		case listing.numReviews <= 0: // 0 reviews
+	// 			break;
+	// 		case listing.numReviews <= 2: // 1 or 2 reviews 
+	// 			break;
+	// 		case listing.numReviews <= 6: // 3 to 6 reviews
+	// 			summaryObj.icon = <i className="fa-solid fa-star"></i>
+	// 			break;
+	// 		default: // 7+ reviews
+	// 			summaryObj.icon = <i className="fa-solid fa-star"></i>
+	// 			break;
+	// 	}
+	// 	return summaryObj;
+	// }
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if(!sessionUser || !buttonClickable) {
@@ -134,7 +161,7 @@ const ListingsShowPage = (props) => {
 	const numGuestsSelector = () => {
 		const options = [];
 		for(let i = 1; i <= (listing ? listing.maxGuests : 0); i ++){
-			options.push(<option value={i}>{i}</option>)
+			options.push(<option key={i} value={i}>{i}</option>)
 		}
 
 		return (
@@ -165,15 +192,16 @@ const ListingsShowPage = (props) => {
 						<div className="show-header-details">
 							<div className="show-header-stats">
 								<span className="rating-review-stats stats-text-small">
-									<span className="star-icon"><i class="fa-solid fa-star"></i></span>
+									<span className="star-icon"><i className="fa-solid fa-star"></i></span>
 									<span className="header-rating">4.93 ·</span>
+									{/* <span className="header-review-count">15 reviews</span> */}
 									<span className="header-review-count">15 reviews</span>
 								</span>
 							</div>
 							<div className="show-header-buttons stats-text-small">
-								<i class="fa-solid fa-arrow-up-from-bracket"></i>&nbsp;&nbsp;Share 
+								<i className="fa-solid fa-arrow-up-from-bracket"></i>&nbsp;&nbsp;Share 
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<i class="fa-regular fa-heart"></i>&nbsp;&nbsp;Save
+								<i className="fa-regular fa-heart"></i>&nbsp;&nbsp;Save
 							</div>
 						</div>
 					</div>
@@ -334,7 +362,7 @@ const ListingsShowPage = (props) => {
 											<div className="heading-2">${listing.baseNightlyRate}</div> &nbsp; <div className="plain-text">night</div>
 										</div>
 										<div className="stats-text-small">
-											<i class="fa-solid fa-star"></i> &nbsp; 4.93 · 15 reviews
+											<i className="fa-solid fa-star"></i> &nbsp; 4.93 · 15 reviews
 										</div>
 									</div>
 									{/* FORM - START */}
@@ -386,7 +414,7 @@ const ListingsShowPage = (props) => {
 									<div className="total-before-taxes plain-text form-padding-top">Total before taxes - ${baseTotalCost() + cleaningFee + totalServiceFee()}</div>
 								</div>
 								<div className="report-button-container">
-									<div className="report-button"><i class="fa-solid fa-flag"></i> &nbsp; Report this listing</div>
+									<div className="report-button"><i className="fa-solid fa-flag"></i> &nbsp; Report this listing</div>
 								</div>
 							</div>
 						</div>
@@ -405,10 +433,12 @@ const ListingsShowPage = (props) => {
 				{/* REVIEWS - START */}
 				<div className="horizontal-rule-top-border plain-text">
 					<br/><br/><br/><br/><br/>
-					<div>No reviews (yet) if none</div>
+					{listing.numRatings === 0 ? 
+						<div>No reviews (yet)</div>
+						: <div><i className="fa-solid fa-star"></i> {`${listing?.averageRatings.overallRating}`} · {`${listing?.numRatings}`} reviews</div>
+					}
 					<br/>
-					{/* <div>STAR, #.## · # reviews</div> */}
-					<div><i class="fa-solid fa-star"></i> {`${listing?.averageRatings.overallRating}`} · {`${listing?.numRatings}`} reviews</div>
+					
 					<br/>
 					<div>Cleanliness bar #.#</div>
 					<div>Communication bar #.#</div>
