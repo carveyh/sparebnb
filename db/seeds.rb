@@ -176,7 +176,7 @@ ApplicationRecord.transaction do
 	3.times do |i|
 		Reservation.create!({
 			reserver_id: 1,
-			listing_id: 1,
+			listing_id: i + 1,
 			start_date: '2023-09-0' + (i + 1).to_s,
 			end_date: '2023-09-0' + (i + 2).to_s,
 			num_guests: 1,
@@ -187,8 +187,8 @@ ApplicationRecord.transaction do
 	3.times do |i|
 		# listing_id = rand(1..1)
 		Reservation.create!({
-			reserver_id: 1,
-			listing_id: i + 1,
+			reserver_id: i + 1,
+			listing_id: 1,
 			start_date: Faker::Date.between(from: '2023-07-12', to: '2023-07-15'),
 			end_date: Faker::Date.between(from: '2023-07-16', to: '2023-08-04'),
 			num_guests: 1,
@@ -201,10 +201,26 @@ ApplicationRecord.transaction do
 
 	puts "Creating sample reservation reviews..."
 
-	5.times do |i|
+	3.times do |i|
 		ReservationReview.create!({
-			reservation_id: i + 1,
 			reviewer_id: 1,
+			reservation_id: i + 1,
+			body: Faker::Movies::LordOfTheRings.quote + ' ' + Faker::Movies::LordOfTheRings.quote,
+			private_message: "Oh my goodness gracious. I thought I had reserved a place in " + Faker::Australia.state + ", Australia...nevertheless, it was quite the " + Faker::Adjective.positive + " experience. The complimentary " + Faker::Food.dish + " was an especially nice touch. Thank you for being so flexible and for your hospitality!",
+			overall_rating: (3..5).to_a.sample,
+			cleanliness: (3..5).to_a.sample,
+			communication: (3..5).to_a.sample,
+			checkin: (2..5).to_a.sample,
+			accuracy: (3..5).to_a.sample,
+			location: (4..5).to_a.sample,
+			value: (1..5).to_a.sample,
+		})
+	end
+
+	3.times do |i|
+		ReservationReview.create!({
+			reviewer_id: i + 1,
+			reservation_id: i + 4,
 			body: Faker::Movies::LordOfTheRings.quote + ' ' + Faker::Movies::LordOfTheRings.quote,
 			private_message: "Oh my goodness gracious. I thought I had reserved a place in " + Faker::Australia.state + ", Australia...nevertheless, it was quite the " + Faker::Adjective.positive + " experience. The complimentary " + Faker::Food.dish + " was an especially nice touch. Thank you for being so flexible and for your hospitality!",
 			overall_rating: (3..5).to_a.sample,

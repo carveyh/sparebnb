@@ -41,7 +41,7 @@ const ListingsShowPage = (props) => {
 
 		// debugger
 		dispatch(fetchListing(listingId));
-		dispatch(fetchUser(listing?.hostId));
+		// dispatch(fetchUser(listing?.hostId));
 		dispatch(fetchResReviewsForListing(listingId));
 	}, [])
 

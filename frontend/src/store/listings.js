@@ -1,4 +1,5 @@
 import csrfFetch from "./csrf";
+import { receiveUser } from "./user";
 
 // ACTION TYPE CONSTANTS
 export const RECEIVE_LISTINGS = "listings/RECEIVE_LISTINGS"
@@ -34,6 +35,7 @@ export const fetchListing = (listingId) => async dispatch => {
 	if(res.ok) {
 		const data = await res.json();
 		dispatch(receiveListing(data.listing));
+		dispatch(receiveUser(data.host));
 	}
 	return res;
 }
