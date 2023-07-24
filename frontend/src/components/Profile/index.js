@@ -88,6 +88,7 @@ export const TripCard = ({reservation, listing}) => {
 
 	const handleDelete = e => {
 		e.preventDefault();
+		debugger
 		dispatch(destroyReservation(e.target.id))
 	}
 

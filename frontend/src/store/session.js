@@ -72,7 +72,7 @@ export const logoutUser = () => async dispatch => {
 	})
 	if(res.ok) {
 		storeCurrentUser(null)
-		dispatch(clearAllReservations())
+		// dispatch(clearAllReservations())
 		dispatch(removeSession())
 	}
 	return res;
