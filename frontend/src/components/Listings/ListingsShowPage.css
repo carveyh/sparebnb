@@ -333,34 +333,52 @@
 }
 
 .sleep-carousel-container {
-	overflow-x: scroll;
+	/* overflow-x: scroll;
 	overscroll-behavior-x: contain;
   white-space: nowrap;
 	width: 100%;
 	scroll-snap-type: x mandatory;
+	overscroll-behavior-x: contain;
+	gap: 8px; */
+	/* margin: -8px; */
 	/* scroll-behavior: smooth; */
 	/* white-space:nowrap; */
 }
 
 .sleep-carousel {
+	display: flex;
+	overflow-x: scroll;
+	overscroll-behavior-x: contain;
+  white-space: nowrap;
+	width: 100%;
+	scroll-snap-type: x mandatory;
+	overscroll-behavior-x: contain;
 	/* display: inline-block; */
 	/* width: 100%; */
+	/* margin: -8px; */
+	/* padding: -8px; */
+	/* box-sizing: border-box; */
+	/* padding-left: 8px; */
 	/* display: flex; */
 	/* overflow-x: hidden; */
 	/* white-space: nowrap; */
 
   /* padding: 10px; */
+	gap: 16px;
 }
 
 .carousel-photo {
+	flex: 1 0 auto;
 
 	display: inline-block;
-  width: calc(50% - 16px); /* Two items per row with some spacing */
-  width: calc(50%); /* Two items per row with some spacing */
-  margin-right: 16px;
+  width: calc(50% - 8px); /* Two items per row with some spacing */
+  /* width: calc(50%); */
+  /* margin-right: 16px; */
+	/* padding: 8px; */
+	
   /* background-color: #ccc; */
   /* padding: 20px; */
-  /* box-sizing: border-box; */
+  /* box-sizing: content-box; */
 	aspect-ratio: 3/2;
 	scroll-snap-align: start;
 
@@ -368,12 +386,16 @@
 	/* border-radius: 8px; */
 }
 
+.carousel-photo:first-child {
+	padding-left: 0px;
+}
+
 .carousel-photo:last-child{
 	margin-right: 0px;
 }
 .carousel-photo > img {
 	/* With border radius, actually causes next item to bleed through on edge after scroll snap somtimes... */
-	/* border-radius: 8px; */
+	border-radius: 8px;
 }
 
 .sleep-carousel-container::-webkit-scrollbar {

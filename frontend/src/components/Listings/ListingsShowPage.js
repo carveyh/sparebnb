@@ -87,10 +87,10 @@ const ListingsShowPage = (props) => {
 	}
 
 	const baseTotalCost = () => {
-		return numNights() ? numNights() * listing.baseNightlyRate : listing.baseNightlyRate;
+		return numNights() ? numNights() * listing?.baseNightlyRate : listing?.baseNightlyRate;
 	}
 
-	const cleaningFee = parseInt(listing.baseNightlyRate / 4);
+	const cleaningFee = parseInt(listing?.baseNightlyRate / 4);
 	const baseServiceFee = 14;
 
 	const totalServiceFee = () => {
@@ -350,7 +350,7 @@ const ListingsShowPage = (props) => {
 								<div className="floating-form-inner-container">
 									<div className="form-stats-header-container">
 										<div>
-											<div className="heading-2">${listing.baseNightlyRate}</div> &nbsp; <div className="plain-text">night</div>
+											<div className="heading-2">${listing?.baseNightlyRate}</div> &nbsp; <div className="plain-text">night</div>
 										</div>
 										<div className="stats-text-small">
 											{listing.numRatings >= 3 && 
@@ -404,7 +404,7 @@ const ListingsShowPage = (props) => {
 									<div className={`plain-text report-button-container ${bookingConfirmed ? "reservation-complete" : "reservation-incomplete"}`}>
 										{bookingConfirmed ? "Reservation complete!" : "What are you waiting for?"}
 									</div>
-									<div>${listing.baseNightlyRate} x {numNights() ? numNights() : "-"} nights - ${baseTotalCost()}</div>
+									<div>${listing?.baseNightlyRate} x {numNights() ? numNights() : "-"} nights - ${baseTotalCost()}</div>
 									<div className="plain-text form-padding-top">Cleaning fee - ${cleaningFee}</div>
 									<div className="plain-text form-padding-top form-padding-bottom ">Sparebnb service fee - ${totalServiceFee()}</div>
 									<div className="plain-text horizontal-rule-top-border"></div>
