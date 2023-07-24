@@ -219,7 +219,7 @@ const ProfilePage = (props) => {
 			const filteredListing = Object.values(listings).filter(listing => listing.id === reservationsArray[i].listingId)[0]
 			
 			upcomingTripTiles.push(
-				<TripCard reservation={reservationsArray[i]} listing={filteredListing}/>
+				<TripCard key={reservationsArray[i].id} reservation={reservationsArray[i]} listing={filteredListing}/>
 			)
 			// upcomingTripTiles.push(
 			// 	<TripMenu reservation={reservationsArray[i]} listing={filteredListing}/>

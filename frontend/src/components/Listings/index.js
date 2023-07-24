@@ -28,7 +28,7 @@ const ListingsFilterCarousel = ({setFilter}) => {
 					<span>Beachfront</span>
 				</div>
 				<div className="category-selector">
-					<i class="fa-solid fa-tower-observation"></i>
+					<i className="fa-solid fa-tower-observation"></i>
 					<span>Treehouses</span>
 				</div>
 				<div className="category-selector">
@@ -64,51 +64,51 @@ const ListingsFilterCarousel = ({setFilter}) => {
 					<span>Govt secret</span>
 				</div>
 				<div className="category-selector">
-					<i class="fa-regular fa-eye-slash"></i>
+					<i className="fa-regular fa-eye-slash"></i>
 					<span>Private escapes</span>
 				</div>
 				<div className="category-selector">
-					<i class="fa-solid fa-film"></i>
+					<i className="fa-solid fa-film"></i>
 					<span>Home theater</span>
 				</div>
 				<div className="category-selector">
-					<i class="fa-solid fa-palette"></i>
+					<i className="fa-solid fa-palette"></i>
 					<span>Studios</span>
 				</div>
 				<div className="category-selector">
-				<i class="fa-solid fa-gamepad"></i>
+				<i className="fa-solid fa-gamepad"></i>
 					<span>Gaming dens</span>
 				</div>
 				<div className="category-selector">
-				<i class="fa-solid fa-dumbbell"></i>
+				<i className="fa-solid fa-dumbbell"></i>
 					<span>Fitness</span>
 				</div>
 				<div className="category-selector">
-				<i class="fa-regular fa-gem"></i>
+				<i className="fa-regular fa-gem"></i>
 					<span>Crème de la crème</span>
 				</div>
 				<div className="category-selector">
-				<i class="fa-solid fa-leaf"></i>
+				<i className="fa-solid fa-leaf"></i>
 					<span>Green</span>
 				</div>
 				<div className="category-selector">
-				<i class="fa-solid fa-stroopwafel"></i>
+				<i className="fa-solid fa-stroopwafel"></i>
 					<span>Rustic</span>
 				</div>
 				<div className="category-selector">
-				<i class="fa-solid fa-hashtag"></i>
+				<i className="fa-solid fa-hashtag"></i>
 					<span>Urban</span>
 				</div>
 				<div className="category-selector">
-				<i class="fa-solid fa-tornado"></i>
+				<i className="fa-solid fa-tornado"></i>
 					<span>Tornado</span>
 				</div>
 				<div className="category-selector">
-				<i class="fa-solid fa-tent"></i>
+				<i className="fa-solid fa-tent"></i>
 					<span>Camps</span>
 				</div>
 				<div className="category-selector">
-				<i class="fa-solid fa-cannabis"></i>
+				<i className="fa-solid fa-cannabis"></i>
 					<span>420 friendly</span>
 				</div>
 			</div>

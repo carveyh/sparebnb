@@ -12,20 +12,13 @@ import {AnimatePresence, motion} from "framer-motion";
 
 // export const photoFileNames = "architectural-wonder beach-niantic dining-jersey fossatun-iceland hilltop-haven mirror-glass-cabin mountain-retreat sample-pool-listing tower-def-treehouse unique-treehouse".split(" ");
 
-const ListingCard = ({listing, num}) => {
-	// const history = useHistory();
-	// const handleClick = e => {
-	// 	e.preventDefault();
-	// 	history.push(`/listings/${num}`)
-	// }
-
-
+const ListingCard = ({listing, num, filter}) => {
 
 	return (
-		<motion.div key={num} animate={{opacity:1}} exit={{opacity: 0}}>
+		<motion.div key={num.toString() + filter} initial={{opacity:0.0}} animate={{opacity:1, transition:{delay:(num) * 0.035, duration: 0.2, ease:'easeIn'} }} exit={{opacity: 0}}>
 		<Link to={`/listings/${listing?.id}`}>
 			<div className={`grid-item grid-item-${num}`} >
-						<div className="listing-favorite-button-background"><i class="fa-solid fa-heart"></i></div>
+						<div className="listing-favorite-button-background"><i className="fa-solid fa-heart"></i></div>
 						<div className="listing-favorite-button"><i className="fa-regular fa-heart"></i></div>
 						<div className="listings-photo-container">
 							{/* <img className="listings-photo" src={require(`../../images/listings/${photoFileNames[num-1]}.png`)} /> */}
@@ -65,13 +58,15 @@ const ListingsIndex = ({filter}) => {
 		if(!filter){
 			for(let i = 1; i <= numTestListings; i++) {
 				listingCards.push(
-					<ListingCard listing={filteredListings[i % filteredListings.length]} num={i} />
+					// <ListingCard key={filteredListings[(i % filteredListings.length) - 1]?.id} listing={filteredListings[(i - 1) % filteredListings.length]} num={i} />
+					<ListingCard filter={filter} listing={filteredListings[(i - 1) % filteredListings.length]} num={i} />
 				)
 			}
 		} else {
 			for(let i = 1; i <= filteredListings.length; i++) {
 				listingCards.push(
-					<ListingCard listing={filteredListings[i % filteredListings.length]} num={i} />
+					// <ListingCard key={filteredListings[(i % filteredListings.length) - 1]?.id} listing={filteredListings[(i - 1) % filteredListings.length]} num={i} />
+					<ListingCard filter={filter} listing={filteredListings[(i - 1) % filteredListings.length]} num={i} />
 				)
 			}
 		}
@@ -79,25 +74,14 @@ const ListingsIndex = ({filter}) => {
 	
 	return (
 		// <>
-		<AnimatePresence>
-		<motion.div className="grid-container-container" key="grid" initial={{opacity:0}} animate={{opacity: 1, transition:{duration: 0.3, ease:'easeIn'} }} exit={{opacity: 0, backgroundColor:"blue", transition:{duration: 0.1, ease:'easeIn'} }}>
+		<div className="grid-container-container" >
 			<div className="grid-container">
-				<AnimatePresence mode="wait">
-				{filter && listingCards}
-				{!filter &&
-					<>
-						{listingCards}
-						{listingCards}
-						{listingCards}
-						{listingCards}
-						{listingCards}
-						{listingCards}
-					</>
-				}
+				{/* <AnimatePresence mode="wait"> */}
+				<AnimatePresence mode="popLayout">
+					{listingCards}
 				</AnimatePresence>
 			</div>
-		</motion.div>
-		</AnimatePresence>
+		</div>
 		// </>
 	)
 }

@@ -1,6 +1,7 @@
 import "./Navigation.css";
 import { NavLink} from "react-router-dom"
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import ProfileButton from "./ProfileButton"
 import LoginForm from "../LoginFormModal/LoginForm";
@@ -12,6 +13,15 @@ const Navigation = () => {
 	
 	const [showSignUpModal, setShowSignUpModal] = useState(false);
 	const [showLogInModal, setShowLogInModal] = useState(false);
+	
+	// If on listings show page, narrow navbar.
+	const location = useLocation();
+	const upperNavbarContainer = document.querySelector('.upper-navbar-container');
+	if(location.pathname.startsWith('/listings')){
+		upperNavbarContainer?.classList.add('narrow-navbar')
+	} else {
+		upperNavbarContainer?.classList.remove('narrow-navbar')
+	}
 
 	// Disables page scrolling if a modal is open!
 	if(showLogInModal || showSignUpModal){

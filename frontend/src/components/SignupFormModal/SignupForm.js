@@ -124,7 +124,7 @@ const SignupForm = ({setShowSignUpModal}) => {
 	return (
 		<div className="signup-form" >
 			<header className="auth-form-header">
-				<button autoFocus className='x-close' onClick={e => setShowSignUpModal(false)}><i class="fa-solid fa-x"></i></button>
+				<button autoFocus className='x-close' onClick={e => setShowSignUpModal(false)}><i className="fa-solid fa-x"></i></button>
 				{/* <div className="auth-form-title">Finish signing up</div> */}
 				<div className="auth-form-title">Sign up</div>
 			</header>
@@ -197,7 +197,7 @@ const SignupForm = ({setShowSignUpModal}) => {
 						</div>	
 					</div>
 					{errors.birth_date ? 
-						<div className='error-tooltip'><i class="fa-solid fa-circle-exclamation"></i> {errors.birth_date}</div>
+						<div className='error-tooltip'><i className="fa-solid fa-circle-exclamation"></i> {errors.birth_date}</div>
 						:
 						<div className='input-tooltip'>To sign up, you need to be at least 18. Your birthday won’t be shared with other people who use Airbnb.</div>
 					}
@@ -225,7 +225,7 @@ const SignupForm = ({setShowSignUpModal}) => {
 						</div>	
 					</div>
 					{errors.email ? 
-						<div className='error-tooltip'><i class="fa-solid fa-circle-exclamation"></i> Enter a valid email.</div>
+						<div className='error-tooltip'><i className="fa-solid fa-circle-exclamation"></i> Enter a valid email.</div>
 						:
 						<div className='input-tooltip'>We'll email you trip confirmations and receipts.</div>
 					}
@@ -257,7 +257,7 @@ const SignupForm = ({setShowSignUpModal}) => {
 						</div>	
 					</div>
 					{errors.password ? 
-						<div className='error-tooltip'><i class="fa-solid fa-circle-xmark"></i> At least 8 characters</div>
+						<div className='error-tooltip'><i className="fa-solid fa-circle-xmark"></i> At least 8 characters</div>
 						:
 						null
 					}
@@ -277,7 +277,7 @@ const SignupForm = ({setShowSignUpModal}) => {
 					<input className="session-btn" type="submit" value="Agree and continue" />
 					{/* <br /> */}
 					<div className='session-buffer-box'>
-						<button className='session-buffer' onClick={scrollBottomForm}><i class="fa-solid fa-chevron-down fa-fade"></i></button>
+						<button className='session-buffer' onClick={scrollBottomForm}><i className="fa-solid fa-chevron-down fa-fade"></i></button>
 					</div>
 						
 					{/* <br /> */}

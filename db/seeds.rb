@@ -142,12 +142,12 @@ ApplicationRecord.transaction do
 			city: Faker::Address.city,
 			state: Faker::Address.state,
 			zip: Faker::Address.zip_code,
-			num_bedrooms: (1..20).to_a.sample,
-			num_beds: (1..20).to_a.sample,
-			num_baths: (1..10).to_a.sample,
-			max_guests: (1..20).to_a.sample,
+			num_bedrooms: (1..4).to_a.sample,
+			num_beds: (1..4).to_a.sample,
+			num_baths: (1..3).to_a.sample,
+			max_guests: (1..6).to_a.sample,
 			description: Faker::Movies::HarryPotter.quote + ' ' + Faker::Movies::HarryPotter.quote + ' ' + Faker::Movies::HarryPotter.quote + ' ' + Faker::Movies::HarryPotter.quote + ' ',
-			base_nightly_rate: (59..2999).to_a.sample,
+			base_nightly_rate: (59..759).to_a.sample,
 			category: %w(amazing-pools rooms beachfront).sample
 			# category: %w(amazing-pools rooms beachfront treehouses adapted mountains trending mansions majestic arctic woods govt-secret private-escapes home-theater studios gaming-dens fitness creme-de-la-creme green rustic urban tornado camps 420-friendly).sample
 
@@ -173,22 +173,46 @@ ApplicationRecord.transaction do
 	puts "Creating sample reservations..."
 
 
-	3.times do |i|
-		Reservation.create!({
-			reserver_id: 1,
-			listing_id: 1,
-			start_date: '2023-09-0' + (i + 1).to_s,
-			end_date: '2023-09-0' + (i + 2).to_s,
-			num_guests: 1,
-			base_nightly_rate: 399
-		})
-	end
+	# 3.times do |i|
+	# 	Reservation.create!({
+	# 		reserver_id: 1,
+	# 		listing_id: i + 1,
+	# 		start_date: '2023-09-0' + (i + 1).to_s,
+	# 		end_date: '2023-09-0' + (i + 2).to_s,
+	# 		num_guests: 1,
+	# 		base_nightly_rate: 399
+	# 	})
+	# end
 
-	3.times do |i|
-		# listing_id = rand(1..1)
+	# 3.times do |i|
+	# 	# listing_id = rand(1..1)
+	# 	Reservation.create!({
+	# 		reserver_id: i + 1,
+	# 		listing_id: 1,
+	# 		start_date: Faker::Date.between(from: '2023-07-12', to: '2023-07-15'),
+	# 		end_date: Faker::Date.between(from: '2023-07-16', to: '2023-08-04'),
+	# 		num_guests: 1,
+	# 		base_nightly_rate: 399
+	# 	})
+	# end
+
+	# ### Number of reviews correspond 1:1 to number of reservations ###
+	# No res/reviews for listing 1
+	# 1 res/review for listing 2
+	Reservation.create!({
+		reserver_id: (1..13).to_a.sample,
+		listing_id: 2,
+		start_date: Faker::Date.between(from: '2023-07-12', to: '2023-07-15'),
+		end_date: Faker::Date.between(from: '2023-07-16', to: '2023-08-04'),
+		num_guests: 1,
+		base_nightly_rate: 399
+	})
+
+	# 3 res/reviews for listing 3
+	3.times do |review_num|
 		Reservation.create!({
-			reserver_id: 1,
-			listing_id: i + 1,
+			reserver_id: (1..13).to_a.sample,
+			listing_id: 3,
 			start_date: Faker::Date.between(from: '2023-07-12', to: '2023-07-15'),
 			end_date: Faker::Date.between(from: '2023-07-16', to: '2023-08-04'),
 			num_guests: 1,
@@ -196,15 +220,41 @@ ApplicationRecord.transaction do
 		})
 	end
 
+	# 6 res/reviews for listing 4
+	6.times do |review_num|
+		Reservation.create!({
+			reserver_id: (1..13).to_a.sample,
+			listing_id: 4,
+			start_date: Faker::Date.between(from: '2023-07-12', to: '2023-07-15'),
+			end_date: Faker::Date.between(from: '2023-07-16', to: '2023-08-04'),
+			num_guests: 1,
+			base_nightly_rate: 399
+		})
+	end
 
+	# 7+ res/reviews for listing 5+
+	9.times do |listing_num|
+		num_reviews = (7..20).to_a.sample
+		num_reviews.times do |review_num|
+			Reservation.create!({
+				reserver_id: (review_num % 13) + 1,
+				listing_id: 4 + 1 + listing_num,
+				start_date: Faker::Date.between(from: '2023-07-12', to: '2023-07-15'),
+				end_date: Faker::Date.between(from: '2023-07-16', to: '2023-08-04'),
+				num_guests: 1,
+				base_nightly_rate: 399
+			})
+		end
+	end
 
 
 	puts "Creating sample reservation reviews..."
 
-	5.times do |i|
+	total_num_res = Reservation.all.length
+	total_num_res.times do |res_idx|
 		ReservationReview.create!({
-			reservation_id: i + 1,
-			reviewer_id: 1,
+			reviewer_id: Reservation.find(res_idx + 1).reserver_id,
+			reservation_id: res_idx + 1,
 			body: Faker::Movies::LordOfTheRings.quote + ' ' + Faker::Movies::LordOfTheRings.quote,
 			private_message: "Oh my goodness gracious. I thought I had reserved a place in " + Faker::Australia.state + ", Australia...nevertheless, it was quite the " + Faker::Adjective.positive + " experience. The complimentary " + Faker::Food.dish + " was an especially nice touch. Thank you for being so flexible and for your hospitality!",
 			overall_rating: (3..5).to_a.sample,
@@ -216,6 +266,38 @@ ApplicationRecord.transaction do
 			value: (1..5).to_a.sample,
 		})
 	end
+
+	# 3.times do |i|
+	# 	ReservationReview.create!({
+	# 		reviewer_id: 1,
+	# 		reservation_id: i + 1,
+	# 		body: Faker::Movies::LordOfTheRings.quote + ' ' + Faker::Movies::LordOfTheRings.quote,
+	# 		private_message: "Oh my goodness gracious. I thought I had reserved a place in " + Faker::Australia.state + ", Australia...nevertheless, it was quite the " + Faker::Adjective.positive + " experience. The complimentary " + Faker::Food.dish + " was an especially nice touch. Thank you for being so flexible and for your hospitality!",
+	# 		overall_rating: (3..5).to_a.sample,
+	# 		cleanliness: (3..5).to_a.sample,
+	# 		communication: (3..5).to_a.sample,
+	# 		checkin: (2..5).to_a.sample,
+	# 		accuracy: (3..5).to_a.sample,
+	# 		location: (4..5).to_a.sample,
+	# 		value: (1..5).to_a.sample,
+	# 	})
+	# end
+
+	# 3.times do |i|
+	# 	ReservationReview.create!({
+	# 		reviewer_id: i + 1,
+	# 		reservation_id: i + 4,
+	# 		body: Faker::Movies::LordOfTheRings.quote + ' ' + Faker::Movies::LordOfTheRings.quote,
+	# 		private_message: "Oh my goodness gracious. I thought I had reserved a place in " + Faker::Australia.state + ", Australia...nevertheless, it was quite the " + Faker::Adjective.positive + " experience. The complimentary " + Faker::Food.dish + " was an especially nice touch. Thank you for being so flexible and for your hospitality!",
+	# 		overall_rating: (3..5).to_a.sample,
+	# 		cleanliness: (3..5).to_a.sample,
+	# 		communication: (3..5).to_a.sample,
+	# 		checkin: (2..5).to_a.sample,
+	# 		accuracy: (3..5).to_a.sample,
+	# 		location: (4..5).to_a.sample,
+	# 		value: (1..5).to_a.sample,
+	# 	})
+	# end
 			
 	puts "Done!"
 

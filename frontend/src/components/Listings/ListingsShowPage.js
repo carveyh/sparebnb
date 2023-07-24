@@ -41,7 +41,7 @@ const ListingsShowPage = (props) => {
 
 		// debugger
 		dispatch(fetchListing(listingId));
-		dispatch(fetchUser(listing?.hostId));
+		// dispatch(fetchUser(listing?.hostId));
 		dispatch(fetchResReviewsForListing(listingId));
 	}, [])
 
@@ -99,6 +99,22 @@ const ListingsShowPage = (props) => {
 		return numNights() ? numNights() * baseServiceFee : baseServiceFee;
 	}
 
+	// REVIEWS DISPLAY DATA - START
+	// Be able to parse return string in 3 different locations: 
+	// (1) Page header
+	// (2) Create res box top-right corner
+	// (3) Reviews section 
+
+	const formattedOverallRating = () => {
+		const twoDigit = listing?.averageRatings.overallRating.toFixed(2)
+		const oneDigit = listing?.averageRatings.overallRating.toFixed(1)
+		return (twoDigit === oneDigit + '0') ? oneDigit : twoDigit;
+	}
+
+	const formattedNumReviews = () => {
+		return (listing?.numRatings !== 1) ? listing?.numRatings + " reviews" : listing?.numRatings + " review" 
+	}
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if(!sessionUser || !buttonClickable) {
@@ -134,7 +150,7 @@ const ListingsShowPage = (props) => {
 	const numGuestsSelector = () => {
 		const options = [];
 		for(let i = 1; i <= (listing ? listing.maxGuests : 0); i ++){
-			options.push(<option value={i}>{i}</option>)
+			options.push(<option key={i} value={i}>{i}</option>)
 		}
 
 		return (
@@ -165,15 +181,16 @@ const ListingsShowPage = (props) => {
 						<div className="show-header-details">
 							<div className="show-header-stats">
 								<span className="rating-review-stats stats-text-small">
-									<span className="star-icon"><i class="fa-solid fa-star"></i></span>
-									<span className="header-rating">4.93 ·</span>
-									<span className="header-review-count">15 reviews</span>
+									<span className="star-icon"><i className="fa-solid fa-star"></i></span>
+									<span className="header-rating">{formattedOverallRating()} ·</span>
+									{/* <span className="header-review-count">15 reviews</span> */}
+									<span className="header-review-count">{formattedNumReviews()}</span>
 								</span>
 							</div>
 							<div className="show-header-buttons stats-text-small">
-								<i class="fa-solid fa-arrow-up-from-bracket"></i>&nbsp;&nbsp;Share 
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<i class="fa-regular fa-heart"></i>&nbsp;&nbsp;Save
+								<i className="fa-solid fa-arrow-up-from-bracket"></i>&nbsp;&nbsp;Share 
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<i className="fa-regular fa-heart"></i>&nbsp;&nbsp;Save
 							</div>
 						</div>
 					</div>
@@ -227,7 +244,7 @@ const ListingsShowPage = (props) => {
 													Entire home hosted by {`${host.firstName}`}
 												</div>
 												<div className="details-card-stats-text-bottom plain-text">
-													{`${listing.maxGuests}`} guests · {`${listing.numBedrooms}`} bedrooms · {`${listing?.numBeds}`} beds · {`${listing?.numBaths}`} baths
+													{`${listing.maxGuests}`} guest{listing.maxGuests > 1 && 's'} · {`${listing.numBedrooms}`} bedroom{listing.numBedrooms > 1 && 's'} · {`${listing?.numBeds}`} bed{listing.numBeds > 1 && 's'} · {`${listing?.numBaths}`} bath{listing.numBaths > 1 && 's'}
 												</div>
 										</div>
 										<div className="details-card-stats-profile-thumbnail">
@@ -334,7 +351,7 @@ const ListingsShowPage = (props) => {
 											<div className="heading-2">${listing.baseNightlyRate}</div> &nbsp; <div className="plain-text">night</div>
 										</div>
 										<div className="stats-text-small">
-											<i class="fa-solid fa-star"></i> &nbsp; 4.93 · 15 reviews
+											<i className="fa-solid fa-star"></i> &nbsp;{formattedOverallRating()} · {formattedNumReviews()}
 										</div>
 									</div>
 									{/* FORM - START */}
@@ -386,7 +403,7 @@ const ListingsShowPage = (props) => {
 									<div className="total-before-taxes plain-text form-padding-top">Total before taxes - ${baseTotalCost() + cleaningFee + totalServiceFee()}</div>
 								</div>
 								<div className="report-button-container">
-									<div className="report-button"><i class="fa-solid fa-flag"></i> &nbsp; Report this listing</div>
+									<div className="report-button"><i className="fa-solid fa-flag"></i> &nbsp; Report this listing</div>
 								</div>
 							</div>
 						</div>
@@ -404,33 +421,37 @@ const ListingsShowPage = (props) => {
 				{/* REVIEWS - START */}
 				{/* REVIEWS - START */}
 				<div className="horizontal-rule-top-border plain-text">
-					<br/><br/><br/><br/><br/>
-					<div>No reviews (yet) if none</div>
-					<br/>
-					{/* <div>STAR, #.## · # reviews</div> */}
-					<div><i class="fa-solid fa-star"></i> {`${listing?.averageRatings.overallRating}`} · {`${listing?.numRatings}`} reviews</div>
-					<br/>
-					<div>Cleanliness bar #.#</div>
-					<div>Communication bar #.#</div>
-					<div>Check-in bar #.#</div>
-					<div>Accuracy bar #.#</div>
-					<div>Location bar #.#</div>
-					<div>Value bar #.#</div>
-					<br/>
-					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
-					<br/>
-					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
-					<br/>
-					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
-					<br/>
-					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
-					<br/>
-					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
-					<br/>
-					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
-					<br/>
-					<div>Show all # reviews if more than 6</div>
-					<br/><br/><br/><br/><br/>
+					<div className="show-page-general-padder">
+					
+						{listing.numRatings === 0 ? 
+							<div className="heading-2 review-header">No reviews (yet)</div>
+							: <div className="heading-2 review-header"><div className="review-star-container"><i className="fa-solid fa-star"></i></div> {`${formattedOverallRating()}`} · {`${listing?.numRatings}`} reviews</div>
+						}
+						<br/>
+						
+						<br/>
+						<div>Cleanliness bar #.#</div>
+						<div>Communication bar #.#</div>
+						<div>Check-in bar #.#</div>
+						<div>Accuracy bar #.#</div>
+						<div>Location bar #.#</div>
+						<div>Value bar #.#</div>
+						<br/>
+						<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+						<br/>
+						<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+						<br/>
+						<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+						<br/>
+						<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+						<br/>
+						<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+						<br/>
+						<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+						<br/>
+						<div>Show all # reviews if more than 6</div>
+					
+					</div>
 				</div>
 			{/* REVIEWS - END */}
 			{/* REVIEWS - END */}
