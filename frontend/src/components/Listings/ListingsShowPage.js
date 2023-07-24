@@ -92,8 +92,8 @@ const ListingsShowPage = (props) => {
 		return numNights() ? numNights() * listing.baseNightlyRate : listing.baseNightlyRate;
 	}
 
-	const cleaningFee = 350;
-	const baseServiceFee = 350;
+	const cleaningFee = parseInt(listing.baseNightlyRate / 4);
+	const baseServiceFee = 14;
 
 	const totalServiceFee = () => {
 		return numNights() ? numNights() * baseServiceFee : baseServiceFee;
@@ -181,8 +181,12 @@ const ListingsShowPage = (props) => {
 						<div className="show-header-details">
 							<div className="show-header-stats">
 								<span className="rating-review-stats stats-text-small">
-									<span className="star-icon"><i className="fa-solid fa-star"></i></span>
-									<span className="header-rating">{formattedOverallRating()} ·</span>
+									{listing.numRatings >= 3 && 
+									<>
+										<span className="star-icon"><i className="fa-solid fa-star"></i></span>
+										<span className="header-rating">{formattedOverallRating()} ·</span>
+									</>
+									}
 									{/* <span className="header-review-count">15 reviews</span> */}
 									<span className="header-review-count">{formattedNumReviews()}</span>
 								</span>
@@ -351,7 +355,13 @@ const ListingsShowPage = (props) => {
 											<div className="heading-2">${listing.baseNightlyRate}</div> &nbsp; <div className="plain-text">night</div>
 										</div>
 										<div className="stats-text-small">
-											<i className="fa-solid fa-star"></i> &nbsp;{formattedOverallRating()} · {formattedNumReviews()}
+											{listing.numRatings >= 3 && 
+											<>
+												<i className="fa-solid fa-star"></i> &nbsp;
+												{formattedOverallRating()} ·&nbsp;
+											</>
+											}
+											 <div className="form-num-reviews">{formattedNumReviews()}</div>
 										</div>
 									</div>
 									{/* FORM - START */}
@@ -422,14 +432,22 @@ const ListingsShowPage = (props) => {
 				{/* REVIEWS - START */}
 				<div className="horizontal-rule-top-border plain-text">
 					<div className="show-page-general-padder">
-					
-						{listing.numRatings === 0 ? 
-							<div className="heading-2 review-header">No reviews (yet)</div>
-							: <div className="heading-2 review-header"><div className="review-star-container"><i className="fa-solid fa-star"></i></div> {`${formattedOverallRating()}`} · {`${listing?.numRatings}`} reviews</div>
-						}
-						<br/>
+						<div className="heading-2 review-header">
+							{listing.numRatings === 0 ? <div>No reviews (yet)</div>
+								: 
+								<div className="review-header-toprow">
+									{listing.numRatings >= 3 && 
+										<>
+											<div className="review-star-container"><i className="fa-solid fa-star"></i></div> 
+											{`${formattedOverallRating()}`} ·&nbsp;
+										</>
+									}
+									{formattedNumReviews()}
+								</div> 
+							}
+							{(listing.numRatings < 3 && listing.numRatings > 0) && <div className="under-3-reviews-placeholder">Average rating will appear after 3 reviews</div>}
+						</div>
 						
-						<br/>
 						<div>Cleanliness bar #.#</div>
 						<div>Communication bar #.#</div>
 						<div>Check-in bar #.#</div>

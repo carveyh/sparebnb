@@ -467,6 +467,10 @@
 	font-size: 0.8em;
 }
 
+.form-num-reviews {
+	color: #717171;
+}
+
 .date-inputs {
 	width: 100%;
 	display: flex;
@@ -644,6 +648,11 @@
 .review-header {
 	margin-bottom: 32px;
 	display: flex;
+	flex-direction: column;
+}
+
+.review-header-toprow {
+	display: flex;
 	flex-direction: row;
 }
 
@@ -653,4 +662,11 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+}
+
+.under-3-reviews-placeholder {
+	padding-top: 8px;
+	font-size: 14px;
+	font-weight: 300;
+	color: #717171;
 }
