@@ -13,14 +13,6 @@ import {AnimatePresence, motion} from "framer-motion";
 // export const photoFileNames = "architectural-wonder beach-niantic dining-jersey fossatun-iceland hilltop-haven mirror-glass-cabin mountain-retreat sample-pool-listing tower-def-treehouse unique-treehouse".split(" ");
 
 const ListingCard = ({listing, num, filter}) => {
-	// const history = useHistory();
-	// const handleClick = e => {
-	// 	e.preventDefault();
-	// 	history.push(`/listings/${num}`)
-	// }
-
-
-	debugger
 
 	return (
 		<motion.div key={num.toString() + filter} initial={{opacity:0.0}} animate={{opacity:1, transition:{delay:(num) * 0.035, duration: 0.2, ease:'easeIn'} }} exit={{opacity: 0}}>

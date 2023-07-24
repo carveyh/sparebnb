@@ -105,26 +105,15 @@ const ListingsShowPage = (props) => {
 	// (2) Create res box top-right corner
 	// (3) Reviews section 
 
-	// const reviewsSummary = () => {
-	// 	const summaryObj = {
-	// 		icon: null,
-	// 		numReviews: listing.numReviews,
-	// 		overallRating: listing.averageRatings.overallRating,
-	// 	}
-	// 	switch(true) {
-	// 		case listing.numReviews <= 0: // 0 reviews
-	// 			break;
-	// 		case listing.numReviews <= 2: // 1 or 2 reviews 
-	// 			break;
-	// 		case listing.numReviews <= 6: // 3 to 6 reviews
-	// 			summaryObj.icon = <i className="fa-solid fa-star"></i>
-	// 			break;
-	// 		default: // 7+ reviews
-	// 			summaryObj.icon = <i className="fa-solid fa-star"></i>
-	// 			break;
-	// 	}
-	// 	return summaryObj;
-	// }
+	const formattedOverallRating = () => {
+		const twoDigit = listing?.averageRatings.overallRating.toFixed(2)
+		const oneDigit = listing?.averageRatings.overallRating.toFixed(1)
+		return (twoDigit === oneDigit + '0') ? oneDigit : twoDigit;
+	}
+
+	const formattedNumReviews = () => {
+		return (listing?.numRatings !== 1) ? listing?.numRatings + " reviews" : listing?.numRatings + " review" 
+	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -193,14 +182,14 @@ const ListingsShowPage = (props) => {
 							<div className="show-header-stats">
 								<span className="rating-review-stats stats-text-small">
 									<span className="star-icon"><i className="fa-solid fa-star"></i></span>
-									<span className="header-rating">4.93 ·</span>
+									<span className="header-rating">{formattedOverallRating()} ·</span>
 									{/* <span className="header-review-count">15 reviews</span> */}
-									<span className="header-review-count">15 reviews</span>
+									<span className="header-review-count">{formattedNumReviews()}</span>
 								</span>
 							</div>
 							<div className="show-header-buttons stats-text-small">
 								<i className="fa-solid fa-arrow-up-from-bracket"></i>&nbsp;&nbsp;Share 
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<i className="fa-regular fa-heart"></i>&nbsp;&nbsp;Save
 							</div>
 						</div>
@@ -255,7 +244,7 @@ const ListingsShowPage = (props) => {
 													Entire home hosted by {`${host.firstName}`}
 												</div>
 												<div className="details-card-stats-text-bottom plain-text">
-													{`${listing.maxGuests}`} guests · {`${listing.numBedrooms}`} bedrooms · {`${listing?.numBeds}`} beds · {`${listing?.numBaths}`} baths
+													{`${listing.maxGuests}`} guest{listing.maxGuests > 1 && 's'} · {`${listing.numBedrooms}`} bedroom{listing.numBedrooms > 1 && 's'} · {`${listing?.numBeds}`} bed{listing.numBeds > 1 && 's'} · {`${listing?.numBaths}`} bath{listing.numBaths > 1 && 's'}
 												</div>
 										</div>
 										<div className="details-card-stats-profile-thumbnail">
@@ -362,7 +351,7 @@ const ListingsShowPage = (props) => {
 											<div className="heading-2">${listing.baseNightlyRate}</div> &nbsp; <div className="plain-text">night</div>
 										</div>
 										<div className="stats-text-small">
-											<i className="fa-solid fa-star"></i> &nbsp; 4.93 · 15 reviews
+											<i className="fa-solid fa-star"></i> &nbsp;{formattedOverallRating()} · {formattedNumReviews()}
 										</div>
 									</div>
 									{/* FORM - START */}
@@ -432,35 +421,37 @@ const ListingsShowPage = (props) => {
 				{/* REVIEWS - START */}
 				{/* REVIEWS - START */}
 				<div className="horizontal-rule-top-border plain-text">
-					<br/><br/><br/><br/><br/>
-					{listing.numRatings === 0 ? 
-						<div>No reviews (yet)</div>
-						: <div><i className="fa-solid fa-star"></i> {`${listing?.averageRatings.overallRating}`} · {`${listing?.numRatings}`} reviews</div>
-					}
-					<br/>
+					<div className="show-page-general-padder">
 					
-					<br/>
-					<div>Cleanliness bar #.#</div>
-					<div>Communication bar #.#</div>
-					<div>Check-in bar #.#</div>
-					<div>Accuracy bar #.#</div>
-					<div>Location bar #.#</div>
-					<div>Value bar #.#</div>
-					<br/>
-					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
-					<br/>
-					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
-					<br/>
-					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
-					<br/>
-					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
-					<br/>
-					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
-					<br/>
-					<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
-					<br/>
-					<div>Show all # reviews if more than 6</div>
-					<br/><br/><br/><br/><br/>
+						{listing.numRatings === 0 ? 
+							<div className="heading-2 review-header">No reviews (yet)</div>
+							: <div className="heading-2 review-header"><div className="review-star-container"><i className="fa-solid fa-star"></i></div> {`${formattedOverallRating()}`} · {`${listing?.numRatings}`} reviews</div>
+						}
+						<br/>
+						
+						<br/>
+						<div>Cleanliness bar #.#</div>
+						<div>Communication bar #.#</div>
+						<div>Check-in bar #.#</div>
+						<div>Accuracy bar #.#</div>
+						<div>Location bar #.#</div>
+						<div>Value bar #.#</div>
+						<br/>
+						<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+						<br/>
+						<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+						<br/>
+						<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+						<br/>
+						<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+						<br/>
+						<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+						<br/>
+						<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
+						<br/>
+						<div>Show all # reviews if more than 6</div>
+					
+					</div>
 				</div>
 			{/* REVIEWS - END */}
 			{/* REVIEWS - END */}
