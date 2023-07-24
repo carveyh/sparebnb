@@ -20,6 +20,7 @@ const ListingCard = ({listing, num, filter}) => {
 	// }
 
 
+	debugger
 
 	return (
 		<motion.div key={num.toString() + filter} initial={{opacity:0.0}} animate={{opacity:1, transition:{delay:(num) * 0.035, duration: 0.2, ease:'easeIn'} }} exit={{opacity: 0}}>
@@ -81,28 +82,14 @@ const ListingsIndex = ({filter}) => {
 	
 	return (
 		// <>
-		<AnimatePresence>
-		{/* <motion.div className="grid-container-container" key="grid" initial={{opacity:0}} animate={{opacity: 1, transition:{duration: 0.3, ease:'easeIn'} }} exit={{opacity: 0, backgroundColor:"blue", transition:{duration: 0.1, ease:'easeIn'} }}> */}
 		<div className="grid-container-container" >
 			<div className="grid-container">
 				{/* <AnimatePresence mode="wait"> */}
 				<AnimatePresence mode="popLayout">
-				{filter && listingCards}
-				{!filter &&
-					<>
-						{listingCards}
-						{/* {listingCards} */}
-						{/* {listingCards} */}
-						{/* {listingCards} */}
-						{/* {listingCards} */}
-						{/* {listingCards} */}
-					</>
-				}
+					{listingCards}
 				</AnimatePresence>
 			</div>
 		</div>
-		{/* </motion.div> */}
-		</AnimatePresence>
 		// </>
 	)
 }

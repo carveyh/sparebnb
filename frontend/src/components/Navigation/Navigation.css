@@ -33,6 +33,10 @@
 	font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
 }
 
+.narrow-navbar {
+	padding: 0px 160px;
+}
+
 .upper-navbar-logo-div {
 	box-sizing: border-box;
 	height: 80px;
