@@ -39,9 +39,7 @@ const ListingsShowPage = (props) => {
 		// Add this line to try to always be at top of a page when navigationg from a dff one
 		window.scrollTo(0, 0);
 
-		// debugger
 		dispatch(fetchListing(listingId));
-		// dispatch(fetchUser(listing?.hostId));
 		dispatch(fetchResReviewsForListing(listingId));
 	}, [])
 

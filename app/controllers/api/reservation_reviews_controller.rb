@@ -13,17 +13,13 @@ class Api::ReservationReviewsController < ApplicationController
     if params.has_key?(:user_id)
       @reservation_reviews = ReservationReview.where(reviewer_id: params[:user_id])
     elsif params.has_key?(:listing_id)
-      # @reservation_reviews = ReservationReview.where(listing.id: params[:listing_id])
       @listing = Listing.find(params[:listing_id])
-      # @reservation_reviews = ReservationReview.where(listing: listing)
       @reservation_reviews = @listing.reviews
-      # debugger
     # elsif params.has_key?(:reservation_id)
     #   # i-var plural just for consistency in json view template
     #   # Actually, :index as a restful route for a singular resource is not recognized by Rails, need to move to #show in controller
     #   @reservation_reviews = ReservationReview.find(reservation_id: params[:reservation_id])
     end
-    # debugger
     render :index
   end
 
