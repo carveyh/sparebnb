@@ -15,18 +15,22 @@ import { createReservation } from "../../store/reservation";
 import {AnimatePresence, motion} from "framer-motion";
 import { fetchResReviewsForListing } from "../../store/reservation_reviews";
 
-export const ListingsShowPhoto = ({listingId, imageNum}) => {
-	listingId = formatTwoDigitNumberString(listingId);
-	imageNum = formatTwoDigitNumberString(imageNum);
-	const photoDirPath = `../../images/listings/${listingId}/${imageNum}.png`;
+// Relevant Components
+import { ListingsShowPhoto } from "./ListingsShowPhoto";
+import { ReviewsSubCategories } from "./ReviewsSubCategories";
+
+// export const ListingsShowPhoto = ({listingId, imageNum}) => {
+// 	listingId = formatTwoDigitNumberString(listingId);
+// 	imageNum = formatTwoDigitNumberString(imageNum);
+// 	const photoDirPath = `../../images/listings/${listingId}/${imageNum}.png`;
 	
-	return(
-		<>
-			{/* Why can't I replace string with photoDirPath...? */}
-			<img className="listings-show-photo" src={require(`../../images/listings/${listingId}/${imageNum}.png`)} />
-		</>
-	)
-}
+// 	return(
+// 		<>
+// 			{/* Why can't I replace string with photoDirPath...? */}
+// 			<img className="listings-show-photo" src={require(`../../images/listings/${listingId}/${imageNum}.png`)} />
+// 		</>
+// 	)
+// }
 
 const ListingsShowPage = (props) => {
 	const dispatch = useDispatch();
@@ -248,8 +252,10 @@ const ListingsShowPage = (props) => {
 									</>
 									}
 									{/* <span className="header-review-count">15 reviews</span> */}
-									<span className="header-review-count">{formattedNumReviews()}</span>
+									{listing.numRatings > 0 && <span className="header-review-count">{formattedNumReviews()}</span>}
 								</span>
+								{listing.numRatings > 0 && <span className="rating-review-stats stats-text-small lower-dot">·</span>}
+								<span className="rating-review-stats stats-text-small">{`${listing.city}, ${listing.state}, United States`}</span>
 							</div>
 							<div className="show-header-buttons stats-text-small">
 								<i className="fa-solid fa-arrow-up-from-bracket"></i>&nbsp;&nbsp;Share 
@@ -430,7 +436,7 @@ const ListingsShowPage = (props) => {
 												{formattedOverallRating()} ·&nbsp;
 											</>
 											}
-											 <div className="form-num-reviews">{formattedNumReviews()}</div>
+											 {listing.numRatings > 0 && <div className="form-num-reviews">{formattedNumReviews()}</div>}
 										</div>
 									</div>
 									{/* FORM - START */}
@@ -517,12 +523,16 @@ const ListingsShowPage = (props) => {
 							{(listing.numRatings < 3 && listing.numRatings > 0) && <div className="under-3-reviews-placeholder">Average rating will appear after 3 reviews</div>}
 						</div>
 						
+						<ReviewsSubCategories ratings={listing.averageRatings} />
+
 						<div>Cleanliness bar #.#</div>
 						<div>Communication bar #.#</div>
 						<div>Check-in bar #.#</div>
 						<div>Accuracy bar #.#</div>
 						<div>Location bar #.#</div>
 						<div>Value bar #.#</div>
+
+
 						<br/>
 						<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
 						<br/>

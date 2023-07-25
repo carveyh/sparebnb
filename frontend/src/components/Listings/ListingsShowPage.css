@@ -15,6 +15,15 @@
 	text-wrap: nowrap;
 }
 
+.lower-dot {
+	margin-top: 6.5px !important;
+	margin-left: 8px;
+	margin-right: 8px;
+	font-weight: 100;
+	display: flex;
+	align-items: flex-end;
+}
+
 .stats-text-small {
 	font-size: 14px;
 	font-weight: 500;
@@ -72,7 +81,7 @@
 }
 
 .show-title {
-	/*  */
+	padding-bottom: 4px;
 }
 
 .show-header-details {
@@ -81,10 +90,15 @@
 	align-items: flex-end;
 }
 
+.show-header-stats {
+	display: flex;
+	flex-direction: row;
+}
+
 .rating-review-stats {
 	display: flex;
 	align-items: center;
-	margin-top: 8px;
+	margin-top: 4px;
 	height: 24px;
 }
 
@@ -92,8 +106,12 @@
 	margin-right: 4px;
 }
 
+.header-rating {
+	padding-right: 4px;
+}
+
 .header-review-count {
-	padding-left: 4px;
+	/*  */
 }
 
 .show-header-buttons {
