@@ -2,6 +2,7 @@ import "./ListingsShowPage.css";
 
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { fetchListing, fetchListings } from "../../store/listings";
 import { fetchUser } from "../../store/user";
@@ -35,14 +36,6 @@ const ListingsShowPage = (props) => {
 	const host = useSelector(state => state.entities?.users ? state.entities.users[`${listing?.hostId}`] : {})
 	const hostIdFormatted = formatTwoDigitNumberString(host?.id);	
 
-	useEffect(() => {
-		// Add this line to try to always be at top of a page when navigationg from a dff one
-		window.scrollTo(0, 0);
-
-		dispatch(fetchListing(listingId));
-		dispatch(fetchResReviewsForListing(listingId));
-	}, [])
-
 	const [checkIn, setCheckIn] = useState();
 	const [checkOut, setCheckOut] = useState();
 	const [numGuests, setNumGuests] = useState(1);
@@ -51,6 +44,23 @@ const ListingsShowPage = (props) => {
 	const [errors, setErrors] = useState([]);
 	const [bookingConfirmed, setBookingConfirmed] = useState(false);
 	const [buttonClickable, setButtonClickable] = useState(true);
+	const [currentSleepPhotoNum, setCurrentSleepPhotoNum] = useState(1);
+	const [sleepPhotoTotal, setSleepPhotoTotal] = useState(1);
+	// const [pressedSleepBtn, setPressedSleepBtn] = useState(null);
+	// const pressedSleepBtn = useRef();
+
+	const prevSleepBtn = useRef(null);
+	const nextSleepBtn = useRef(null);
+
+	useEffect(() => {
+		// Add this line to try to always be at top of a page when navigationg from a dff one
+		window.scrollTo(0, 0);
+
+		dispatch(fetchListing(listingId));
+		dispatch(fetchResReviewsForListing(listingId));
+		setSleepPhotoTotal(Math.round(document.querySelectorAll(".carousel-photo").length / 2.0))
+	}, [])
+
 
 	const handleChangeCheckIn = e => {
 		setCheckIn(e.target.value);
@@ -159,6 +169,38 @@ const ListingsShowPage = (props) => {
 				<div className="num-guests-placeholder">GUESTS</div>
 			</div>
 		)
+	}
+
+	const mouseDownSleepBtn = (direction) => (e) => {
+		e.currentTarget.classList.add("sleep-button-pressed");
+		if(direction === "prev") {
+			document.addEventListener("mouseup", prevPhoto)
+		} else {
+			document.addEventListener("mouseup", nextPhoto)
+		}
+	}
+
+	const prevPhoto = () => {
+		document.removeEventListener("mouseup", prevPhoto);
+		prevSleepBtn.current.classList.remove("sleep-button-pressed");
+		shiftPhoto("prev");
+	}
+
+	const nextPhoto = () => {
+		document.removeEventListener("mouseup", nextPhoto);
+		nextSleepBtn.current.classList.remove("sleep-button-pressed");
+		shiftPhoto("next");
+	}
+
+	const shiftPhoto = (direction) => {
+		const carousel = document.querySelector(".sleep-carousel")
+		const carouselPhotos = carousel.querySelectorAll(".carousel-photo")
+		const photoLength = carouselPhotos[0].offsetWidth + 16
+		const currentPhotoNum = Math.round(carousel.scrollLeft / (carouselPhotos[0].offsetWidth + 16));
+		const numChange = (direction === "prev") ? -1 : 1;
+		const newPhotoNum = currentPhotoNum + numChange;
+		carousel.scroll({left: newPhotoNum * photoLength, behavior: 'smooth'})
+		setCurrentSleepPhotoNum(newPhotoNum);
 	}
 
 	if(!listing || !host) return null;
@@ -287,7 +329,16 @@ const ListingsShowPage = (props) => {
 							{/* DETAILS CARD | BED-PHOTOS - START */}
 							<div className="details-card-description-container horizontal-rule-top-border">
 								<div className="show-page-general-padder plain-text">
-									<div className="sleep-header heading-2">Where you'll sleep</div>
+									<div className="sleep-header heading-2">
+										<span className="sleep-text">Where you'll sleep </span>
+										<div className="sleep-buttons-container">
+											<span className="sleep-counter">{`${currentSleepPhotoNum} / ${sleepPhotoTotal}`}</span>
+											{/* <div className="sleep-button" onMouseDown={mouseDownSleepBtn} onMouseUp={(shiftSleepPhoto)("prev")}><i class="fa-solid fa-chevron-left"></i></div> */}
+											{/* <div className="sleep-button" ref={prevSleepBtn} onMouseDown={(mouseDownSleepBtn)("prev")} ><i class="fa-solid fa-chevron-left"></i></div> */}
+											<div className="sleep-button" ref={prevSleepBtn} onMouseDown={mouseDownSleepBtn("prev")} ><i class="fa-solid fa-chevron-left"></i></div>
+											<div className="sleep-button" ref={nextSleepBtn} onMouseDown={mouseDownSleepBtn("next")} ><i class="fa-solid fa-chevron-right"></i></div>
+										</div>
+									</div>
 									<div className="sleep-carousel-container">
 										<div className="sleep-carousel">
 											<div className="carousel-photo"><ListingsShowPhoto listingId={listingId} imageNum={6}/></div>
