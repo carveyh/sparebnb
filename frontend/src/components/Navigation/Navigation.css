@@ -6,6 +6,8 @@
 
 /* Rename this UPPER NAV BAR, should be contained in a <header> */
 .upper-navbar-header {
+	container-type: inline-size;
+	container-name: navbar-width;
 	height: 80px;
 	width: 100%;
 	position: sticky;
@@ -35,6 +37,23 @@
 
 .narrow-navbar {
 	padding: 0px 160px;
+}
+
+@container navbar-width (width < 1270px) {
+	.narrow-navbar {
+		min-width: unset;
+		width: 100%;
+		padding: 0px 80px;
+		
+	}
+}
+@container navbar-width (width < 1120px) {
+	.narrow-navbar {
+		min-width: unset;
+		width: 100%;
+		padding: 0px 40px;
+		
+	}
 }
 
 .upper-navbar-logo-div {

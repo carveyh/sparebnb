@@ -2,6 +2,7 @@ import "./ListingsShowPage.css";
 
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { fetchListing, fetchListings } from "../../store/listings";
 import { fetchUser } from "../../store/user";
@@ -35,16 +36,6 @@ const ListingsShowPage = (props) => {
 	const host = useSelector(state => state.entities?.users ? state.entities.users[`${listing?.hostId}`] : {})
 	const hostIdFormatted = formatTwoDigitNumberString(host?.id);	
 
-	useEffect(() => {
-		// Add this line to try to always be at top of a page when navigationg from a dff one
-		window.scrollTo(0, 0);
-
-		// debugger
-		dispatch(fetchListing(listingId));
-		// dispatch(fetchUser(listing?.hostId));
-		dispatch(fetchResReviewsForListing(listingId));
-	}, [])
-
 	const [checkIn, setCheckIn] = useState();
 	const [checkOut, setCheckOut] = useState();
 	const [numGuests, setNumGuests] = useState(1);
@@ -53,6 +44,23 @@ const ListingsShowPage = (props) => {
 	const [errors, setErrors] = useState([]);
 	const [bookingConfirmed, setBookingConfirmed] = useState(false);
 	const [buttonClickable, setButtonClickable] = useState(true);
+	const [currentSleepPhotoNum, setCurrentSleepPhotoNum] = useState(1);
+	const [sleepPhotoTotal, setSleepPhotoTotal] = useState(1);
+	// const [pressedSleepBtn, setPressedSleepBtn] = useState(null);
+	// const pressedSleepBtn = useRef();
+
+	const prevSleepBtn = useRef(null);
+	const nextSleepBtn = useRef(null);
+
+	useEffect(() => {
+		// Add this line to try to always be at top of a page when navigationg from a dff one
+		window.scrollTo(0, 0);
+
+		dispatch(fetchListing(listingId));
+		dispatch(fetchResReviewsForListing(listingId));
+		setSleepPhotoTotal(Math.round(document.querySelectorAll(".carousel-photo").length / 2.0))
+	}, [])
+
 
 	const handleChangeCheckIn = e => {
 		setCheckIn(e.target.value);
@@ -89,11 +97,11 @@ const ListingsShowPage = (props) => {
 	}
 
 	const baseTotalCost = () => {
-		return numNights() ? numNights() * listing.baseNightlyRate : listing.baseNightlyRate;
+		return numNights() ? numNights() * listing?.baseNightlyRate : listing?.baseNightlyRate;
 	}
 
-	const cleaningFee = 350;
-	const baseServiceFee = 350;
+	const cleaningFee = parseInt(listing?.baseNightlyRate / 4);
+	const baseServiceFee = 14;
 
 	const totalServiceFee = () => {
 		return numNights() ? numNights() * baseServiceFee : baseServiceFee;
@@ -163,6 +171,38 @@ const ListingsShowPage = (props) => {
 		)
 	}
 
+	const mouseDownSleepBtn = (direction) => (e) => {
+		e.currentTarget.classList.add("sleep-button-pressed");
+		if(direction === "prev") {
+			document.addEventListener("mouseup", prevPhoto)
+		} else {
+			document.addEventListener("mouseup", nextPhoto)
+		}
+	}
+
+	const prevPhoto = () => {
+		document.removeEventListener("mouseup", prevPhoto);
+		prevSleepBtn.current.classList.remove("sleep-button-pressed");
+		shiftPhoto("prev");
+	}
+
+	const nextPhoto = () => {
+		document.removeEventListener("mouseup", nextPhoto);
+		nextSleepBtn.current.classList.remove("sleep-button-pressed");
+		shiftPhoto("next");
+	}
+
+	const shiftPhoto = (direction) => {
+		const carousel = document.querySelector(".sleep-carousel")
+		const carouselPhotos = carousel.querySelectorAll(".carousel-photo")
+		const photoLength = carouselPhotos[0].offsetWidth + 16
+		const currentPhotoNum = Math.round(carousel.scrollLeft / (carouselPhotos[0].offsetWidth + 16));
+		const numChange = (direction === "prev") ? -1 : 1;
+		const newPhotoNum = currentPhotoNum + numChange;
+		carousel.scroll({left: newPhotoNum * photoLength, behavior: 'smooth'})
+		setCurrentSleepPhotoNum(newPhotoNum);
+	}
+
 	if(!listing || !host) return null;
 
 	return (
@@ -181,8 +221,12 @@ const ListingsShowPage = (props) => {
 						<div className="show-header-details">
 							<div className="show-header-stats">
 								<span className="rating-review-stats stats-text-small">
-									<span className="star-icon"><i className="fa-solid fa-star"></i></span>
-									<span className="header-rating">{formattedOverallRating()} ·</span>
+									{listing.numRatings >= 3 && 
+									<>
+										<span className="star-icon"><i className="fa-solid fa-star"></i></span>
+										<span className="header-rating">{formattedOverallRating()} ·</span>
+									</>
+									}
 									{/* <span className="header-review-count">15 reviews</span> */}
 									<span className="header-review-count">{formattedNumReviews()}</span>
 								</span>
@@ -285,7 +329,16 @@ const ListingsShowPage = (props) => {
 							{/* DETAILS CARD | BED-PHOTOS - START */}
 							<div className="details-card-description-container horizontal-rule-top-border">
 								<div className="show-page-general-padder plain-text">
-									<div className="sleep-header heading-2">Where you'll sleep</div>
+									<div className="sleep-header heading-2">
+										<span className="sleep-text">Where you'll sleep </span>
+										<div className="sleep-buttons-container">
+											<span className="sleep-counter">{`${currentSleepPhotoNum} / ${sleepPhotoTotal}`}</span>
+											{/* <div className="sleep-button" onMouseDown={mouseDownSleepBtn} onMouseUp={(shiftSleepPhoto)("prev")}><i class="fa-solid fa-chevron-left"></i></div> */}
+											{/* <div className="sleep-button" ref={prevSleepBtn} onMouseDown={(mouseDownSleepBtn)("prev")} ><i class="fa-solid fa-chevron-left"></i></div> */}
+											<div className="sleep-button" ref={prevSleepBtn} onMouseDown={mouseDownSleepBtn("prev")} ><i class="fa-solid fa-chevron-left"></i></div>
+											<div className="sleep-button" ref={nextSleepBtn} onMouseDown={mouseDownSleepBtn("next")} ><i class="fa-solid fa-chevron-right"></i></div>
+										</div>
+									</div>
 									<div className="sleep-carousel-container">
 										<div className="sleep-carousel">
 											<div className="carousel-photo"><ListingsShowPhoto listingId={listingId} imageNum={6}/></div>
@@ -348,10 +401,16 @@ const ListingsShowPage = (props) => {
 								<div className="floating-form-inner-container">
 									<div className="form-stats-header-container">
 										<div>
-											<div className="heading-2">${listing.baseNightlyRate}</div> &nbsp; <div className="plain-text">night</div>
+											<div className="heading-2">${listing?.baseNightlyRate}</div> &nbsp; <div className="plain-text">night</div>
 										</div>
 										<div className="stats-text-small">
-											<i className="fa-solid fa-star"></i> &nbsp;{formattedOverallRating()} · {formattedNumReviews()}
+											{listing.numRatings >= 3 && 
+											<>
+												<i className="fa-solid fa-star"></i> &nbsp;
+												{formattedOverallRating()} ·&nbsp;
+											</>
+											}
+											 <div className="form-num-reviews">{formattedNumReviews()}</div>
 										</div>
 									</div>
 									{/* FORM - START */}
@@ -396,7 +455,7 @@ const ListingsShowPage = (props) => {
 									<div className={`plain-text report-button-container ${bookingConfirmed ? "reservation-complete" : "reservation-incomplete"}`}>
 										{bookingConfirmed ? "Reservation complete!" : "What are you waiting for?"}
 									</div>
-									<div>${listing.baseNightlyRate} x {numNights() ? numNights() : "-"} nights - ${baseTotalCost()}</div>
+									<div>${listing?.baseNightlyRate} x {numNights() ? numNights() : "-"} nights - ${baseTotalCost()}</div>
 									<div className="plain-text form-padding-top">Cleaning fee - ${cleaningFee}</div>
 									<div className="plain-text form-padding-top form-padding-bottom ">Sparebnb service fee - ${totalServiceFee()}</div>
 									<div className="plain-text horizontal-rule-top-border"></div>
@@ -422,14 +481,22 @@ const ListingsShowPage = (props) => {
 				{/* REVIEWS - START */}
 				<div className="horizontal-rule-top-border plain-text">
 					<div className="show-page-general-padder">
-					
-						{listing.numRatings === 0 ? 
-							<div className="heading-2 review-header">No reviews (yet)</div>
-							: <div className="heading-2 review-header"><div className="review-star-container"><i className="fa-solid fa-star"></i></div> {`${formattedOverallRating()}`} · {`${listing?.numRatings}`} reviews</div>
-						}
-						<br/>
+						<div className="heading-2 review-header">
+							{listing.numRatings === 0 ? <div>No reviews (yet)</div>
+								: 
+								<div className="review-header-toprow">
+									{listing.numRatings >= 3 && 
+										<>
+											<div className="review-star-container"><i className="fa-solid fa-star"></i></div> 
+											{`${formattedOverallRating()}`} ·&nbsp;
+										</>
+									}
+									{formattedNumReviews()}
+								</div> 
+							}
+							{(listing.numRatings < 3 && listing.numRatings > 0) && <div className="under-3-reviews-placeholder">Average rating will appear after 3 reviews</div>}
+						</div>
 						
-						<br/>
 						<div>Cleanliness bar #.#</div>
 						<div>Communication bar #.#</div>
 						<div>Check-in bar #.#</div>
