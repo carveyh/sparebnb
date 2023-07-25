@@ -15,18 +15,22 @@ import { createReservation } from "../../store/reservation";
 import {AnimatePresence, motion} from "framer-motion";
 import { fetchResReviewsForListing } from "../../store/reservation_reviews";
 
-export const ListingsShowPhoto = ({listingId, imageNum}) => {
-	listingId = formatTwoDigitNumberString(listingId);
-	imageNum = formatTwoDigitNumberString(imageNum);
-	const photoDirPath = `../../images/listings/${listingId}/${imageNum}.png`;
+// Relevant Components
+import { ListingsShowPhoto } from "./ListingsShowPhoto";
+import { ReviewsSubCategories } from "./ReviewsSubCategories";
+
+// export const ListingsShowPhoto = ({listingId, imageNum}) => {
+// 	listingId = formatTwoDigitNumberString(listingId);
+// 	imageNum = formatTwoDigitNumberString(imageNum);
+// 	const photoDirPath = `../../images/listings/${listingId}/${imageNum}.png`;
 	
-	return(
-		<>
-			{/* Why can't I replace string with photoDirPath...? */}
-			<img className="listings-show-photo" src={require(`../../images/listings/${listingId}/${imageNum}.png`)} />
-		</>
-	)
-}
+// 	return(
+// 		<>
+// 			{/* Why can't I replace string with photoDirPath...? */}
+// 			<img className="listings-show-photo" src={require(`../../images/listings/${listingId}/${imageNum}.png`)} />
+// 		</>
+// 	)
+// }
 
 const ListingsShowPage = (props) => {
 	const dispatch = useDispatch();
@@ -45,20 +49,22 @@ const ListingsShowPage = (props) => {
 	const [bookingConfirmed, setBookingConfirmed] = useState(false);
 	const [buttonClickable, setButtonClickable] = useState(true);
 	const [currentSleepPhotoNum, setCurrentSleepPhotoNum] = useState(1);
-	const [sleepPhotoTotal, setSleepPhotoTotal] = useState(1);
-	// const [pressedSleepBtn, setPressedSleepBtn] = useState(null);
-	// const pressedSleepBtn = useRef();
+
+	// !!! NEED TO CHANGE THIS ONE WE HAVE DYNAMIC LISTINGS PHOTOS!!! FOR NOW EACH LISTING HAS 6 PHOTOS
+	const sleepPhotoTotal = 6;
+	const sleepPhotoPairsTotal = Math.round(sleepPhotoTotal / 2.0)
 
 	const prevSleepBtn = useRef(null);
 	const nextSleepBtn = useRef(null);
 
+	const cleaningFee = parseInt(listing?.baseNightlyRate / 4);
+	const baseServiceFee = 14;
+
 	useEffect(() => {
 		// Add this line to try to always be at top of a page when navigationg from a dff one
 		window.scrollTo(0, 0);
-
 		dispatch(fetchListing(listingId));
 		dispatch(fetchResReviewsForListing(listingId));
-		setSleepPhotoTotal(Math.round(document.querySelectorAll(".carousel-photo").length / 2.0))
 	}, [])
 
 
@@ -72,15 +78,12 @@ const ListingsShowPage = (props) => {
 		setDayBefore(daysApartCalculator(e.target.value, -0));
 	}
 
-
-
 	const daysApartCalculator = (oldDate, delta) => {
 		const tomorrow = new Date(oldDate)
 		tomorrow.setDate(tomorrow.getDate() + delta)
 		const month = String(tomorrow.getMonth() + 1)
 		const date = String(tomorrow.getDate())
 		return `${tomorrow.getFullYear()}-${month.length < 2 ? '0'.concat(month) : month}-${date.length < 2 ? '0' + date : date}`
-		
 	}
 	
 	const minDate = () => {
@@ -99,9 +102,6 @@ const ListingsShowPage = (props) => {
 	const baseTotalCost = () => {
 		return numNights() ? numNights() * listing?.baseNightlyRate : listing?.baseNightlyRate;
 	}
-
-	const cleaningFee = parseInt(listing?.baseNightlyRate / 4);
-	const baseServiceFee = 14;
 
 	const totalServiceFee = () => {
 		return numNights() ? numNights() * baseServiceFee : baseServiceFee;
@@ -171,43 +171,67 @@ const ListingsShowPage = (props) => {
 		)
 	}
 
+	// LOGIC FOR SLEEP PHOTOS CAROUSEL - START
+	// LOGIC FOR SLEEP PHOTOS CAROUSEL - START
+
 	const mouseDownSleepBtn = (direction) => (e) => {
 		e.currentTarget.classList.add("sleep-button-pressed");
 		if(direction === "prev") {
-			document.addEventListener("mouseup", prevPhoto)
+			document.addEventListener("mouseup", prevPhoto) //add/rmv elisteners require exact reference...so separate function names
 		} else {
 			document.addEventListener("mouseup", nextPhoto)
 		}
 	}
 
-	const prevPhoto = () => {
+	const prevPhoto = (e) => {
 		document.removeEventListener("mouseup", prevPhoto);
 		prevSleepBtn.current.classList.remove("sleep-button-pressed");
-		shiftPhoto("prev");
+		if(e.target === prevSleepBtn.current || e.target.parentElement === prevSleepBtn.current) shiftPhoto("prev");
 	}
 
-	const nextPhoto = () => {
+	const nextPhoto = (e) => {
 		document.removeEventListener("mouseup", nextPhoto);
 		nextSleepBtn.current.classList.remove("sleep-button-pressed");
-		shiftPhoto("next");
+		if(e.target === nextSleepBtn.current || e.target.parentElement === nextSleepBtn.current) shiftPhoto("next");
 	}
 
 	const shiftPhoto = (direction) => {
 		const carousel = document.querySelector(".sleep-carousel")
 		const carouselPhotos = carousel.querySelectorAll(".carousel-photo")
 		const photoLength = carouselPhotos[0].offsetWidth + 16
+
+		// Note: currentPhotoNum is 0-indexed, represents how many photos away from carousel start we are.
 		const currentPhotoNum = Math.round(carousel.scrollLeft / (carouselPhotos[0].offsetWidth + 16));
-		const numChange = (direction === "prev") ? -1 : 1;
-		const newPhotoNum = currentPhotoNum + numChange;
+
+		let numChange;
+		let newPhotoNum;
+		if(direction === "prev") {
+			if(currentPhotoNum === 0) { //if already at first photo, no change
+				numChange = 0;
+			} else {
+				if(currentPhotoNum % 2 !== 0) numChange = -1;
+				else numChange = -2;
+			}
+		} else if(direction === "next") { 
+			if(currentPhotoNum >= (sleepPhotoTotal - 2)) { //if already at last photo, no change
+				numChange = 0;
+			} else {
+				if(sleepPhotoTotal % 2 !== 0 && currentPhotoNum === sleepPhotoTotal - 3) numChange = 1;
+				else numChange = 2;
+			}
+		}
+		newPhotoNum = currentPhotoNum + numChange;
 		carousel.scroll({left: newPhotoNum * photoLength, behavior: 'smooth'})
-		setCurrentSleepPhotoNum(newPhotoNum);
+
+		setCurrentSleepPhotoNum(Math.round((newPhotoNum) / 2.0) + 1);
 	}
+
+	// LOGIC FOR SLEEP PHOTOS CAROUSEL - END
+	// LOGIC FOR SLEEP PHOTOS CAROUSEL - END
 
 	if(!listing || !host) return null;
 
 	return (
-		// <AnimatePresence>
-		// <motion.div className="show-page-outer-container" initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
 		<div className="show-page-outer-container" initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
 			<div className="show-page-dynamic-inner-container">
 
@@ -228,8 +252,10 @@ const ListingsShowPage = (props) => {
 									</>
 									}
 									{/* <span className="header-review-count">15 reviews</span> */}
-									<span className="header-review-count">{formattedNumReviews()}</span>
+									{listing.numRatings > 0 && <span className="header-review-count">{formattedNumReviews()}</span>}
 								</span>
+								{listing.numRatings > 0 && <span className="rating-review-stats stats-text-small lower-dot">·</span>}
+								<span className="rating-review-stats stats-text-small">{`${listing.city}, ${listing.state}, United States`}</span>
 							</div>
 							<div className="show-header-buttons stats-text-small">
 								<i className="fa-solid fa-arrow-up-from-bracket"></i>&nbsp;&nbsp;Share 
@@ -332,7 +358,7 @@ const ListingsShowPage = (props) => {
 									<div className="sleep-header heading-2">
 										<span className="sleep-text">Where you'll sleep </span>
 										<div className="sleep-buttons-container">
-											<span className="sleep-counter">{`${currentSleepPhotoNum} / ${sleepPhotoTotal}`}</span>
+											<span className="sleep-counter">{`${currentSleepPhotoNum} / ${sleepPhotoPairsTotal}`}</span>
 											{/* <div className="sleep-button" onMouseDown={mouseDownSleepBtn} onMouseUp={(shiftSleepPhoto)("prev")}><i class="fa-solid fa-chevron-left"></i></div> */}
 											{/* <div className="sleep-button" ref={prevSleepBtn} onMouseDown={(mouseDownSleepBtn)("prev")} ><i class="fa-solid fa-chevron-left"></i></div> */}
 											<div className="sleep-button" ref={prevSleepBtn} onMouseDown={mouseDownSleepBtn("prev")} ><i class="fa-solid fa-chevron-left"></i></div>
@@ -410,7 +436,7 @@ const ListingsShowPage = (props) => {
 												{formattedOverallRating()} ·&nbsp;
 											</>
 											}
-											 <div className="form-num-reviews">{formattedNumReviews()}</div>
+											 {listing.numRatings > 0 && <div className="form-num-reviews">{formattedNumReviews()}</div>}
 										</div>
 									</div>
 									{/* FORM - START */}
@@ -497,12 +523,16 @@ const ListingsShowPage = (props) => {
 							{(listing.numRatings < 3 && listing.numRatings > 0) && <div className="under-3-reviews-placeholder">Average rating will appear after 3 reviews</div>}
 						</div>
 						
+						<ReviewsSubCategories ratings={listing.averageRatings} />
+
 						<div>Cleanliness bar #.#</div>
 						<div>Communication bar #.#</div>
 						<div>Check-in bar #.#</div>
 						<div>Accuracy bar #.#</div>
 						<div>Location bar #.#</div>
 						<div>Value bar #.#</div>
+
+
 						<br/>
 						<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
 						<br/>
@@ -540,8 +570,6 @@ const ListingsShowPage = (props) => {
 				</div>
 			</div>
 		</div>
-		// </motion.div>
-		// </AnimatePresence>
 	)
 }
 

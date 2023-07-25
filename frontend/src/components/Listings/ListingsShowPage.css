@@ -1,6 +1,6 @@
 /* ------------------ GLOBAL STYLES ------------------ */
 .heading-1 {
-	width: 100%;
+	/* width: 100%; */
 	font-size: 26px;
 	font-weight: 500;
 	margin-bottom: 4px;
@@ -13,6 +13,15 @@
 	font-weight: 500;
 	margin-bottom: 4px;
 	text-wrap: nowrap;
+}
+
+.lower-dot {
+	margin-top: 6.5px !important;
+	margin-left: 8px;
+	margin-right: 8px;
+	font-weight: 100;
+	display: flex;
+	align-items: flex-end;
 }
 
 .stats-text-small {
@@ -58,7 +67,6 @@
 
 
 .show-header-full-header {
-	/* background-color: pink; */
 	width: 100%;
 	height: 86px;
 	display: flex;
@@ -73,42 +81,41 @@
 }
 
 .show-title {
-	/* width: 100%;
-	font-size: 26px;
-	font-weight: 600px;
-	margin-bottom: 4px;
-	text-wrap: nowrap; */
+	padding-bottom: 4px;
 }
 
 .show-header-details {
-	/* background-color: beige; */
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-end;
 }
 
+.show-header-stats {
+	display: flex;
+	flex-direction: row;
+}
+
 .rating-review-stats {
-	/* background-color: lightgray; */
 	display: flex;
 	align-items: center;
-	margin-top: 8px;
+	margin-top: 4px;
 	height: 24px;
-	/* font-size: 13px;
-	font-weight: 500; */
 }
 
 .star-icon {
 	margin-right: 4px;
 }
 
+.header-rating {
+	padding-right: 4px;
+}
+
 .header-review-count {
-	padding-left: 4px;
+	/*  */
 }
 
 .show-header-buttons {
-	/* background-color: lightgray; */
 	padding-bottom: 5px;
-	/* font-size: 14px; */
 }
 
 /* ------------------ PHOTOS ------------------ */
@@ -117,7 +124,6 @@
 
 /* 'Crown' of photo wall - side padding, and upper padding. */
 .photo-wall-crown {
-	/* background-color: lightcyan; */
 	width: 100%;
 	box-sizing: border-box;
 	padding-top: 24px;
@@ -127,9 +133,6 @@
 
 /* Actual photo wall nestled within 'crown' */
 .photo-wall-container {
-	/* background-color: pink; */
-	/* border: 1px black solid; */
-
 	/* ACTUALLY - need it to not shrink, airbnb maintains a static height */
 	/* for approx full to half screen browser widths... */
 	/* UPDATE - this dynamic width setting needs to work for more than just photos */
@@ -164,7 +167,6 @@
 
 /* airbnb gives exactly entire left half of photo wall space to one big photo */
 .photo-wall-halver {
-	/* background-color: orange; */
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -176,14 +178,12 @@
 /* the remaining right half is split into quadrants, */
 /* AFTER first applying a padding-left within that half */
 .photo-wall-big {
-	/* background-color: blue; */
 	flex-basis: 33%;
 	flex-grow: 1;
 	box-sizing: border-box;
 }
 
 .photo-wall-grid {
-	/* background-color: purple; */
 	flex-basis: 33%;
 	flex-grow: 1;
 	box-sizing: border-box;
@@ -201,8 +201,6 @@
 }
 
 .photo-wall-individual-photo-div {
-	/* background-color: lightcyan; */
-	/* border: 1px solid blue; */
 	overflow: hidden;
 
 }
@@ -245,23 +243,17 @@
 
 /* Outer container for main div which is the flex container for entire section */
 .details-outer-container{
-	/* background-color: pink; */
 	width: 100%;
-	/* height: 100px; */
 	display: block;
-	/* position: sticky; */
-	/* top: 300px; */
 }
 
 /* Main div for listing details, flex */
 .details-main-container{
-	/* background-color: purple; */
 	width: 100%;
 	display: flex;
 	flex-direction: row;
 	justify-content: stretch;
 	align-items: flex-start;
-	/* height: 100%; */
 }
 
 
@@ -273,27 +265,20 @@
 .details-left-container {
 	flex-grow: 1;
 	flex-basis: 58.33%;	
-	/* background-color: bisque; */
 	display: block;
-	/* height: 100%; */
-	/* flex-direction: column; */
-	/* position: relative; */
 }
 
 .details-card-stats-container {
-	/* background-color: red; */
 	height: 100%;
 	width: 100%;
 }
 
 .details-card-stats-padder {
-	/* background-color: aliceblue; */
 	padding-top: 48px;
 	padding-bottom: 24px;
 }
 
 .details-card-stats-horizontal-splitter {
-	/* background-color: pink; */
 	display: flex;
 	justify-content: space-between;
 }
@@ -371,7 +356,6 @@
 
 .sleep-button-pressed {
 	box-shadow: none !important;
-	/* box-shadow: 0 0 0 1px transparent,0 0 0 4px transparent, 0 2px 4px rgba(0,0,0,0.18) !important; */
 }
 
 .sleep-button:last-child {
@@ -383,16 +367,7 @@
 }
 
 .sleep-carousel-container {
-	/* overflow-x: scroll;
-	overscroll-behavior-x: contain;
-  white-space: nowrap;
-	width: 100%;
-	scroll-snap-type: x mandatory;
-	overscroll-behavior-x: contain;
-	gap: 8px; */
-	/* margin: -8px; */
-	/* scroll-behavior: smooth; */
-	/* white-space:nowrap; */
+	/*  */
 }
 
 .sleep-carousel {
@@ -403,17 +378,6 @@
 	width: 100%;
 	scroll-snap-type: x mandatory;
 	overscroll-behavior-x: contain;
-	/* display: inline-block; */
-	/* width: 100%; */
-	/* margin: -8px; */
-	/* padding: -8px; */
-	/* box-sizing: border-box; */
-	/* padding-left: 8px; */
-	/* display: flex; */
-	/* overflow-x: hidden; */
-	/* white-space: nowrap; */
-
-  /* padding: 10px; */
 	gap: 16px;
 
 	/* hide scrollbar: IE, Edge, FireFox: */
@@ -431,18 +395,8 @@
 
 	display: inline-block;
   width: calc(50% - 8px); /* Two items per row with some spacing */
-  /* width: calc(50%); */
-  /* margin-right: 16px; */
-	/* padding: 8px; */
-	
-  /* background-color: #ccc; */
-  /* padding: 20px; */
-  /* box-sizing: content-box; */
 	aspect-ratio: 3/2;
 	scroll-snap-align: start;
-
-	/* With border radius, actually causes next item to bleed through on edge after scroll snap somtimes... */
-	/* border-radius: 8px; */
 }
 
 .carousel-photo:first-child {
@@ -462,7 +416,6 @@
 }
 
 
-
 /* ------------------ LISTING DETAILS RIGHT SIDE ------------------ */
 /* ------------------ LISTING DETAILS RIGHT SIDE ------------------ */
 /* ------------------ LISTING DETAILS RIGHT SIDE ------------------ */
@@ -470,14 +423,9 @@
 .details-right-container {
 	flex-grow: 1;
 	flex-basis: 41.67%;
-	/* background-color: yellow; */
 	display: block;
 	/* How else to get this container of sticky container to stretch to its full container height?  */
-	/* height; */
-	/* flex-direction: column; */
 	position: relative;
-	/* min-height: 150px; */
-	/* height: 100%; */
 	align-self: stretch;
 	box-sizing: border-box;
 	padding-left: 93.32px;
@@ -488,14 +436,10 @@
 	/* overflow: scroll; */
 	width: 100%;
 	/* height: 323px; */
-	/* background-color: aqua; */
 	position: sticky;
-	
-	/* margin-top: 48px; */
 	
 	padding-top: 48px;
 	padding-bottom: 48px;
-	/* margin-bottom: 48px; */
 
 	top:80px;
 }
@@ -511,8 +455,6 @@
 	padding: 24px;
 	border: 1px solid rgb(221, 221, 221);
 	border-radius: 12px;
-	/* border-image-repeat: stretch; */
-	/* border-image-slice: 100%; */
 	box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
 }
 
@@ -574,10 +516,6 @@
 	font-size: 14px;
 	padding-top: 6px;
 	padding-right: 8px;
-	/* border-radius: 8px;
-	border-top: 0px;
-	border-left: 0px;
-	border-right: 0px; */
 }
 
 .checkin-input {
@@ -589,7 +527,6 @@
 	border: 1px rgb(176, 176, 176) solid;
 	border-top-right-radius: 8px;
 	border-left: none;
-
 }
 
 .checkin-placeholder, .checkout-placeholder {
@@ -604,26 +541,20 @@
 .num-guests-container {
 	position: relative;
 	width: 100%;
-	/* display: flex;
-	justify-content: stretch; */
 }
 
 .num-guests-selector {
 	width: 100%;
-	/* position: relative; */
 	height: 56px;
-	/* outline:none; */
 	border:none;
 	border:1px rgb(176, 176, 176) solid;
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
 	border-top:none;
-	/* text-align-last: center; */
 	text-indent: 14px;
 	font-size: 14px;
 	padding-top: 6px;
 	padding-right: 8px;
-	/* appearance: none; */
 }
 
 .num-guests-placeholder {
@@ -653,7 +584,6 @@
 }
 
 .reservation-form {
-	/* border: 1px solid blue; */
 	border-radius: 8px;
 }
 
@@ -669,11 +599,9 @@
 }
 
 .form-inputs {
-	/* border: 1px solid rgb(221, 221, 221); */
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
-	/* border-radius: 12px; */
 	box-sizing: border-box;
 }
 
@@ -682,9 +610,6 @@
 	justify-content: center;
 	align-items: center;
 	margin-top: 24px;
-	/* margin-bottom: 24px; */
-	/* width: 100%; */
-	/* background-color: aqua; */
 }
 
 .reservation-complete {
@@ -703,11 +628,11 @@
 }
 
 .reservation-incomplete::after {
-	/* content: "Sup" */
+	/*  */
 }
 
 .reservation-incomplete:hover {
-	/* color: green; */
+	/*  */
 }
 
 .total-before-taxes {

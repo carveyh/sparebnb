@@ -50,7 +50,7 @@ const ListingsIndex = ({filter}) => {
 	useEffect(() => {
 		window.scrollTo(0, 0);
 		dispatch(fetchListings())
-	}, [])
+	}, [filter])
 	const numTestListings = 13;
 	const listingCards = [];
 

@@ -16,11 +16,14 @@ const Navigation = () => {
 	
 	// If on listings show page, narrow navbar.
 	const location = useLocation();
+	const upperNavbar = document.querySelector('.upper-navbar-header');
 	const upperNavbarContainer = document.querySelector('.upper-navbar-container');
 	if(location.pathname.startsWith('/listings')){
-		upperNavbarContainer?.classList.add('narrow-navbar')
+		upperNavbarContainer?.classList.add('narrow-navbar-container')
+		upperNavbar?.classList.add('narrow-navbar')
 	} else {
-		upperNavbarContainer?.classList.remove('narrow-navbar')
+		upperNavbarContainer?.classList.remove('narrow-navbar-container')
+		upperNavbar?.classList.remove('narrow-navbar')
 	}
 
 	// Disables page scrolling if a modal is open!
