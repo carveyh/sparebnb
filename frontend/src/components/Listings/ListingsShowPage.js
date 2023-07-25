@@ -45,21 +45,22 @@ const ListingsShowPage = (props) => {
 	const [bookingConfirmed, setBookingConfirmed] = useState(false);
 	const [buttonClickable, setButtonClickable] = useState(true);
 	const [currentSleepPhotoNum, setCurrentSleepPhotoNum] = useState(1);
+
+	// !!! NEED TO CHANGE THIS ONE WE HAVE DYNAMIC LISTINGS PHOTOS!!! FOR NOW EACH LISTING HAS 6 PHOTOS
 	const sleepPhotoTotal = 6;
 	const sleepPhotoPairsTotal = Math.round(sleepPhotoTotal / 2.0)
-	// const [pressedSleepBtn, setPressedSleepBtn] = useState(null);
-	// const pressedSleepBtn = useRef();
 
 	const prevSleepBtn = useRef(null);
 	const nextSleepBtn = useRef(null);
 
+	const cleaningFee = parseInt(listing?.baseNightlyRate / 4);
+	const baseServiceFee = 14;
+
 	useEffect(() => {
 		// Add this line to try to always be at top of a page when navigationg from a dff one
 		window.scrollTo(0, 0);
-
 		dispatch(fetchListing(listingId));
 		dispatch(fetchResReviewsForListing(listingId));
-		// setSleepPhotoTotal(Math.round(document.querySelectorAll(".carousel-photo").length / 2.0))
 	}, [])
 
 
@@ -73,15 +74,12 @@ const ListingsShowPage = (props) => {
 		setDayBefore(daysApartCalculator(e.target.value, -0));
 	}
 
-
-
 	const daysApartCalculator = (oldDate, delta) => {
 		const tomorrow = new Date(oldDate)
 		tomorrow.setDate(tomorrow.getDate() + delta)
 		const month = String(tomorrow.getMonth() + 1)
 		const date = String(tomorrow.getDate())
 		return `${tomorrow.getFullYear()}-${month.length < 2 ? '0'.concat(month) : month}-${date.length < 2 ? '0' + date : date}`
-		
 	}
 	
 	const minDate = () => {
@@ -100,9 +98,6 @@ const ListingsShowPage = (props) => {
 	const baseTotalCost = () => {
 		return numNights() ? numNights() * listing?.baseNightlyRate : listing?.baseNightlyRate;
 	}
-
-	const cleaningFee = parseInt(listing?.baseNightlyRate / 4);
-	const baseServiceFee = 14;
 
 	const totalServiceFee = () => {
 		return numNights() ? numNights() * baseServiceFee : baseServiceFee;
@@ -172,10 +167,13 @@ const ListingsShowPage = (props) => {
 		)
 	}
 
+	// LOGIC FOR SLEEP PHOTOS CAROUSEL - START
+	// LOGIC FOR SLEEP PHOTOS CAROUSEL - START
+
 	const mouseDownSleepBtn = (direction) => (e) => {
 		e.currentTarget.classList.add("sleep-button-pressed");
 		if(direction === "prev") {
-			document.addEventListener("mouseup", prevPhoto)
+			document.addEventListener("mouseup", prevPhoto) //add/rmv elisteners require exact reference...so separate function names
 		} else {
 			document.addEventListener("mouseup", nextPhoto)
 		}
@@ -190,7 +188,6 @@ const ListingsShowPage = (props) => {
 	const nextPhoto = (e) => {
 		document.removeEventListener("mouseup", nextPhoto);
 		nextSleepBtn.current.classList.remove("sleep-button-pressed");
-		// console.log(e.target, nextSleepBtn.current)
 		if(e.target === nextSleepBtn.current || e.target.parentElement === nextSleepBtn.current) shiftPhoto("next");
 	}
 
@@ -210,15 +207,11 @@ const ListingsShowPage = (props) => {
 			} else {
 				if(currentPhotoNum % 2 !== 0) numChange = -1;
 				else numChange = -2;
-
-				// if(sleepPhotoTotal % 2 !== 0 && currentPhotoNum === sleepPhotoTotal - 1) numChange = -1;
-				// else numChange = -2;
 			}
 		} else if(direction === "next") { 
 			if(currentPhotoNum >= (sleepPhotoTotal - 2)) { //if already at last photo, no change
 				numChange = 0;
 			} else {
-				console.log("whats the currentPhotoNum before moving forward", currentPhotoNum, "sleepPhotoTotal:", sleepPhotoTotal)
 				if(sleepPhotoTotal % 2 !== 0 && currentPhotoNum === sleepPhotoTotal - 3) numChange = 1;
 				else numChange = 2;
 			}
@@ -229,11 +222,12 @@ const ListingsShowPage = (props) => {
 		setCurrentSleepPhotoNum(Math.round((newPhotoNum) / 2.0) + 1);
 	}
 
+	// LOGIC FOR SLEEP PHOTOS CAROUSEL - END
+	// LOGIC FOR SLEEP PHOTOS CAROUSEL - END
+
 	if(!listing || !host) return null;
 
 	return (
-		// <AnimatePresence>
-		// <motion.div className="show-page-outer-container" initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
 		<div className="show-page-outer-container" initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
 			<div className="show-page-dynamic-inner-container">
 
@@ -566,8 +560,6 @@ const ListingsShowPage = (props) => {
 				</div>
 			</div>
 		</div>
-		// </motion.div>
-		// </AnimatePresence>
 	)
 }
 
