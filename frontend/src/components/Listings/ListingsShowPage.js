@@ -45,7 +45,8 @@ const ListingsShowPage = (props) => {
 	const [bookingConfirmed, setBookingConfirmed] = useState(false);
 	const [buttonClickable, setButtonClickable] = useState(true);
 	const [currentSleepPhotoNum, setCurrentSleepPhotoNum] = useState(1);
-	const [sleepPhotoTotal, setSleepPhotoTotal] = useState(1);
+	const sleepPhotoTotal = 6;
+	const sleepPhotoPairsTotal = Math.round(sleepPhotoTotal / 2.0)
 	// const [pressedSleepBtn, setPressedSleepBtn] = useState(null);
 	// const pressedSleepBtn = useRef();
 
@@ -58,7 +59,7 @@ const ListingsShowPage = (props) => {
 
 		dispatch(fetchListing(listingId));
 		dispatch(fetchResReviewsForListing(listingId));
-		setSleepPhotoTotal(Math.round(document.querySelectorAll(".carousel-photo").length / 2.0))
+		// setSleepPhotoTotal(Math.round(document.querySelectorAll(".carousel-photo").length / 2.0))
 	}, [])
 
 
@@ -180,27 +181,52 @@ const ListingsShowPage = (props) => {
 		}
 	}
 
-	const prevPhoto = () => {
+	const prevPhoto = (e) => {
 		document.removeEventListener("mouseup", prevPhoto);
 		prevSleepBtn.current.classList.remove("sleep-button-pressed");
-		shiftPhoto("prev");
+		if(e.target === prevSleepBtn.current || e.target.parentElement === prevSleepBtn.current) shiftPhoto("prev");
 	}
 
-	const nextPhoto = () => {
+	const nextPhoto = (e) => {
 		document.removeEventListener("mouseup", nextPhoto);
 		nextSleepBtn.current.classList.remove("sleep-button-pressed");
-		shiftPhoto("next");
+		// console.log(e.target, nextSleepBtn.current)
+		if(e.target === nextSleepBtn.current || e.target.parentElement === nextSleepBtn.current) shiftPhoto("next");
 	}
 
 	const shiftPhoto = (direction) => {
 		const carousel = document.querySelector(".sleep-carousel")
 		const carouselPhotos = carousel.querySelectorAll(".carousel-photo")
 		const photoLength = carouselPhotos[0].offsetWidth + 16
+
+		// Note: currentPhotoNum is 0-indexed, represents how many photos away from carousel start we are.
 		const currentPhotoNum = Math.round(carousel.scrollLeft / (carouselPhotos[0].offsetWidth + 16));
-		const numChange = (direction === "prev") ? -1 : 1;
-		const newPhotoNum = currentPhotoNum + numChange;
+
+		let numChange;
+		let newPhotoNum;
+		if(direction === "prev") {
+			if(currentPhotoNum === 0) { //if already at first photo, no change
+				numChange = 0;
+			} else {
+				if(currentPhotoNum % 2 !== 0) numChange = -1;
+				else numChange = -2;
+
+				// if(sleepPhotoTotal % 2 !== 0 && currentPhotoNum === sleepPhotoTotal - 1) numChange = -1;
+				// else numChange = -2;
+			}
+		} else if(direction === "next") { 
+			if(currentPhotoNum >= (sleepPhotoTotal - 2)) { //if already at last photo, no change
+				numChange = 0;
+			} else {
+				console.log("whats the currentPhotoNum before moving forward", currentPhotoNum, "sleepPhotoTotal:", sleepPhotoTotal)
+				if(sleepPhotoTotal % 2 !== 0 && currentPhotoNum === sleepPhotoTotal - 3) numChange = 1;
+				else numChange = 2;
+			}
+		}
+		newPhotoNum = currentPhotoNum + numChange;
 		carousel.scroll({left: newPhotoNum * photoLength, behavior: 'smooth'})
-		setCurrentSleepPhotoNum(newPhotoNum);
+
+		setCurrentSleepPhotoNum(Math.round((newPhotoNum) / 2.0) + 1);
 	}
 
 	if(!listing || !host) return null;
@@ -332,7 +358,7 @@ const ListingsShowPage = (props) => {
 									<div className="sleep-header heading-2">
 										<span className="sleep-text">Where you'll sleep </span>
 										<div className="sleep-buttons-container">
-											<span className="sleep-counter">{`${currentSleepPhotoNum} / ${sleepPhotoTotal}`}</span>
+											<span className="sleep-counter">{`${currentSleepPhotoNum} / ${sleepPhotoPairsTotal}`}</span>
 											{/* <div className="sleep-button" onMouseDown={mouseDownSleepBtn} onMouseUp={(shiftSleepPhoto)("prev")}><i class="fa-solid fa-chevron-left"></i></div> */}
 											{/* <div className="sleep-button" ref={prevSleepBtn} onMouseDown={(mouseDownSleepBtn)("prev")} ><i class="fa-solid fa-chevron-left"></i></div> */}
 											<div className="sleep-button" ref={prevSleepBtn} onMouseDown={mouseDownSleepBtn("prev")} ><i class="fa-solid fa-chevron-left"></i></div>
