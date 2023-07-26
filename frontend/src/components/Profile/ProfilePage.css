@@ -61,7 +61,7 @@
 	/* height: (210 - 24 - 24)px; */
 	height: 210px;
 	border-radius: 12px;
-	box-shadow: rgba(0, 0, 0, 0.17) 0px 0px 22px;
+	box-shadow: rgba(0, 0, 0, 0.17) 3px 3px 20px;
 	display: flex;
 	flex-direction: row;
 	align-items: stretch;

@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { fetchReservations } from "../../store/reservation";
+import { clearAllReservations, fetchReservations } from "../../store/reservation";
 import { fetchListings, fetchUsersListings } from "../../store/listings";
 import { fetchUser } from "../../store/user";
 import { formatTwoDigitNumberString } from "../../utils/urlFormatter";
@@ -201,6 +201,7 @@ const ProfilePage = (props) => {
 		window.scrollTo(0, 0);
 		
 		// dispatch(fetchReservations(userId))
+		dispatch(clearAllReservations())
 		dispatch(fetchReservations({id: userId, type: "user"}))
 		
 		// // Wish to achieve this. But out of time. REVISIT
@@ -249,7 +250,7 @@ const ProfilePage = (props) => {
 					{/* TRIP CARDS - UPCOMING */}
 					<div className="trip-cards-outer-container-upcoming">
 						<div className="trip-cards-header heading-2">
-							Upcoming reservations
+							Upcoming trips
 						</div>
 						<div className="trip-cards-main-container">
 							{/* ALL CARDS FOR PAST RESEREVATIONS */}
@@ -263,7 +264,7 @@ const ProfilePage = (props) => {
 					{/* TRIP CARDS - PAST */}
 					<div className="trip-cards-outer-container-past">
 						<div className="trip-cards-header heading-2">
-							Past reservations
+							Past trips
 						</div>
 						<div className="trip-cards-main-container">
 							{/* ALL CARDS FOR PAST RESEREVATIONS */}
