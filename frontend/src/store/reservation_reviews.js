@@ -1,9 +1,11 @@
 import csrfFetch from "./csrf"
+import { CLEAR_ALL_RESERVATIONS } from "./reservation"
 
 // ACTION TYPE CONSTANTS
 export const RECEIVE_RES_REVIEWS = "reservation_reviews/RECEIVE_RES_REVIEWS"
 export const RECEIVE_RES_REVIEW = "reservation_reviews/RECEIVE_RES_REVIEW"
 export const REMOVE_RES_REVIEW = "reservation_reviews/REMOVE_RES_REVIEW"
+export const CLEAR_ALL_RES_REVIEWS = "reservation_reviews/CLEAR_ALL_RES_REVIEWS"
 
 // OBJECT ACTION CREATORS
 export const receiveResReviews = (reviews) => ({
@@ -19,6 +21,10 @@ export const receiveResReview = (review) => ({
 export const removeResReview = (reviewId) => ({
 	type: REMOVE_RES_REVIEW,
 	reviewId
+})
+
+export const removeAllResReviewsFromState = () => ({
+	type: CLEAR_ALL_RES_REVIEWS
 })
 
 // THUNK ACTION CREATORS
@@ -96,6 +102,10 @@ export const destroyResReview = (reviewId) => async (dispatch) => {
 	return res;
 }
 
+export const clearAllResReviews = () => async (dispatch) => {
+	dispatch(removeAllResReviewsFromState())
+}
+
 // RESERVATION_REVIEWS REDUCER
 
 const reservationReviewsReducer = (state = {}, action) => {
@@ -110,7 +120,8 @@ const reservationReviewsReducer = (state = {}, action) => {
 		case REMOVE_RES_REVIEW:
 			delete newState[action.reviewId];
 			return newState;
-
+		case CLEAR_ALL_RES_REVIEWS:
+			return {};
 		default:
 			return newState;
 	}

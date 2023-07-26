@@ -252,10 +252,14 @@ ApplicationRecord.transaction do
 
 	total_num_res = Reservation.all.length
 	total_num_res.times do |res_idx|
+		sample_body = ""
+		(3..7).to_a.sample.times{sample_body += Faker::TvShows::Spongebob.quote + ' '}
+		sample_body.strip
 		ReservationReview.create!({
 			reviewer_id: Reservation.find(res_idx + 1).reserver_id,
 			reservation_id: res_idx + 1,
-			body: Faker::Movies::LordOfTheRings.quote + ' ' + Faker::Movies::LordOfTheRings.quote,
+			# body: (1..4).to_a.sample.times{Faker::Movies::LordOfTheRings.quote + ' '} + Faker::Movies::LordOfTheRings.quote,
+			body: sample_body,
 			private_message: "Oh my goodness gracious. I thought I had reserved a place in " + Faker::Australia.state + ", Australia...nevertheless, it was quite the " + Faker::Adjective.positive + " experience. The complimentary " + Faker::Food.dish + " was an especially nice touch. Thank you for being so flexible and for your hospitality!",
 			overall_rating: (3..5).to_a.sample,
 			cleanliness: (3..5).to_a.sample,

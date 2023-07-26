@@ -22,6 +22,7 @@ const ListingCard = ({listing, num, filter}) => {
 						<div className="listing-favorite-button"><i className="fa-regular fa-heart"></i></div>
 						<div className="listings-photo-container">
 							{/* <img className="listings-photo" src={require(`../../images/listings/${photoFileNames[num-1]}.png`)} /> */}
+							<div className="hover-overlay"></div>
 							<img className="listings-photo" src={require(`../../images/listings/${formatTwoDigitNumberString(listing?.id)}/01.png`)} />
 						</div>
 						<div className="listings-text-container">

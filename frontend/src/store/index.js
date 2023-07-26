@@ -10,7 +10,7 @@ const entitiesReducer = combineReducers({
 	listings: listingsReducer,
 	users: usersReducer,
 	reservations: reservationsReducer,
-	res_reviews: reservationReviewsReducer,
+	resReviews: reservationReviewsReducer,
 })
 
 const rootReducer = combineReducers({

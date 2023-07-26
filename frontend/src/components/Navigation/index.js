@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 import ProfileButton from "./ProfileButton"
-import LoginForm from "../LoginFormModal/LoginForm";
-import SignupForm from "../SignupFormModal/SignupForm";
+import LoginForm from "../AuthForms/LoginForm";
+import SignupForm from "../AuthForms/SignupForm";
 import { Modal } from "../../context/Modal";
 import { useState } from "react";
 
