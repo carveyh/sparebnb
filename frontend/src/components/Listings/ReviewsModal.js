@@ -8,10 +8,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { ReviewSnippetIndividual } from "./ReviewsSnippetsMain";
+import { ReviewsSubCategories } from "./ReviewsSubCategories";
 
 
 
-export const ReviewsModal = ({listingId}) => {
+export const ReviewsModal = ({listingId, setShowReviewsModal}) => {
 
 	const dispatch = useDispatch();
 
@@ -47,12 +48,14 @@ export const ReviewsModal = ({listingId}) => {
 
 	return (
 		<div className="reviews-modal-outer-container">
-			<div className="reviews-modal-forehead"></div>
+			<div className="reviews-modal-forehead">
+				<button onClick={e => setShowReviewsModal(false)} className="x-close"><i class="fa-solid fa-x"></i></button>
+			</div>
 			<div className="reviews-modal-non-forehead">
 				<div className="modal-ratings-section">
 					
 
-					<div className={`heading-2 review-header`}>
+					<div className={`heading-2 review-header review-header-modal`}>
 						{listing.numRatings === 0 ? <div>No reviews (yet)</div>
 							: 
 							<div className="review-header-toprow review-header-toprow-modal">
@@ -67,7 +70,7 @@ export const ReviewsModal = ({listingId}) => {
 						}
 						{(listing.numRatings < 3 && listing.numRatings > 0) && <div className="under-3-reviews-placeholder">Average rating will appear after 3 reviews</div>}
 					</div>
-
+					<ReviewsSubCategories ratings={listing.averageRatings} isModal={true} />
 
 				</div>
 				<div className="modal-reviews-section">

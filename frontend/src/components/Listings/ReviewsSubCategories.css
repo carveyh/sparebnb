@@ -7,6 +7,10 @@
 	/* width: calc(100% + 16px); */
 }
 
+.modal-ratings {
+	flex-direction: column;
+}
+
 .subcat-container {
 	box-sizing: border-box;
 	width: 41.6667%;
@@ -17,6 +21,22 @@
 	line-height: 20px;
 }
 
+.modal-subcat-container {
+	width: 100%;
+	margin-bottom: 12px;
+
+}
+
+.modal-subcat-container .subcat-category-box {
+	width: 100%;
+	font-size: 14px;
+}
+
+.modal-subcat-container .subcat-score-box {
+	width: 75%;
+}
+
+/* Offsets on listings show page */
 .subcat-container:nth-child(2n) {
 	padding-left: 8px;
 }
@@ -27,6 +47,14 @@
 
 .subcat-container-inner:nth-child(1n) > .subcat-score-box {
 	margin-left: -8px;
+}
+
+/* None of these offsets apply in modal */
+.modal-subcat-container > .subcat-container-inner > .subcat-score-box {
+	padding-left: 0px; margin-left: 0px;
+}
+.modal-subcat-container:nth-child(2n) {
+	padding-left: 0px;
 }
 
 .subcat-container-inner {

@@ -661,6 +661,10 @@
 	flex-direction: column;
 }
 
+.review-header-modal {
+	margin-bottom: 24px;
+}
+
 .review-header-toprow {
 	display: flex;
 	flex-direction: row;

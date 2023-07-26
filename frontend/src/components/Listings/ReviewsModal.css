@@ -1,5 +1,5 @@
 .reviews-modal-outer-container {
-	height: 682px;
+	/* height: 682px; */
 	max-height: 682px;
 	display: flex;
 	flex-direction: column;
@@ -23,10 +23,11 @@
 	box-sizing: border-box;
 	margin: 0px -8px;
 	padding: 0px 24px;
-	overflow: scroll;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
+	overflow-y: scroll;
+	scroll-behavior: smooth;
 }
 
 .modal-ratings-section {

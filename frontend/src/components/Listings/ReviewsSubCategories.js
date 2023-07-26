@@ -1,10 +1,13 @@
 import "./ReviewsSubCategories.css"
 import { useEffect } from "react";
+import { useState } from "react";
 
 const categories = ["Cleanliness", "Accuracy", "Communication", "Location", "Check-in", "Value"];
 
-const SubcatContainer = ({ratings, category}) => {
+const SubcatContainer = ({ratings, category, isModal=false}) => {
 	
+	// const [barWidth, setBarWidth] = useState("0%");
+
 	let score;
 	switch (category) {
 		case categories[0]: //"Cleanliness"
@@ -29,19 +32,26 @@ const SubcatContainer = ({ratings, category}) => {
 	
 	
 	useEffect(() => {
-		const scoreBar = document.querySelector(`.bar-score-${category}`);
+		let scoreBar;
+		if(isModal) {
+			scoreBar = document.querySelector(`.bar-score-${category}-modal`);
+		} else {
+			scoreBar = document.querySelector(`.bar-score-${category}`);
+		}
 		scoreBar.style.width = `${score / 5 * 100}%`
+		// setBarWidth(`${score / 5 * 100}%`)
+		// scoreBar.style.width = barWidth
 	}, [])
 	
 	score = score.toFixed(1);
 
 	return(
-		<div className="subcat-container">
+		<div className={`subcat-container ${isModal && `modal-subcat-container`}`}>
 			<div className="subcat-container-inner">
 				<div className="subcat-category-box">{category}</div>
 				<div className="subcat-score-box">
 					<div className="subcat-bar-bg">
-						<div className={`subcat-bar-score bar-score-${category}`}></div>
+						<div className={`subcat-bar-score bar-score-${category} ${isModal && `bar-score-${category}-modal`}`}></div>
 					</div>
 					<div className="subcat-rating">{score}</div>
 				</div>
@@ -50,14 +60,14 @@ const SubcatContainer = ({ratings, category}) => {
 	)
 }
 
-export const ReviewsSubCategories = ({ratings}) => {
+export const ReviewsSubCategories = ({ratings, isModal=false}) => {
 	const subcontainers = categories.map(category => {
 		return (
-			<SubcatContainer ratings={ratings} category={category} />
+			<SubcatContainer ratings={ratings} category={category} isModal={isModal} />
 		)
 	})
 	return (
-		<div className="review-subcategories-main">
+		<div className={`review-subcategories-main ${isModal && `modal-ratings`}`}>
 			{subcontainers}
 		</div>
 	)
