@@ -1,5 +1,5 @@
 .reviews-modal-outer-container {
-	height: 682px;
+	/* height: 682px; */
 	max-height: 682px;
 	display: flex;
 	flex-direction: column;
@@ -9,9 +9,7 @@
 	border-radius: 12px;
 	animation: slideIn 0.4s both, fadeInModal 0.4s forwards;
 
-
-
-	/* Need to not hard code this */
+	/* Need to not hard code this so dynamically renders on page resizing*/
 	width: 1032px;
 }
 
@@ -21,6 +19,27 @@
 }
 
 .reviews-modal-non-forehead {
+	position: relative;
+	box-sizing: border-box;
+	margin: 0px -8px;
 	padding: 0px 24px;
-	overflow: scroll;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	overflow-y: scroll;
+	scroll-behavior: smooth;
+}
+
+.modal-ratings-section {
+	position: sticky;
+	top: 0px;
+	left: 0px;
+	padding: 0px 8px;
+	width: 33.3333%;
+	margin-right: 8.3333%;
+}
+
+.modal-reviews-section {
+	padding: 0px 8px;
+	width: 58.3333%;
 }

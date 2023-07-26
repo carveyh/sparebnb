@@ -554,7 +554,7 @@ const ListingsShowPage = (props) => {
 		</div>
 		
 		{showReviewsModal && <Modal onClose={e => setShowReviewsModal(false)}>
-			<ReviewsModal listingId={listing.id}/>
+			<ReviewsModal listingId={listing.id} setShowReviewsModal={setShowReviewsModal}/>
 		</Modal>}
 
 		</>

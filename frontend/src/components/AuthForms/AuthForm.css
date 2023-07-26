@@ -120,6 +120,7 @@ div.signup-form, div.login-form {
 	font-size: 0.9em;
 	transform: scaleY(0.9);
 	transform: scaleX(1.2);
+	cursor: pointer;
 }
 
 .auth-form-body {

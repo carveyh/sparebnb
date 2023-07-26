@@ -15,8 +15,8 @@ export const ReviewSnippetIndividual = ({review, endDate, truncated=true, setSho
 	}, [])
 
 	return (
-		<div className="subcat-container review-snippet-box">
-			<div className="subcat-container-inner review-snippet-container-inner">
+		<div className={`review-snippet-box ${truncated && `review-snippet-box-truncated`}`}>
+			<div className="review-snippet-container-inner">
 				<div className="snippet-header">
 					<div className="snippet-photo">
 						<img className="fit-photo" src={require(`../../images/profilepics/${formatTwoDigitNumberString((review.reviewerId % 12) + 1)}.png`)} />
@@ -28,7 +28,7 @@ export const ReviewSnippetIndividual = ({review, endDate, truncated=true, setSho
 				</div>
 				<div className={`snippet-body ${truncated && `snippet-body-truncated`} snippet-body-${review.id}`}>{review.body}</div>
 				<div className="snippet-more-btn">
-					{showMore && <><div onClick={e => setShowReviewsModal(true)} className="show-more-text">Show more</div> <i class="fa-solid fa-chevron-right"></i></>}
+					{(showMore && truncated) && <><div onClick={e => setShowReviewsModal(true)} className="show-more-text">Show more</div> <i class="fa-solid fa-chevron-right"></i></>}
 				</div>
 			</div>
 		</div>
