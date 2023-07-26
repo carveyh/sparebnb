@@ -1,4 +1,4 @@
-import '../LoginFormModal/SignupLoginForm.css';
+import '../AuthForms/AuthForm.css';
 
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";

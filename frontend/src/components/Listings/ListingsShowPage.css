@@ -38,6 +38,7 @@
 	width:100%;
 	height:100%;
 	object-fit: cover;
+	border-radius: 50%;
 }
 
 .show-page-general-padder {
@@ -111,7 +112,8 @@
 }
 
 .header-review-count {
-	/*  */
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 .show-header-buttons {
@@ -491,6 +493,8 @@
 }
 
 .form-num-reviews {
+	text-decoration: underline;
+	cursor: pointer;
 	color: #717171;
 }
 
@@ -675,4 +679,9 @@
 	font-size: 14px;
 	font-weight: 300;
 	color: #717171;
+}
+
+.show-page-review-section-padder {
+	padding-bottom: 0px;
+	margin-bottom: 48px;
 }

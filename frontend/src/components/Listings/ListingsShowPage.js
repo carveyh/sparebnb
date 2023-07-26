@@ -18,19 +18,9 @@ import { fetchResReviewsForListing } from "../../store/reservation_reviews";
 // Relevant Components
 import { ListingsShowPhoto } from "./ListingsShowPhoto";
 import { ReviewsSubCategories } from "./ReviewsSubCategories";
-
-// export const ListingsShowPhoto = ({listingId, imageNum}) => {
-// 	listingId = formatTwoDigitNumberString(listingId);
-// 	imageNum = formatTwoDigitNumberString(imageNum);
-// 	const photoDirPath = `../../images/listings/${listingId}/${imageNum}.png`;
-	
-// 	return(
-// 		<>
-// 			{/* Why can't I replace string with photoDirPath...? */}
-// 			<img className="listings-show-photo" src={require(`../../images/listings/${listingId}/${imageNum}.png`)} />
-// 		</>
-// 	)
-// }
+import { ReviewsSnippetsMain } from "./ReviewsSnippetsMain";
+import { ReviewsModal } from "./ReviewsModal";
+import { Modal } from "../../context/Modal";
 
 const ListingsShowPage = (props) => {
 	const dispatch = useDispatch();
@@ -49,6 +39,18 @@ const ListingsShowPage = (props) => {
 	const [bookingConfirmed, setBookingConfirmed] = useState(false);
 	const [buttonClickable, setButtonClickable] = useState(true);
 	const [currentSleepPhotoNum, setCurrentSleepPhotoNum] = useState(1);
+
+	// Review modal
+	const [showReviewsModal, setShowReviewsModal] = useState(false);
+	// Disables page scrolling if a modal is open!
+	if(showReviewsModal){
+		// This was working fine before, but as of 7/20, it will cause site to expand to cover the missing scroll bar...need to check how to prevent this change in layout on page.
+		// document.body.style.overflow = "hidden";
+		document.querySelector('body').style.overflowY = "hidden";
+	} else {
+		// document.body.style.overflow = "scroll";
+		document.querySelector('body').style.overflowY = "scroll";
+	}
 
 	// !!! NEED TO CHANGE THIS ONE WE HAVE DYNAMIC LISTINGS PHOTOS!!! FOR NOW EACH LISTING HAS 6 PHOTOS
 	const sleepPhotoTotal = 6;
@@ -232,6 +234,7 @@ const ListingsShowPage = (props) => {
 	if(!listing || !host) return null;
 
 	return (
+		<>
 		<div className="show-page-outer-container" initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
 			<div className="show-page-dynamic-inner-container">
 
@@ -252,7 +255,7 @@ const ListingsShowPage = (props) => {
 									</>
 									}
 									{/* <span className="header-review-count">15 reviews</span> */}
-									{listing.numRatings > 0 && <span className="header-review-count">{formattedNumReviews()}</span>}
+									{listing.numRatings > 0 && <span onClick={e => setShowReviewsModal(true)} className="header-review-count">{formattedNumReviews()}</span>}
 								</span>
 								{listing.numRatings > 0 && <span className="rating-review-stats stats-text-small lower-dot">·</span>}
 								<span className="rating-review-stats stats-text-small">{`${listing.city}, ${listing.state}, United States`}</span>
@@ -436,7 +439,7 @@ const ListingsShowPage = (props) => {
 												{formattedOverallRating()} ·&nbsp;
 											</>
 											}
-											 {listing.numRatings > 0 && <div className="form-num-reviews">{formattedNumReviews()}</div>}
+											 {listing.numRatings > 0 && <div onClick={e => setShowReviewsModal(true)} className="form-num-reviews">{formattedNumReviews()}</div>}
 										</div>
 									</div>
 									{/* FORM - START */}
@@ -506,7 +509,7 @@ const ListingsShowPage = (props) => {
 				{/* REVIEWS - START */}
 				{/* REVIEWS - START */}
 				<div className="horizontal-rule-top-border plain-text">
-					<div className="show-page-general-padder">
+					<div className="show-page-general-padder show-page-review-section-padder">
 						<div className="heading-2 review-header">
 							{listing.numRatings === 0 ? <div>No reviews (yet)</div>
 								: 
@@ -525,28 +528,7 @@ const ListingsShowPage = (props) => {
 						
 						<ReviewsSubCategories ratings={listing.averageRatings} />
 
-						<div>Cleanliness bar #.#</div>
-						<div>Communication bar #.#</div>
-						<div>Check-in bar #.#</div>
-						<div>Accuracy bar #.#</div>
-						<div>Location bar #.#</div>
-						<div>Value bar #.#</div>
-
-
-						<br/>
-						<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
-						<br/>
-						<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
-						<br/>
-						<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
-						<br/>
-						<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
-						<br/>
-						<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
-						<br/>
-						<div>PROFILEPIC, FIRSTNAME, MONTH/YEAR_REVIEW, REVIEWBODY-4 lines always, if long, line3: ellipses, line4: "Show more arrow" if more</div>
-						<br/>
-						<div>Show all # reviews if more than 6</div>
+						<ReviewsSnippetsMain listingId={listing.id} setShowReviewsModal={setShowReviewsModal} />
 					
 					</div>
 				</div>
@@ -570,6 +552,12 @@ const ListingsShowPage = (props) => {
 				</div>
 			</div>
 		</div>
+		
+		{showReviewsModal && <Modal onClose={e => setShowReviewsModal(false)}>
+			<ReviewsModal listingId={listing.id}/>
+		</Modal>}
+
+		</>
 	)
 }
 

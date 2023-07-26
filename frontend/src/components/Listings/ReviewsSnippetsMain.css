@@ -1,0 +1,109 @@
+.reviews-snippets-container-main {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: stretch;
+}
+
+.review-snippet-box {
+	margin-bottom: 40px;
+}
+
+.review-snippet-container-inner {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.snippet-header {
+	margin-bottom: 20px;
+	display: flex;
+	flex-direction: row;
+}
+
+.snippet-photo {
+	margin-right: 12px;
+	background-color: lightpink;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
+
+.snippet-header-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.guest-first-name {
+	font-weight: 600;
+	font-size: 15px;
+}
+
+.snippet-res-month-yr {
+	color: rgb(113,113,113);
+	font-weight: 300;
+	font-size: 14px;
+}
+
+.snippet-body {
+	margin-bottom: 16px;
+	line-height: 24px;
+
+}
+
+.snippet-body-truncated {
+	/* Height extra, line clamp will do height of line-height * line-clamp amt */
+	height: 72px;
+
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	/* line-clamp: 3; */
+	-webkit-box-orient: vertical;  
+	overflow: hidden;
+}
+
+.snippet-more-btn {
+	font-weight: 600;
+	font-size: 15px;
+	cursor: pointer;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.show-more-text {
+	text-decoration: underline;
+}
+
+.snippet-more-btn .fa-solid {
+	margin-left: 8px;
+	width: 12px;
+	height: 12px;
+	font-size: 0.75em;
+}
+
+.all-reviews-btn-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.all-reviews-btn {
+	border-radius: 8px;
+	border: 1px solid #222222;
+	padding: 13px 23px;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 20px;
+	cursor: pointer;
+}
+
+.all-reviews-btn:hover {
+	background-color: #F7F7F7;
+	border-color: #000000;
+}
