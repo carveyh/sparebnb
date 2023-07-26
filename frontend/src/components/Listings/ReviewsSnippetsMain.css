@@ -7,10 +7,22 @@
 }
 
 .review-snippet-box {
+	box-sizing: border-box;
+	width: 100%;
+	font-size: 16px;
+	font-weight: 300;
+	margin-bottom: 16px;
+	line-height: 20px;
 	margin-bottom: 40px;
 }
 
+.review-snippet-box-truncated {
+	width: 41.6667%;
+	margin-right: 8.3333%;
+}
+
 .review-snippet-container-inner {
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -52,7 +64,7 @@
 .snippet-body {
 	margin-bottom: 16px;
 	line-height: 24px;
-
+	font-size: 14px;
 }
 
 .snippet-body-truncated {
@@ -64,6 +76,8 @@
 	/* line-clamp: 3; */
 	-webkit-box-orient: vertical;  
 	overflow: hidden;
+
+	font-size: 16px;
 }
 
 .snippet-more-btn {

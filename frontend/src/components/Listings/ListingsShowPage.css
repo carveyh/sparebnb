@@ -666,12 +666,23 @@
 	flex-direction: row;
 }
 
+.review-header-toprow-modal {
+	font-size: 30px;
+	font-weight: 600;
+	line-height: 36px;
+}
+
 .review-star-container {
 	margin-right: 8px;
 	font-size: 0.65em;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+}
+
+.rev-star-modal {
+	font-size: 0.7em;
+	margin-right: 14px;
 }
 
 .under-3-reviews-placeholder {
