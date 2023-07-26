@@ -108,6 +108,9 @@
 	margin-right: 24px;
 	display: flex;
 	flex-direction: column;
+
+	/* Need to change this to be more dynamic not hard coded */
+	width: 50px;
 }
 
 .trip-text-details-address-info {
@@ -116,6 +119,10 @@
 	display: flex;
 	flex-direction: column;
 	margin-right: 24px;
+	overflow-x: hidden;
+
+	/* Need to change this to be more dynamic not hard coded */
+	width: 230px;
 }
 
 .update-form-container {
@@ -141,6 +148,73 @@
 	justify-content: space-evenly;
 	align-items: center;
 	gap: 4px;
+}
+
+.trips-date-input {
+	width: 130px;
+}
+
+.trips-update-field:not(:last-child) > input, .trips-update-field > select {
+	border-radius: 8px;
+	border:1px rgb(176, 176, 176) solid;
+}
+
+.trip-crud-buttons {
+	justify-content: center !important;
+}
+
+.trip-crud-buttons > input {
+	box-sizing: border-box;
+	cursor: pointer;
+	width: 100%;
+	/* background-color: white; */
+	outline: none;
+	border: none;
+	padding: 8px;
+	margin: 0px;
+
+	border-radius: 8px;
+	/* border: 1px solid #222222; */
+	padding: 6px 12px;
+	cursor: pointer;
+
+	transition: all 0.3s;
+}
+
+.trip-crud-buttons >.trip-crud-btn-enabled {
+	color: white;
+	background-color: red;
+}
+
+.trip-crud-buttons >.trip-crud-btn-disabled {
+	background-color: rgb(221, 221, 221);
+	color: gray;
+	cursor: not-allowed;
+}
+
+.trip-crud-buttons > input:nth-child(2) {
+	border: none;
+	color: white;
+	background-color: rgb(152, 152, 152);
+}
+
+.trip-crud-btn-enabled {
+	transition: all 0.3s;
+	/* background-color: blue; */
+}
+
+.trip-crud-buttons > .trip-crud-btn-enabled:hover {
+	color: white;
+	background-color: pink;
+}
+
+.trip-crud-buttons > input:nth-child(2):hover {
+	color: #F7F7F7;
+	background-color: black;
+}
+
+.trip-crud-buttons > input:nth-child(1) {
+	/* border-bottom: 1px solid black; */
 }
 
 .trip-text-details-date-info > *, .trip-text-details-address-info > * {

@@ -24,6 +24,8 @@ export const TripCard = ({reservation, listing}) => {
   	"July", "August", "September", "October", "November", "December"
 	];
 
+	const unChanged = () => checkIn === reservation.startDate && checkOut === reservation.endDate && numGuests.toString() === reservation.numGuests.toString()
+
 	const startDate = new Date(reservation?.startDate)
 	const endDate = new Date(reservation?.endDate)
 	let startDateMonth;
@@ -52,11 +54,10 @@ export const TripCard = ({reservation, listing}) => {
 		}
 
 		return (
-			<div className="num-guests-container">
-				<select className="num-guests-selector" value={numGuests} onChange={e => setNumGuests(e.target.value)}>
+			<div className="num-guests-container trips-update-field">
+				<select className="num-guests-selector " value={numGuests} onChange={e => setNumGuests(e.target.value)}>
 					{options}
 				</select>
-				<div className="num-guests-placeholder">GUESTS</div>
 			</div>
 		)
 	}
@@ -72,17 +73,19 @@ export const TripCard = ({reservation, listing}) => {
 
 	const handleUpdate = e => {
 		e.preventDefault();
-		const newReservation = {...reservation, startDate: checkIn, endDate: checkOut, numGuests: parseInt(numGuests)};
-		
-
-		// NEED TO TRY - CATCH
-		try {
-			dispatch(updateReservation(newReservation));
-		} catch(err) {
-			// can update err via state variable, or dispatch(receiveErrors), component can useSelector on errors.
-			// dispatch(receieveUpdateReservationError)
-			// so errorrs slice of state can point to key of errors: {updatedRservationError : {[backendmessage, numgeustserorr, endateerror]},  }
-			// OR!!! could justhave a local useState for component.
+		if(!unChanged()){
+			const newReservation = {...reservation, startDate: checkIn, endDate: checkOut, numGuests: parseInt(numGuests)};
+			
+			// NEED TO TRY - CATCH
+			try {
+				dispatch(updateReservation(newReservation))
+					.then(() => unChanged())
+			} catch(err) {
+				// can update err via state variable, or dispatch(receiveErrors), component can useSelector on errors.
+				// dispatch(receieveUpdateReservationError)
+				// so errorrs slice of state can point to key of errors: {updatedRservationError : {[backendmessage, numgeustserorr, endateerror]},  }
+				// OR!!! could justhave a local useState for component.
+			}
 		}
 	}
 
@@ -103,7 +106,7 @@ export const TripCard = ({reservation, listing}) => {
 							{listing?.title}
 						</div>
 						<div className="trip-text-title-host stats-text-small">
-							Entire cabin hosted by ...
+							Entire cabin hosted by {listing.hostFirstName}
 						</div>
 					</div>
 					<div className="trip-text-details-main">
@@ -122,10 +125,10 @@ export const TripCard = ({reservation, listing}) => {
 						<div className="update-form-container">
 							<form>
 								<div className="update-form-inner-container">
-									<div className="update-field ">
+									<div className="update-field trips-update-field">
 										Check in date:
 										{/* <input type="date" value={checkIn} onChange={e => setCheckIn(e.target.value)}/> */}
-										<input className="checkin-input" 
+										<input className="checkin-input trips-date-input" 
 											type="date"
 											value={checkIn}
 											min={minDate()}
@@ -134,10 +137,10 @@ export const TripCard = ({reservation, listing}) => {
 											required
 										/>
 									</div>
-									<div className="update-field ">
+									<div className="update-field trips-update-field">
 										Check out date:
 										{/* <input type="date" value={checkOut} onChange={e => setCheckOut(e.target.value)}/> */}
-										<input className="checkout-input" 
+										<input className="checkout-input trips-date-input" 
 											type="date"
 											value={checkOut}
 											min={checkIn ? dayAfter : null}
@@ -145,13 +148,13 @@ export const TripCard = ({reservation, listing}) => {
 											required
 										/>
 									</div>
-									<div className="update-field ">
+									<div className="update-field trips-update-field">
 										Number of guests:
-										{numGuestsSelector()}
+											{numGuestsSelector()}
 									</div>
-									<div className="update-field ">
-										<input type="button" onClick={handleUpdate} value="Update reservation"/>
-										<input type="button" id={reservation?.id} onClick={handleDelete} value="Delete reservation"/>
+									<div className="update-field trips-update-field trip-crud-buttons">
+										<input className={unChanged() ? `trip-crud-btn-disabled` : `trip-crud-btn-enabled`} type="button" onClick={handleUpdate} value="Update"/>
+										<input type="button" id={reservation?.id} onClick={handleDelete} value="Delete"/>
 									</div>
 
 									
