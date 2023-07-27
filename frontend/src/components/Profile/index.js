@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { fetchReservations } from "../../store/reservation";
+import { clearAllReservations, fetchReservations } from "../../store/reservation";
 import { fetchListings, fetchUsersListings } from "../../store/listings";
 import { fetchUser } from "../../store/user";
 import { formatTwoDigitNumberString } from "../../utils/urlFormatter";
@@ -23,6 +23,8 @@ export const TripCard = ({reservation, listing}) => {
 	const monthNames = ["January", "February", "March", "April", "May", "June",
   	"July", "August", "September", "October", "November", "December"
 	];
+
+	const unChanged = () => checkIn === reservation.startDate && checkOut === reservation.endDate && numGuests.toString() === reservation.numGuests.toString()
 
 	const startDate = new Date(reservation?.startDate)
 	const endDate = new Date(reservation?.endDate)
@@ -52,11 +54,10 @@ export const TripCard = ({reservation, listing}) => {
 		}
 
 		return (
-			<div className="num-guests-container">
-				<select className="num-guests-selector" value={numGuests} onChange={e => setNumGuests(e.target.value)}>
+			<div className="num-guests-container trips-update-field">
+				<select className="num-guests-selector " value={numGuests} onChange={e => setNumGuests(e.target.value)}>
 					{options}
 				</select>
-				<div className="num-guests-placeholder">GUESTS</div>
 			</div>
 		)
 	}
@@ -72,17 +73,17 @@ export const TripCard = ({reservation, listing}) => {
 
 	const handleUpdate = e => {
 		e.preventDefault();
-		const newReservation = {...reservation, startDate: checkIn, endDate: checkOut, numGuests: parseInt(numGuests)};
-		
-
-		// NEED TO TRY - CATCH
-		try {
-			dispatch(updateReservation(newReservation));
-		} catch(err) {
-			// can update err via state variable, or dispatch(receiveErrors), component can useSelector on errors.
-			// dispatch(receieveUpdateReservationError)
-			// so errorrs slice of state can point to key of errors: {updatedRservationError : {[backendmessage, numgeustserorr, endateerror]},  }
-			// OR!!! could justhave a local useState for component.
+		if(!unChanged()){
+			const newReservation = {...reservation, startDate: checkIn, endDate: checkOut, numGuests: parseInt(numGuests)};
+			try {
+				dispatch(updateReservation(newReservation))
+					.then(() => unChanged())
+			} catch(err) {
+				// can update err via state variable, or dispatch(receiveErrors), component can useSelector on errors.
+				// dispatch(receieveUpdateReservationError)
+				// so errorrs slice of state can point to key of errors: {updatedRservationError : {[backendmessage, numgeustserorr, endateerror]},  }
+				// OR!!! could justhave a local useState for component.
+			}
 		}
 	}
 
@@ -91,7 +92,12 @@ export const TripCard = ({reservation, listing}) => {
 		dispatch(destroyReservation(e.target.id))
 	}
 
-	// if(!reservation || !listing) return null;
+	const handleReset = e => {
+		setCheckIn(reservation.startDate)
+		setCheckOut(reservation.endDate)
+		setNumGuests(reservation.numGuests)
+	}
+
 	return (
 		<>
 			<div className="trip-card">
@@ -103,7 +109,7 @@ export const TripCard = ({reservation, listing}) => {
 							{listing?.title}
 						</div>
 						<div className="trip-text-title-host stats-text-small">
-							Entire cabin hosted by ...
+							Entire cabin hosted by {listing?.hostFirstName}
 						</div>
 					</div>
 					<div className="trip-text-details-main">
@@ -122,10 +128,10 @@ export const TripCard = ({reservation, listing}) => {
 						<div className="update-form-container">
 							<form>
 								<div className="update-form-inner-container">
-									<div className="update-field ">
+									<div className="update-field trips-update-field">
 										Check in date:
 										{/* <input type="date" value={checkIn} onChange={e => setCheckIn(e.target.value)}/> */}
-										<input className="checkin-input" 
+										<input className="checkin-input trips-date-input" 
 											type="date"
 											value={checkIn}
 											min={minDate()}
@@ -134,10 +140,10 @@ export const TripCard = ({reservation, listing}) => {
 											required
 										/>
 									</div>
-									<div className="update-field ">
+									<div className="update-field trips-update-field">
 										Check out date:
 										{/* <input type="date" value={checkOut} onChange={e => setCheckOut(e.target.value)}/> */}
-										<input className="checkout-input" 
+										<input className="checkout-input trips-date-input" 
 											type="date"
 											value={checkOut}
 											min={checkIn ? dayAfter : null}
@@ -145,13 +151,17 @@ export const TripCard = ({reservation, listing}) => {
 											required
 										/>
 									</div>
-									<div className="update-field ">
+									<div className="update-field trips-update-field">
 										Number of guests:
-										{numGuestsSelector()}
+											{numGuestsSelector()}
 									</div>
-									<div className="update-field ">
-										<input type="button" onClick={handleUpdate} value="Update reservation"/>
-										<input type="button" id={reservation?.id} onClick={handleDelete} value="Delete reservation"/>
+									<div className="update-field trips-update-field trip-crud-buttons">
+										<input className={unChanged() ? `trip-crud-btn-disabled` : `trip-crud-btn-enabled`} type="button" onClick={handleUpdate} value="Update"/>
+										<input type="button" id={reservation?.id} onClick={handleDelete} value="Delete"/>
+									</div>
+									<div className="update-field trips-update-field trip-card-reset-box">
+										{/* <input className={unChanged() ? `trip-crud-btn-disabled` : `trip-crud-btn-enabled`} type="button" onClick={handleUpdate} value="Update"/> */}
+										<div id={reservation?.id} onClick={handleReset}><i class="fa-solid fa-rotate-right"></i></div>
 									</div>
 
 									
@@ -179,7 +189,6 @@ export const TripCard = ({reservation, listing}) => {
 
 export const TripMenu = ({reservation, listing}) => {
 
-	// if(!reservation) return null;
 	return (
 		<>
 			<div className="trip-menu">
@@ -197,42 +206,55 @@ const ProfilePage = (props) => {
 	const listings = useSelector(state => state.entities?.listings ? state.entities.listings : null)
 	 
 	useEffect(() => {
-
 		window.scrollTo(0, 0);
 		
-		// dispatch(fetchReservations(userId))
+		dispatch(clearAllReservations())
 		dispatch(fetchReservations({id: userId, type: "user"}))
-		
-		// // Wish to achieve this. But out of time. REVISIT
-		// dispatch(fetchUsersListings(userId))
 
 		dispatch(fetchListings())
 		dispatch(fetchUser)
 	}, [])
 
+	// Format reservations - sort and separate into upcoming, past trips
+	const currentTripTiles = [];
 	const upcomingTripTiles = [];
+	const pastTripTiles = [];
 	if(reservations){
-		const reservationsArray = Object.values(reservations)
+		// Sort by start date; if same, sort by end date
+		const reservationsArray = Object.values(reservations).sort((a, b) => {
+			const startDateDiff = new Date(b.startDate) - new Date(a.startDate)
+			const endDateDiff = new Date(b.endDate) - new Date(a.endDate)
+			if(startDateDiff !== 0) {
+				return startDateDiff;
+			} else {
+				return endDateDiff;
+			}
+		})
+
+		// Filter into upcoming and past trips
 		for(let i = 0; i < reservationsArray.length; i++){
-			// reservationsArray[i].listingId
 			const filteredListing = Object.values(listings).filter(listing => listing.id === reservationsArray[i].listingId)[0]
-			
-			upcomingTripTiles.push(
-				<TripCard key={reservationsArray[i].id} reservation={reservationsArray[i]} listing={filteredListing}/>
-			)
-			// upcomingTripTiles.push(
-			// 	<TripMenu reservation={reservationsArray[i]} listing={filteredListing}/>
-			// )
-			
+
+			if(new Date(reservationsArray[i].endDate) > new Date()) {
+				if(new Date(reservationsArray[i].startDate) < new Date()) {
+					currentTripTiles.push(
+						<TripCard key={reservationsArray[i].id} reservation={reservationsArray[i]} listing={filteredListing}/>
+					)
+				} else {
+					upcomingTripTiles.push(
+						<TripCard key={reservationsArray[i].id} reservation={reservationsArray[i]} listing={filteredListing}/>
+					)
+				}
+				
+			} else {
+				pastTripTiles.push(
+					<TripCard key={reservationsArray[i].id} reservation={reservationsArray[i]} listing={filteredListing}/>
+				)
+			}
 		}
 	}
 
-
-
-	
-
-	// if(!reservations || !listings) return null;	
-	if(!reservations || !listings || !sessionUser) return <Redirect to="/" />;	
+	if(!sessionUser) return <Redirect to="/" />;	
 
 	return (
 		<>
@@ -246,10 +268,22 @@ const ProfilePage = (props) => {
 					</div>
 					{/* HEADER */}
 
+					{/* TRIP CARDS - CURRENT */}
+					<div className="trip-cards-outer-container-active">
+						<div className="trip-cards-header heading-2">
+							Active trips
+						</div>
+						<div className="trip-cards-main-container">
+							{/* ALL CARDS FOR PAST RESEREVATIONS */}
+							{currentTripTiles.length ? currentTripTiles : <div className="trips-not-found">This list is empty.</div> }
+						</div>
+					</div>
+					{/* TRIP CARDS - UPCOMING */}
+
 					{/* TRIP CARDS - UPCOMING */}
 					<div className="trip-cards-outer-container-upcoming">
 						<div className="trip-cards-header heading-2">
-							Upcoming reservations
+							Upcoming trips
 						</div>
 						<div className="trip-cards-main-container">
 							{/* ALL CARDS FOR PAST RESEREVATIONS */}
@@ -263,11 +297,11 @@ const ProfilePage = (props) => {
 					{/* TRIP CARDS - PAST */}
 					<div className="trip-cards-outer-container-past">
 						<div className="trip-cards-header heading-2">
-							Past reservations
+							Past trips
 						</div>
 						<div className="trip-cards-main-container">
 							{/* ALL CARDS FOR PAST RESEREVATIONS */}
-							<div className="trips-not-found">This list is empty.</div>
+							{pastTripTiles.length ? pastTripTiles : <div className="trips-not-found">This list is empty.</div> }
 						</div>
 					</div>
 					{/* TRIP CARDS - PAST */}
@@ -283,9 +317,6 @@ const ProfilePage = (props) => {
 						</div>
 					</div>
 					{/* FOOTER */}
-
-
-
 
 				</div>
 			</div>

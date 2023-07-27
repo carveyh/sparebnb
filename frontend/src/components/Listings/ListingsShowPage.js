@@ -526,9 +526,9 @@ const ListingsShowPage = (props) => {
 							{(listing.numRatings < 3 && listing.numRatings > 0) && <div className="under-3-reviews-placeholder">Average rating will appear after 3 reviews</div>}
 						</div>
 						
-						<ReviewsSubCategories ratings={listing.averageRatings} />
+						{listing.numRatings >= 3 && <ReviewsSubCategories ratings={listing.averageRatings} />}
 
-						<ReviewsSnippetsMain listingId={listing.id} setShowReviewsModal={setShowReviewsModal} />
+						{listing.numRatings > 0 && <ReviewsSnippetsMain listingId={listing.id} setShowReviewsModal={setShowReviewsModal} />}
 					
 					</div>
 				</div>

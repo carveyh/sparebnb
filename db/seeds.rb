@@ -172,30 +172,6 @@ ApplicationRecord.transaction do
 
 	puts "Creating sample reservations..."
 
-
-	# 3.times do |i|
-	# 	Reservation.create!({
-	# 		reserver_id: 1,
-	# 		listing_id: i + 1,
-	# 		start_date: '2023-09-0' + (i + 1).to_s,
-	# 		end_date: '2023-09-0' + (i + 2).to_s,
-	# 		num_guests: 1,
-	# 		base_nightly_rate: 399
-	# 	})
-	# end
-
-	# 3.times do |i|
-	# 	# listing_id = rand(1..1)
-	# 	Reservation.create!({
-	# 		reserver_id: i + 1,
-	# 		listing_id: 1,
-	# 		start_date: Faker::Date.between(from: '2023-07-12', to: '2023-07-15'),
-	# 		end_date: Faker::Date.between(from: '2023-07-16', to: '2023-08-04'),
-	# 		num_guests: 1,
-	# 		base_nightly_rate: 399
-	# 	})
-	# end
-
 	# ### Number of reviews correspond 1:1 to number of reservations ###
 	# No res/reviews for listing 1
 	# 1 res/review for listing 2
