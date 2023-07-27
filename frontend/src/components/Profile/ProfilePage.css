@@ -27,14 +27,23 @@
 	font-size: 32px;
 }
 
-.trip-cards-outer-container-upcoming {
+.trip-cards-outer-container-active {
 	padding-top: 24px;
-	padding-bottom: 24px;
+	/* padding-top: 72px; */
+	padding-bottom: 72px;
+	border-bottom: 1px solid rgb(221,221,221);
+}
+
+.trip-cards-outer-container-upcoming {
+	/* padding-top: 24px; */
+	padding-top: 72px;
+	padding-bottom: 72px;
 	border-bottom: 1px solid rgb(221,221,221);
 }
 
 .trip-cards-outer-container-past {
-	padding-top: 24px;
+	/* padding-top: 24px; */
+	padding-top: 72px;
 	padding-bottom: 48px;
 	border-bottom: 1px solid rgb(221,221,221);
 }
@@ -184,10 +193,12 @@
 .trip-crud-buttons >.trip-crud-btn-enabled {
 	color: white;
 	background-color: red;
+	border: none !important;
 }
 
 .trip-crud-buttons >.trip-crud-btn-disabled {
 	background-color: rgb(221, 221, 221);
+	border: none !important;
 	color: gray;
 	cursor: not-allowed;
 }
@@ -215,6 +226,22 @@
 
 .trip-crud-buttons > input:nth-child(1) {
 	/* border-bottom: 1px solid black; */
+}
+
+.trip-card-reset-box {
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
+	border-radius: 50%;
+	transition: all 0.3s;
+}
+
+.trip-card-reset-box:hover {
+	background-color: #F7F7F7;
+}
+
+.trip-card-reset-box .fa-solid {
+	cursor: pointer;
 }
 
 .trip-text-details-date-info > *, .trip-text-details-address-info > * {

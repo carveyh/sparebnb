@@ -75,8 +75,6 @@ export const TripCard = ({reservation, listing}) => {
 		e.preventDefault();
 		if(!unChanged()){
 			const newReservation = {...reservation, startDate: checkIn, endDate: checkOut, numGuests: parseInt(numGuests)};
-			
-			// NEED TO TRY - CATCH
 			try {
 				dispatch(updateReservation(newReservation))
 					.then(() => unChanged())
@@ -94,7 +92,12 @@ export const TripCard = ({reservation, listing}) => {
 		dispatch(destroyReservation(e.target.id))
 	}
 
-	// if(!reservation || !listing) return null;
+	const handleReset = e => {
+		setCheckIn(reservation.startDate)
+		setCheckOut(reservation.endDate)
+		setNumGuests(reservation.numGuests)
+	}
+
 	return (
 		<>
 			<div className="trip-card">
@@ -106,7 +109,7 @@ export const TripCard = ({reservation, listing}) => {
 							{listing?.title}
 						</div>
 						<div className="trip-text-title-host stats-text-small">
-							Entire cabin hosted by {listing.hostFirstName}
+							Entire cabin hosted by {listing?.hostFirstName}
 						</div>
 					</div>
 					<div className="trip-text-details-main">
@@ -156,6 +159,10 @@ export const TripCard = ({reservation, listing}) => {
 										<input className={unChanged() ? `trip-crud-btn-disabled` : `trip-crud-btn-enabled`} type="button" onClick={handleUpdate} value="Update"/>
 										<input type="button" id={reservation?.id} onClick={handleDelete} value="Delete"/>
 									</div>
+									<div className="update-field trips-update-field trip-card-reset-box">
+										{/* <input className={unChanged() ? `trip-crud-btn-disabled` : `trip-crud-btn-enabled`} type="button" onClick={handleUpdate} value="Update"/> */}
+										<div id={reservation?.id} onClick={handleReset}><i class="fa-solid fa-rotate-right"></i></div>
+									</div>
 
 									
 									
@@ -182,7 +189,6 @@ export const TripCard = ({reservation, listing}) => {
 
 export const TripMenu = ({reservation, listing}) => {
 
-	// if(!reservation) return null;
 	return (
 		<>
 			<div className="trip-menu">
@@ -200,43 +206,55 @@ const ProfilePage = (props) => {
 	const listings = useSelector(state => state.entities?.listings ? state.entities.listings : null)
 	 
 	useEffect(() => {
-
 		window.scrollTo(0, 0);
 		
-		// dispatch(fetchReservations(userId))
 		dispatch(clearAllReservations())
 		dispatch(fetchReservations({id: userId, type: "user"}))
-		
-		// // Wish to achieve this. But out of time. REVISIT
-		// dispatch(fetchUsersListings(userId))
 
 		dispatch(fetchListings())
 		dispatch(fetchUser)
 	}, [])
 
+	// Format reservations - sort and separate into upcoming, past trips
+	const currentTripTiles = [];
 	const upcomingTripTiles = [];
+	const pastTripTiles = [];
 	if(reservations){
-		const reservationsArray = Object.values(reservations)
+		// Sort by start date; if same, sort by end date
+		const reservationsArray = Object.values(reservations).sort((a, b) => {
+			const startDateDiff = new Date(b.startDate) - new Date(a.startDate)
+			const endDateDiff = new Date(b.endDate) - new Date(a.endDate)
+			if(startDateDiff !== 0) {
+				return startDateDiff;
+			} else {
+				return endDateDiff;
+			}
+		})
+
+		// Filter into upcoming and past trips
 		for(let i = 0; i < reservationsArray.length; i++){
-			// reservationsArray[i].listingId
 			const filteredListing = Object.values(listings).filter(listing => listing.id === reservationsArray[i].listingId)[0]
-			
-			upcomingTripTiles.push(
-				<TripCard key={reservationsArray[i].id} reservation={reservationsArray[i]} listing={filteredListing}/>
-			)
-			// upcomingTripTiles.push(
-			// 	<TripMenu reservation={reservationsArray[i]} listing={filteredListing}/>
-			// )
-			
+
+			if(new Date(reservationsArray[i].endDate) > new Date()) {
+				if(new Date(reservationsArray[i].startDate) < new Date()) {
+					currentTripTiles.push(
+						<TripCard key={reservationsArray[i].id} reservation={reservationsArray[i]} listing={filteredListing}/>
+					)
+				} else {
+					upcomingTripTiles.push(
+						<TripCard key={reservationsArray[i].id} reservation={reservationsArray[i]} listing={filteredListing}/>
+					)
+				}
+				
+			} else {
+				pastTripTiles.push(
+					<TripCard key={reservationsArray[i].id} reservation={reservationsArray[i]} listing={filteredListing}/>
+				)
+			}
 		}
 	}
 
-
-
-	
-
-	// if(!reservations || !listings) return null;	
-	if(!reservations || !listings || !sessionUser) return <Redirect to="/" />;	
+	if(!sessionUser) return <Redirect to="/" />;	
 
 	return (
 		<>
@@ -249,6 +267,18 @@ const ProfilePage = (props) => {
 						</div>
 					</div>
 					{/* HEADER */}
+
+					{/* TRIP CARDS - CURRENT */}
+					<div className="trip-cards-outer-container-active">
+						<div className="trip-cards-header heading-2">
+							Active trips
+						</div>
+						<div className="trip-cards-main-container">
+							{/* ALL CARDS FOR PAST RESEREVATIONS */}
+							{currentTripTiles.length ? currentTripTiles : <div className="trips-not-found">This list is empty.</div> }
+						</div>
+					</div>
+					{/* TRIP CARDS - UPCOMING */}
 
 					{/* TRIP CARDS - UPCOMING */}
 					<div className="trip-cards-outer-container-upcoming">
@@ -271,7 +301,7 @@ const ProfilePage = (props) => {
 						</div>
 						<div className="trip-cards-main-container">
 							{/* ALL CARDS FOR PAST RESEREVATIONS */}
-							<div className="trips-not-found">This list is empty.</div>
+							{pastTripTiles.length ? pastTripTiles : <div className="trips-not-found">This list is empty.</div> }
 						</div>
 					</div>
 					{/* TRIP CARDS - PAST */}
@@ -287,9 +317,6 @@ const ProfilePage = (props) => {
 						</div>
 					</div>
 					{/* FOOTER */}
-
-
-
 
 				</div>
 			</div>

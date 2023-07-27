@@ -60,7 +60,8 @@ const ProfileButton = ({setShowSignUpModal, setShowLogInModal}) => {
 				<li onClick={e => setShowLogInModal(true)}>Log in</li>
 				<li className="menu-divider-li"><MenuDivider /></li>
 				<a target="_blank" href="https://www.linkedin.com/in/carvey-hor/"><li>LinkedIn</li></a>
-				<li>Help</li>
+				<a target="_blank" href="https://github.com/carveyh/sparebnb"><li>Github</li></a>
+				{/* <li>Help</li> */}
 			</>
 		)
 	}
@@ -68,18 +69,18 @@ const ProfileButton = ({setShowSignUpModal, setShowLogInModal}) => {
 		sessionLinks = (
 			<>
 			<div className="profile-drop-menu-bold-item">
-				<li>2023 Summer Release NEW</li>
-				<li className="menu-divider-li"><MenuDivider /></li>
-				<li>Messages</li>
+				{/* <li>2023 Summer Release NEW</li> */}
+				{/* <li className="menu-divider-li"><MenuDivider /></li> */}
+				{/* <li>Messages</li> */}
 				<Link to={`/users/${sessionUser.id}`}><li>Trips</li></Link>
 				<li>Wishlists</li>
 			</div>
 			<li className="menu-divider-li"><MenuDivider /></li>
 				{/* <li>Sparebnb your home</li> */}
 				<a target="_blank" href="https://www.linkedin.com/in/carvey-hor/"><li>LinkedIn</li></a>
-				<li>Account</li>
+				<a target="_blank" href="https://github.com/carveyh/sparebnb"><li>Github</li></a>
 				<li className="menu-divider-li"><MenuDivider /></li>
-				<li>Help</li>
+				{/* <li>Help</li> */}
 				<li onClick={handleLogout}>Logout</li>
 			</>
 		)
