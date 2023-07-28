@@ -34,6 +34,15 @@
 	border-bottom: 1px solid rgb(221,221,221);
 }
 
+.trip-cards-header {
+	color: #FF0000;
+}
+
+.trip-cards-outer-container-past .trip-cards-header {
+	color: #950000;
+	/* font-style:italic; */
+}
+
 .trip-cards-outer-container-upcoming {
 	/* padding-top: 24px; */
 	padding-top: 72px;
@@ -119,7 +128,7 @@
 	flex-direction: column;
 
 	/* Need to change this to be more dynamic not hard coded */
-	width: 50px;
+	width: 60px;
 }
 
 .trip-text-details-address-info {
@@ -159,17 +168,18 @@
 	gap: 4px;
 }
 
-.trips-date-input {
+.trips-date-input, .trips-update-field .num-guests-selector {
 	width: 130px;
 }
 
-.trips-update-field:not(:last-child) > input, .trips-update-field > select {
+.trips-update-field:not(:last-child) > input, .trips-update-field > .num-guests-selector {
 	border-radius: 8px;
 	border:1px rgb(176, 176, 176) solid;
 }
 
 .trip-crud-buttons {
 	justify-content: center !important;
+	padding-left: 15px;
 }
 
 .trip-crud-buttons > input {
@@ -229,6 +239,7 @@
 }
 
 .trip-card-reset-box {
+	margin-left: -10px;
 	width: 40px;
 	height: 40px;
 	cursor: pointer;
@@ -242,6 +253,17 @@
 
 .trip-card-reset-box .fa-solid {
 	cursor: pointer;
+}
+
+.disabled-trip-input-container {
+	
+}
+
+.disabled-trip-input-field {
+	background-color: rgb(235,235,235) !important;
+	color: rgb(170,170,170) !important;
+	border-color: transparent !important;
+	cursor:not-allowed;
 }
 
 .trip-text-details-date-info > *, .trip-text-details-address-info > * {
@@ -269,6 +291,7 @@
 
 
 .trip-photo-main {
+	position: relative;
 	border-top-right-radius: 12px;
 	border-bottom-right-radius: 12px;
 	/* width: 100%; */
@@ -277,12 +300,17 @@
 	background-color: pink;
 }
 
-.trip-photo-main > img {
+.trip-photo-main > a > img {
 	border-top-right-radius: 12px;
 	border-bottom-right-radius: 12px;
 	width:100%;
 	height:100%;
 	object-fit: cover;
+}
+
+.trip-photo-main .hover-overlay {
+	border-top-right-radius: 12px;
+	border-bottom-right-radius: 12px;
 }
 
 /* FOOTER */

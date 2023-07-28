@@ -21,6 +21,7 @@ import { ReviewsSubCategories } from "./ReviewsSubCategories";
 import { ReviewsSnippetsMain } from "./ReviewsSnippetsMain";
 import { ReviewsModal } from "./ReviewsModal";
 import { Modal } from "../../context/Modal";
+import * as ListingFees from "./ListingFees"
 
 const ListingsShowPage = (props) => {
 	const dispatch = useDispatch();
@@ -30,8 +31,8 @@ const ListingsShowPage = (props) => {
 	const host = useSelector(state => state.entities?.users ? state.entities.users[`${listing?.hostId}`] : {})
 	const hostIdFormatted = formatTwoDigitNumberString(host?.id);	
 
-	const [checkIn, setCheckIn] = useState();
-	const [checkOut, setCheckOut] = useState();
+	const [checkIn, setCheckIn] = useState("");
+	const [checkOut, setCheckOut] = useState("");
 	const [numGuests, setNumGuests] = useState(1);
 	const [dayAfter, setDayAfter] = useState();
 	const [dayBefore, setDayBefore] = useState();
@@ -59,8 +60,10 @@ const ListingsShowPage = (props) => {
 	const prevSleepBtn = useRef(null);
 	const nextSleepBtn = useRef(null);
 
-	const cleaningFee = parseInt(listing?.baseNightlyRate / 4);
-	const baseServiceFee = 14;
+	// const cleaningFee = parseInt(listing?.baseNightlyRate / 4);
+	const cleaningFee = ListingFees.cleaningFee(listing?.baseNightlyRate);
+	// const baseServiceFee = 14;
+	const baseServiceFee = ListingFees.baseServiceFee(listing?.baseNightlyRate);
 
 	useEffect(() => {
 		// Add this line to try to always be at top of a page when navigationg from a dff one
@@ -95,10 +98,12 @@ const ListingsShowPage = (props) => {
 	}
 
 	const numNights = () => {
-		if(!checkIn || !checkOut) return null;
-		const diffTime = Math.abs(new Date(checkOut) - new Date(checkIn));
-		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-		return diffDays;
+		// if(!checkIn || !checkOut) return null;
+		// const diffTime = Math.abs(new Date(checkOut) - new Date(checkIn));
+		// const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+		// return diffDays;
+
+		return ListingFees.numNights(checkIn, checkOut);
 	}
 
 	const baseTotalCost = () => {
@@ -125,11 +130,33 @@ const ListingsShowPage = (props) => {
 		return (listing?.numRatings !== 1) ? listing?.numRatings + " reviews" : listing?.numRatings + " review" 
 	}
 
+	// const focusReservationInput = (e) => {
+	// 	e.preventDefault();
+
+	// }
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if(!sessionUser || !buttonClickable) {
 			return
 		} else {
+
+			// If form inputs are not fully complete, force focus on form inputs in logical order: checkin, checkout, guests count.
+			const emptyCheckin = (checkIn === "")
+			const emptyCheckout = (checkOut === "")
+			if(emptyCheckin || emptyCheckout) {
+				let inputToFocus;
+				if(emptyCheckin) {
+					inputToFocus = document.querySelector(".checkin-input");
+				} else if(emptyCheckout) {
+					inputToFocus = document.querySelector(".checkout-input");
+				}
+				inputToFocus.focus();
+				inputToFocus.showPicker();
+				// debugger
+				return;
+			}
+
 			const reservation = { checkIn, checkOut, numGuests, listingId,
 				reserverId: sessionUser.id,
 				baseNightlyRate: listing.baseNightlyRate
@@ -473,22 +500,25 @@ const ListingsShowPage = (props) => {
 										</div>
 										<br/>
 										<button type="submit" 
+											onClick={handleSubmit}
 											className={(sessionUser && buttonClickable) ? `reserve-button plain-text` : `disabled-reserve-button plain-text`}
 										>
-											Reserve
+											{numNights() ? `Reserve` : `Check availability` }
 										</button>
 									</form>
 									{/* FORM - END */}
 									{/* FORM - END */}
 									{/* <div className="plain-text report-button-container wont-charged">You won't be charged yet</div> */}
-									<div className={`plain-text report-button-container ${bookingConfirmed ? "reservation-complete" : "reservation-incomplete"}`}>
-										{bookingConfirmed ? "Reservation complete!" : "What are you waiting for?"}
-									</div>
-									<div>${listing?.baseNightlyRate} x {numNights() ? numNights() : "-"} nights - ${baseTotalCost()}</div>
-									<div className="plain-text form-padding-top">Cleaning fee - ${cleaningFee}</div>
-									<div className="plain-text form-padding-top form-padding-bottom ">Sparebnb service fee - ${totalServiceFee()}</div>
-									<div className="plain-text horizontal-rule-top-border"></div>
-									<div className="total-before-taxes plain-text form-padding-top">Total before taxes - ${baseTotalCost() + cleaningFee + totalServiceFee()}</div>
+									{numNights() && <>
+										<div className={`plain-text report-button-container ${bookingConfirmed ? "reservation-complete" : "reservation-incomplete"}`}>
+											{bookingConfirmed ? "Reservation complete!" : "What are you waiting for?"}
+										</div>
+										<div>${listing?.baseNightlyRate} x {numNights() ? numNights() : "-"} nights - ${baseTotalCost()}</div>
+										<div className="plain-text form-padding-top">Cleaning fee - ${cleaningFee}</div>
+										<div className="plain-text form-padding-top form-padding-bottom ">Sparebnb service fee - ${totalServiceFee()}</div>
+										<div className="plain-text horizontal-rule-top-border"></div>
+										<div className="total-before-taxes plain-text form-padding-top">Total before taxes - ${baseTotalCost() + cleaningFee + totalServiceFee()}</div>
+									</>}
 								</div>
 								<div className="report-button-container">
 									<div className="report-button"><i className="fa-solid fa-flag"></i> &nbsp; Report this listing</div>

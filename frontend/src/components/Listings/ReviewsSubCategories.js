@@ -5,7 +5,6 @@ import { useState } from "react";
 const categories = ["Cleanliness", "Accuracy", "Communication", "Location", "Check-in", "Value"];
 
 const SubcatContainer = ({ratings, category, isModal=false}) => {
-	
 	// const [barWidth, setBarWidth] = useState("0%");
 
 	let score;
