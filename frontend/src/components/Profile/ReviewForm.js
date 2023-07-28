@@ -34,8 +34,14 @@ export const ReviewForm = ({reservation, listing, setShowReviewForm}) => {
 
 	const [errors, setErrors] = useState({});
 
+	const [formIncomplete, setFormIncomplete] = useState(false);
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		if(reviewBody === "" || [cleanliness, accuracy, communication, location, checkin, value, overallRating].some(rating => rating === 0) ) {
+			setFormIncomplete(true)
+			return;
+		}
 		const review = {
 			body: reviewBody,
 			cleanliness,
@@ -149,6 +155,10 @@ export const ReviewForm = ({reservation, listing, setShowReviewForm}) => {
 						<div className="review-section-subtitle">How was your stay overall?</div>
 						<ReviewStarInput rating={overallRating} setRating={setOverallRating} />
 					</div> 
+
+					<div className="review-form-section missing-fields-notice-section">
+						{formIncomplete && <div className="form-incomplete-notice">Please complete missing fields</div>}
+					</div>
 
 					<div className="review-form-section review-form-submit-section">
 						<button type="submit" className="review-form-submit">Submit review</button>

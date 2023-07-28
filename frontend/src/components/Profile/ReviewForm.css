@@ -107,6 +107,22 @@
 	color: #FF0000;
 }
 
+/* Very basic form incomplete handling */
+.missing-fields-notice-section {
+	/* width: 100%; */
+	height: 14px;
+	display: flex;
+	flex-direction: center;
+	justify-content: center;
+	align-items: center;
+}
+
+.form-incomplete-notice {
+	color: red;
+	font-size: 14px;
+	font-weight: 300;
+}
+
 /* SUBMIT SECTION */
 .review-form-submit-section {
 	display: flex;
