@@ -72,9 +72,14 @@
 	align-items: center;
 }
 
-.trip-card-review-icon {
+.trip-card-review-complete-icon {
 	padding: 0em 0.3em;
-	font-size: 1.8em;
+	font-size: 1.6em;
+}
+
+.trip-card-review-create-icon {
+	padding: 0em 0.3em;
+	font-size: 1.3em;
 }
 
 /* PAST TRIP INFO & INTERACTION CONTAINER - END */

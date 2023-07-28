@@ -42,6 +42,15 @@ export const TripCard = ({reservation, listing, review, tripType}) => {
 	const [showReviewModal, setShowReviewModal] = useState(false);
 	const [showReviewForm, setShowReviewForm] = useState(false);
 
+		// Disables page scrolling if a modal is open!
+		if(showReviewModal || showReviewForm){
+			// This was working fine before, but as of 7/20, it will cause site to expand to cover the missing scroll bar...need to check how to prevent this change in layout on page.
+			// document.body.style.overflow = "hidden";
+			document.querySelector('body').style.overflowY = "hidden";
+		} else {
+			// document.body.style.overflow = "scroll";
+			document.querySelector('body').style.overflowY = "scroll";
+		}
 
 	const monthNames = ["January", "February", "March", "April", "May", "June",
   	"July", "August", "September", "October", "November", "December"
@@ -133,9 +142,9 @@ export const TripCard = ({reservation, listing, review, tripType}) => {
 					>
 						<div className={`past-trip-review-button-inner`}>
 							{review ? 
-								<><div className="trip-card-review-icon"><i class="fa-solid fa-check"></i></div> <span>Review Complete</span> </> 
+								<><div className="trip-card-review-complete-icon"><i class="fa-solid fa-check"></i></div> <span>Review Complete</span> </> 
 								: 
-								<><div className="trip-card-review-icon"><i class="fa-solid fa-pen-to-square"></i></div> <span>Leave a Review</span> </> }
+								<><div className="trip-card-review-create-icon"><i class="fa-solid fa-pen-to-square"></i></div> <span>Leave a Review</span> </> }
 						</div>
 					</div>
 				</div>
@@ -248,7 +257,7 @@ export const TripCard = ({reservation, listing, review, tripType}) => {
 				<ReviewsModal listingId={listing.id} setShowReviewsModal={setShowReviewModal} specificReviewId={review.id} />
 			</Modal>}
 			{showReviewForm && <Modal onClose={e => setShowReviewForm(false)}>
-				<ReviewForm />
+				<ReviewForm reservation={reservation} listing={listing} setShowReviewForm={setShowReviewForm}/>
 			</Modal>}
 		</>
 	)
