@@ -1,5 +1,150 @@
 .review-form-container {
-	height: 500px;
-	width: 300px;
-	background-color: pink;
+	position: relative;
+	height: 100%;
+	width: 1032px;
+	width: 800px;
+	border-radius: 12px;
+	background-color: white;
+	flex-direction: column;
+	justify-content: flex-start;
+	max-height: 682px;
+
+	animation: slideIn 0.4s both, fadeInModal 0.4s forwards;
+	overflow: hidden;
+}
+
+.reviews-form-forehead {
+	position: sticky;
+	top: 0px;
+	left: 0px;
+	height: 72px;
+	min-height: 72px;
+}
+
+.reviews-form-non-forehead {
+	/* position: relative; */
+	box-sizing: border-box;
+	margin: 0px -8px;
+	padding: 0px 32px;
+	display: flex;
+	flex-direction: column;
+	overflow-y: scroll;
+	scroll-behavior: smooth;
+	max-height: calc(682px - 72px);
+}
+
+.review-form-divider {
+	height: 0px;
+	width: 100%;
+	border-bottom: 1px solid rgb(221,221,221);
+	/* margin-top: 24px; */
+	/* margin-bottom: 24px; */
+}
+
+.review-form-header {
+	/* margin-top: 24px; */
+	margin-bottom: 24px;
+}
+
+.review-form-section {
+	margin-top: 12px;
+	margin-bottom: 12px;
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+}
+
+.review-section-title {
+	font-size: 15px;
+	font-weight: 600;
+	padding: 0.5px 0px;
+}
+
+.review-section-subtitle {
+	font-size: 14.5px;
+	padding: 0.5px 0px;
+}
+
+* .review-section-subtitle:last-child {
+	/* padding-bottom: 12px; */
+}
+
+.review-body-textarea-container {
+	padding-top: 12px;
+	box-sizing: border-box;
+	width: 100%;
+	/* to fix text area pushing past the outside of container...not sure why */
+	padding-right: 10px;
+}
+
+.review-body-textarea {
+	width: 100%;
+	max-width: 100%;
+	min-width: 100%;
+	min-height: 50px;
+	max-height: 350px;
+	padding: 5px;
+	font-family: inherit;
+	border-radius: 4px;
+	/* color: rgb(221,221,221) */
+	/* border: 1px solid red; */
+}
+
+.review-rating-box {
+	padding: 6px 0px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+}
+
+.review-rating-box .fa-star {
+	cursor: pointer;
+	font-size: 1.5em;
+	color: rgb(221,221,221);
+}
+
+.active-star .fa-star {
+	color: #FF0000;
+}
+
+/* Very basic form incomplete handling */
+.missing-fields-notice-section {
+	/* width: 100%; */
+	height: 14px;
+	display: flex;
+	flex-direction: center;
+	justify-content: center;
+	align-items: center;
+}
+
+.form-incomplete-notice {
+	color: red;
+	font-size: 14px;
+	font-weight: 300;
+}
+
+/* SUBMIT SECTION */
+.review-form-submit-section {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 24px;
+}
+
+.review-form-submit {
+	font-family: inherit;
+	font-size: 16px;
+	outline: none;
+	border: none;
+	cursor:pointer;
+	border-radius: 8px;
+	background-color: rgb(221,221,221);
+	padding: 12px;
+	transition: all 0.1s;
+}
+
+.review-form-submit:hover {
+	background-color: #FF0000;
+	color: white;
 }

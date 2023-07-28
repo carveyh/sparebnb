@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 
 import { ReviewSnippetIndividual } from "./ReviewsSnippetsMain";
 import { ReviewsSubCategories } from "./ReviewsSubCategories";
+import { fetchListing } from "../../store/listings";
 
 
 
@@ -38,6 +39,7 @@ export const ReviewsModal = ({listingId, setShowReviewsModal, specificReviewId})
 	reviews.sort((a, b) => new Date(b.reviewDate) - new Date(a.reviewDate))
 
 	useEffect(() => {
+		// dispatch(fetchListing(listingId))
 		// dispatch(clearAllResReviews())
 		// dispatch(fetchResReviewsForListing(listingId));
 		// dispatch(fetchReservations({ id:listingId, type:"listing"}));

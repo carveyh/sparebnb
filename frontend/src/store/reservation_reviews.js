@@ -1,4 +1,5 @@
 import csrfFetch from "./csrf"
+import { fetchListings } from "./listings"
 import { CLEAR_ALL_RESERVATIONS } from "./reservation"
 
 // ACTION TYPE CONSTANTS
@@ -77,6 +78,7 @@ export const createResReview = (review) => async (dispatch) => {
 	if(res.ok){
 		const data = await res.json();
 		dispatch(receiveResReview(data.reservationReview))
+		dispatch(fetchListings())
 	}
 	return res;
 }

@@ -22,7 +22,9 @@ const ProfilePage = (props) => {
 	const listings = useSelector(state => state.entities?.listings ? state.entities.listings : null)
 	const reviews = useSelector(state => state.entities?.resReviews ? state.entities.resReviews : null)
 
-	const [showReviewModal, setShowReviewModal] = useState(false);
+	// const [showReviewModal, setShowReviewModal] = useState(false);
+
+	
 
 	useEffect(() => {
 		// window.scrollTo(0, 0);
