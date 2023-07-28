@@ -1,0 +1,82 @@
+/* NOTE: document created halfway, some style may still be in ProfilePage.css */
+
+/* PAST TRIP INFO & INTERACTION CONTAINER - START */
+/* PAST TRIP INFO & INTERACTION CONTAINER - START */
+
+.past-trip-container{
+	padding-left: 24px;
+	border-left: 1px solid rgb(221,221,221);
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	/* justify-self: stretch; */
+}
+
+.past-trip-details {
+	width: 50%;
+	width: 200px;
+	padding: 0px 20px;
+	display: flex;
+	flex-direction: column;
+}
+
+.past-trip-details > div > span:nth-child(2) {
+	font-weight: 300;
+}
+
+.past-trip-controls {
+	width: 50%;
+	padding: 0px 20px;
+	display: flex;
+	flex-direction: column;
+}
+
+.past-trip-review-button {
+	background-color: pink;
+	border-radius: 8px;
+
+	cursor: pointer;
+	box-sizing: border-box;
+	width: 100%;
+	width: 210px;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.show-posted-review-form-btn {
+	background-color: green;
+	color: white;
+}
+
+.new-review-form-btn {
+	background-color: rgb(114, 114, 114);
+	color: white;
+}
+
+.past-trip-review-button-inner {
+	/* background-color: pink; */
+	/* border-radius: 8px; */
+	/* max-height: 100%; */
+	display: flex;
+	/* flex-direction: column; */
+	width: 100%;
+	text-align: center;
+	box-sizing: border-box;
+	padding: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.trip-card-review-icon {
+	padding: 0em 0.3em;
+	font-size: 1.8em;
+}
+
+/* PAST TRIP INFO & INTERACTION CONTAINER - END */
+/* PAST TRIP INFO & INTERACTION CONTAINER - END */
+
