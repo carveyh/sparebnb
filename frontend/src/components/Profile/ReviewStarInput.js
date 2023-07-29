@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export const ReviewStarInput = ({rating, setRating, formIncomplete, setFormIncomplete}) => {
+export const ReviewStarInput = ({rating, setRating, formIncomplete, tabIndex}) => {
 
 	const [localRating, setLocalRating] = useState(rating);
 
