@@ -40,7 +40,7 @@ const ProfilePage = (props) => {
 	}, [])
 
 	// No looking at other ppl's trips page!
-	if(parseInt(userId) !== sessionUser.id) return <Redirect to="/" />;	
+	if(parseInt(userId) !== sessionUser?.id) return <Redirect to="/" />;	
 
 	// Format reservations - sort and separate into upcoming, past trips
 	const currentTripTiles = [];
