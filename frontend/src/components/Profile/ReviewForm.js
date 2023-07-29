@@ -95,7 +95,7 @@ export const ReviewForm = ({reservation, listing, setShowReviewForm}) => {
 					<div className="review-form-divider"></div>
 					{/*  */}
 
-					<div className="review-form-section review-form-body">
+					<div className="review-form-section review-body-greater-section">
 						<div className="review-section-title heading-2">Leave a public review</div>
 						<div className="review-section-subtitle">Write a fair, honest review about your stay so future guests know what to expect.</div>
 						<div className="review-body-textarea-container">
@@ -108,52 +108,56 @@ export const ReviewForm = ({reservation, listing, setShowReviewForm}) => {
 
 							</textarea>
 						</div>
+						<div className="text-missing-section">
+							{(formIncomplete && reviewBody === "") && <div className="form-incomplete-notice"><i className="fa-solid fa-circle-exclamation"></i> Review required</div>}
+						</div>
 					</div>
 
 					{/*  */}
 					<div className="review-form-divider"></div>
 					{/*  */}
+					<div className="review-ratings-greater-section">
+						<div className="review-form-section">
+							<div className="review-section-title">Cleanliness</div>
+							<div className="review-section-subtitle">Was {listing.title} a clean space?</div>
+							<ReviewStarInput rating={cleanliness} setRating={setCleanliness} formIncomplete={formIncomplete}/>
+						</div> 
 
-					<div className="review-form-section">
-						<div className="review-section-title">Cleanliness</div>
-						<div className="review-section-subtitle">Was {listing.title} a clean space?</div>
-						<ReviewStarInput rating={cleanliness} setRating={setCleanliness} />
-					</div> 
+						<div className="review-form-section">
+							<div className="review-section-title">Accuracy</div>
+							<div className="review-section-subtitle">How accurate was {listing.title} compared to the description?</div>
+							<ReviewStarInput rating={accuracy} setRating={setAccuracy} formIncomplete={formIncomplete}/>
+						</div> 
 
-					<div className="review-form-section">
-						<div className="review-section-title">Accuracy</div>
-						<div className="review-section-subtitle">How accurate was {listing.title} compared to the description?</div>
-						<ReviewStarInput rating={accuracy} setRating={setAccuracy} />
-					</div> 
+						<div className="review-form-section">
+							<div className="review-section-title">Communication</div>
+							<div className="review-section-subtitle">How clearly did {hostName} communicate their booking proess, requests, and house rules?</div>
+							<ReviewStarInput rating={communication} setRating={setCommunication} formIncomplete={formIncomplete}/>
+						</div> 
 
-					<div className="review-form-section">
-						<div className="review-section-title">Communication</div>
-						<div className="review-section-subtitle">How clearly did {hostName} communicate their booking proess, requests, and house rules?</div>
-						<ReviewStarInput rating={communication} setRating={setCommunication} />
-					</div> 
+						<div className="review-form-section">
+							<div className="review-section-title">Location</div>
+							<div className="review-section-subtitle">Did the location of this listing meet your needs?</div>
+							<ReviewStarInput rating={location} setRating={setLocation} formIncomplete={formIncomplete}/>
+						</div> 
 
-					<div className="review-form-section">
-						<div className="review-section-title">Location</div>
-						<div className="review-section-subtitle">Did the location of this listing meet your needs?</div>
-						<ReviewStarInput rating={location} setRating={setLocation} />
-					</div> 
+						<div className="review-form-section">
+							<div className="review-section-title">Check-in</div>
+							<div className="review-section-subtitle">How easy was it to check-in?</div>
+							<ReviewStarInput rating={checkin} setRating={setCheckin} formIncomplete={formIncomplete}/>
+						</div> 
 
-					<div className="review-form-section">
-						<div className="review-section-title">Check-in</div>
-						<div className="review-section-subtitle">How easy was it to check-in?</div>
-						<ReviewStarInput rating={checkin} setRating={setCheckin} />
-					</div> 
+						<div className="review-form-section">
+							<div className="review-section-title">Value</div>
+							<div className="review-section-subtitle">Please rate the value of this listing for the price that it was booked.</div>
+							<ReviewStarInput rating={value} setRating={setValue} formIncomplete={formIncomplete}/>
+						</div> 
 
-					<div className="review-form-section">
-						<div className="review-section-title">Value</div>
-						<div className="review-section-subtitle">Please rate the value of this listing for the price that it was booked.</div>
-						<ReviewStarInput rating={value} setRating={setValue} />
-					</div> 
-
-					<div className="review-form-section">
-						<div className="review-section-title">Overall Rating</div>
-						<div className="review-section-subtitle">How was your stay overall?</div>
-						<ReviewStarInput rating={overallRating} setRating={setOverallRating} />
+						<div className="review-form-section">
+							<div className="review-section-title">Overall Rating</div>
+							<div className="review-section-subtitle">How was your stay overall?</div>
+							<ReviewStarInput rating={overallRating} setRating={setOverallRating} formIncomplete={formIncomplete}/>
+						</div>
 					</div> 
 
 					<div className="review-form-section missing-fields-notice-section">

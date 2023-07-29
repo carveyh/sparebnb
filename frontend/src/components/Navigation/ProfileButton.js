@@ -73,7 +73,7 @@ const ProfileButton = ({setShowSignUpModal, setShowLogInModal}) => {
 				{/* <li className="menu-divider-li"><MenuDivider /></li> */}
 				{/* <li>Messages</li> */}
 				<Link to={`/users/${sessionUser.id}`}><li>Trips</li></Link>
-				<li>Wishlists</li>
+				{/* <li>Wishlists</li> */}
 			</div>
 			<li className="menu-divider-li"><MenuDivider /></li>
 				{/* <li>Sparebnb your home</li> */}

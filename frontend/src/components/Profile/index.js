@@ -24,7 +24,7 @@ const ProfilePage = (props) => {
 
 	// const [showReviewModal, setShowReviewModal] = useState(false);
 
-	
+
 
 	useEffect(() => {
 		// window.scrollTo(0, 0);
@@ -38,6 +38,9 @@ const ProfilePage = (props) => {
 		dispatch(clearAllResReviews())
 		dispatch(fetchResReviewsForGuest(userId))
 	}, [])
+
+	// No looking at other ppl's trips page!
+	if(parseInt(userId) !== sessionUser?.id) return <Redirect to="/" />;	
 
 	// Format reservations - sort and separate into upcoming, past trips
 	const currentTripTiles = [];

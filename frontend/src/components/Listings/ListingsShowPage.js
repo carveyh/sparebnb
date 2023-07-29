@@ -22,6 +22,7 @@ import { ReviewsSnippetsMain } from "./ReviewsSnippetsMain";
 import { ReviewsModal } from "./ReviewsModal";
 import { Modal } from "../../context/Modal";
 import * as ListingFees from "./ListingFees"
+import { Redirect } from "react-router-dom";
 
 const ListingsShowPage = (props) => {
 	const dispatch = useDispatch();
@@ -68,10 +69,14 @@ const ListingsShowPage = (props) => {
 	useEffect(() => {
 		// Add this line to try to always be at top of a page when navigationg from a dff one
 		window.scrollTo(0, 0);
-		dispatch(fetchListing(listingId));
-		dispatch(fetchResReviewsForListing(listingId));
+		dispatch(fetchListing(listingId))
+			.then(() => dispatch(fetchResReviewsForListing(listingId)))
+			.catch(() => {
+				// 
+			})
 	}, [])
 
+	if(!listing) return <Redirect to="/" /> 
 
 	const handleChangeCheckIn = e => {
 		setCheckIn(e.target.value);
