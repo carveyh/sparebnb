@@ -2,12 +2,14 @@ import "./ReviewForm.css";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useTabIndex } from 'react-tabindex'
 
 import { ReviewStarInput } from "./ReviewStarInput";
 import { createResReview } from "../../store/reservation_reviews";
 
 export const ReviewForm = ({reservation, listing, setShowReviewForm}) => {
 	const dispatch = useDispatch();
+	const tabIndex = useTabIndex();
 
 	const sessionUser = useSelector(state => state.session?.user)
 	const listings = Object.values(useSelector(state => state.entities?.listings ? state.entities.listings : {}))
@@ -35,9 +37,11 @@ export const ReviewForm = ({reservation, listing, setShowReviewForm}) => {
 	const [errors, setErrors] = useState({});
 
 	const [formIncomplete, setFormIncomplete] = useState(false);
+	const [reviewComplete, setReviewComplete] = useState(false);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		// setReviewComplete(true)
 		if(reviewBody === "" || [cleanliness, accuracy, communication, location, checkin, value, overallRating].some(rating => rating === 0) ) {
 			setFormIncomplete(true)
 			return;
@@ -56,7 +60,10 @@ export const ReviewForm = ({reservation, listing, setShowReviewForm}) => {
 		}
 		return dispatch(createResReview(review))
 		.then(() => {
-			setShowReviewForm(false)
+			setReviewComplete(true)
+			setTimeout(() => {
+				setShowReviewForm(false)
+			}, 1450)
 		})
 		.catch(async (res) => {
 			let data;
@@ -100,6 +107,7 @@ export const ReviewForm = ({reservation, listing, setShowReviewForm}) => {
 						<div className="review-section-subtitle">Write a fair, honest review about your stay so future guests know what to expect.</div>
 						<div className="review-body-textarea-container">
 							<textarea 
+								tabIndex={0}
 								placeholder="Say a few words about your stay" 
 								className="review-body-textarea"
 								value={reviewBody}
@@ -120,43 +128,43 @@ export const ReviewForm = ({reservation, listing, setShowReviewForm}) => {
 						<div className="review-form-section">
 							<div className="review-section-title">Cleanliness</div>
 							<div className="review-section-subtitle">Was {listing.title} a clean space?</div>
-							<ReviewStarInput rating={cleanliness} setRating={setCleanliness} formIncomplete={formIncomplete}/>
+							<ReviewStarInput rating={cleanliness} setRating={setCleanliness} tabIndex={1} formIncomplete={formIncomplete}/>
 						</div> 
 
 						<div className="review-form-section">
 							<div className="review-section-title">Accuracy</div>
 							<div className="review-section-subtitle">How accurate was {listing.title} compared to the description?</div>
-							<ReviewStarInput rating={accuracy} setRating={setAccuracy} formIncomplete={formIncomplete}/>
+							<ReviewStarInput rating={accuracy} setRating={setAccuracy} tabIndex={2} formIncomplete={formIncomplete}/>
 						</div> 
 
 						<div className="review-form-section">
 							<div className="review-section-title">Communication</div>
 							<div className="review-section-subtitle">How clearly did {hostName} communicate their booking proess, requests, and house rules?</div>
-							<ReviewStarInput rating={communication} setRating={setCommunication} formIncomplete={formIncomplete}/>
+							<ReviewStarInput rating={communication} setRating={setCommunication} tabIndex={3} formIncomplete={formIncomplete}/>
 						</div> 
 
 						<div className="review-form-section">
 							<div className="review-section-title">Location</div>
 							<div className="review-section-subtitle">Did the location of this listing meet your needs?</div>
-							<ReviewStarInput rating={location} setRating={setLocation} formIncomplete={formIncomplete}/>
+							<ReviewStarInput rating={location} setRating={setLocation} tabIndex={4} formIncomplete={formIncomplete}/>
 						</div> 
 
 						<div className="review-form-section">
 							<div className="review-section-title">Check-in</div>
 							<div className="review-section-subtitle">How easy was it to check-in?</div>
-							<ReviewStarInput rating={checkin} setRating={setCheckin} formIncomplete={formIncomplete}/>
+							<ReviewStarInput rating={checkin} setRating={setCheckin} tabIndex={5} formIncomplete={formIncomplete}/>
 						</div> 
 
 						<div className="review-form-section">
 							<div className="review-section-title">Value</div>
 							<div className="review-section-subtitle">Please rate the value of this listing for the price that it was booked.</div>
-							<ReviewStarInput rating={value} setRating={setValue} formIncomplete={formIncomplete}/>
+							<ReviewStarInput rating={value} setRating={setValue} tabIndex={6} formIncomplete={formIncomplete}/>
 						</div> 
 
 						<div className="review-form-section">
 							<div className="review-section-title">Overall Rating</div>
 							<div className="review-section-subtitle">How was your stay overall?</div>
-							<ReviewStarInput rating={overallRating} setRating={setOverallRating} formIncomplete={formIncomplete}/>
+							<ReviewStarInput rating={overallRating} setRating={setOverallRating} tabIndex={7} formIncomplete={formIncomplete}/>
 						</div>
 					</div> 
 
@@ -165,10 +173,14 @@ export const ReviewForm = ({reservation, listing, setShowReviewForm}) => {
 					</div>
 
 					<div className="review-form-section review-form-submit-section">
-						<button type="submit" className="review-form-submit">Submit review</button>
+						<button type="submit" tabIndex={2} className="review-form-submit" >Submit review</button>
 					</div> 
 				</form>
 			</div>
+			{reviewComplete && <div className={`review-complete-display ${reviewComplete && `review-complete-display-active`}`}>
+				<div className="review-complete-shimmer review-complete-shimmer-active"></div>
+					<span className="review-complete-text">Review complete</span>
+			</div>}
 		</div>
 	)
 }
