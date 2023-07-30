@@ -567,7 +567,8 @@ const ListingsShowPage = (props) => {
 									</>}
 								</div>
 								<div className="report-button-container">
-									<div className="report-button"><i className="fa-solid fa-flag"></i> &nbsp; Report this listing</div>
+									<a target="_blank" href="https://www.linkedin.com/in/carvey-hor/"><div className="report-button"><i className="fa-solid fa-flag"></i> &nbsp; Report this listing</div></a>
+									{/* <div className="report-button"><i className="fa-solid fa-flag"></i> &nbsp; Report this listing</div> */}
 								</div>
 							</div>
 						</div>
