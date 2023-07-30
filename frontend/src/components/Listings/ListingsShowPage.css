@@ -589,7 +589,7 @@
 	color: white;
 	box-shadow: 1px 1.5px 1px 0.5px gray;
 	opacity: 0;
-	transition: all 0.5s;
+	transition: all 0.7s;
 }
 
 .reserve-btn-tooltip-visible {

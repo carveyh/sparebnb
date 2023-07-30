@@ -159,7 +159,7 @@ const ListingsShowPage = (props) => {
 			tooltip.classList.add('reserve-btn-tooltip-visible');
 			setTimeout(() => {
 				tooltip.classList.remove('reserve-btn-tooltip-visible');
-			}, 2000)
+			}, 1400)
 		}
 
 		if(!sessionUser || !buttonClickable) {
