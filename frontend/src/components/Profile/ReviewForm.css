@@ -294,6 +294,7 @@
 	100% {
 		opacity: 1;
 		color: green;
+		color: black;
 		/* text-shadow:  1px 1px 1px green,
 		 -1px 1px 1px green, 
 		 1px -1px 1px green,
