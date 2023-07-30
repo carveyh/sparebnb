@@ -61,6 +61,8 @@ const ListingsShowPage = (props) => {
 	const prevSleepBtn = useRef(null);
 	const nextSleepBtn = useRef(null);
 
+	const reserveBtn = useRef(null);
+
 	// const cleaningFee = parseInt(listing?.baseNightlyRate / 4);
 	const cleaningFee = ListingFees.cleaningFee(listing?.baseNightlyRate);
 	// const baseServiceFee = 14;
@@ -81,11 +83,21 @@ const ListingsShowPage = (props) => {
 	const handleChangeCheckIn = e => {
 		setCheckIn(e.target.value);
 		setDayAfter(daysApartCalculator(e.target.value, 2));
+		if(!checkOut) {
+			const inputToFocus = document.querySelector(".checkout-input");
+			inputToFocus.focus();
+			inputToFocus.showPicker();
+		};
 	}
 
 	const handleChangeCheckOut = e => {
 		setCheckOut(e.target.value);
 		setDayBefore(daysApartCalculator(e.target.value, -0));
+		if(!checkIn) {
+			const inputToFocus = document.querySelector(".checkin-input");
+			inputToFocus.focus();
+			inputToFocus.showPicker();
+		};
 	}
 
 	const daysApartCalculator = (oldDate, delta) => {
@@ -139,6 +151,30 @@ const ListingsShowPage = (props) => {
 	// 	e.preventDefault();
 
 	// }
+
+
+	const mouseDownReserveBtn = (e) => {
+		if(!sessionUser) {
+			const tooltip = document.querySelector('.reserve-btn-tooltip');
+			tooltip.classList.add('reserve-btn-tooltip-visible');
+			setTimeout(() => {
+				tooltip.classList.remove('reserve-btn-tooltip-visible');
+			}, 2000)
+		}
+
+		if(!sessionUser || !buttonClickable) {
+			return
+		}
+		e.preventDefault();
+		e.currentTarget.classList.add("mouse-down-reserve-btn");
+		document.addEventListener("mouseup", mouseUpReserveBtn) //add/rmv elisteners require exact reference...so separate function names
+	}
+
+	const mouseUpReserveBtn = (e) => {
+		document.removeEventListener("mouseup", mouseUpReserveBtn);
+		reserveBtn.current.classList.remove("mouse-down-reserve-btn");
+		if(e.target === reserveBtn.current || e.target.parentElement === reserveBtn.current) handleSubmit(e);
+	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -504,12 +540,17 @@ const ListingsShowPage = (props) => {
 											{numGuestsSelector()}
 										</div>
 										<br/>
-										<button type="submit" 
-											onClick={handleSubmit}
-											className={(sessionUser && buttonClickable) ? `reserve-button plain-text` : `disabled-reserve-button plain-text`}
-										>
-											{numNights() ? `Reserve` : `Check availability` }
-										</button>
+										<div className="reserve-button-container">
+											<button type="submit" 
+												ref={reserveBtn}
+												onClick={handleSubmit}
+												onMouseDown={mouseDownReserveBtn}
+												className={(sessionUser && buttonClickable) ? `reserve-button plain-text` : `disabled-reserve-button plain-text`}
+											>
+												{numNights() ? `Reserve` : `Check availability` }
+											</button>
+											<div className="reserve-btn-tooltip">Sign in to book your adventure</div>
+										</div>
 									</form>
 									{/* FORM - END */}
 									{/* FORM - END */}
@@ -518,11 +559,11 @@ const ListingsShowPage = (props) => {
 										<div className={`plain-text report-button-container ${bookingConfirmed ? "reservation-complete" : "reservation-incomplete"}`}>
 											{bookingConfirmed ? "Reservation complete!" : "What are you waiting for?"}
 										</div>
-										<div>${listing?.baseNightlyRate} x {numNights() ? numNights() : "-"} nights - ${baseTotalCost()}</div>
-										<div className="plain-text form-padding-top">Cleaning fee - ${cleaningFee}</div>
-										<div className="plain-text form-padding-top form-padding-bottom ">Sparebnb service fee - ${totalServiceFee()}</div>
+										<div className="reserve-form-price-line"><span>${listing?.baseNightlyRate} x {numNights() ? numNights() : "-"} nights</span> <span>${baseTotalCost()}</span></div>
+										<div className="reserve-form-price-line plain-text form-padding-top"><span>Cleaning fee</span> <span>${cleaningFee}</span></div>
+										<div className="reserve-form-price-line plain-text form-padding-top form-padding-bottom "><span>Sparebnb service fee</span> <span>${totalServiceFee()}</span></div>
 										<div className="plain-text horizontal-rule-top-border"></div>
-										<div className="total-before-taxes plain-text form-padding-top">Total before taxes - ${baseTotalCost() + cleaningFee + totalServiceFee()}</div>
+										<div className="reserve-form-price-line total-before-taxes plain-text form-padding-top"><span>Total before taxes</span> <span>${baseTotalCost() + cleaningFee + totalServiceFee()}</span></div>
 									</>}
 								</div>
 								<div className="report-button-container">

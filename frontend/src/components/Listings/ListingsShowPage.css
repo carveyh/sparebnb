@@ -570,21 +570,57 @@
 	z-index: 5;	
 }
 
+.reserve-button-container {
+	position: relative;
+}
+
+.reserve-btn-tooltip {
+	position: absolute;
+	top: -25%;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: pink;
+	/* width: 30%; */
+	/* height: 50px; */
+	white-space: nowrap;
+	padding: 7px;
+	border-radius: 7px;
+	background-color: rgb(63, 63, 63);
+	color: white;
+	box-shadow: 1px 1.5px 1px 0.5px gray;
+	opacity: 0;
+	transition: all 0.5s;
+}
+
+.reserve-btn-tooltip-visible {
+	opacity: 1;
+}
+
+
+
 .reserve-button {
+	width: 100%;
 	background-color: #FF0000;
 	color: white;
 	padding: 14px 24px;
 	border-radius: 8px;
 	border: none;
 	cursor: pointer;
+	transition: all 0.075s;
 }
 
 .disabled-reserve-button {
+	width: 100%;
 	background-color: rgb(221, 221, 221);
 	color: gray;
 	padding: 14px 24px;
 	border-radius: 8px;
 	border: none;
+}
+
+.mouse-down-reserve-btn {
+	transform-origin: center;
+	transform: scale(0.96);
 }
 
 .reservation-form {
@@ -639,8 +675,16 @@
 	/*  */
 }
 
+.reserve-form-price-line {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	font-weight: 300;
+}
+
 .total-before-taxes {
-	font-weight: 400;;
+	font-weight: 500;
 }
 
 .form-padding-top {
