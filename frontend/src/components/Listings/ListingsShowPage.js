@@ -551,6 +551,7 @@ const ListingsShowPage = (props) => {
 										</div>
 										<br/>
 										<div className="reserve-button-container">
+											<div className="reserve-btn-tooltip">Sign in to book your adventure</div>
 											<button type="submit" 
 												ref={reserveBtn}
 												onClick={handleSubmit}
@@ -559,7 +560,7 @@ const ListingsShowPage = (props) => {
 											>
 												{numNights() ? `Reserve` : `Check availability` }
 											</button>
-											<div className="reserve-btn-tooltip">Sign in to book your adventure</div>
+											
 										</div>
 									</form>
 									{/* FORM - END */}

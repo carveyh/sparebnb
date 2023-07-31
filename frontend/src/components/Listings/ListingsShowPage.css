@@ -588,12 +588,14 @@
 	background-color: rgb(63, 63, 63);
 	color: white;
 	box-shadow: 1px 1.5px 1px 0.5px gray;
-	opacity: 0;
 	transition: all 0.7s;
+	opacity: 0;
+	display: none;
 }
 
 .reserve-btn-tooltip-visible {
 	opacity: 1;
+	display: block;
 }
 
 
@@ -606,7 +608,7 @@
 	border-radius: 8px;
 	border: none;
 	cursor: pointer;
-	transition: transform 0.075s, background-color 0.5s;
+	transition: transform 0.075s, background-color 0.4s;
 }
 
 .reserve-button:hover {
@@ -614,6 +616,7 @@
 }
 
 .disabled-reserve-button {
+	cursor:not-allowed;
 	width: 100%;
 	background-color: rgb(221, 221, 221);
 	color: gray;
