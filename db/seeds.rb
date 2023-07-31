@@ -132,25 +132,26 @@ ApplicationRecord.transaction do
 	end
 
 	source_locations={
-		1 => [41.91522955731417, -73.88802726471754, "Charlottesville", "Virginia", "12572"],
-		2 => [42.66513204774507, -78.06544479352814, "Chicago", "Illinois", "14550"],
-		3 => [41.21157754129034, -73.58021349369768, "Pound Ridge", "New York", "10576"],
-		4 => [41.50823306029319, -74.00626147761515, "Bristol", "Rhode Island", "12550"],
-		5 => [37.73748882712852, -83.5330183878139, "Campton", "Kentucky", "41301"],
-		6 => [41.37693786980471, -72.20529517071341, "East Lyme", "Connecticut", "06333"],
-		7 => [39.19778303424643, -106.80651220066964, "Aspen", "Colorado", "81611"],
-		8 => [41.5987164906102, -93.61450370031326, "Des Moines", "Iowa", "50309"],
-		9 => [41.816036098034864, -124.22828943682804, "Crescent City", "California", "95531"],
-		10 => [42.29899929788915, -73.3481036281174, "West Stockbridge", "Massachusetts", "01262"],
-		11 => [42.29899929788915, -73.3481036281174, "Kerhonkson", "New York", "12446"],
-		12 => [44.36899664640086, -68.21771873960097, "Bar Harbor", "Maine", "04609"],
-		13 => [61.027534198510445, -149.72132122906788, "Anchorage", "Alaska", "99518"]
+		1 => [41.91522955731417, -73.88802726471754, "Charlottesville", "Virginia", "12572", "Architectural wonder in the woods"],
+		2 => [42.66513204774507, -78.06544479352814, "Chicago", "Illinois", "14550", "Lake Tent @ The Silverlaken Estate"],
+		3 => [41.21157754129034, -73.58021349369768, "Pound Ridge", "New York", "10576", "Guesthouse 1 Hour from NYC"],
+		4 => [41.50823306029319, -74.00626147761515, "Bristol", "Rhode Island", "12550", "Mid-century House"],
+		5 => [37.73748882712852, -83.5330183878139, "Campton", "Kentucky", "41301", "Pair of Mirrored Treehouses"],
+		6 => [41.37693786980471, -72.20529517071341, "East Lyme", "Connecticut", "06333", "Beachfronts & Balconies"],
+		7 => [39.19778303424643, -106.80651220066964, "Aspen", "Colorado", "81611", "Modern Chalet near skiing & amenities!"],
+		8 => [41.5987164906102, -93.61450370031326, "Des Moines", "Iowa", "50309", "Eiffel Tower Grant Retreat"],
+		9 => [41.816036098034864, -124.22828943682804, "Crescent City", "California", "95531", "Cats Castle"],
+		10 => [42.29899929788915, -73.3481036281174, "West Stockbridge", "Massachusetts", "01262", "Filomena House"],
+		11 => [42.29899929788915, -73.3481036281174, "Kerhonkson", "New York", "12446", "A-Frame in the Catskills"],
+		12 => [44.36899664640086, -68.21771873960097, "Bar Harbor", "Maine", "04609", "Downtown Studio"],
+		13 => [61.027534198510445, -149.72132122906788, "Anchorage", "Alaska", "99518", "Glass Igloo"]
 	}
 
 	13.times do |i|
 		Listing.create!({
 			title: 
-				Faker::Adjective.positive.capitalize() + ' ' + Faker::Adjective.positive.capitalize() + ' ' + (%w(Apartment House Dwelling Mansion Getaway Resort Tent ) + ['Parking Lot', 'Suspicious Back Alley', 'Port-a-Potty', 'Coding Bootcamp', 'Cardboard Box', "Wendy\'s Dumpster"]).sample + (((0..1).to_a.sample % 2 == 0) ? (' ' + 'Inspired by' + ' ' + Faker::Movie.title) : ""),
+				# Faker::Adjective.positive.capitalize() + ' ' + Faker::Adjective.positive.capitalize() + ' ' + (%w(Apartment House Dwelling Mansion Getaway Resort Tent ) + ['Parking Lot', 'Suspicious Back Alley', 'Port-a-Potty', 'Coding Bootcamp', 'Cardboard Box', "Wendy\'s Dumpster"]).sample + (((0..1).to_a.sample % 2 == 0) ? (' ' + 'Inspired by' + ' ' + Faker::Movie.title) : ""),
+				Faker::Adjective.positive.capitalize() + ' ' + Faker::Adjective.positive.capitalize() + ' ' + source_locations[i + 1][5],
 			host_id: (1..12).to_a.sample,
 			# latitude: rand(-90.0..90.0).truncate(6),
 			latitude: source_locations[i + 1][0],
@@ -165,7 +166,7 @@ ApplicationRecord.transaction do
 			max_guests: (1..6).to_a.sample,
 			description: Faker::Movies::HarryPotter.quote + ' ' + Faker::Movies::HarryPotter.quote + ' ' + Faker::Movies::HarryPotter.quote + ' ' + Faker::Movies::HarryPotter.quote + ' ',
 			base_nightly_rate: (59..759).to_a.sample,
-			category: %w(amazing-pools rooms beachfront).sample
+			category: %w(amazing-pools rooms beachfronts).sample
 			# category: %w(amazing-pools rooms beachfront treehouses adapted mountains trending mansions majestic arctic woods govt-secret private-escapes home-theater studios gaming-dens fitness creme-de-la-creme green rustic urban tornado camps 420-friendly).sample
 
 		})
@@ -173,8 +174,8 @@ ApplicationRecord.transaction do
 
 	Listing.find(4).update(category: "amazing-pools")
 	
-	Listing.find(2).update(category: "beachfront")
-	Listing.find(6).update(category: "beachfront")
+	Listing.find(2).update(category: "beachfronts")
+	Listing.find(6).update(category: "beachfronts")
 	
 	Listing.find(1).update(category: "rooms")
 	Listing.find(3).update(category: "rooms")
