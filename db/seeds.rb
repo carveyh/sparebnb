@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 require 'open-uri'
-require 'aws-sdk-s3'
+# require 'aws-sdk-s3'
 
 ApplicationRecord.transaction do
 	puts "Destroying tables..."
