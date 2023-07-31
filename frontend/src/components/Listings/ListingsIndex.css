@@ -173,15 +173,36 @@
 /* MAP INTERACTION - START */
 /* MAP INTERACTION - START */
 
-.index-map-toggle-container {
+.index-map-toggle-container-outer {
+	--toggle-map-btn-height: 48px;
 	position: fixed;
-	width: 50px;
-	height: 50px;
-	background-color: pink;
-	top: 0px;
-	bottom: 200px;
-	left: 0px;
+	bottom: calc(137px - var(--toggle-map-btn-height));
+	left: 50%;
+	transform: translateX(-50%);
+}
 
+.index-map-toggle-container {
+	/* width: 132.45px; */
+	height: var(--toggle-map-btn-height);
+	background-color: pink;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	background-color: #222222;
+	box-sizing: border-box;
+	padding: 14px 21px;
+	border-radius: 24px;
+	font-size: 14px;
+	font-weight: 400;
+	cursor: pointer;
+	transform-origin: 0%, 0%;
+	transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.index-map-toggle-container:hover {
+	transform: scale(1.04);
+	box-shadow: 0 0 0 1px transparent, 0 0 0 4px transparent, 0 6px 16px rgba(0,0,0,0.12);
 }
 
 /* MAP INTERACTION - END */
