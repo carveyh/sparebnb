@@ -1,10 +1,10 @@
 import './SpareMap.css';
 
-import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, Marker, useLoadScript, Circle } from "@react-google-maps/api";
 import { useMemo } from "react";
 // import "./App.css";
 
-const SpareMap = ({center={ lat: 18.52043, lng: 73.856743 }, zoom=12}) => {
+const SpareMap = ({center={ lat: 18.52043, lng: 73.856743 }, zoom=12}, listings) => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
   });
@@ -22,18 +22,27 @@ const SpareMap = ({center={ lat: 18.52043, lng: 73.856743 }, zoom=12}) => {
         >
 					<Marker 
 						position={center} 
-						// icon={`/icon_small.png`}
-						// icon={"https://i.imgur.com/DekpBQl.png"}
 						options={{
 							icon:{
 								url: "https://i.imgur.com/DekpBQl.png",
-								scaledSize: new window.google.maps.Size(40, 40),
-								anchor: new window.google.maps.Point(-20,40)
+								scaledSize: new window.google.maps.Size(35, 35),
+								anchor: new window.google.maps.Point(-0,35)
 							},
 						}}
-						
-						
 					/>
+					{/* <Circle
+					radius={1200}
+					center={center}
+					onMouseOver={() => console.log('mouseover')}
+					onClick={() => console.log('click')}
+					onMouseOut={() => console.log('mouseout')}
+					// strokeColor='transparent'
+					// strokeOpacity={0}
+					// strokeWeight={5}
+					// fillColor='#FF0000'
+					// fillOpacity={0.2}
+				/> */}
+
 				</GoogleMap>
       )}
     </div>

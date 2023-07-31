@@ -3,6 +3,7 @@
 }
 
 .grid-container-container {
+	position: relative;
 	display: block;
 	padding: 0px 80px;
 	padding-bottom: 10px;
@@ -161,15 +162,6 @@
   /* background-color: #5bbdfa; */
 }
 
-/* .grid-item::before {
-  content: 'Listing';
-  position: absolute;
-  font-size: 25px;
-  font-weight: bold;
-  top: 10px;
-  left: 15px;
-} */
-
 .grid-item::after {
   position: absolute;
   font-size: 25px;
@@ -177,3 +169,20 @@
   right: 15px;
   font-weight: bold;
 }
+
+/* MAP INTERACTION - START */
+/* MAP INTERACTION - START */
+
+.index-map-toggle-container {
+	position: fixed;
+	width: 50px;
+	height: 50px;
+	background-color: pink;
+	top: 0px;
+	bottom: 200px;
+	left: 0px;
+
+}
+
+/* MAP INTERACTION - END */
+/* MAP INTERACTION - END */

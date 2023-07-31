@@ -82,6 +82,7 @@ const ListingsIndex = ({filter}) => {
 					{listingCards}
 				</AnimatePresence>
 			</div>
+			<div className="index-map-toggle-container"></div>
 		</div>
 		// </>
 	)
