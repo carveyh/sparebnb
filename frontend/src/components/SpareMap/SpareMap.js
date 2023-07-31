@@ -1,13 +1,83 @@
 import './SpareMap.css';
 
-import { GoogleMap, Marker, useLoadScript, Circle } from "@react-google-maps/api";
+import { GoogleMap, Marker, useLoadScript, InfoWindow, Circle } from "@react-google-maps/api";
 import { useMemo } from "react";
+import { useState } from 'react';
 
-const SpareMap = ({center={ lat: 18.52043, lng: 73.856743 }, zoom=12, listings}) => {
+const SpareMap = ({center={ lat: 40.75293464767648, lng: -73.97873537480417 }, zoom=12, listings}) => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
   });
   const centerMemo = useMemo(() => (center), []);
+  const [mapRef, setMapRef] = useState();
+  const [isOpen, setIsOpen] = useState(false);
+  const [infoWindowData, setInfoWindowData] = useState();
+
+	const listingsMarkers = [];
+	let spareIcon;
+	if(isLoaded) {
+		spareIcon = {
+			url: "https://i.imgur.com/DekpBQl.png",
+			scaledSize: new window.google.maps.Size(35, 35),
+			anchor: new window.google.maps.Point(-0,35)
+		}
+		// // If listings index, set the boundaries of the map accordingly and add markers.
+		// if(listings){
+		// 	listings.forEach((listing, idx) => {
+		// 		listingsMarkers.push(
+		// 			<Marker 
+		// 				key={idx}
+		// 				position={{lat: listing.latitude, lng: listing.longitude}} 
+		// 				options={{
+		// 					icon:spareIcon,
+		// 				}}
+		// 			/>	
+		// 		)
+		// 	})
+		// }
+	}
+
+			// If listings index, set the boundaries of the map accordingly and add markers.
+			if(listings){
+				listings.forEach((listing, idx) => {
+					listingsMarkers.push(
+						<Marker 
+							key={idx}
+							position={{lat: listing.latitude, lng: listing.longitude}} 
+							options={{
+								icon:spareIcon,
+							}}
+						/>	
+					)
+				})
+			}
+
+	const onLoad = (map) => {
+		setMapRef(map);
+		if(listings){
+			const bounds = new window.google.maps.LatLngBounds();
+			// listings?.forEach(({ latitude, longitude }) => {
+			listings?.forEach((listing, idx) => {
+				bounds.extend({ lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) })
+				listingsMarkers.push(
+					<Marker 
+						key={idx}
+						position={{lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude)}} 
+						options={{
+							icon:spareIcon,
+						}}
+					/>	
+				)
+			});
+			map.fitBounds(bounds);
+		}
+	}
+
+  const handleMarkerClick = (id, lat, lng, address) => {
+    mapRef?.panTo({ lat, lng });
+    setInfoWindowData({ id, address });
+    setIsOpen(true);
+  };
 
   return (
     <div className="overall-map-container">
@@ -18,17 +88,60 @@ const SpareMap = ({center={ lat: 18.52043, lng: 73.856743 }, zoom=12, listings})
           mapContainerClassName={listings ? "map-container-listings-index" : "map-container-listing-show"}
           center={centerMemo}
           zoom={zoom}
+					onLoad={onLoad}
         >
-					<Marker 
-						position={center} 
-						options={{
-							icon:{
-								url: "https://i.imgur.com/DekpBQl.png",
-								scaledSize: new window.google.maps.Size(35, 35),
-								anchor: new window.google.maps.Point(-0,35)
-							},
-						}}
-					/>
+					{listings ? 
+						<>
+							{/* {listingsMarkers} */}
+
+
+							{listings.map(({ address, latitude, longitude }, ind) => (
+            <Marker
+              key={ind}
+              position={{ lat: parseFloat(latitude), lng: parseFloat(longitude) }}
+              onClick={() => {
+                handleMarkerClick(ind, parseFloat(latitude), parseFloat(longitude), address);
+              }}
+							options={{
+								icon:spareIcon,
+							}}
+            >
+              {isOpen && infoWindowData?.id === ind && (
+                <InfoWindow
+                  onCloseClick={() => {
+                    setIsOpen(false);
+                  }}
+                >
+                  <h3>{infoWindowData.address}</h3>
+                </InfoWindow>
+              )}
+            </Marker>
+          ))}
+
+
+
+
+
+						</>
+						: 
+						<>
+							<Marker 
+								position={center} 
+								options={{
+									icon:spareIcon,
+								}}
+							/>	
+						</>
+					}
+					
+				</GoogleMap>
+      )}
+    </div>
+  );
+};
+
+export default SpareMap;
+
 					{/* <Circle
 					radius={1200}
 					center={center}
@@ -40,12 +153,5 @@ const SpareMap = ({center={ lat: 18.52043, lng: 73.856743 }, zoom=12, listings})
 					// strokeWeight={5}
 					// fillColor='#FF0000'
 					// fillOpacity={0.2}
-				/> */}
-
-				</GoogleMap>
-      )}
-    </div>
-  );
-};
-
-export default SpareMap;
+					/>
+					*/}
