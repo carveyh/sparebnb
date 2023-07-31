@@ -42,6 +42,7 @@ const ListingsShowPage = (props) => {
 	const [bookingConfirmed, setBookingConfirmed] = useState(false);
 	const [buttonClickable, setButtonClickable] = useState(true);
 	const [currentSleepPhotoNum, setCurrentSleepPhotoNum] = useState(1);
+	const [disabledToolTipRunning, setDisabledToolTipRunning] = useState(false);
 
 	// Review modal
 	const [showReviewsModal, setShowReviewsModal] = useState(false);
@@ -163,12 +164,18 @@ const ListingsShowPage = (props) => {
 
 
 	const mouseDownReserveBtn = (e) => {
-		if(!sessionUser) {
+		if(!sessionUser && !disabledToolTipRunning) {
+			setDisabledToolTipRunning(true)
 			const tooltip = document.querySelector('.reserve-btn-tooltip');
 			tooltip.classList.add('reserve-btn-tooltip-visible');
 			setTimeout(() => {
-				tooltip.classList.remove('reserve-btn-tooltip-visible');
+				tooltip.classList.add('reserve-btn-tooltip-recede');
 			}, 1400)
+			setTimeout(() => {
+				tooltip.classList.remove('reserve-btn-tooltip-visible');
+				tooltip.classList.remove('reserve-btn-tooltip-recede');
+				setDisabledToolTipRunning(false)
+			}, 2100)
 		}
 
 		if(!sessionUser || !buttonClickable) {
