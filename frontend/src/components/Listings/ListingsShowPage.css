@@ -606,7 +606,11 @@
 	border-radius: 8px;
 	border: none;
 	cursor: pointer;
-	transition: all 0.075s;
+	transition: transform 0.075s, background-color 0.5s;
+}
+
+.reserve-button:hover {
+	background-color: #d00000;
 }
 
 .disabled-reserve-button {
