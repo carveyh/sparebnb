@@ -87,21 +87,26 @@ const ListingsShowPage = (props) => {
 	const handleChangeCheckIn = e => {
 		setCheckIn(e.target.value);
 		setDayAfter(daysApartCalculator(e.target.value, 2));
-		if(!checkOut) {
-			const inputToFocus = document.querySelector(".checkout-input");
-			inputToFocus.focus();
-			inputToFocus.showPicker();
-		};
+
+		// Not working great, if you click up and down on month selector the date input automatically selects a date,
+		// this will cause shift in focus
+		// if(!checkOut) {
+		// 	const inputToFocus = document.querySelector(".checkout-input");
+		// 	inputToFocus.focus();
+		// 	inputToFocus.showPicker();
+		// };
 	}
 
 	const handleChangeCheckOut = e => {
 		setCheckOut(e.target.value);
 		setDayBefore(daysApartCalculator(e.target.value, -0));
-		if(!checkIn) {
-			const inputToFocus = document.querySelector(".checkin-input");
-			inputToFocus.focus();
-			inputToFocus.showPicker();
-		};
+		// Not working great, if you click up and down on month selector the date input automatically selects a date,
+		// this will cause shift in focus
+		// if(!checkIn) {
+		// 	const inputToFocus = document.querySelector(".checkin-input");
+		// 	inputToFocus.focus();
+		// 	inputToFocus.showPicker();
+		// };
 	}
 
 	const daysApartCalculator = (oldDate, delta) => {
@@ -535,7 +540,7 @@ const ListingsShowPage = (props) => {
 													<input className="checkout-input" 
 														type="date"
 														value={checkOut}
-														min={checkIn ? dayAfter : null}
+														min={checkIn ? dayAfter : daysApartCalculator(minDate(), 2)}
 														onChange={handleChangeCheckOut}
 														required
 													/>
