@@ -23,6 +23,7 @@ import { ReviewsModal } from "./ReviewsModal";
 import { Modal } from "../../context/Modal";
 import * as ListingFees from "./ListingFees"
 import { Redirect } from "react-router-dom";
+import Map from "../SpareMap/SpareMap.js"
 
 const ListingsShowPage = (props) => {
 	const dispatch = useDispatch();
@@ -72,13 +73,16 @@ const ListingsShowPage = (props) => {
 		// Add this line to try to always be at top of a page when navigationg from a dff one
 		window.scrollTo(0, 0);
 		dispatch(fetchListing(listingId))
-			.then(() => dispatch(fetchResReviewsForListing(listingId)))
+			.then(() => {
+				
+				dispatch(fetchResReviewsForListing(listingId))
+			})
 			.catch(() => {
 				// 
 			})
 	}, [])
 
-	if(!listing) return <Redirect to="/" /> 
+	
 
 	const handleChangeCheckIn = e => {
 		setCheckIn(e.target.value);
@@ -159,7 +163,7 @@ const ListingsShowPage = (props) => {
 			tooltip.classList.add('reserve-btn-tooltip-visible');
 			setTimeout(() => {
 				tooltip.classList.remove('reserve-btn-tooltip-visible');
-			}, 2000)
+			}, 1400)
 		}
 
 		if(!sessionUser || !buttonClickable) {
@@ -299,6 +303,7 @@ const ListingsShowPage = (props) => {
 	// LOGIC FOR SLEEP PHOTOS CAROUSEL - END
 	// LOGIC FOR SLEEP PHOTOS CAROUSEL - END
 
+	// if(!listing) return <Redirect to="/" /> 
 	if(!listing || !host) return null;
 
 	return (
@@ -567,7 +572,8 @@ const ListingsShowPage = (props) => {
 									</>}
 								</div>
 								<div className="report-button-container">
-									<div className="report-button"><i className="fa-solid fa-flag"></i> &nbsp; Report this listing</div>
+									<a target="_blank" href="https://www.linkedin.com/in/carvey-hor/"><div className="report-button"><i className="fa-solid fa-flag"></i> &nbsp; Report this listing</div></a>
+									{/* <div className="report-button"><i className="fa-solid fa-flag"></i> &nbsp; Report this listing</div> */}
 								</div>
 							</div>
 						</div>
@@ -612,8 +618,13 @@ const ListingsShowPage = (props) => {
 			{/* REVIEWS - END */}
 
 				<div className="horizontal-rule-top-border plain-text">
-					<br/><br/><br/><br/><br/>
-					<div>Maps</div>
+					<div className="listing-show-map-header heading-2">
+						Where you'll be
+					</div>
+					<div className="listing-show-map-subheader">
+						{`${listing.city}, ${listing.state}, United States`}
+					</div>
+					<Map center={{lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) }}/>
 					<br/><br/><br/><br/><br/>
 				</div>
 				<div className="horizontal-rule-top-border plain-text">

@@ -589,7 +589,7 @@
 	color: white;
 	box-shadow: 1px 1.5px 1px 0.5px gray;
 	opacity: 0;
-	transition: all 0.5s;
+	transition: all 0.7s;
 }
 
 .reserve-btn-tooltip-visible {
@@ -744,3 +744,19 @@
 	padding-bottom: 0px;
 	margin-bottom: 48px;
 }
+
+/* MAPS */
+/* MAPS */
+
+.listing-show-map-header {
+	padding-top: 48px;
+	padding-bottom: 24px;
+	margin-bottom: 0px;
+}
+
+.listing-show-map-subheader {
+	padding-bottom: 24px;
+}
+
+/* MAPS */
+/* MAPS */

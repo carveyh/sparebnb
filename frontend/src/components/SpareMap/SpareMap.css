@@ -1,0 +1,8 @@
+.overall-map-container {
+	/*  */
+}
+
+.map-container-listing-show {
+	width: min(1120px, 100%);
+	height: 480px;
+}

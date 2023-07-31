@@ -63,7 +63,7 @@ export const ReviewForm = ({reservation, listing, setShowReviewForm}) => {
 			setReviewComplete(true)
 			setTimeout(() => {
 				setShowReviewForm(false)
-			}, 1500)
+			}, 1700)
 		})
 		.catch(async (res) => {
 			let data;
