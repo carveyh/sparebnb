@@ -1,55 +1,120 @@
 import './SpareMap.css';
 
-import React from 'react'
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
+import { useMemo } from "react";
+// import "./App.css";
 
-const containerStyle = {
-  width: '1120px',
-  height: '480px'
-};
-
-// const center = {
-//   lat: -3.745,
-//   lng: -38.523
-// };
-
-const SpareMap = ({center}) => {
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
+const SpareMap = ({center={ lat: 18.52043, lng: 73.856743 }, zoom=12}) => {
+  const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
   });
+  const centerMemo = useMemo(() => (center), []);
 
-  const [map, setMap] = React.useState(null)
+  return (
+    <div className="overall-map-container">
+      {!isLoaded ? (
+        <h1>Loading...</h1>
+      ) : (
+        <GoogleMap
+          mapContainerClassName="map-container-listing-show"
+          center={centerMemo}
+          zoom={zoom}
+        >
+					<Marker 
+						position={center} 
+						// icon={`/icon_small.png`}
+						// icon={"https://i.imgur.com/DekpBQl.png"}
+						options={{
+							icon:{
+								url: "https://i.imgur.com/DekpBQl.png",
+								scaledSize: new window.google.maps.Size(40, 40),
+								anchor: new window.google.maps.Point(-20,40)
+							},
+						}}
+						
+						
+					/>
+				</GoogleMap>
+      )}
+    </div>
+  );
+};
 
-  const onLoad = React.useCallback(function callback(map) {
-    // This is just an example of getting and using the map instance!!! don't just blindly copy!
-    const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
+export default SpareMap;
 
-    setMap(map)
-  }, [])
 
-  const onUnmount = React.useCallback(function callback(map) {
-    setMap(null)
-  }, [])
 
-  return isLoaded ? (
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        defaultZoom={3}
-				// minZoom={2}
-    		// maxZoom={16}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
-      >
-        { /* Child components, such as markers, info windows, etc. */ }
-        <></>
-      </GoogleMap>
-  ) : <></>
-}
 
-export default React.memo(SpareMap)
+// WORKING VERSION 1 ---- START
+// WORKING VERSION 1 ---- START
+// WORKING VERSION 1 ---- START
+
+
+// import React from 'react'
+// import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+
+// const containerStyle = {
+//   width: '1120px',
+//   height: '480px'
+// };
+
+// // const center = {
+// //   lat: -3.745,
+// //   lng: -38.523
+// // };
+
+// const SpareMap = ({center}) => {
+//   const { isLoaded } = useJsApiLoader({
+//     id: 'google-map-script',
+//     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
+//   });
+
+//   const [map, setMap] = React.useState(null)
+
+//   const onLoad = React.useCallback(function callback(map) {
+//     // This is just an example of getting and using the map instance!!! don't just blindly copy!
+//     const bounds = new window.google.maps.LatLngBounds(center);
+//     map.fitBounds(bounds);
+
+//     setMap(map)
+//   }, [])
+
+//   const onUnmount = React.useCallback(function callback(map) {
+//     setMap(null)
+//   }, [])
+
+//   return isLoaded ? (
+//       <GoogleMap
+//         mapContainerStyle={containerStyle}
+//         center={center}
+//         defaultZoom={3}
+// 				// minZoom={2}
+//     		// maxZoom={16}
+//         onLoad={onLoad}
+//         onUnmount={onUnmount}
+//       >
+//         { /* Child components, such as markers, info windows, etc. */ }
+//         <></>
+//       </GoogleMap>
+//   ) : <></>
+// }
+
+// export default React.memo(SpareMap)
+
+
+
+// WORKING VERSION 1 ---- END
+// WORKING VERSION 1 ---- END
+// WORKING VERSION 1 ---- END
+
+
+
+
+
+
+
+
+
 
 // import "./SpareMap.css";
 // import { Wrapper } from "@googlemaps/react-wrapper";
