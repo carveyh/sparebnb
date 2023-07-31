@@ -83,7 +83,7 @@ const SpareMap = ({center={ lat: 40.75293464767648, lng: -73.97873537480417 }, z
   return (
     <div className="overall-map-container">
       {!isLoaded ? (
-        <h1>Loading...</h1>
+        <></>
       ) : (
         <GoogleMap
           mapContainerClassName={listings ? "map-container-listings-index" : "map-container-listing-show"}
