@@ -594,10 +594,33 @@
 }
 
 .reserve-btn-tooltip-visible {
-	opacity: 1;
+	/* opacity: 1; */
 	display: block;
+	animation: fadeInReserveToolTip 0.7s linear 0s 1 forwards normal;
 }
 
+.reserve-btn-tooltip-recede {
+	display: block;
+	animation: fadeInReserveToolTipReverse 0.7s linear 0s 1 forwards normal;
+}
+
+@keyframes fadeInReserveToolTip {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeInReserveToolTipReverse {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
 
 
 .reserve-button {
