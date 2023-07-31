@@ -1,0 +1,28 @@
+.map-info-card-container {
+	/* position: relative; */
+	/* top: 0px; */
+	/* width: 50px; */
+	/* height: 50px; */
+	/* background-color: pink; */
+	/* margin: 0px -8px; */
+	box-sizing: border-box;
+	font-size: 18px;
+	display: flex;
+	flex-direction: column;
+	width: 300px;
+
+}
+
+.map-info-title {
+	overflow-y: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.info-container {
+	position: relative;
+}
+
+.map-marker {
+	position: relative;
+}
