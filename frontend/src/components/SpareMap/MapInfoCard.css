@@ -6,21 +6,36 @@
 	/* background-color: pink; */
 	/* margin: 0px -8px; */
 	box-sizing: border-box;
-	font-size: 18px;
 	display: flex;
 	flex-direction: column;
-	width: 300px;
-
+	width: 225px;
+	font-size: 16px;
 }
 
 .map-info-title {
 	overflow-y: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	font-size: 16px;
+	font-weight: 400;
+	/* padding-bottom: 10px; */
 }
 
-.info-container {
-	position: relative;
+.map-info-pricing-rating {
+	padding-bottom: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.map-rating-box {
+	display: flex;
+	align-items: center;
+}
+
+.star-icon-index-map {
+	font-size: 0.75em;
+	margin-right: 4px;
 }
 
 .map-marker {
