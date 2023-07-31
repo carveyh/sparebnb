@@ -9,6 +9,7 @@ import { fetchListings } from "../../store/listings";
 import { Route, Switch } from "react-router-dom";
 import ListingsShowPage from "./ListingsShowPage";
 import Testing from "../Testing";
+import SpareMap from "../SpareMap/SpareMap";
 
 const ListingsFilterCarousel = ({setFilter}) => {
 	
@@ -120,33 +121,34 @@ const ListingsMain = () => {
 	// const sessionUser = useSelector(state => state.session?.user )
 	const dispatch = useDispatch();
 	const [filter, setFilter] = useState(null);
+	const [showIndexMap, setShowIndexMap] = useState(false);
+
 	useEffect(() => {
 		dispatch(fetchListings())
 	}, [])
 	
-	const listings = useSelector(state => state.entities?.listings)
+	const listings = useSelector(state => state.entities?.listings ? state.entities.listings : {})
+	let filteredListings;
+	if(filter) {
+		filteredListings = Object.values(listings).filter(listing => listing.category === filter)
+	} else {
+		filteredListings = Object.values(listings)
+	}
+
 	return (
 		<>
 			<ListingsFilterCarousel setFilter={setFilter}/>
-			<ListingsIndex filter={filter} />
+			{showIndexMap ? 
+				<SpareMap listings={filteredListings} />
+			:
+			<>
+				<ListingsIndex filter={filter} />
+			</>
+			}
+			<div className="index-map-toggle-container-outer">
+				<div onClick={e => setShowIndexMap(old => !old)} className="index-map-toggle-container"><span>{showIndexMap ? "Show list" : "Show map"}</span><span>&nbsp;&nbsp;<i class={`fa-solid ${showIndexMap ? `fa-list-ul` : `fa-map` }`}></i></span></div>
+			</div>
 
-			{/* <Switch>
-				<Route exact path={`/${listingId}`}>
-				<Route exact path={`/show`}>
-					<ListingsShowPage />
-				</Route>
-				<Route>
-					<Testing />
-					<ListingsFilterCarousel/>
-					<ListingsIndex />
-				</Route>
-			</Switch> */}
-
-
-
-			{/* <div className="listings-main">
-          <img src={sessionUser.photoUrl} />  
-			</div> */}
 		</>
 	)
 }
