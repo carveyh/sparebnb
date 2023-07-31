@@ -3,6 +3,7 @@ import './SpareMap.css';
 import { GoogleMap, Marker, useLoadScript, InfoWindow, Circle } from "@react-google-maps/api";
 import { useMemo } from "react";
 import { useState } from 'react';
+import { MapInfoCard } from './MapInfoCard';
 
 const SpareMap = ({center={ lat: 40.75293464767648, lng: -73.97873537480417 }, zoom=12, listings}) => {
   const { isLoaded } = useLoadScript({
@@ -95,27 +96,33 @@ const SpareMap = ({center={ lat: 40.75293464767648, lng: -73.97873537480417 }, z
 							{/* {listingsMarkers} */}
 
 
-							{listings.map(({ address, latitude, longitude }, ind) => (
-            <Marker
-              key={ind}
-              position={{ lat: parseFloat(latitude), lng: parseFloat(longitude) }}
-              onClick={() => {
-                handleMarkerClick(ind, parseFloat(latitude), parseFloat(longitude), address);
-              }}
-							options={{
-								icon:spareIcon,
-							}}
-            >
-              {isOpen && infoWindowData?.id === ind && (
-                <InfoWindow
-                  onCloseClick={() => {
-                    setIsOpen(false);
-                  }}
-                >
-                  <h3>{infoWindowData.address}</h3>
-                </InfoWindow>
-              )}
-            </Marker>
+							{listings.map((listing, ind) => (
+								<Marker
+									className="map-marker"
+									key={ind}
+									position={{ lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) }}
+									onClick={() => {
+										handleMarkerClick(ind, parseFloat(listing.latitude), parseFloat(listing.longitude), listing.address);
+									}}
+									options={{
+										icon:spareIcon,
+									}}
+								>
+									{isOpen && infoWindowData?.id === ind && (
+										<div className='info-container'>
+										<InfoWindow
+											onCloseClick={() => {
+												setIsOpen(false);
+											}}
+											position={{ lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) }}
+										>
+											<MapInfoCard listing={listing}/>
+											{/* <h3>{infoWindowData.address}</h3> */}
+										</InfoWindow>
+										
+										</div>
+									)}
+								</Marker>
           ))}
 
 
