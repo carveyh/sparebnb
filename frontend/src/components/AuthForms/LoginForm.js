@@ -67,36 +67,43 @@ const LoginForm = ({setShowLogInModal}) => {
 	
 	return (
 		<div className="login-form">
-			<form>
-				<ul>
-					{errors.map(error => <li key={error}>{error}</li>)}
-				</ul>
-				<label>Email (or phone):&nbsp;
-					<input
-						id="credential-input"
-						type="text"
-						value={credential}
-						onChange={handleCredential}
-						required
-					/>
-				</label>
-				<br />
-				<br />
-				<label>Password:&nbsp;
-					<input
-						type="password"
-						value={password}
-						onChange={handlePassword}
-						required
-					/>
-				</label>
-				<br />
-				<br />
-				<input type="submit" value="Login" onClick={handleSubmit} />
-				<br />
-				<br />
-				<input type="submit" value="Demo Login" onClick={loginDemo} />
-			</form>
+			<header className="auth-form-header">
+				<button autoFocus className='x-close' onClick={e => setShowLogInModal(false)}><i className="fa-solid fa-x"></i></button>
+				{/* <div className="auth-form-title">Finish signing up</div> */}
+				<div className="auth-form-title">Log in</div>
+			</header>
+			<div className="auth-form-body">
+				<form>
+					<ul>
+						{errors.map(error => <li key={error}>{error}</li>)}
+					</ul>
+					<label>Email (or phone):&nbsp;
+						<input
+							id="credential-input"
+							type="text"
+							value={credential}
+							onChange={handleCredential}
+							required
+						/>
+					</label>
+					<br />
+					<br />
+					<label>Password:&nbsp;
+						<input
+							type="password"
+							value={password}
+							onChange={handlePassword}
+							required
+						/>
+					</label>
+					<br />
+					<br />
+					<input type="submit" value="Login" onClick={handleSubmit} />
+					<br />
+					<br />
+					<input type="submit" value="Demo Login" onClick={loginDemo} />
+				</form>
+			</div>
 		</div>
 	)
 }
