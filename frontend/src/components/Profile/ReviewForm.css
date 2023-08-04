@@ -149,6 +149,7 @@
 
 .form-incomplete-notice {
 	color: red;
+	color: rgb(202, 37, 0);
 	font-size: 14px;
 	font-weight: 300;
 }

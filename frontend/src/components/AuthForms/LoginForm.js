@@ -8,7 +8,7 @@ import { useRef } from 'react';
 
 const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 	useEffect(() => {
-		document.querySelector(".x-close").focus({focusVisible:true, preventScroll:false})
+		// document.querySelector(".x-close").focus({focusVisible:true, preventScroll:false})
 	}, [])
 	const dispatch = useDispatch();
 	
@@ -86,7 +86,7 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 		setShowPassword(false);
 		setCredential('demo@user.io');
 		setPassword('dprian83');
-		const user = {email:'demo@user.io', password:'dprian83'}
+		const user = {credential:'demo@user.io', password:'dprian83'}
 		dispatch(loginUser(user))
 			.then(() => {
 				setShowLogInModal(false)
@@ -111,20 +111,22 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 				<div className="auth-form-title">Log in</div>
 			</header>
 			<div className="auth-form-body">
-				<form onSubmit={e => e.preventDefault()}>
+				<form autoComplete='off' onSubmit={e => e.preventDefault()}>
 					<div className='name-entry-div'>
 						<div className='first-name-box'>
 							<label className='name-entry-label'>
 								<div className='floating-placeholder-container'>
 									<div className={`floating-placeholder ${credential === "" ? "" : "input-placeholder-not-empty" }`}>Email</div>
 									<input
-										id="first-name-input"
+										// id="first-name-input"
+										// className={`email ${(formIncomplete && email === "") && `session-error-input`}`}
+										className={`email`}
 										type="text"
 										value={credential}
 										onChange={handleCredential}
 										onFocus={e => setFocusInput("credential")}
 										onBlur={e =>setFocusInput(null)}
-										placeholder={(focusInput === "credential") ? "First name" : ""}
+										placeholder={(focusInput === "credential") ? "Email" : ""}
 										placeholderColor="green"
 										required
 									/>
@@ -135,9 +137,11 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 							<label className='name-entry-label'>
 								<div className='floating-placeholder-container'>
 									<div className={`floating-placeholder ${password === "" ? "" : "input-placeholder-not-empty" }`}>Password</div>
-									<button type="button" className='show-pw-toggle' onClick={e => setShowPassword(old => !old)}>{showPassword ? 'Hide' : "Show"}</button>
+									
 									<input
-										id="last-name-input"
+										// id="last-name-input"
+										// className={`password ${(formIncomplete && initialBadPassword) && `session-error-input`}`}
+										className={`password`}
 										type={showPassword ? `text` : `password`}
 										value={password}
 										onChange={handlePassword}
@@ -145,7 +149,9 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 										onBlur={e =>setFocusInput(null)}
 										placeholder={(focusInput === "password") ? "Last name" : ""}
 										required
+										maxLength={20}
 									/>
+									<button type="button" className='show-pw-toggle' onClick={e => setShowPassword(old => !old)}>{showPassword ? 'Hide' : "Show"}</button>
 								</div>
 							</label>
 						</div>
@@ -153,10 +159,10 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 					{/* <div className='input-tooltip'>Make sure it matches the name on your government ID.</div> */}
 
 					<div className='auth-session-btns'>
-						<input className="session-btn" type="text" ref={loginRef} value="Log in" onMouseDown={mouseDownAuthBtn} onMouseUp={e => e.preventDefault()}/>
-						<input className="session-btn" type="text" ref={demoLoginRef} value="Demo Log in" onMouseDown={mouseDownAuthBtn} />
+						<button className="session-btn" type="button" ref={loginRef} onMouseDown={mouseDownAuthBtn} onMouseUp={e => e.preventDefault()}>Log in</button>
+						<button className="session-btn" type="button" ref={demoLoginRef} onMouseDown={mouseDownAuthBtn} >Demo log in</button>
 					</div>
-					<div className='signup-tooltip'>
+					<div className='signup-tooltip switch-auth-modal'>
 						Don't have an account? <span className="signup-link" ref={signupBtnRef} onMouseDown={mouseDownAuthBtn} >Sign up</span>
 					</div>
 				</form>
