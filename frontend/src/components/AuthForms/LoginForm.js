@@ -17,6 +17,9 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 	const [password, setPassword] = useState('');	
 	const [showPassword, setShowPassword] = useState(false);
 	const [errors, setErrors] = useState([]);
+	const [formIncomplete, setFormIncomplete] = useState(false);
+	const [initialBadPassword, setInitialBadPassword] = useState(false);
+	const [invalidCredentials, setInvalidCredentials] = useState(false);
 
 	const loginRef = useRef(null);
 	const demoLoginRef = useRef(null);
@@ -31,6 +34,7 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 	const handlePassword = (e) => {
 		e.preventDefault();
 		setPassword(e.target.value);
+		setInitialBadPassword(false);
 	}
 	
 	const mouseDownAuthBtn = (e) => {
@@ -63,12 +67,21 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		if(credential === "" || password === ""){
+			setFormIncomplete(true)
+			setInitialBadPassword(true);
+			// if(!passwordOK()){
+			// 	setInitialBadPassword(true);
+			// }
+			return;
+		}
 		const user = {credential, password}
 		dispatch(loginUser(user))
 			.then(() => {
 				setShowLogInModal(false)
 			})
 			.catch(async (res) => {
+				setInvalidCredentials(true)
 				let data;
 				try {
 					data = await res.clone().json();
@@ -103,6 +116,15 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 				else setErrors([res.statusText]);
 			})
 	}
+
+	const loginErrorToolTip = () => {
+		return (
+			<div>
+				{((formIncomplete || invalidCredentials) && password === "") && <div className={`error-tooltip `}><i className="fa-solid fa-circle-exclamation"></i> Password is required.</div>}
+				{((formIncomplete || invalidCredentials) && (credential === "" || password === "" )) && <div className={`error-tooltip `}><i className={`fa-solid fa-circle-xmark`}></i>{` Invalid credentials`}</div>}
+			</div>
+		)
+	}
 	
 	return (
 		<div className="login-form">
@@ -112,50 +134,58 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 			</header>
 			<div className="auth-form-body">
 				<form autoComplete='off' onSubmit={e => e.preventDefault()}>
-					<div className='name-entry-div'>
+					<div className={`${((formIncomplete || invalidCredentials) && (credential === "" || password === "")) ? `error-entry-div` : `name-entry-div`}`}>
 						<div className='first-name-box'>
 							<label className='name-entry-label'>
 								<div className='floating-placeholder-container'>
-									<div className={`floating-placeholder ${credential === "" ? "" : "input-placeholder-not-empty" }`}>Email</div>
+									{/* <div className={`floating-placeholder ${credential === "" ? "" : "input-placeholder-not-empty" }`}>Email</div> */}
+									<div className={`floating-placeholder ${(formIncomplete && (credential === "")) ? "input-placeholder-error" : credential === "" ? "" : "input-placeholder-not-empty" }`}>Email</div>
 									<input
 										// id="first-name-input"
 										// className={`email ${(formIncomplete && email === "") && `session-error-input`}`}
-										className={`email`}
+										// className={`email`}
+										className={`email ${(formIncomplete && (credential === "")) && `session-error-input`}`}
 										type="text"
 										value={credential}
 										onChange={handleCredential}
 										onFocus={e => setFocusInput("credential")}
 										onBlur={e =>setFocusInput(null)}
-										placeholder={(focusInput === "credential") ? "Email" : ""}
+										// placeholder={(focusInput === "credential") ? "Email" : ""}
+										placeholder={(focusInput === "credential" || (formIncomplete && (credential === ""))) ? "Email" : ""}
 										placeholderColor="green"
 										required
 									/>
 								</div>
 							</label>
 						</div>
+						
 						<div className='last-name-box'>
 							<label className='name-entry-label'>
 								<div className='floating-placeholder-container'>
-									<div className={`floating-placeholder ${password === "" ? "" : "input-placeholder-not-empty" }`}>Password</div>
-									
+									{/* <div className={`floating-placeholder ${password === "" ? "" : "input-placeholder-not-empty" }`}>Password</div> */}
+									<div className={`floating-placeholder ${ (formIncomplete && (password === "")) ? "input-placeholder-error" : password === "" ? "" : "input-placeholder-not-empty" }`}>Password</div>
 									<input
 										// id="last-name-input"
 										// className={`password ${(formIncomplete && initialBadPassword) && `session-error-input`}`}
-										className={`password`}
+										// className={`password`}
+										className={`password ${(formIncomplete && (password === "")) && `session-error-input`}`}
 										type={showPassword ? `text` : `password`}
 										value={password}
 										onChange={handlePassword}
 										onFocus={e => setFocusInput("password")}
 										onBlur={e =>setFocusInput(null)}
-										placeholder={(focusInput === "password") ? "Last name" : ""}
+										// placeholder={(focusInput === "password") ? "Last name" : ""}
+										placeholder={(focusInput === "password" || (formIncomplete && (password === ""))) ? "Password" : ""}
 										required
 										maxLength={20}
 									/>
-									<button type="button" className='show-pw-toggle' onClick={e => setShowPassword(old => !old)}>{showPassword ? 'Hide' : "Show"}</button>
+									{/* <button type="button" className='show-pw-toggle' onClick={e => setShowPassword(old => !old)}>{showPassword ? 'Hide' : "Show"}</button> */}
+									<button type="button" className={`show-pw-toggle ${initialBadPassword && `show-pw-toggle-pw-error`}`} onClick={e => setShowPassword(old => !old)}>{showPassword ? 'Hide' : "Show"}</button>
 								</div>
 							</label>
 						</div>
 					</div>
+					{loginErrorToolTip()}
 					{/* <div className='input-tooltip'>Make sure it matches the name on your government ID.</div> */}
 
 					<div className='auth-session-btns'>

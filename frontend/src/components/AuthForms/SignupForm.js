@@ -33,8 +33,6 @@ const SignupForm = ({setShowSignUpModal, setShowLogInModal}) => {
 	const loginBtnRef = useRef(null);
 	const activeBtnRef = useRef(null);
 	
-	// Show this on focus, and don't go away until form submission.
-	// overall strength: weak or good
 	const checkPasswordStrength = useCallback(() => {
 		if(!((firstName.length > 0 && password.toLowerCase().includes(firstName)) || (lastName.length > 0 && password.toLowerCase().includes(lastName)) || (email.length > 0 && password.toLowerCase().includes(email)))) {
 			setPasswordNotNameEmail(true);
@@ -84,13 +82,11 @@ const SignupForm = ({setShowSignUpModal, setShowLogInModal}) => {
 	const handleFirstName = (e) => {
 		e.preventDefault();
 		setFirstName(e.target.value);
-		// checkPasswordStrength();
 	}
 
 	const handleLastName = (e) => {
 		e.preventDefault();
 		setLastName(e.target.value);
-		// checkPasswordStrength();
 	}
 
 	// const handleBirthdate = (e) => {
@@ -101,14 +97,12 @@ const SignupForm = ({setShowSignUpModal, setShowLogInModal}) => {
 	const handleEmail = (e) => {
 		e.preventDefault();
 		setEmail(e.target.value);
-		// checkPasswordStrength();
 	}
 	
 	const handlePassword = (e) => {
 		e.preventDefault();
 		setPassword(e.target.value);
 		setInitialBadPassword(false);
-		// checkPasswordStrength();
 	}
 
 
@@ -308,11 +302,6 @@ const SignupForm = ({setShowSignUpModal, setShowLogInModal}) => {
 							</label>
 						</div>	
 					</div>
-					{/* {errors.email ? 
-						<div className='error-tooltip'><i className="fa-solid fa-circle-exclamation"></i> Enter a valid email.</div>
-						:
-						<div className='input-tooltip'>We'll email you trip confirmations and receipts.</div>
-					} */}
 					{emailToolTip()}
 
 					<br />
@@ -340,11 +329,6 @@ const SignupForm = ({setShowSignUpModal, setShowLogInModal}) => {
 							</label>
 						</div>	
 					</div>
-					{/* {errors.password ? 
-						<div className='error-tooltip'><i className="fa-solid fa-circle-xmark"></i> At least 8 characters</div>
-						:
-						null
-					} */}
 					{passwordToolTip()}
 					
 					<br />
