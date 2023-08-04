@@ -10,22 +10,10 @@ import { useRef } from 'react';
 
 const SignupForm = ({setShowSignUpModal, setShowLogInModal}) => {
 
-	const disableOtherScroll = (e) => {
-		const underModal = document.querySelector(".under-Modal")
-		e.preventDefault();
-		e.stopPropogation();
-		return;
-	}
-
 	useEffect(() => {
-		// document.getElementById("first-name-input").focus({preventScroll:false, focusVisible: true});
-
-		const underModal = document.querySelector(".under-modal")
-		// underModal.addEventListener("wheel", disableOtherScroll)
-
 		document.querySelector(".x-close").focus({preventScroll:false, focusVisible: true});
 		return () => {
-			// underModal.removeEventListener("wheel", disableOtherScroll);
+			// 
 		}
 	}, [])
 	const dispatch = useDispatch();
@@ -55,10 +43,10 @@ const SignupForm = ({setShowSignUpModal, setShowLogInModal}) => {
 		setLastName(e.target.value);
 	}
 
-	const handleBirthdate = (e) => {
-		e.preventDefault();
-		setBirthDate(e.target.value);
-	}
+	// const handleBirthdate = (e) => {
+	// 	e.preventDefault();
+	// 	setBirthDate(e.target.value);
+	// }
 	
 	const handleEmail = (e) => {
 		e.preventDefault();
@@ -83,18 +71,14 @@ const SignupForm = ({setShowSignUpModal, setShowLogInModal}) => {
 		activeBtnRef.current.classList.remove("mouse-down-session-btn");
 		if(e.target === activeBtnRef.current){
 			if(e.target === signupRef.current) {
-				// signupRef.current.classList.remove("mouse-down-session-btn");
-				// console.log(e.target, signupRef.current)
 				handleSubmit(e);
 				return;
 			}
 			if(e.target === demoLoginRef.current) {
-				// demoLoginRef.current.classList.remove("mouse-down-session-btn");
 				loginDemo(e);
 				return;
 			}
 			if(e.target === loginBtnRef.current) {
-				// loginBtnRef.current.classList.remove("mouse-down-session-btn");
 				setShowLogInModal(true)
 				setShowSignUpModal(false)
 				return;
@@ -104,7 +88,6 @@ const SignupForm = ({setShowSignUpModal, setShowLogInModal}) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// if(password === confirmPassword){
 			const user = {firstName, lastName, birthDate, email, password}
 			return dispatch(signupUser(user))
 				.then(() => {
@@ -148,14 +131,6 @@ const SignupForm = ({setShowSignUpModal, setShowLogInModal}) => {
 			})
 	}
 
-	const scrollBottomForm = (e) => {
-		e.preventDefault();
-		const form = document.querySelector('.auth-form-body');
-		form.scrollTop = form.scrollHeight;
-	}
-
-	// if(sessionUser) return <Redirect to="/" />
-
 	return (
 		<div className="signup-form" >
 			<header className="auth-form-header">
@@ -163,7 +138,6 @@ const SignupForm = ({setShowSignUpModal, setShowLogInModal}) => {
 				<div className="auth-form-title">Sign up</div>
 			</header>
 			<div className="auth-form-body">
-				{/* <form onSubmit={handleSubmit}> */}
 				<form onSubmit={e => e.preventDefault()}>
 					{/* NAME STYLING - START */}
 					<div className='name-entry-div'>
@@ -305,15 +279,9 @@ const SignupForm = ({setShowSignUpModal, setShowLogInModal}) => {
 						&nbsp;and acknowledge the <a target="_blank" className="signup-link" href="https://www.linkedin.com/in/carvey-hor/">Privacy Policy</a>.
 					</div>
 
-					{/* <br /> */}
-					{/* <br /> */}
 					<div className='auth-session-btns'>
 						<input className="session-btn" type="text" ref={signupRef} value="Agree and continue" onMouseDown={mouseDownAuthBtn} onMouseUp={e => e.preventDefault()}/>
-						{/* <div className='session-buffer-box'>
-							<button className='session-buffer' onClick={scrollBottomForm}><i className="fa-solid fa-chevron-down fa-fade"></i></button>
-						</div> */}
 						<input className="session-btn" type="text" ref={demoLoginRef} value="Demo Log in" onMouseDown={mouseDownAuthBtn} />
-						{/* <input className="session-btn" type="submit" ref={loginBtnRef} value="Log in" onMouseDown={mouseDownAuthBtn} /> */}
 					</div>
 					<div className='signup-tooltip'>
 						Already have an account? <span className="signup-link" ref={loginBtnRef} onMouseDown={mouseDownAuthBtn} >Log in</span>

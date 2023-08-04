@@ -46,18 +46,14 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 		activeBtnRef.current.classList.remove("mouse-down-session-btn");
 		if(e.target === activeBtnRef.current){
 			if(e.target === loginRef.current) {
-				// signupRef.current.classList.remove("mouse-down-session-btn");
-				// console.log(e.target, loginRef.current)
 				handleSubmit(e);
 				return;
 			}
 			if(e.target === demoLoginRef.current) {
-				// demoLoginRef.current.classList.remove("mouse-down-session-btn");
 				loginDemo(e);
 				return;
 			}
 			if(e.target === signupBtnRef.current) {
-				// loginBtnRef.current.classList.remove("mouse-down-session-btn");
 				setShowSignUpModal(true)
 				setShowLogInModal(false)
 				return;
@@ -112,34 +108,10 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 		<div className="login-form">
 			<header className="auth-form-header">
 				<button autoFocus className='x-close' onClick={e => setShowLogInModal(false)}><i className="fa-solid fa-x"></i></button>
-				{/* <div className="auth-form-title">Finish signing up</div> */}
 				<div className="auth-form-title">Log in</div>
 			</header>
 			<div className="auth-form-body">
 				<form onSubmit={e => e.preventDefault()}>
-					{/* <ul>
-						{errors.map(error => <li key={error}>{error}</li>)}
-					</ul>
-					<label>Email (or phone):&nbsp;
-						<input
-							id="credential-input"
-							type="text"
-							value={credential}
-							onChange={handleCredential}
-							required
-						/>
-					</label>
-					<br />
-					<br />
-					<label>Password:&nbsp;
-						<input
-							type="password"
-							value={password}
-							onChange={handlePassword}
-							required
-						/>
-					</label> */}
-
 					<div className='name-entry-div'>
 						<div className='first-name-box'>
 							<label className='name-entry-label'>
@@ -182,24 +154,11 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 
 					<div className='auth-session-btns'>
 						<input className="session-btn" type="text" ref={loginRef} value="Log in" onMouseDown={mouseDownAuthBtn} onMouseUp={e => e.preventDefault()}/>
-						{/* <div className='session-buffer-box'>
-							<button className='session-buffer' onClick={scrollBottomForm}><i className="fa-solid fa-chevron-down fa-fade"></i></button>
-						</div> */}
 						<input className="session-btn" type="text" ref={demoLoginRef} value="Demo Log in" onMouseDown={mouseDownAuthBtn} />
-						{/* <input className="session-btn" type="submit" ref={loginBtnRef} value="Log in" onMouseDown={mouseDownAuthBtn} /> */}
 					</div>
 					<div className='signup-tooltip'>
 						Don't have an account? <span className="signup-link" ref={signupBtnRef} onMouseDown={mouseDownAuthBtn} >Sign up</span>
 					</div>
-
-
-
-					{/* <br />
-					<br />
-					<input type="submit" value="Login" onClick={handleSubmit} />
-					<br />
-					<br />
-					<input type="submit" value="Demo Login" onClick={loginDemo} /> */}
 				</form>
 			</div>
 		</div>
