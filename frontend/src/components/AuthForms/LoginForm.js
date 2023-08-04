@@ -41,15 +41,13 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 	}
 
 	const mouseUpAuthBtn = (e) => {
-		// debugger
-		// e.stopImmediatePropogation();
 		e.preventDefault();
 		document.removeEventListener("mouseup", mouseUpAuthBtn);
 		activeBtnRef.current.classList.remove("mouse-down-session-btn");
 		if(e.target === activeBtnRef.current){
 			if(e.target === loginRef.current) {
 				// signupRef.current.classList.remove("mouse-down-session-btn");
-				console.log(e.target, loginRef.current)
+				// console.log(e.target, loginRef.current)
 				handleSubmit(e);
 				return;
 			}
@@ -89,6 +87,9 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 		}
 	const loginDemo = (e) => {
 		e.preventDefault();
+		setShowPassword(false);
+		setCredential('demo@user.io');
+		setPassword('dprian83');
 		const user = {email:'demo@user.io', password:'dprian83'}
 		dispatch(loginUser(user))
 			.then(() => {
@@ -115,7 +116,7 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 				<div className="auth-form-title">Log in</div>
 			</header>
 			<div className="auth-form-body">
-				<form>
+				<form onSubmit={e => e.preventDefault()}>
 					{/* <ul>
 						{errors.map(error => <li key={error}>{error}</li>)}
 					</ul>
@@ -179,12 +180,12 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 					</div>
 					{/* <div className='input-tooltip'>Make sure it matches the name on your government ID.</div> */}
 
-					<div className='signup-session-btns'>
-						<input className="session-btn" type="submit" ref={loginRef} value="Log in" onMouseDown={mouseDownAuthBtn} onMouseUp={e => e.preventDefault()}/>
+					<div className='auth-session-btns'>
+						<input className="session-btn" type="text" ref={loginRef} value="Log in" onMouseDown={mouseDownAuthBtn} onMouseUp={e => e.preventDefault()}/>
 						{/* <div className='session-buffer-box'>
 							<button className='session-buffer' onClick={scrollBottomForm}><i className="fa-solid fa-chevron-down fa-fade"></i></button>
 						</div> */}
-						<input className="session-btn" type="submit" ref={demoLoginRef} value="Demo Log in" onMouseDown={mouseDownAuthBtn} />
+						<input className="session-btn" type="text" ref={demoLoginRef} value="Demo Log in" onMouseDown={mouseDownAuthBtn} />
 						{/* <input className="session-btn" type="submit" ref={loginBtnRef} value="Log in" onMouseDown={mouseDownAuthBtn} /> */}
 					</div>
 					<div className='signup-tooltip'>

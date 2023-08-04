@@ -78,15 +78,13 @@ const SignupForm = ({setShowSignUpModal, setShowLogInModal}) => {
 	}
 
 	const mouseUpAuthBtn = (e) => {
-		// debugger
-		// e.stopImmediatePropogation();
 		e.preventDefault();
 		document.removeEventListener("mouseup", mouseUpAuthBtn);
 		activeBtnRef.current.classList.remove("mouse-down-session-btn");
 		if(e.target === activeBtnRef.current){
 			if(e.target === signupRef.current) {
 				// signupRef.current.classList.remove("mouse-down-session-btn");
-				console.log(e.target, signupRef.current)
+				// console.log(e.target, signupRef.current)
 				handleSubmit(e);
 				return;
 			}
@@ -309,12 +307,12 @@ const SignupForm = ({setShowSignUpModal, setShowLogInModal}) => {
 
 					{/* <br /> */}
 					{/* <br /> */}
-					<div className='signup-session-btns'>
-						<input className="session-btn" type="submit" ref={signupRef} value="Agree and continue" onMouseDown={mouseDownAuthBtn} onMouseUp={e => e.preventDefault()}/>
+					<div className='auth-session-btns'>
+						<input className="session-btn" type="text" ref={signupRef} value="Agree and continue" onMouseDown={mouseDownAuthBtn} onMouseUp={e => e.preventDefault()}/>
 						{/* <div className='session-buffer-box'>
 							<button className='session-buffer' onClick={scrollBottomForm}><i className="fa-solid fa-chevron-down fa-fade"></i></button>
 						</div> */}
-						<input className="session-btn" type="submit" ref={demoLoginRef} value="Demo Log in" onMouseDown={mouseDownAuthBtn} />
+						<input className="session-btn" type="text" ref={demoLoginRef} value="Demo Log in" onMouseDown={mouseDownAuthBtn} />
 						{/* <input className="session-btn" type="submit" ref={loginBtnRef} value="Log in" onMouseDown={mouseDownAuthBtn} /> */}
 					</div>
 					<div className='signup-tooltip'>
