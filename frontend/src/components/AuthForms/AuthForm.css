@@ -27,8 +27,8 @@ div.signup-form, div.login-form {
 	overflow-y:hidden;
 }
 
-.login-form{
-	/* padding: 24px; */
+.signup-form {
+	height: 682px;
 }
 
 @keyframes slideIn {
@@ -134,15 +134,18 @@ div.signup-form, div.login-form {
 	/* display: none; */
 }
 
-p {
-	/* font-size: 80px; */
-}
-
 .name-entry-div {
 	box-sizing: border-box;
 	width: 520px;
 	border-radius: 8px;
 	border: 1px solid rgb(176, 176, 176);
+}
+
+.error-entry-div {
+	box-sizing: border-box;
+	width: 520px;
+	border-radius: 8px;
+	border: 1px solid rgb(202, 37, 0);
 }
 
 .name-entry-div > div {
@@ -181,6 +184,10 @@ p {
 	background-color: white;
 }
 
+.password:not(:focus) ~ .show-pw-toggle-pw-error {
+	background-color: rgb(255,248,246);
+}
+
 .name-entry-label:focus-within .floating-placeholder:nth-child(1) {
 	transform: translateY(-9px) scale(0.75);
 }
@@ -189,18 +196,27 @@ p {
 	transform: translateY(-9px) scale(0.75);
 }
 
+.signup-form .input-placeholder-error {
+	transform: translateY(-9px) scale(0.75);
+	color: rgb(202, 37, 0);
+	font-weight: 600;
+}
+
 .first-name-box {
-	border-bottom: 1px solid rgb(176, 176, 176);
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	border-bottom: 0.5px solid rgb(176, 176, 176);
 }
 
 .last-name-box {
+	border-top: 0.5px solid rgb(176, 176, 176);
 }
 
 .name-entry-label {
 	display: flex;
 }
 
-#first-name-input, #last-name-input, #birthdate, #email, #password {
+.first-name-input, .last-name-input, .email, .password {
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	box-sizing: border-box;
 	width: 518px;
@@ -221,6 +237,18 @@ p {
 	font-weight: 100;
 }
 
+.session-error-input {
+	outline-color: rgb(202, 37, 0);
+}
+
+.session-error-input:not(:focus) {
+	background-color: rgb(255, 248, 246);
+}
+
+/* .password:focus .show-pw-toggle-pw-error {
+	background-color: white;
+} */
+
 .input-tooltip {
 	margin: 8px 0px;
 	font-size: 13px;
@@ -234,7 +262,42 @@ p {
 	font-size: 13px;
 	font-weight: 100;
 	letter-spacing: 0.3px;
-	color: red;
+	/* color: red; */
+	color: rgb(202, 37, 0);
+}
+
+.password-errors-container {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+/* .password-errors-container .error-tooltip {
+	padding: 0.5px 0px;
+} */
+
+.error-password-tooltip {
+	font-size: 13px;
+	font-weight: 500;
+	margin: 0px;
+	padding: 0.5px 0px;
+}
+
+.ok-password-tooltip {
+	font-size: 13px;
+	font-weight: 500;
+	margin: 0px;
+	padding: 0.5px 0px;
+	color: green;
+}
+
+.error-tooltip > i {
+	font-size: inherit;
+	height: 12px;
+	font-size: 12px;
+}
+
+.password-errors-container i {
+	font-size: 11px;
 }
 
 .signup-tooltip {
@@ -250,6 +313,10 @@ p {
 	white-space: wrap;
 }
 
+.switch-auth-modal {
+	/* padding-bottom: 10px; */
+}
+
 .signup-link {
 	cursor: pointer;
 	font-weight: 600;
@@ -257,12 +324,13 @@ p {
 	color:#0038AB;
 }
 
-.signup-session-btns {
+.auth-session-btns {
 	padding-top: 35px;
 	padding-bottom: 20px;
 }
 
 .session-btn {
+	text-align: center;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	box-sizing: border-box;
 	width: 520px;
@@ -288,6 +356,10 @@ p {
 		;
 
 	margin-bottom: 12px;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	/* user-select: none; */
 }
 
 .session-btn:hover {
@@ -298,10 +370,7 @@ p {
 	outline: none;
 	transition: box-shadow 0.2s linear;
 	box-shadow: 0 0 0 2px rgba(255,255,255,0.8), 0 0 0 4px #222222;
-}
-
-.session-btn:last-child {
-	/* margin-bottom: 24px; */
+	/* user-select: none; */
 }
 
 .mouse-down-session-btn {

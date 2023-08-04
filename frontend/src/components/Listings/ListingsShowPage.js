@@ -210,7 +210,6 @@ const ListingsShowPage = (props) => {
 				}
 				inputToFocus.focus();
 				inputToFocus.showPicker();
-				// debugger
 				return;
 			}
 
