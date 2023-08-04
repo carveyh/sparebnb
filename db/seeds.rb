@@ -73,7 +73,7 @@ ApplicationRecord.transaction do
 		first_name: 'Demo',
 		last_name: 'Lition',
 		birth_date: Time.new(1993,3,8),
-		password: 'password'
+		password: 'dprian83'
 	)
 
 	# ######################################################################
@@ -108,7 +108,7 @@ ApplicationRecord.transaction do
 		first_name: 'Phony',
 		last_name: 'Baloney',
 		birth_date: Time.new(2003,12,19),
-		password: 'password',
+		password: 'dprian83',
 		phone_number: '5551239999'
 	)
 
@@ -119,7 +119,7 @@ ApplicationRecord.transaction do
 			first_name: Faker::Name.first_name,
 			last_name: Faker::Name.last_name,
 			birth_date: Faker::Date.birthday(min_age: 18, max_age: 101),
-			password: 'password',
+			password: 'dprian83',
 			phone_number: Faker::PhoneNumber.subscriber_number(length:10)
 		})
 	end

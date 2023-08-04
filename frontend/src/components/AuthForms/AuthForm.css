@@ -22,13 +22,13 @@ div.signup-form, div.login-form {
 	justify-self: center;
 	align-self: center;
 	max-height: 682px;
-	height: 682px;
+	/* height: 682px; */
 	align-self: center;
 	overflow-y:hidden;
 }
 
 .login-form{
-	padding: 24px;
+	/* padding: 24px; */
 }
 
 @keyframes slideIn {
@@ -79,17 +79,16 @@ div.signup-form, div.login-form {
 }
 
 .session-buffer-box {
-	position: relative;
+	/* position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 520px;
-	height: 47px;
-	/* cursor: pointer; */
+	height: 47px; */
 }
 	
 .session-buffer {
-	position: absolute;
+	/* position: absolute;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -97,7 +96,7 @@ div.signup-form, div.login-form {
 	padding: 0px;
 	background-color:inherit;
 	border-radius: 50%;
-	cursor: pointer;
+	cursor: pointer; */
 }
 
 .x-close::before, .session-buffer::before {
@@ -136,7 +135,7 @@ div.signup-form, div.login-form {
 }
 
 p {
-	font-size: 80px;
+	/* font-size: 80px; */
 }
 
 .name-entry-div {
@@ -157,7 +156,7 @@ p {
 	position: relative;
 }
 
-.signup-form .floating-placeholder {
+.signup-form .floating-placeholder, .login-form .floating-placeholder {
 	position: absolute;
 	top: 20px;
 	left: 12px;
@@ -252,11 +251,16 @@ p {
 }
 
 .signup-link {
+	cursor: pointer;
 	font-weight: 600;
 	text-decoration: underline;
 	color:#0038AB;
 }
 
+.signup-session-btns {
+	padding-top: 35px;
+	padding-bottom: 20px;
+}
 
 .session-btn {
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -297,7 +301,7 @@ p {
 }
 
 .session-btn:last-child {
-	margin-bottom: 24px;
+	/* margin-bottom: 24px; */
 }
 
 .mouse-down-session-btn {
