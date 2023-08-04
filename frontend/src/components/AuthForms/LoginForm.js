@@ -7,9 +7,7 @@ import { useEffect } from 'react';
 import { useRef } from 'react';
 
 const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
-	useEffect(() => {
-		// document.querySelector(".x-close").focus({focusVisible:true, preventScroll:false})
-	}, [])
+
 	const dispatch = useDispatch();
 	
 	const [focusInput, setFocusInput] = useState(null);
@@ -25,6 +23,14 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 	const demoLoginRef = useRef(null);
 	const signupBtnRef = useRef(null);
 	const activeBtnRef = useRef(null);
+
+	useEffect(() => {
+		// document.querySelector(".x-close").focus({focusVisible:true, preventScroll:false})
+	}, [])
+
+	useEffect(() => {
+		setInvalidCredentials(false)
+	}, [credential, password])
 	
 	const handleCredential = (e) => {
 		e.preventDefault();
@@ -73,7 +79,7 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 			// if(!passwordOK()){
 			// 	setInitialBadPassword(true);
 			// }
-			return;
+			// return;
 		}
 		const user = {credential, password}
 		dispatch(loginUser(user))
@@ -134,24 +140,25 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 			</header>
 			<div className="auth-form-body">
 				<form autoComplete='off' onSubmit={e => e.preventDefault()}>
-					<div className={`${((formIncomplete || invalidCredentials) && (credential === "" || password === "")) ? `error-entry-div` : `name-entry-div`}`}>
+					<div className={`${((formIncomplete) && (credential === "" || password === "")) || invalidCredentials ? `error-entry-div` : `name-entry-div`}`}>
 						<div className='first-name-box'>
 							<label className='name-entry-label'>
 								<div className='floating-placeholder-container'>
 									{/* <div className={`floating-placeholder ${credential === "" ? "" : "input-placeholder-not-empty" }`}>Email</div> */}
-									<div className={`floating-placeholder ${(formIncomplete && (credential === "")) ? "input-placeholder-error" : credential === "" ? "" : "input-placeholder-not-empty" }`}>Email</div>
+									<div className={`floating-placeholder ${(formIncomplete && (credential === ""))  || invalidCredentials ? "input-placeholder-error" : credential === "" ? "" : "input-placeholder-not-empty" }`}>Email</div>
 									<input
 										// id="first-name-input"
 										// className={`email ${(formIncomplete && email === "") && `session-error-input`}`}
 										// className={`email`}
-										className={`email ${(formIncomplete && (credential === "")) && `session-error-input`}`}
+										// className={`email ${(formIncomplete && (credential === ""))  || invalidCredentials && `session-error-input`}`}
+										className={`email ${((formIncomplete && (credential === "")) || invalidCredentials) && `session-error-input`}`}
 										type="text"
 										value={credential}
 										onChange={handleCredential}
 										onFocus={e => setFocusInput("credential")}
 										onBlur={e =>setFocusInput(null)}
 										// placeholder={(focusInput === "credential") ? "Email" : ""}
-										placeholder={(focusInput === "credential" || (formIncomplete && (credential === ""))) ? "Email" : ""}
+										placeholder={(focusInput === "credential" || (formIncomplete && (credential === "")))  || invalidCredentials ? "Email" : ""}
 										placeholderColor="green"
 										required
 									/>
@@ -163,24 +170,24 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 							<label className='name-entry-label'>
 								<div className='floating-placeholder-container'>
 									{/* <div className={`floating-placeholder ${password === "" ? "" : "input-placeholder-not-empty" }`}>Password</div> */}
-									<div className={`floating-placeholder ${ (formIncomplete && (password === "")) ? "input-placeholder-error" : password === "" ? "" : "input-placeholder-not-empty" }`}>Password</div>
+									<div className={`floating-placeholder ${ (formIncomplete && (password === "")) || invalidCredentials ? "input-placeholder-error" : password === "" ? "" : "input-placeholder-not-empty" }`}>Password</div>
 									<input
 										// id="last-name-input"
 										// className={`password ${(formIncomplete && initialBadPassword) && `session-error-input`}`}
 										// className={`password`}
-										className={`password ${(formIncomplete && (password === "")) && `session-error-input`}`}
+										className={`password ${((formIncomplete && (password === "")) || invalidCredentials) && `session-error-input`}`}
 										type={showPassword ? `text` : `password`}
 										value={password}
 										onChange={handlePassword}
 										onFocus={e => setFocusInput("password")}
 										onBlur={e =>setFocusInput(null)}
 										// placeholder={(focusInput === "password") ? "Last name" : ""}
-										placeholder={(focusInput === "password" || (formIncomplete && (password === ""))) ? "Password" : ""}
+										placeholder={(focusInput === "password" || (formIncomplete && (password === ""))) || invalidCredentials ? "Password" : ""}
 										required
 										maxLength={20}
 									/>
 									{/* <button type="button" className='show-pw-toggle' onClick={e => setShowPassword(old => !old)}>{showPassword ? 'Hide' : "Show"}</button> */}
-									<button type="button" className={`show-pw-toggle ${initialBadPassword && `show-pw-toggle-pw-error`}`} onClick={e => setShowPassword(old => !old)}>{showPassword ? 'Hide' : "Show"}</button>
+									<button type="button" className={`show-pw-toggle ${((formIncomplete && (password === "")) || invalidCredentials) && `show-pw-toggle-pw-error`}`} onClick={e => setShowPassword(old => !old)}>{showPassword ? 'Hide' : "Show"}</button>
 								</div>
 							</label>
 						</div>
