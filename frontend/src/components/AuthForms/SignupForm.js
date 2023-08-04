@@ -6,6 +6,7 @@ import { useState } from "react";
 import { signupUser } from "../../store/session";
 import { useEffect } from 'react';
 import { loginUser } from '../../store/session';
+import { useRef } from 'react';
 
 const SignupForm = ({setShowSignUpModal}) => {
 
@@ -39,6 +40,10 @@ const SignupForm = ({setShowSignUpModal}) => {
 	const [focusInput, setFocusInput] = useState(null);
 	const [showPassword, setShowPassword] = useState(false);
 	
+	const signupRef = useRef(null);
+	const demoLoginRef = useRef(null);
+	const loginBtnRef = useRef(null);
+	const activeBtnRef = useRef(null);
 
 	const handleFirstName = (e) => {
 		e.preventDefault();
@@ -65,10 +70,37 @@ const SignupForm = ({setShowSignUpModal}) => {
 		setPassword(e.target.value);
 	}
 
-	const maxDate = () => {
-		const month = String(new Date().getMonth() + 1)
-		const date = String(new Date().getDate())
-		return `${new Date().getFullYear()}-${month.length < 2 ? '0' + month : month}-${date.length < 2 ? '0' + date : date}`
+	const mouseDownAuthBtn = (e) => {
+		e.preventDefault();
+		e.currentTarget.classList.add("mouse-down-session-btn");
+		activeBtnRef.current = e.currentTarget;
+		document.addEventListener("mouseup", mouseUpAuthBtn) //add/rmv elisteners require exact reference...so separate function names
+	}
+
+	const mouseUpAuthBtn = (e) => {
+		// debugger
+		// e.stopImmediatePropogation();
+		e.preventDefault();
+		document.removeEventListener("mouseup", mouseUpAuthBtn);
+		activeBtnRef.current.classList.remove("mouse-down-session-btn");
+		if(e.target === activeBtnRef.current){
+			if(e.target === signupRef.current) {
+				// signupRef.current.classList.remove("mouse-down-session-btn");
+				console.log(e.target, signupRef.current)
+				handleSubmit(e);
+				return;
+			}
+			if(e.target === demoLoginRef.current) {
+				// demoLoginRef.current.classList.remove("mouse-down-session-btn");
+				loginDemo(e);
+				return;
+			}
+			if(e.target === loginBtnRef.current) {
+				// loginBtnRef.current.classList.remove("mouse-down-session-btn");
+				loginDemo(e);
+				return;
+			}
+		}
 	}
 
 	const handleSubmit = (e) => {
@@ -95,6 +127,10 @@ const SignupForm = ({setShowSignUpModal}) => {
 
 	const loginDemo = (e) => {
 		e.preventDefault();
+		setFirstName('Demo');
+		setLastName('Lition');
+		setEmail('demo@user.io');
+		setPassword('password');
 		const user = {email:'demo@user.io', password:'password'}
 		dispatch(loginUser(user))
 			.then(() => {
@@ -125,11 +161,11 @@ const SignupForm = ({setShowSignUpModal}) => {
 		<div className="signup-form" >
 			<header className="auth-form-header">
 				<button autoFocus className='x-close' onClick={e => setShowSignUpModal(false)}><i className="fa-solid fa-x"></i></button>
-				{/* <div className="auth-form-title">Finish signing up</div> */}
 				<div className="auth-form-title">Sign up</div>
 			</header>
 			<div className="auth-form-body">
-				<form onSubmit={handleSubmit}>
+				{/* <form onSubmit={handleSubmit}> */}
+				<form onSubmit={e => e.preventDefault()}>
 					{/* NAME STYLING - START */}
 					<div className='name-entry-div'>
 						<div className='first-name-box'>
@@ -137,7 +173,6 @@ const SignupForm = ({setShowSignUpModal}) => {
 								<div className='floating-placeholder-container'>
 
 									<div className={`floating-placeholder ${firstName === "" ? "" : "input-placeholder-not-empty" }`}>First name</div>
-									{/* <div className='floating-placeholder'></div> */}
 									<input
 										id="first-name-input"
 										type="text"
@@ -171,11 +206,11 @@ const SignupForm = ({setShowSignUpModal}) => {
 						</div>
 					</div>
 					<div className='input-tooltip'>Make sure it matches the name on your government ID.</div>
+					<br />
 
 					{/* NAME STYLING - END */}
 
-					<br />
-					<div className='name-entry-div'>
+					{/* <div className='name-entry-div'>
 						<div className=''>
 							<label className='name-entry-label'>
 								<div className='floating-placeholder-container'>
@@ -201,7 +236,7 @@ const SignupForm = ({setShowSignUpModal}) => {
 						:
 						<div className='input-tooltip'>To sign up, you need to be at least 18. Your birthday won’t be shared with other people who use Airbnb.</div>
 					}
-					<br />
+					<br /> */}
 					{/* <br /> */}
 
 
@@ -274,15 +309,12 @@ const SignupForm = ({setShowSignUpModal}) => {
 
 					<br />
 					<br />
-					<input className="session-btn" type="submit" value="Agree and continue" />
-					{/* <br /> */}
-					<div className='session-buffer-box'>
+					<input className="session-btn" type="submit" ref={signupRef} value="Agree and continue" onMouseDown={mouseDownAuthBtn} onMouseUp={e => e.preventDefault()}/>
+					{/* <div className='session-buffer-box'>
 						<button className='session-buffer' onClick={scrollBottomForm}><i className="fa-solid fa-chevron-down fa-fade"></i></button>
-					</div>
-						
-					{/* <br /> */}
-					<input className="session-btn" type="submit" value="Demo Login" onClick={loginDemo} />
-					{/* <p>Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text Filler text </p> */}
+					</div> */}
+					<input className="session-btn" type="submit" ref={demoLoginRef} value="Demo Log in" onMouseDown={mouseDownAuthBtn} />
+					<input className="session-btn" type="submit" ref={loginBtnRef} value="Log in" onMouseDown={mouseDownAuthBtn} />
 				</form>
 			</div>
 		</div>

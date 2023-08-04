@@ -128,6 +128,7 @@ div.signup-form, div.login-form {
 	display: flex;
 	padding: 24px;
 	overflow-y:scroll;
+	overflow-x: hidden;
 	scroll-behavior: smooth;
 }
 .auth-form-body::-webkit-scrollbar {
@@ -277,7 +278,16 @@ p {
 	font-weight: 500;
 	cursor: pointer;
 
-	transition: box-shadow 0.2s linear, transform 0.1s linear;
+	transition: box-shadow 0.2s linear, 
+		transform 0.1s linear,
+		background-color 0.4s linear
+		;
+
+	margin-bottom: 12px;
+}
+
+.session-btn:hover {
+	background-color: #d00000;
 }
 
 .session-btn:focus {
@@ -290,3 +300,7 @@ p {
 	margin-bottom: 24px;
 }
 
+.mouse-down-session-btn {
+	transform-origin: center;
+	transform: scale(0.96);
+}
