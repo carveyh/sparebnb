@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { loginUser } from '../../store/session';
 import { useRef } from 'react';
 
-const SignupForm = ({setShowSignUpModal}) => {
+const SignupForm = ({setShowSignUpModal, setShowLogInModal}) => {
 
 	const disableOtherScroll = (e) => {
 		const underModal = document.querySelector(".under-Modal")
@@ -97,7 +97,8 @@ const SignupForm = ({setShowSignUpModal}) => {
 			}
 			if(e.target === loginBtnRef.current) {
 				// loginBtnRef.current.classList.remove("mouse-down-session-btn");
-				loginDemo(e);
+				setShowLogInModal(true)
+				setShowSignUpModal(false)
 				return;
 			}
 		}
@@ -130,8 +131,8 @@ const SignupForm = ({setShowSignUpModal}) => {
 		setFirstName('Demo');
 		setLastName('Lition');
 		setEmail('demo@user.io');
-		setPassword('password');
-		const user = {email:'demo@user.io', password:'password'}
+		setPassword('dprian83');
+		const user = {email:'demo@user.io', password:'dprian83'}
 		dispatch(loginUser(user))
 			.then(() => {
 				setShowSignUpModal(false)
@@ -171,7 +172,6 @@ const SignupForm = ({setShowSignUpModal}) => {
 						<div className='first-name-box'>
 							<label className='name-entry-label'>
 								<div className='floating-placeholder-container'>
-
 									<div className={`floating-placeholder ${firstName === "" ? "" : "input-placeholder-not-empty" }`}>First name</div>
 									<input
 										id="first-name-input"
@@ -188,7 +188,7 @@ const SignupForm = ({setShowSignUpModal}) => {
 							</label>
 						</div>
 						<div className='last-name-box'>
-						<label className='name-entry-label'>
+							<label className='name-entry-label'>
 								<div className='floating-placeholder-container'>
 									<div className={`floating-placeholder ${lastName === "" ? "" : "input-placeholder-not-empty" }`}>Last name</div>
 									<input
@@ -307,14 +307,19 @@ const SignupForm = ({setShowSignUpModal}) => {
 						&nbsp;and acknowledge the <a target="_blank" className="signup-link" href="https://www.linkedin.com/in/carvey-hor/">Privacy Policy</a>.
 					</div>
 
-					<br />
-					<br />
-					<input className="session-btn" type="submit" ref={signupRef} value="Agree and continue" onMouseDown={mouseDownAuthBtn} onMouseUp={e => e.preventDefault()}/>
-					{/* <div className='session-buffer-box'>
-						<button className='session-buffer' onClick={scrollBottomForm}><i className="fa-solid fa-chevron-down fa-fade"></i></button>
-					</div> */}
-					<input className="session-btn" type="submit" ref={demoLoginRef} value="Demo Log in" onMouseDown={mouseDownAuthBtn} />
-					<input className="session-btn" type="submit" ref={loginBtnRef} value="Log in" onMouseDown={mouseDownAuthBtn} />
+					{/* <br /> */}
+					{/* <br /> */}
+					<div className='signup-session-btns'>
+						<input className="session-btn" type="submit" ref={signupRef} value="Agree and continue" onMouseDown={mouseDownAuthBtn} onMouseUp={e => e.preventDefault()}/>
+						{/* <div className='session-buffer-box'>
+							<button className='session-buffer' onClick={scrollBottomForm}><i className="fa-solid fa-chevron-down fa-fade"></i></button>
+						</div> */}
+						<input className="session-btn" type="submit" ref={demoLoginRef} value="Demo Log in" onMouseDown={mouseDownAuthBtn} />
+						{/* <input className="session-btn" type="submit" ref={loginBtnRef} value="Log in" onMouseDown={mouseDownAuthBtn} /> */}
+					</div>
+					<div className='signup-tooltip'>
+						Already have an account? <span className="signup-link" ref={loginBtnRef} onMouseDown={mouseDownAuthBtn} >Log in</span>
+					</div>
 				</form>
 			</div>
 		</div>

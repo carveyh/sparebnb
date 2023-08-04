@@ -36,7 +36,12 @@ const Navigation = () => {
 		document.querySelector('body').style.overflowY = "scroll";
 	}
 
-return (
+	const handleCloseModals = (e) => {
+		setShowLogInModal(false)
+		setShowSignUpModal(false)
+	}
+
+	return (
 		<>
 			<header className="upper-navbar-header">
 				<div className="upper-navbar-container">
@@ -97,11 +102,15 @@ return (
 				</div>
 			</header>
 			
-			{showSignUpModal && <Modal onClose={e => setShowSignUpModal(false)}>
-				<SignupForm setShowSignUpModal={setShowSignUpModal}/>
+			{/* {showSignUpModal && <Modal onClose={e => setShowSignUpModal(false)}>
+				<SignupForm setShowSignUpModal={setShowSignUpModal} setShowLogInModal={setShowLogInModal}/>
 			</Modal>}
 			{showLogInModal && <Modal onClose={e => setShowLogInModal(false)}>
-				<LoginForm setShowLogInModal={setShowLogInModal}/>
+				<LoginForm setShowSignUpModal={setShowSignUpModal} setShowLogInModal={setShowLogInModal}/>
+			</Modal>} */}
+			{(showLogInModal || showSignUpModal) && <Modal onClose={handleCloseModals}>
+				{showLogInModal && <LoginForm setShowSignUpModal={setShowSignUpModal} setShowLogInModal={setShowLogInModal}/>}
+				{showSignUpModal && <SignupForm setShowSignUpModal={setShowSignUpModal} setShowLogInModal={setShowLogInModal}/>}
 			</Modal>}
 		</>
 	)
