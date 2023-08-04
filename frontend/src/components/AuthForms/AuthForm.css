@@ -196,7 +196,7 @@ div.signup-form, div.login-form {
 	transform: translateY(-9px) scale(0.75);
 }
 
-.signup-form .input-placeholder-error {
+.signup-form .input-placeholder-error, .login-form .input-placeholder-error {
 	transform: translateY(-9px) scale(0.75);
 	color: rgb(202, 37, 0);
 	font-weight: 600;
@@ -314,7 +314,7 @@ div.signup-form, div.login-form {
 }
 
 .switch-auth-modal {
-	/* padding-bottom: 10px; */
+	padding-bottom: 15px;
 }
 
 .signup-link {
