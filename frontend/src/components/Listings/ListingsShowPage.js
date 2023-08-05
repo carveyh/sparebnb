@@ -636,7 +636,7 @@ const ListingsShowPage = (props) => {
 					<div className="listing-show-map-subheader">
 						{`${listing.city}, ${listing.state}, United States`}
 					</div>
-					<Map center={{lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) }}/>
+					<Map isLoaded={props.isLoaded} center={{lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) }}/>
 					<br/><br/><br/><br/><br/>
 				</div>
 				<div className="horizontal-rule-top-border plain-text">

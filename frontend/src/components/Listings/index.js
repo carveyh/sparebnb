@@ -117,7 +117,7 @@ const ListingsFilterCarousel = ({setFilter}) => {
 	)
 }
 
-const ListingsMain = () => {
+const ListingsMain = ({isLoaded}) => {
 	// const sessionUser = useSelector(state => state.session?.user )
 	const dispatch = useDispatch();
 	const [filter, setFilter] = useState(null);
@@ -139,10 +139,10 @@ const ListingsMain = () => {
 		<>
 			<ListingsFilterCarousel setFilter={setFilter}/>
 			{showIndexMap ? 
-				<SpareMap listings={filteredListings} />
+				<SpareMap isLoaded={isLoaded} listings={filteredListings} />
 			:
 			<>
-				<ListingsIndex filter={filter} />
+				<ListingsIndex isLoaded={isLoaded} filter={filter} />
 			</>
 			}
 			<div className="index-map-toggle-container-outer">

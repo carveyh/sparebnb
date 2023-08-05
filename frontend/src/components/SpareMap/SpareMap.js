@@ -5,10 +5,10 @@ import { useMemo } from "react";
 import { useState } from 'react';
 import { MapInfoCard } from './MapInfoCard';
 
-const SpareMap = ({center={ lat: 40.75293464767648, lng: -73.97873537480417 }, zoom=12, listings}) => {
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
-  });
+const SpareMap = ({isLoaded, center={ lat: 40.77413645301188, lng: -73.97082471226298 }, zoom=12, listings}) => {
+  // const { isLoaded } = useLoadScript({
+  //   googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
+  // });
   const centerMemo = useMemo(() => (center), []);
   const [mapRef, setMapRef] = useState();
   const [isOpen, setIsOpen] = useState(false);
