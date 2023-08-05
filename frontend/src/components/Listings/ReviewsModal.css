@@ -21,8 +21,9 @@
 .reviews-modal-non-forehead {
 	position: relative;
 	box-sizing: border-box;
-	margin: 0px -8px;
-	padding: 0px 24px;
+	/* margin: 0px -8px; */
+	/* padding: 0px 24px; */
+	padding: 0px 16px;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
@@ -42,4 +43,6 @@
 .modal-reviews-section {
 	padding: 0px 8px;
 	width: 58.3333%;
+	/* overflow-y: scroll; */
+	/* scroll-behavior: smooth; */
 }

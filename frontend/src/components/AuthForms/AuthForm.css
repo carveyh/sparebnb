@@ -126,10 +126,15 @@ div.signup-form, div.login-form {
 	box-sizing: border-box;
 	display: flex;
 	padding: 24px;
-	overflow-y:scroll;
 	overflow-x: hidden;
+	
+}
+
+.signup-form .auth-form-body {
+	overflow-y:scroll;
 	scroll-behavior: smooth;
 }
+
 .auth-form-body::-webkit-scrollbar {
 	/* display: none; */
 }
