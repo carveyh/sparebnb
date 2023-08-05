@@ -20,6 +20,12 @@ import {AnimatePresence, motion} from "framer-motion";
 
 const ListingCard = ({distance, listing, num, filter}) => {
 
+	const formattedOverallRating = () => {
+		const twoDigit = listing?.averageRatings.overallRating.toFixed(2)
+		const oneDigit = listing?.averageRatings.overallRating.toFixed(1)
+		return (twoDigit === oneDigit + '0') ? oneDigit : twoDigit;
+	}
+
 	return (
 		<motion.div key={num.toString() + filter} initial={{opacity:0.0}} animate={{opacity:1, transition:{delay:(num) * 0.035, duration: 0.2, ease:'easeIn'} }} exit={{opacity: 0}}>
 		<Link to={`/listings/${listing?.id}`}>
@@ -32,7 +38,12 @@ const ListingCard = ({distance, listing, num, filter}) => {
 							<img className="listings-photo" src={require(`../../images/listings/${formatTwoDigitNumberString(listing?.id)}/01.png`)} />
 						</div>
 						<div className="listings-text-container">
-							<p>{`${listing?.city}, ${listing?.state}`}</p>
+							<div className="listings-card-top-row"><p>{`${listing?.city}, ${listing?.state}`}</p> <span className="listings-index-rating">{listing.numRatings >= 3 && 
+								<>
+									<span className="index-star-icon"><i className="fa-solid fa-star"></i></span>
+									<span className="index-rating-num">{formattedOverallRating()}</span>
+								</>
+							}</span></div>
 							{distance ? <p>{`${distance} miles away`}</p> : <p>Calculating distance...</p>}
 							{/* <p>{`${listing?.title}`}</p> */}
 							<p>June 15 - 22</p>
