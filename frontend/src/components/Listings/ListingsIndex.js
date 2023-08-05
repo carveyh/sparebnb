@@ -30,8 +30,9 @@ const ListingCard = ({distance, listing, num, filter}) => {
 		<motion.div key={num.toString() + filter} initial={{opacity:0.0}} animate={{opacity:1, transition:{delay:(num) * 0.035, duration: 0.2, ease:'easeIn'} }} exit={{opacity: 0}}>
 		<Link to={`/listings/${listing?.id}`}>
 			<div className={`grid-item grid-item-${num}`} >
-						<div className="listing-favorite-button-background"><i className="fa-solid fa-heart"></i></div>
-						<div className="listing-favorite-button"><i className="fa-regular fa-heart"></i></div>
+						{/* IMPLEMENT SAVED LISTINGS LATER!!! AND BRING THIS HEART BACK!!! */}
+						{/* <div className="listing-favorite-button-background"><i className="fa-solid fa-heart"></i></div> */}
+						{/* <div className="listing-favorite-button"><i className="fa-regular fa-heart"></i></div> */}
 						<div className="listings-photo-container">
 							{/* <img className="listings-photo" src={require(`../../images/listings/${photoFileNames[num-1]}.png`)} /> */}
 							<div className="hover-overlay"></div>
@@ -177,7 +178,6 @@ const ListingsIndex = ({filter, isLoaded}) => {
 		// 	}}
 		// 	callback={(response) => {
 		// 		distancesArray.push(response)
-		// 		debugger
 		// 		console.log("response of Distance Matrix Service Obj", response?.rows[0].elements.map(element => element.distance))
 		// 	}}
 		// />)

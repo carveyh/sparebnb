@@ -639,11 +639,11 @@ const ListingsShowPage = (props) => {
 					<Map isLoaded={props.isLoaded} center={{lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) }}/>
 					<br/><br/><br/><br/><br/>
 				</div>
-				<div className="horizontal-rule-top-border plain-text">
+				{/* <div className="horizontal-rule-top-border plain-text">
 					<br/><br/><br/><br/><br/>
 					<div>Host details</div>
 					<br/><br/><br/><br/><br/>
-				</div>
+				</div> */}
 				<div className="horizontal-rule-top-border plain-text">
 					<br/><br/><br/><br/><br/>
 					<div>Footer</div>
