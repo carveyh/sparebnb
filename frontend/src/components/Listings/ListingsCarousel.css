@@ -41,12 +41,17 @@
 	justify-content: space-between;
 	align-items: center;
 	color:rgba(0,0,0,0.6);
+	transition: all 0.2s linear;
 }
 .category-selector:first-child {
 	margin-left: 0px;
 }
 .category-selector:last-child {
 	margin-right: 0px;
+}
+
+.selected-category {
+	color: red;
 }
 
 .category-selector:hover {

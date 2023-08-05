@@ -56,7 +56,7 @@ const ListingCard = ({distance, listing, num, filter}) => {
 	)
 }
 
-const ListingsIndex = ({filter, isLoaded}) => {
+const ListingsIndex = ({localLatitude, localLongitude, filter=null, isLoaded}) => {
 	const dispatch = useDispatch();
 	const [distancesLoaded, setDistancesLoaded] = useState(false);
 	const [pageLoaded, setPageLoaded] = useState(false);
@@ -68,24 +68,25 @@ const ListingsIndex = ({filter, isLoaded}) => {
 		filteredListings = Object.values(listings)
 	}
 
-	const [localLatitude, setLocalLatitude] = useState(null)
-	const [localLongitude, setLocalLongitude] = useState(null)
+	// const [localLatitude, setLocalLatitude] = useState(null)
+	// const [localLongitude, setLocalLongitude] = useState(null)
 	const [distancesObj, setDistancesObj] = useState(null);
 	const [distancesArray, setDistancesArray] = useState([]);
 	const [destinations, setDestinations] = useState([]);
 
-	useEffect(() => {
-		navigator.geolocation.getCurrentPosition((position) => {
-			setLocalLatitude(position.coords.latitude)
-			setLocalLongitude(position.coords.longitude)
-			console.log("that simple?", position)
-		}, (err) => {}, {enableHighAccuracy: false, timeout: 20000, maximumAge: Infinity})
-	}, [])
+	// useEffect(() => {
+	// 	navigator.geolocation.getCurrentPosition((position) => {
+	// 		setLocalLatitude(position.coords.latitude)
+	// 		setLocalLongitude(position.coords.longitude)
+	// 		console.log("that simple?", position)
+	// 	}, (err) => {}, {enableHighAccuracy: false, timeout: 20000, maximumAge: Infinity})
+	// }, [])
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
 		dispatch(fetchListings())
-	}, [filter])
+	}, [])
+	// }, [filter])
 
 	// const destinations = filteredListings.map(listing => {
 	// 	return {lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) } 
@@ -94,7 +95,9 @@ const ListingsIndex = ({filter, isLoaded}) => {
 		setDestinations(filteredListings.map(listing => {
 			return {lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) } 
 		} ))
+	// }, [filter])
 	}, filteredListings) //for some reason this works, NOT listings
+	// }, listings)
 
 	useEffect(() => {
 		if(localLatitude && localLongitude && isLoaded && destinations.length){
@@ -191,14 +194,14 @@ const ListingsIndex = ({filter, isLoaded}) => {
 			for(let i = 1; i <= numTestListings; i++) {
 				listingCards.push(
 					// <ListingCard key={filteredListings[(i % filteredListings.length) - 1]?.id} listing={filteredListings[(i - 1) % filteredListings.length]} num={i} />
-					<ListingCard distance={distancesArray[i]} filter={filter} listing={filteredListings[(i - 1) % filteredListings.length]} num={i} />
+					<ListingCard distance={distancesArray[i - 1]} filter={filter} listing={filteredListings[(i - 1) % filteredListings.length]} num={i} />
 				)
 			}
 		} else {
 			for(let i = 1; i <= filteredListings.length; i++) {
 				listingCards.push(
 					// <ListingCard key={filteredListings[(i % filteredListings.length) - 1]?.id} listing={filteredListings[(i - 1) % filteredListings.length]} num={i} />
-					<ListingCard distance={distancesArray[i]} filter={filter} listing={filteredListings[(i - 1) % filteredListings.length]} num={i} />
+					<ListingCard distance={distancesArray[i - 1]} filter={filter} listing={filteredListings[(i - 1) % filteredListings.length]} num={i} />
 				)
 			}
 		}
@@ -212,7 +215,7 @@ const ListingsIndex = ({filter, isLoaded}) => {
 				<AnimatePresence mode="popLayout">
 					{listingCards}
 					{/* {distances} */}
-					{distancesObj}
+					{/* {distancesObj} */}
 				</AnimatePresence>
 			</div>
 		</div>

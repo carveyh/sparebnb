@@ -5,6 +5,8 @@ import ListingsIndex from "./components/Listings";
 import { TestingConceptsPage } from "./components/Testing/TestingConcepts";
 import ListingsShowPage from "./components/Listings/ListingsShowPage";
 import ProfilePage from "./components/Profile";
+import { useEffect } from "react";
+import { useState } from "react";
 
 import { useLoadScript } from "@react-google-maps/api";
 
@@ -13,6 +15,17 @@ function App() {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
   });
+
+  const [localLatitude, setLocalLatitude] = useState(null)
+	const [localLongitude, setLocalLongitude] = useState(null)
+
+	useEffect(() => {
+		navigator.geolocation.getCurrentPosition((position) => {
+			setLocalLatitude(position.coords.latitude)
+			setLocalLongitude(position.coords.longitude)
+			console.log("that simple?", position)
+		}, (err) => {}, {enableHighAccuracy: false, timeout: 20000, maximumAge: Infinity})
+	}, [])
 
   return (
     <div className="under-modal">
@@ -24,7 +37,7 @@ function App() {
           <Route exact path="/testing"><Testing /></Route>
           <Route exact path="/testing-concepts"><TestingConceptsPage /></Route>
           <Route exact path="/">
-            {<ListingsIndex isLoaded={isLoaded} />}
+            {<ListingsIndex localLatitude={localLatitude} localLongitude={localLongitude} isLoaded={isLoaded} />}
           </Route>
           <Route exact path="/users/:userId">
             <ProfilePage />
