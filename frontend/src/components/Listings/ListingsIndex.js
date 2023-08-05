@@ -60,6 +60,7 @@ const ListingsIndex = ({filter, isLoaded}) => {
 	const [localLongitude, setLocalLongitude] = useState(null)
 	const [distancesObj, setDistancesObj] = useState(null);
 	const [distancesArray, setDistancesArray] = useState([]);
+	const [destinations, setDestinations] = useState([]);
 
 	useEffect(() => {
 		navigator.geolocation.getCurrentPosition((position) => {
@@ -74,34 +75,86 @@ const ListingsIndex = ({filter, isLoaded}) => {
 		dispatch(fetchListings())
 	}, [filter])
 
-	const destinations = filteredListings.map(listing => {
-		return {lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) } 
-	} )
+	// const destinations = filteredListings.map(listing => {
+	// 	return {lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) } 
+	// } )
+	useEffect(() => {
+		setDestinations(filteredListings.map(listing => {
+			return {lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) } 
+		} ))
+	}, filteredListings) //for some reason this works, NOT listings
 
 	useEffect(() => {
-		if(localLatitude && localLongitude && isLoaded){
+		if(localLatitude && localLongitude && isLoaded && destinations.length){
 			let service = new window.google.maps.DistanceMatrixService();
-			service.getDistanceMatrix(
-				{
-					origins: [{lat:parseFloat(localLatitude), lng:parseFloat(localLongitude)}],
-					destinations: destinations,
-					travelMode: "DRIVING",
-					unitSystem: window.google.maps.UnitSystem.IMPERIAL,
-					avoidHighways: false,
-					avoidTolls: false
-				},
-				(response, status) => {
-					if (status !== "OK") {
-						console.log("error. origin", {lat:parseFloat(localLatitude), lng:parseFloat(localLongitude)})
-					} else {
-						setDistancesArray(
-							response.rows[0].elements.map(element => element.distance.text.split(" ")[0])
-						)
-						console.log("status", status)
-						console.log("response of Distance Matrix Service Obj", response)
-					}
+			let numTries = 1;
+			const getDistance = () => {
+				try {
+					service.getDistanceMatrix(
+						{
+							origins: [{lat:parseFloat(localLatitude), lng:parseFloat(localLongitude)}],
+							destinations: destinations,
+							travelMode: "DRIVING",
+							unitSystem: window.google.maps.UnitSystem.IMPERIAL,
+							avoidHighways: false,
+							avoidTolls: false
+						}
+					)
+						.then((response) => {
+							setDistancesArray(
+								response.rows[0].elements.map(element => element.distance.text.split(" ")[0])
+							)
+							// console.log("status", status)
+							console.log("response of Distance Matrix Service Obj", response)
+							// console.log("response of Distance Matrix Service Obj", response.)
+						})
+						.catch((err) => {
+							console.log("origin lat", parseFloat(localLatitude), "origin long", parseFloat(localLongitude))
+							console.log("destinations", destinations)
+							console.log(`inner catch distance error #${numTries++}`)
+							getDistance()	
+						})	
+				} 
+				catch (err) {
+					// console.log(`outer catch distance error #${numTries++}`)
+					// getDistance()
 				}
-			);
+			}
+			getDistance();
+			// service.getDistanceMatrix(
+			// 	{
+			// 		origins: [{lat:parseFloat(localLatitude), lng:parseFloat(localLongitude)}],
+			// 		destinations: destinations,
+			// 		travelMode: "DRIVING",
+			// 		unitSystem: window.google.maps.UnitSystem.IMPERIAL,
+			// 		avoidHighways: false,
+			// 		avoidTolls: false
+			// 	}
+			// )
+			// 	.then((response) => {
+			// 		setDistancesArray(
+			// 			response.rows[0].elements.map(element => element.distance.text.split(" ")[0])
+			// 		)
+			// 		// console.log("status", status)
+			// 		console.log("response of Distance Matrix Service Obj", response)
+			// 		// console.log("response of Distance Matrix Service Obj", response.)
+			// 	})
+			// 	.catch((err) => {
+			// 		console.log("error", err)
+			// 	})
+			// 	,
+			// 	(response, status) => {
+			// 		if (status !== "OK") {
+			// 			console.log("error. origin", {lat:parseFloat(localLatitude), lng:parseFloat(localLongitude)})
+			// 		} else {
+			// 			setDistancesArray(
+			// 				response.rows[0].elements.map(element => element.distance.text.split(" ")[0])
+			// 			)
+			// 			console.log("status", status)
+			// 			console.log("response of Distance Matrix Service Obj", response)
+			// 		}
+			// 	}
+			// );
 		}
 
 		// DOESNT WORK IF WE ACCESS RESPONSE
@@ -117,7 +170,7 @@ const ListingsIndex = ({filter, isLoaded}) => {
 		// 		console.log("response of Distance Matrix Service Obj", response?.rows[0].elements.map(element => element.distance))
 		// 	}}
 		// />)
-	}, [localLatitude, localLongitude, isLoaded])
+	}, [localLatitude, localLongitude, destinations, isLoaded])
 
 	const numTestListings = 13;
 	const listingCards = [];
