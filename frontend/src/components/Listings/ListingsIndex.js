@@ -20,19 +20,31 @@ import {AnimatePresence, motion} from "framer-motion";
 
 const ListingCard = ({distance, listing, num, filter}) => {
 
+	const formattedOverallRating = () => {
+		const twoDigit = listing?.averageRatings.overallRating.toFixed(2)
+		const oneDigit = listing?.averageRatings.overallRating.toFixed(1)
+		return (twoDigit === oneDigit + '0') ? oneDigit : twoDigit;
+	}
+
 	return (
 		<motion.div key={num.toString() + filter} initial={{opacity:0.0}} animate={{opacity:1, transition:{delay:(num) * 0.035, duration: 0.2, ease:'easeIn'} }} exit={{opacity: 0}}>
 		<Link to={`/listings/${listing?.id}`}>
 			<div className={`grid-item grid-item-${num}`} >
-						<div className="listing-favorite-button-background"><i className="fa-solid fa-heart"></i></div>
-						<div className="listing-favorite-button"><i className="fa-regular fa-heart"></i></div>
+						{/* IMPLEMENT SAVED LISTINGS LATER!!! AND BRING THIS HEART BACK!!! */}
+						{/* <div className="listing-favorite-button-background"><i className="fa-solid fa-heart"></i></div> */}
+						{/* <div className="listing-favorite-button"><i className="fa-regular fa-heart"></i></div> */}
 						<div className="listings-photo-container">
 							{/* <img className="listings-photo" src={require(`../../images/listings/${photoFileNames[num-1]}.png`)} /> */}
 							<div className="hover-overlay"></div>
 							<img className="listings-photo" src={require(`../../images/listings/${formatTwoDigitNumberString(listing?.id)}/01.png`)} />
 						</div>
 						<div className="listings-text-container">
-							<p>{`${listing?.city}, ${listing?.state}`}</p>
+							<div className="listings-card-top-row"><p>{`${listing?.city}, ${listing?.state}`}</p> <span className="listings-index-rating">{listing.numRatings >= 3 && 
+								<>
+									<span className="index-star-icon"><i className="fa-solid fa-star"></i></span>
+									<span className="index-rating-num">{formattedOverallRating()}</span>
+								</>
+							}</span></div>
 							{distance ? <p>{`${distance} miles away`}</p> : <p>Calculating distance...</p>}
 							{/* <p>{`${listing?.title}`}</p> */}
 							<p>June 15 - 22</p>
@@ -44,7 +56,7 @@ const ListingCard = ({distance, listing, num, filter}) => {
 	)
 }
 
-const ListingsIndex = ({filter, isLoaded}) => {
+const ListingsIndex = ({localLatitude, localLongitude, filter=null, isLoaded}) => {
 	const dispatch = useDispatch();
 	const [distancesLoaded, setDistancesLoaded] = useState(false);
 	const [pageLoaded, setPageLoaded] = useState(false);
@@ -56,24 +68,25 @@ const ListingsIndex = ({filter, isLoaded}) => {
 		filteredListings = Object.values(listings)
 	}
 
-	const [localLatitude, setLocalLatitude] = useState(null)
-	const [localLongitude, setLocalLongitude] = useState(null)
+	// const [localLatitude, setLocalLatitude] = useState(null)
+	// const [localLongitude, setLocalLongitude] = useState(null)
 	const [distancesObj, setDistancesObj] = useState(null);
 	const [distancesArray, setDistancesArray] = useState([]);
 	const [destinations, setDestinations] = useState([]);
 
-	useEffect(() => {
-		navigator.geolocation.getCurrentPosition((position) => {
-			setLocalLatitude(position.coords.latitude)
-			setLocalLongitude(position.coords.longitude)
-			console.log("that simple?", position)
-		}, (err) => {}, {enableHighAccuracy: false, timeout: 20000, maximumAge: Infinity})
-	}, [])
+	// useEffect(() => {
+	// 	navigator.geolocation.getCurrentPosition((position) => {
+	// 		setLocalLatitude(position.coords.latitude)
+	// 		setLocalLongitude(position.coords.longitude)
+	// 		console.log("that simple?", position)
+	// 	}, (err) => {}, {enableHighAccuracy: false, timeout: 20000, maximumAge: Infinity})
+	// }, [])
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
 		dispatch(fetchListings())
-	}, [filter])
+	}, [])
+	// }, [filter])
 
 	// const destinations = filteredListings.map(listing => {
 	// 	return {lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) } 
@@ -82,7 +95,9 @@ const ListingsIndex = ({filter, isLoaded}) => {
 		setDestinations(filteredListings.map(listing => {
 			return {lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) } 
 		} ))
+	// }, [filter])
 	}, filteredListings) //for some reason this works, NOT listings
+	// }, listings)
 
 	useEffect(() => {
 		if(localLatitude && localLongitude && isLoaded && destinations.length){
@@ -166,7 +181,6 @@ const ListingsIndex = ({filter, isLoaded}) => {
 		// 	}}
 		// 	callback={(response) => {
 		// 		distancesArray.push(response)
-		// 		debugger
 		// 		console.log("response of Distance Matrix Service Obj", response?.rows[0].elements.map(element => element.distance))
 		// 	}}
 		// />)
@@ -180,14 +194,14 @@ const ListingsIndex = ({filter, isLoaded}) => {
 			for(let i = 1; i <= numTestListings; i++) {
 				listingCards.push(
 					// <ListingCard key={filteredListings[(i % filteredListings.length) - 1]?.id} listing={filteredListings[(i - 1) % filteredListings.length]} num={i} />
-					<ListingCard distance={distancesArray[i]} filter={filter} listing={filteredListings[(i - 1) % filteredListings.length]} num={i} />
+					<ListingCard distance={distancesArray[i - 1]} filter={filter} listing={filteredListings[(i - 1) % filteredListings.length]} num={i} />
 				)
 			}
 		} else {
 			for(let i = 1; i <= filteredListings.length; i++) {
 				listingCards.push(
 					// <ListingCard key={filteredListings[(i % filteredListings.length) - 1]?.id} listing={filteredListings[(i - 1) % filteredListings.length]} num={i} />
-					<ListingCard distance={distancesArray[i]} filter={filter} listing={filteredListings[(i - 1) % filteredListings.length]} num={i} />
+					<ListingCard distance={distancesArray[i - 1]} filter={filter} listing={filteredListings[(i - 1) % filteredListings.length]} num={i} />
 				)
 			}
 		}
@@ -201,7 +215,7 @@ const ListingsIndex = ({filter, isLoaded}) => {
 				<AnimatePresence mode="popLayout">
 					{listingCards}
 					{/* {distances} */}
-					{distancesObj}
+					{/* {distancesObj} */}
 				</AnimatePresence>
 			</div>
 		</div>
