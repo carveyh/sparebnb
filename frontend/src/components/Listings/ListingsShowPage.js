@@ -416,12 +416,35 @@ const ListingsShowPage = (props) => {
 							{/* DETAILS CARD | HIGHLIGHTS - START */}
 							{/* DETAILS CARD | HIGHLIGHTS - START */}
 							<div className="details-card-higlights-container horizontal-rule-top-border">
-								<div className="details-card-higlights-padder plain-text">
-									Dedicated workspace
-									A common area with wifi that’s well-suited for working.
-									Self check-in
-									Check yourself in with the lockbox.
-									Free cancellation for 48 hours.
+								<div className="details-card-higlights-padder plain-text listing-features-list">
+									{/* CARD #1 */}
+									<div className="listing-feature-card">
+										<div className="listing-feature-icon">
+											<i class="fa-solid fa-wifi"></i>
+										</div>
+										<div className="listing-feature-text">
+											<div className="listing-feature-header">
+												Dedicated workspace		
+											</div>
+											<div className="listing-feature-desc">
+												A common area with wifi that’s well-suited for working.
+											</div>
+										</div>	
+									</div>
+									{/* CARD #2 */}
+									<div className="listing-feature-card">
+										<div className="listing-feature-icon">
+											<i class="fa-solid fa-door-open"></i>
+										</div>
+										<div className="listing-feature-text">
+											<div className="listing-feature-header">
+												Self check-in
+											</div>
+											<div className="listing-feature-desc">
+												Check yourself in with the lockbox.
+											</div>
+										</div>	
+									</div>
 								</div>
 							</div>
 							{/* DETAILS CARD | HIGHLIGHTS - END */}
@@ -431,7 +454,7 @@ const ListingsShowPage = (props) => {
 							{/* DETAILS CARD | DESCRIPTION - START */}
 							{/* DETAILS CARD | DESCRIPTION - START */}
 							<div className="details-card-description-container horizontal-rule-top-border">
-								<div className="show-page-general-padder plain-text">
+								<div className="show-page-general-padder plain-text listing-show-description-text">
 									{listing.description}
 								</div>
 							</div>
@@ -639,11 +662,9 @@ const ListingsShowPage = (props) => {
 					<Map isLoaded={props.isLoaded} center={{lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) }}/>
 					<br/><br/><br/><br/><br/>
 				</div>
-				{/* <div className="horizontal-rule-top-border plain-text">
-					<br/><br/><br/><br/><br/>
-					<div>Host details</div>
-					<br/><br/><br/><br/><br/>
-				</div> */}
+
+				{/* OMITTED: Host details from airbnb */}
+
 				<div className="horizontal-rule-top-border plain-text">
 					<br/><br/><br/><br/><br/>
 					<div>Footer</div>
