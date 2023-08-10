@@ -45,7 +45,7 @@ export const ReviewsSnippetsMain = ({listingId, setShowReviewsModal}) => {
 	useEffect(() => {
 		dispatch(clearAllResReviews())
 		dispatch(fetchResReviewsForListing(listingId));
-		dispatch(fetchReservations({ id:listingId, type:"listing"}));
+		// dispatch(fetchReservations({ id:listingId, type:"listing"}));
 	}, [])
 
 	const reviewSnippets = reviews?.slice(0,6).map(review => {

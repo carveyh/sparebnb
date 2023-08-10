@@ -31,8 +31,7 @@ export const removeAllReservationsFromState = () => ({
 // REDUX THUNK ACTION CREATORS
 
 
-//THIS BELOW NOT WORKING - a dynamic fetchReservations that can diff types wildcard.
-//REVISIT! 
+//Dynamic thunk can take different an options object containing diff string types :)
 export const fetchReservations = ({id, type}) => async dispatch => {
 	let requestUrl;
 	if(id && type === "listing"){

@@ -1,0 +1,11 @@
+.listings-show-calendar-inner-container {
+	/* color: red; */
+	/* background-color: blue; */
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
+.rdrCalendarWrapper, .rdrMonthsHorizontal, .rdrMonth, .rdrMonthAndYearWrapper {
+	width: 100% !important;
+	max-width: 100%;
+}

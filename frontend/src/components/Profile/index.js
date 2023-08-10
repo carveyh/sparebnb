@@ -30,7 +30,7 @@ const ProfilePage = (props) => {
 		// window.scrollTo(0, 0);
 		
 		dispatch(clearAllReservations())
-		dispatch(fetchReservations({id: userId, type: "user"}))
+		dispatch(fetchReservations({id:userId, type:"user"}))
 
 		dispatch(fetchListings())
 		dispatch(fetchUser)
