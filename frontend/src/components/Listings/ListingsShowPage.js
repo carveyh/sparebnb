@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { formatTwoDigitNumberString } from "../../utils/urlFormatter";
 import { useState } from "react";
-import { createReservation } from "../../store/reservation";
+import { clearAllReservations, createReservation, fetchReservations } from "../../store/reservation";
 
 import {AnimatePresence, motion} from "framer-motion";
 import { fetchResReviewsForListing } from "../../store/reservation_reviews";
@@ -32,6 +32,7 @@ const ListingsShowPage = (props) => {
 	const sessionUser = useSelector(state => state.session?.user)
 	const listing = useSelector(state => state.entities?.listings ? state.entities.listings[`${listingId}`] : {})
 	const host = useSelector(state => state.entities?.users ? state.entities.users[`${listing?.hostId}`] : {})
+	// const reservations = useSele
 	const hostIdFormatted = formatTwoDigitNumberString(host?.id);	
 
 	const [checkIn, setCheckIn] = useState("");
@@ -76,7 +77,8 @@ const ListingsShowPage = (props) => {
 		window.scrollTo(0, 0);
 		dispatch(fetchListing(listingId))
 			.then(() => {
-				
+				dispatch(clearAllReservations())
+				dispatch(fetchReservations({id:listingId, type: "listing"}))
 				dispatch(fetchResReviewsForListing(listingId))
 			})
 			.catch(() => {
@@ -659,7 +661,7 @@ const ListingsShowPage = (props) => {
 					<div className="listing-show-map-subheader">
 						{`${listing.city}, ${listing.state}, United States`}
 					</div>
-					<Map isLoaded={props.isLoaded} center={{lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) }}/>
+					<Map isLoaded={props.isLoaded} zoom={14} center={{lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) }}/>
 					<br/><br/><br/><br/><br/>
 				</div>
 

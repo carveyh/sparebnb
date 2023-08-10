@@ -16,11 +16,15 @@ const SpareMap = ({isLoaded, center={ lat: 40.77413645301188, lng: -73.970824712
 
 	const listingsMarkers = [];
 	let spareIcon;
+
 	if(isLoaded) {
 		spareIcon = {
 			url: "https://i.imgur.com/DekpBQl.png",
-			scaledSize: new window.google.maps.Size(35, 35),
-			anchor: new window.google.maps.Point(-0,35)
+			// scaledSize: new window.google.maps.Size(35, 35),
+			scaledSize: (listings ? new window.google.maps.Size(35, 35) : new window.google.maps.Size(50, 50)),
+			anchor: (listings? new window.google.maps.Point(-0,35) : new window.google.maps.Point(-0,50) ),
+			// anchor: new window.google.maps.Point(-0,70)
+			// anchor: new window.google.maps.Point(17.5,17.5)
 		}
 		// // If listings index, set the boundaries of the map accordingly and add markers.
 		// if(listings){
@@ -38,20 +42,28 @@ const SpareMap = ({isLoaded, center={ lat: 40.77413645301188, lng: -73.970824712
 		// }
 	}
 
-			// If listings index, set the boundaries of the map accordingly and add markers.
-			if(listings){
-				listings.forEach((listing, idx) => {
-					listingsMarkers.push(
-						<Marker 
-							key={idx}
-							position={{lat: listing.latitude, lng: listing.longitude}} 
-							options={{
-								icon:spareIcon,
-							}}
-						/>	
-					)
-				})
-			}
+	const circleOptions = {
+		strokeColor: "#FF0000",
+    strokeOpacity: 0,
+    strokeWeight: 2,
+    fillColor: "#FF0000",
+    fillOpacity: 0.4,
+	}
+
+	// If listings index, set the boundaries of the map accordingly and add markers.
+	if(listings){
+		listings.forEach((listing, idx) => {
+			listingsMarkers.push(
+				<Marker 
+					key={idx}
+					position={{lat: listing.latitude, lng: listing.longitude}} 
+					options={{
+						icon:spareIcon,
+					}}
+				/>	
+			)
+		})
+	}
 
 	const onLoad = (map) => {
 		setMapRef(map);
@@ -94,8 +106,6 @@ const SpareMap = ({isLoaded, center={ lat: 40.77413645301188, lng: -73.970824712
 					{listings ? 
 						<>
 							{/* {listingsMarkers} */}
-
-
 							{listings.map((listing, ind) => (
 								<Marker
 									className="map-marker"
@@ -123,15 +133,11 @@ const SpareMap = ({isLoaded, center={ lat: 40.77413645301188, lng: -73.970824712
 										</div>
 									)}
 								</Marker>
-          ))}
-
-
-
-
-
+          		))}
 						</>
 						: 
 						<>
+							<Circle center={center} radius={250} options={circleOptions} />
 							<Marker 
 								position={center} 
 								options={{
