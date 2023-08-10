@@ -315,6 +315,80 @@
 	padding: 32px 0px;
 }
 
+/* LISTING FEATURES - START */
+/* LISTING FEATURES - START */
+/* LISTING FEATURES - START */
+
+.listing-features-list {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+.listing-feature-card {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+	letter-spacing: 0.1px;
+}
+
+.listing-feature-card:first-child {
+	margin-bottom: 22px;
+}
+
+.listing-feature-icon {
+	/* box-sizing: border-box; */
+	width: 24px;
+	padding-right: 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.listing-feature-icon .fa-solid {
+	font-size: 20px;
+}
+
+.listing-feature-text {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.listing-feature-header {
+	font-size: 16px;
+	font-weight: 500;
+	padding-bottom: 12px;
+}
+
+.listing-feature-desc {
+	font-size: 14px;
+	font-weight: 300;
+	color: #717171;
+}
+
+/* LISTING FEATURES - END */
+/* LISTING FEATURES - END */
+/* LISTING FEATURES - END */
+
+/* DESCRIPTION - START */
+/* DESCRIPTION - START */
+/* DESCRIPTION - START */
+
+.listing-show-description-text {
+	line-height: 1.4em;
+}
+
+/* DESCRIPTION - END */
+/* DESCRIPTION - END */
+/* DESCRIPTION - END */
+
+/* SLEEP - START */
+/* SLEEP - START */
+/* SLEEP - START */
+
 .sleep-header {
 	display: flex;
 	flex-direction: row;
@@ -416,6 +490,31 @@
 .sleep-carousel-container::-webkit-scrollbar {
 	display: none;
 }
+
+
+/* SLEEP - END */
+/* SLEEP - END */
+/* SLEEP - END */
+
+/* CALENDAR - START */
+/* CALENDAR - START */
+/* CALENDAR - START */
+
+.listing-show-calendar-subtitle {
+	padding-top: 8px;
+	color: rgb(113,113,113);
+	font-size: 14px;
+	font-weight: 300;
+	height: 36px;
+}
+
+.listing-calendars-box {
+
+}
+
+/* CALENDAR - END */
+/* CALENDAR - END */
+/* CALENDAR - END */
 
 
 /* ------------------ LISTING DETAILS RIGHT SIDE ------------------ */
