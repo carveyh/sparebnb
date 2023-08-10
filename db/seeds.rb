@@ -219,8 +219,8 @@ ApplicationRecord.transaction do
 		Reservation.create!({
 			reserver_id: (1..13).to_a.sample,
 			listing_id: 4,
-			start_date: Faker::Date.between(from: '2023-06-12', to: '2023-06-15'),
-			end_date: Faker::Date.between(from: '2023-06-16', to: '2023-07-04'),
+			start_date: Faker::Date.between(from: '2023-08-12', to: '2023-08-15'),
+			end_date: Faker::Date.between(from: '2023-08-16', to: '2023-09-04'),
 			num_guests: 1,
 			base_nightly_rate: 399
 		})
