@@ -339,8 +339,16 @@
 }
 
 .listing-feature-icon {
+	/* box-sizing: border-box; */
 	width: 24px;
 	padding-right: 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.listing-feature-icon .fa-solid {
+	font-size: 20px;
 }
 
 .listing-feature-text {
@@ -487,6 +495,26 @@
 /* SLEEP - END */
 /* SLEEP - END */
 /* SLEEP - END */
+
+/* CALENDAR - START */
+/* CALENDAR - START */
+/* CALENDAR - START */
+
+.listing-show-calendar-subtitle {
+	padding-top: 8px;
+	color: rgb(113,113,113);
+	font-size: 14px;
+	font-weight: 300;
+	height: 36px;
+}
+
+.listing-calendars-box {
+
+}
+
+/* CALENDAR - END */
+/* CALENDAR - END */
+/* CALENDAR - END */
 
 
 /* ------------------ LISTING DETAILS RIGHT SIDE ------------------ */

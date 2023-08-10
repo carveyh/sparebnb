@@ -141,12 +141,6 @@ const ListingsShowPage = (props) => {
 		return numNights() ? numNights() * baseServiceFee : baseServiceFee;
 	}
 
-	// REVIEWS DISPLAY DATA - START
-	// Be able to parse return string in 3 different locations: 
-	// (1) Page header
-	// (2) Create res box top-right corner
-	// (3) Reviews section 
-
 	const formattedOverallRating = () => {
 		const twoDigit = listing?.averageRatings.overallRating.toFixed(2)
 		const oneDigit = listing?.averageRatings.overallRating.toFixed(1)
@@ -156,12 +150,6 @@ const ListingsShowPage = (props) => {
 	const formattedNumReviews = () => {
 		return (listing?.numRatings !== 1) ? listing?.numRatings + " reviews" : listing?.numRatings + " review" 
 	}
-
-	// const focusReservationInput = (e) => {
-	// 	e.preventDefault();
-
-	// }
-
 
 	const mouseDownReserveBtn = (e) => {
 		if(!sessionUser && !disabledToolTipRunning) {
@@ -515,11 +503,22 @@ const ListingsShowPage = (props) => {
 							{/* DETAILS CARD | CALENDAR - START */}
 							<div className="details-card-amenities-container horizontal-rule-top-border">
 								<div className="show-page-general-padder plain-text">
-									<br/><br/><br/><br/><br/>
-									CALENDAR
-									<br/><br/><br/><br/><br/>
-									CALENDAR
-									<br/><br/><br/><br/><br/>
+									<div className="heading-2 ">
+										{numNights() ? 
+											`${numNights()} nights in ${listing.city}`
+											: 
+											checkIn === "" ? 
+												"Select check-in date"
+												:
+												"Select checkout date"
+										}
+									</div>
+									<div className="listing-show-calendar-subtitle">
+										{numNights() ? `${checkIn} - ${checkOut}` : `Add your travel dates for exact pricing`}
+									</div>
+									<div className="listing-calendars-box">
+
+									</div>
 								</div>
 							</div>
 							{/* DETAILS CARD | CALENDAR - END */}
