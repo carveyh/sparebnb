@@ -612,6 +612,7 @@
 .checkin-button, .checkout-button {
 	position: relative;
 	width: 100%;
+	max-width: 50%;
 }
 
 .checkin-input, .checkout-input {

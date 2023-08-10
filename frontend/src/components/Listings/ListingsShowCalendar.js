@@ -28,11 +28,16 @@ const ListingsShowCalendar = () => {
 	const [containerSize, setContainerSize] = useState(undefined);
 
 	const handleResize = () => {
-		setContainerSize(calRef.current.offsetWidth);
-		console.log("calRef", calRef);
-		console.log("calRef.current", calRef.current);
-		console.log("containerSize", containerSize);
-		console.log("calRef.current.offsetWidth", calRef.current.offsetWidth);
+		// setContainerSize(calRef.current.offsetWidth);
+		// console.log("calRef", calRef);
+		// console.log("calRef.current", calRef.current);
+		// console.log("containerSize", containerSize);
+		// console.log("calRef.current.offsetWidth", calRef.current.offsetWidth);
+		if(calRef.current.offsetWidth < 606.5) {
+			setNumMonths(1)
+		} else {
+			setNumMonths(2)
+		}
 	}
 
 	useEffect(() => {

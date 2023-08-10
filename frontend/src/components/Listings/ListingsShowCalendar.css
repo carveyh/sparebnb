@@ -5,6 +5,7 @@
 	overflow-x: hidden;
 }
 
-.rdrCalendarWrapper, .rdrMonthAndYearWrapper {
+.rdrCalendarWrapper, .rdrMonthsHorizontal, .rdrMonth, .rdrMonthAndYearWrapper {
+	width: 100% !important;
 	max-width: 100%;
 }
