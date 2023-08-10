@@ -1,0 +1,10 @@
+.listings-show-calendar-inner-container {
+	/* color: red; */
+	/* background-color: blue; */
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
+.rdrCalendarWrapper, .rdrMonthAndYearWrapper {
+	max-width: 100%;
+}

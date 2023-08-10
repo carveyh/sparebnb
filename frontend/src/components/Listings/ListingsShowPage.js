@@ -24,6 +24,7 @@ import { Modal } from "../../context/Modal";
 import * as ListingFees from "./ListingFees"
 import { Redirect } from "react-router-dom";
 import Map from "../SpareMap/SpareMap.js"
+import ListingsShowCalendar from "./ListingsShowCalendar";
 
 const ListingsShowPage = (props) => {
 	const dispatch = useDispatch();
@@ -517,7 +518,7 @@ const ListingsShowPage = (props) => {
 										{numNights() ? `${checkIn} - ${checkOut}` : `Add your travel dates for exact pricing`}
 									</div>
 									<div className="listing-calendars-box">
-
+										<ListingsShowCalendar />
 									</div>
 								</div>
 							</div>
