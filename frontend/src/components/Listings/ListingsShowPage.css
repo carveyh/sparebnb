@@ -514,6 +514,21 @@
 
 }
 
+.calendar-clear-dates-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.clear-dates-button {
+	margin-right: 10px;
+	color: black;
+	font-size: 14px;
+	font-weight: 500;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
 /* CALENDAR - END */
 /* CALENDAR - END */
 /* CALENDAR - END */
@@ -785,6 +800,16 @@
 	justify-content: center;
 	align-items: center;
 	margin-top: 24px;
+}
+
+.report-button {
+	font-size: 14px;
+	font-weight: 500;
+	color: #717171;
+}
+
+.report-button-text {
+	text-decoration: underline;
 }
 
 .reservation-complete {

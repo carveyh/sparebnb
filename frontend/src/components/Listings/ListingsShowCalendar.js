@@ -15,16 +15,44 @@ const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut}) => {
 
 	const [datesState, setDatesState] = useState([
 		{
-			startDate: new Date(),
-			endDate: new Date(),
-			// endDate: addDays(new Date(), 7),
-			key: 'selection',
+			// startDate: new Date(),
+			// endDate: new Date(),
+			// // endDate: addDays(new Date(), 7),
+			// key: 'selection',
+
 			// startDate: checkIn,
 			// endDate: checkOut,
 			// // endDate: addDays(new Date(), 7),
 			// key: 'selection',
+			
+			startDate: null,
+			endDate: null,
+			// endDate: addDays(new Date(), 7),
+			key: 'selection',
+
 		}
 	])
+
+	useEffect(() => {
+		if(checkIn < checkOut) {
+			setDatesState(
+				[{
+					startDate: checkIn,
+					endDate: checkOut,
+					key: 'selection',
+				}]
+			)
+		} else {
+			setDatesState(
+				[{
+					startDate: checkIn,
+					endDate: checkIn,
+					key: 'selection',
+				}]
+			)
+		}
+		
+	}, [checkIn, checkOut])
 
 	const handleSelect = (item) => {
 		setDatesState([item.selection])
@@ -90,6 +118,19 @@ const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut}) => {
 		return () => window.removeEventListener('resize', handleResize);
 	}, [])
 
+	// useEffect(() => {
+	// 	setDatesState({
+	// 		// startDate: new Date(),
+	// 		// endDate: new Date(),
+	// 		// // endDate: addDays(new Date(), 7),
+	// 		// key: 'selection',
+	// 		startDate: checkIn,
+	// 		endDate: checkOut,
+	// 		// endDate: addDays(new Date(), 7),
+	// 		key: 'selection',
+	// 	})
+	// }, [checkIn, checkOut])
+
 	listBlockedDates();
 	getMaxDate();
 
@@ -106,6 +147,8 @@ const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut}) => {
 				direction="horizontal"
 				months={numMonths}
 				ranges={datesState}
+				// ranges={(checkIn && checkOut) ? datesState : undefined}
+				// ranges={undefined} // if we want to "clear dates"
 				onChange={handleSelect}
 				showDateDisplay={false} // Don't need this for on page
 				editableDateInputs={true} // if showDateDisplay={true}

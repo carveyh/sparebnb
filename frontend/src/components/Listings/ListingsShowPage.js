@@ -39,6 +39,8 @@ const ListingsShowPage = (props) => {
 	// const [checkOut, setCheckOut] = useState("");
 	const [checkIn, setCheckIn] = useState(new Date());
 	const [checkOut, setCheckOut] = useState(new Date());
+	// const [checkIn, setCheckIn] = useState(undefined);
+	// const [checkOut, setCheckOut] = useState(undefined);
 	const [numGuests, setNumGuests] = useState(1);
 	const [dayAfter, setDayAfter] = useState();
 	const [dayBefore, setDayBefore] = useState();
@@ -91,8 +93,18 @@ const ListingsShowPage = (props) => {
 	
 
 	const handleChangeCheckIn = e => {
-		setCheckIn(e.target.value);
-		setDayAfter(daysApartCalculator(e.target.value, 2));
+		const dateString = e.target.value;
+		const formattedDateString = dateString.split('-').join('/')
+		const newDate = new Date(formattedDateString);
+		setCheckIn(newDate);
+		// setCheckIn(e.target.value);
+		setDayAfter(daysApartCalculator(e.target.value, 2))
+
+		if(newDate > checkOut){
+			setCheckOut(newDate)
+			document.querySelector(".checkout-input").focus();
+			document.querySelector(".checkout-input").showPicker();
+		}
 
 		// Not working great, if you click up and down on month selector the date input automatically selects a date,
 		// this will cause shift in focus
@@ -104,7 +116,11 @@ const ListingsShowPage = (props) => {
 	}
 
 	const handleChangeCheckOut = e => {
-		setCheckOut(e.target.value);
+		const dateString = e.target.value;
+		const formattedDateString = dateString.split('-').join('/')
+		const newDate = new Date(formattedDateString);
+		setCheckOut(newDate);
+		// setCheckOut(e.target.value);
 		setDayBefore(daysApartCalculator(e.target.value, -0));
 		// Not working great, if you click up and down on month selector the date input automatically selects a date,
 		// this will cause shift in focus
@@ -113,6 +129,11 @@ const ListingsShowPage = (props) => {
 		// 	inputToFocus.focus();
 		// 	inputToFocus.showPicker();
 		// };
+	}
+
+	const handleClearDates = () => {
+		setCheckIn(new Date())
+		setCheckOut(new Date())
 	}
 
 	const daysApartCalculator = (oldDate, delta) => {
@@ -210,6 +231,11 @@ const ListingsShowPage = (props) => {
 				inputToFocus.focus();
 				inputToFocus.showPicker();
 				return;
+			}
+			if(checkIn.toString() === checkOut.toString()) {
+				document.querySelector(".checkin-input").focus();
+				document.querySelector(".checkin-input").showPicker();
+				return
 			}
 
 			const reservation = { checkIn, checkOut, numGuests, listingId,
@@ -492,7 +518,7 @@ const ListingsShowPage = (props) => {
 
 							{/* DETAILS CARD | AMENITIES - START */}
 							{/* DETAILS CARD | AMENITIES - START */}
-							<div className="details-card-amenities-container horizontal-rule-top-border">
+							{/* <div className="details-card-amenities-container horizontal-rule-top-border">
 								<div className="show-page-general-padder plain-text">
 								What this place offers
 								Lake access
@@ -506,7 +532,7 @@ const ListingsShowPage = (props) => {
 								Free washer – In unit
 								Free dryer – In unit
 								</div>
-							</div>
+							</div> */}
 							{/* DETAILS CARD | AMENITIES - END */}
 							{/* DETAILS CARD | AMENITIES - END */}
 
@@ -515,7 +541,7 @@ const ListingsShowPage = (props) => {
 							<div className="details-card-amenities-container horizontal-rule-top-border">
 								<div className="show-page-general-padder plain-text">
 									<div className="heading-2 ">
-										{numNights() ? 
+										{numNights() > 0 ? 
 											`${numNights()} nights in ${listing.city}`
 											: 
 											checkIn === "" ? 
@@ -525,7 +551,7 @@ const ListingsShowPage = (props) => {
 										}
 									</div>
 									<div className="listing-show-calendar-subtitle">
-										{numNights() ? `${formatDate(checkIn)} - ${formatDate(checkOut)}` : `Add your travel dates for exact pricing`}
+										{numNights() > 0 ? `${formatDate(checkIn)} - ${formatDate(checkOut)}` : `Add your travel dates for exact pricing`}
 									</div>
 									<div className="listing-calendars-box">
 										<ListingsShowCalendar 
@@ -534,6 +560,9 @@ const ListingsShowPage = (props) => {
 											checkOut={checkOut}
 											setCheckOut={setCheckOut}
 										/>
+									</div>
+									<div className="calendar-clear-dates-container">
+										<div onClick={handleClearDates} className="clear-dates-button">Clear dates</div>
 									</div>
 								</div>
 							</div>
@@ -572,7 +601,7 @@ const ListingsShowPage = (props) => {
 												<div className="checkin-button">
 													<input className="checkin-input" 
 														type="date"
-														value={checkIn.toISOString().slice(0,10)}
+														value={checkIn !== "" ? checkIn?.toISOString().slice(0,10) : ""}
 														min={minDate()}
 														max={checkOut ? dayBefore : null}
 														onChange={handleChangeCheckIn}
@@ -583,7 +612,7 @@ const ListingsShowPage = (props) => {
 												<div className="checkout-button">
 													<input className="checkout-input" 
 														type="date"
-														value={checkOut.toISOString().slice(0,10)}
+														value={checkOut?.toISOString().slice(0,10)}
 														min={checkIn ? dayAfter : daysApartCalculator(minDate(), 2)}
 														onChange={handleChangeCheckOut}
 														required
@@ -602,7 +631,7 @@ const ListingsShowPage = (props) => {
 												onMouseDown={mouseDownReserveBtn}
 												className={(sessionUser && buttonClickable) ? `reserve-button plain-text` : `disabled-reserve-button plain-text`}
 											>
-												{numNights() ? `Reserve` : `Check availability` }
+												{(numNights() > 0) ? `Reserve` : `Check availability` }
 											</button>
 											
 										</div>
@@ -610,7 +639,7 @@ const ListingsShowPage = (props) => {
 									{/* FORM - END */}
 									{/* FORM - END */}
 									{/* <div className="plain-text report-button-container wont-charged">You won't be charged yet</div> */}
-									{numNights() && <>
+									{numNights() > 0 && <>
 										<div className={`plain-text report-button-container ${bookingConfirmed ? "reservation-complete" : "reservation-incomplete"}`}>
 											{bookingConfirmed ? "Reservation complete!" : "What are you waiting for?"}
 										</div>
@@ -622,7 +651,7 @@ const ListingsShowPage = (props) => {
 									</>}
 								</div>
 								<div className="report-button-container">
-									<a target="_blank" href="https://www.linkedin.com/in/carvey-hor/"><div className="report-button"><i className="fa-solid fa-flag"></i> &nbsp; Report this listing</div></a>
+									<a target="_blank" href="https://www.linkedin.com/in/carvey-hor/"><div className="report-button"><i className="fa-solid fa-flag"></i> &nbsp; <span className="report-button-text">Report this listing</span></div></a>
 									{/* <div className="report-button"><i className="fa-solid fa-flag"></i> &nbsp; Report this listing</div> */}
 								</div>
 							</div>
