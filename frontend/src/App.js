@@ -20,6 +20,8 @@ function App() {
   const [localLatitude, setLocalLatitude] = useState(null)
 	const [localLongitude, setLocalLongitude] = useState(null)
 
+  const [showIndexMap, setShowIndexMap] = useState(false);
+
 	useEffect(() => {
 		navigator.geolocation.getCurrentPosition((position) => {
 			setLocalLatitude(position.coords.latitude)
@@ -38,7 +40,10 @@ function App() {
           <Route exact path="/testing"><Testing /></Route>
           <Route exact path="/testing-concepts"><TestingConceptsPage /></Route>
           <Route exact path="/">
-            {<ListingsIndex localLatitude={localLatitude} localLongitude={localLongitude} isLoaded={isLoaded} />}
+            {<ListingsIndex 
+              showIndexMap={showIndexMap} setShowIndexMap={setShowIndexMap}
+              localLatitude={localLatitude} localLongitude={localLongitude} isLoaded={isLoaded} 
+            />}
           </Route>
           <Route exact path="/users/:userId">
             <ProfilePage />
@@ -50,7 +55,7 @@ function App() {
         </Switch>
       </div>
 
-      <Footer />
+      {!showIndexMap && <Footer />}
 
     </div>
   );
