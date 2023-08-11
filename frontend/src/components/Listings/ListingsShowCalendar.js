@@ -9,21 +9,56 @@ import { addDays } from 'date-fns';
 import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-const ListingsShowCalendar = () => {
+const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut, modal, calModalRef, showDateModal, setShowDateModal, handleClearDates}) => {
 
 	const reservations = Object.values(useSelector(state => state.entities.reservations ? state.entities.reservations : {}))
 
 	const [datesState, setDatesState] = useState([
 		{
-			startDate: new Date(),
+			// startDate: new Date(),
+			// endDate: new Date(),
+			// // endDate: addDays(new Date(), 7),
+			// key: 'selection',
+
+			// startDate: checkIn,
+			// endDate: checkOut,
+			// // endDate: addDays(new Date(), 7),
+			// key: 'selection',
+			
+			startDate: null,
+			endDate: null,
 			// endDate: addDays(new Date(), 7),
-			endDate: new Date(),
 			key: 'selection',
+
 		}
 	])
 
+	useEffect(() => {
+		if(checkIn < checkOut) {
+			setDatesState(
+				[{
+					startDate: checkIn,
+					endDate: checkOut,
+					key: 'selection',
+				}]
+			)
+		} else {
+			setDatesState(
+				[{
+					startDate: checkIn,
+					endDate: checkIn,
+					key: 'selection',
+				}]
+			)
+		}
+		
+	}, [checkIn, checkOut])
+
 	const handleSelect = (item) => {
 		setDatesState([item.selection])
+		setCheckIn(item.selection.startDate)
+		setCheckOut(item.selection.endDate)
+		console.log(item.selection)
 	}
 
 	// Calendar will only display 1 month if container is < 606.5px, akin to airbnb
@@ -32,6 +67,7 @@ const ListingsShowCalendar = () => {
 	const [containerSize, setContainerSize] = useState(undefined);
 	// const [blockedDates, setBlockedDates] = useState([]); // better not using useState
 	let blockedDates = [];
+	let maxDate;
 
 	const handleResize = () => {
 		// setContainerSize(calRef.current.offsetWidth);
@@ -67,39 +103,92 @@ const ListingsShowCalendar = () => {
 		blockedDates = blockedDatesArr;
 	}
 
+	const getMaxDate = () => { // airbnb roughly allows you to browse 24 months for booking, not including current month.
+		const tempDate = new Date();
+		// tempDate.setDate(tempDate.getDate() + 730)
+		tempDate.setMonth(tempDate.getMonth() + 24)
+		tempDate.setDate(1)
+		tempDate.setDate(tempDate.getDate() - 1)
+
+		maxDate = tempDate;
+	}
+
+	const clickOutsideClose = (e) => {
+		// need calModalRef.current bc if close button is clicked, the ref will no longer be available to check
+		if(calModalRef.current && !calModalRef.current.contains(e.target) && showDateModal) {
+			setShowDateModal(false)
+			document.removeEventListener("click",clickOutsideClose)
+		}
+	}
+
 	useEffect(() => {
+		if(modal) document.addEventListener("click",clickOutsideClose)
 		window.addEventListener('resize', handleResize);
-		return () => window.removeEventListener('resize', handleResize);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+			document.removeEventListener("click",clickOutsideClose)
+		}
 	}, [])
 
+	// useEffect(() => {
+	// 	setDatesState({
+	// 		// startDate: new Date(),
+	// 		// endDate: new Date(),
+	// 		// // endDate: addDays(new Date(), 7),
+	// 		// key: 'selection',
+	// 		startDate: checkIn,
+	// 		endDate: checkOut,
+	// 		// endDate: addDays(new Date(), 7),
+	// 		key: 'selection',
+	// 	})
+	// }, [checkIn, checkOut])
+
 	listBlockedDates();
+	getMaxDate();
 
-	useEffect(() => {
-		// console.log("blocked dates:",listBlockedDates())
-		// listBlockedDates();
-	}, []) // run this useEffect once reservations gets populated
-	// }, [reservations]) // run this useEffect once reservations gets populated
+	
 
-	useEffect(() => {
-		console.log("blocked dates should be set", blockedDates)
-	}, [blockedDates])
+	// useEffect(() => {
+	// 	console.log("blocked dates should be set", blockedDates)
+	// }, [blockedDates])
 
 	return (
-		<div ref={calRef} className='listings-show-calendar-inner-container'>
-			<DateRange
-				preventSnapRefocus={true}
-				direction="horizontal"
-				months={numMonths}
-				ranges={datesState}
-				onChange={handleSelect}
-				showDateDisplay={false}
-				fixedHeight={false} //airbnb has this behavior - if a month needs 6 lines for a month it will change height.
-				// blockedDates={listBlockedDates()}
-				disabledDates={blockedDates}
+		<>
+			<div ref={calRef} className='listings-show-calendar-inner-container'>
+				<DateRange
+					preventSnapRefocus={true}
+					direction="horizontal"
+					months={numMonths}
+					ranges={datesState}
+					// ranges={(checkIn && checkOut) ? datesState : undefined}
+					// ranges={undefined} // if we want to "clear dates"
+					onChange={handleSelect}
+					showDateDisplay={false} // Don't need this for on page
+					editableDateInputs={true} // if showDateDisplay={true}
+					fixedHeight={false} //airbnb has this behavior - if a month needs 6 lines for a month it will change height.
+					// blockedDates={listBlockedDates()}
+					disabledDates={blockedDates}
+					minDate={new Date()}
+					maxDate={maxDate}
+					rangeColors={["#3e3e3e","#717171", "#FF0000"]}
+					color="FF0000"
+					weekdayDisplayFormat='EEEEEE'
+					// initialFocusedRange={[]}
 
-				// showPreview={false}
-			/>
-		</div>
+					// scroll={{enabled: true}} // calendar turns gray and empty...not needed
+					// showMonthAndYearPickers={false} // not as clean, can omit as airbnb forces you to use showMonthArrow or type in dates
+					// showMonthArrow={true} // needed to select from different future months
+					// showSelectionPreview={false} // no apparent change
+					// showPreview={false} //no apparent change
+				/>
+			</div>
+			{modal && 
+				<div className='date-modal-controls'>
+					<div onClick={handleClearDates} className='date-modal-btn date-modal-clear-btn'>Clear Dates</div>
+					<div onClick={e => setShowDateModal(false)} className='date-modal-btn date-modal-close-btn'>Close</div>
+				</div>
+			}
+		</>
 	)
 }
 
