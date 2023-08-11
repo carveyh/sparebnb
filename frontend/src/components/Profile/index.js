@@ -136,13 +136,13 @@ const ProfilePage = (props) => {
 						{/* HORIZONTAL RULEEEEEEEEEEEEEEEEEEEEE */}
 					
 					{/* FOOTER */}
-					<div className="footer-container">
+					{/* <div className="footer-container">
 						<div className="footer-text">
 							<div>Can't find your reservation here?</div> 
 							<div className="footer-links"><a target="_blank" href="https://github.com/carveyh">Github</a></div> 
 							<div className="footer-links"><a target="_blank" href="https://www.linkedin.com/in/carvey-hor/">LinkedIn</a></div> 
 						</div>
-					</div>
+					</div> */}
 					{/* FOOTER */}
 
 				</div>
