@@ -1,3 +1,67 @@
+/* MODAL - START */
+
+.listing-date-modal-container {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 200%;
+	z-index: 6;
+	padding: 24px 32px 16px;
+	box-sizing: border-box;
+	background-color: white;
+	border-radius: 16px;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px;
+	display: flex;
+	flex-direction: column;
+	/* opacity: 0; */
+	
+}
+
+/* Due to calendar selection range showing all black for 0.01s upon initial render */
+.listing-date-modal-container * {
+	animation: fadeInDateModal 0.04s linear 0s 1 normal forwards;
+}
+
+@keyframes fadeInDateModal {
+	0%{
+		opacity: 0;
+	}
+	100%{
+		opacity: 1;
+	}
+}
+
+.date-modal-controls {
+	padding-right: 10px;
+	align-self: flex-end;
+	display: flex;
+	flex-direction: row;
+}
+
+.date-modal-btn {
+	cursor: pointer;
+	padding: 8px 16px;
+	font-size: 14px;
+	border-radius: 8px;
+}
+
+.date-modal-clear-btn {
+	padding: 8px;
+	text-decoration: underline;
+}
+
+.date-modal-clear-btn:hover {
+	background-color: #F7F7F7;
+}
+
+.date-modal-close-btn {
+	margin-left: 8px;
+	color: #FFFFFF;
+	background-color: #222222;
+}
+
+/* MODAL - END */
+
 .listings-show-calendar-inner-container {
 	/* color: red; */
 	/* background-color: blue; */

@@ -9,7 +9,7 @@ import { addDays } from 'date-fns';
 import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut}) => {
+const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut, modal, calModalRef, showDateModal, setShowDateModal, handleClearDates}) => {
 
 	const reservations = Object.values(useSelector(state => state.entities.reservations ? state.entities.reservations : {}))
 
@@ -113,9 +113,21 @@ const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut}) => {
 		maxDate = tempDate;
 	}
 
+	const clickOutsideClose = (e) => {
+		// need calModalRef.current bc if close button is clicked, the ref will no longer be available to check
+		if(calModalRef.current && !calModalRef.current.contains(e.target) && showDateModal) {
+			setShowDateModal(false)
+			document.removeEventListener("click",clickOutsideClose)
+		}
+	}
+
 	useEffect(() => {
+		if(modal) document.addEventListener("click",clickOutsideClose)
 		window.addEventListener('resize', handleResize);
-		return () => window.removeEventListener('resize', handleResize);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+			document.removeEventListener("click",clickOutsideClose)
+		}
 	}, [])
 
 	// useEffect(() => {
@@ -141,34 +153,42 @@ const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut}) => {
 	// }, [blockedDates])
 
 	return (
-		<div ref={calRef} className='listings-show-calendar-inner-container'>
-			<DateRange
-				preventSnapRefocus={true}
-				direction="horizontal"
-				months={numMonths}
-				ranges={datesState}
-				// ranges={(checkIn && checkOut) ? datesState : undefined}
-				// ranges={undefined} // if we want to "clear dates"
-				onChange={handleSelect}
-				showDateDisplay={false} // Don't need this for on page
-				editableDateInputs={true} // if showDateDisplay={true}
-				fixedHeight={false} //airbnb has this behavior - if a month needs 6 lines for a month it will change height.
-				// blockedDates={listBlockedDates()}
-				disabledDates={blockedDates}
-				minDate={new Date()}
-				maxDate={maxDate}
-				rangeColors={["#3e3e3e","#717171", "#FF0000"]}
-				color="FF0000"
-				weekdayDisplayFormat='EEEEEE'
-				// initialFocusedRange={[]}
+		<>
+			<div ref={calRef} className='listings-show-calendar-inner-container'>
+				<DateRange
+					preventSnapRefocus={true}
+					direction="horizontal"
+					months={numMonths}
+					ranges={datesState}
+					// ranges={(checkIn && checkOut) ? datesState : undefined}
+					// ranges={undefined} // if we want to "clear dates"
+					onChange={handleSelect}
+					showDateDisplay={false} // Don't need this for on page
+					editableDateInputs={true} // if showDateDisplay={true}
+					fixedHeight={false} //airbnb has this behavior - if a month needs 6 lines for a month it will change height.
+					// blockedDates={listBlockedDates()}
+					disabledDates={blockedDates}
+					minDate={new Date()}
+					maxDate={maxDate}
+					rangeColors={["#3e3e3e","#717171", "#FF0000"]}
+					color="FF0000"
+					weekdayDisplayFormat='EEEEEE'
+					// initialFocusedRange={[]}
 
-				// scroll={{enabled: true}} // calendar turns gray and empty...not needed
-				// showMonthAndYearPickers={false} // not as clean, can omit as airbnb forces you to use showMonthArrow or type in dates
-				// showMonthArrow={true} // needed to select from different future months
-				// showSelectionPreview={false} // no apparent change
-				// showPreview={false} //no apparent change
-			/>
-		</div>
+					// scroll={{enabled: true}} // calendar turns gray and empty...not needed
+					// showMonthAndYearPickers={false} // not as clean, can omit as airbnb forces you to use showMonthArrow or type in dates
+					// showMonthArrow={true} // needed to select from different future months
+					// showSelectionPreview={false} // no apparent change
+					// showPreview={false} //no apparent change
+				/>
+			</div>
+			{modal && 
+				<div className='date-modal-controls'>
+					<div onClick={handleClearDates} className='date-modal-btn date-modal-clear-btn'>Clear Dates</div>
+					<div onClick={e => setShowDateModal(false)} className='date-modal-btn date-modal-close-btn'>Close</div>
+				</div>
+			}
+		</>
 	)
 }
 

@@ -16,7 +16,9 @@
 }
 
 .lower-dot {
-	margin-top: 6.5px !important;
+	/* margin-top: 6.5px !important; */
+	margin-top: 3px !important;
+	margin-bottom: 3.5px;
 	margin-left: 8px;
 	margin-right: 8px;
 	font-weight: 100;
@@ -25,7 +27,7 @@
 }
 
 .stats-text-small {
-	font-size: 14px;
+	font-size: 13px;
 	font-weight: 500;
 }
 
@@ -100,6 +102,7 @@
 	display: flex;
 	align-items: center;
 	margin-top: 4px;
+	margin-top: 0px;
 	height: 24px;
 }
 
@@ -118,6 +121,29 @@
 
 .show-header-buttons {
 	padding-bottom: 5px;
+	display: flex;
+	margin-right: -8px;
+	margin-top: -8px;
+	font-size: 14px;
+}
+
+.show-header-btn {
+	cursor: pointer;
+	margin-top: 8px;
+	padding: 8px;
+	border-radius: 8px;
+}
+
+.show-header-btn:hover {
+	background-color: #f7f7f7;
+}
+
+.show-header-btn-text {
+	text-decoration: underline;
+}
+
+.show-save-btn {
+	margin-left: 6px;
 }
 
 /* ------------------ PHOTOS ------------------ */
@@ -617,6 +643,7 @@
 }
 
 .date-inputs {
+	position: relative;
 	width: 100%;
 	max-width: 100%;
 	display: flex;

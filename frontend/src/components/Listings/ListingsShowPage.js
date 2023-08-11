@@ -49,6 +49,7 @@ const ListingsShowPage = (props) => {
 	const [buttonClickable, setButtonClickable] = useState(true);
 	const [currentSleepPhotoNum, setCurrentSleepPhotoNum] = useState(1);
 	const [disabledToolTipRunning, setDisabledToolTipRunning] = useState(false);
+	const [showDateModal, setShowDateModal] = useState(false);
 
 	// Review modal
 	const [showReviewsModal, setShowReviewsModal] = useState(false);
@@ -71,6 +72,9 @@ const ListingsShowPage = (props) => {
 
 	const reserveBtn = useRef(null);
 
+	// calendar modal
+	const calModalRef = useRef(null);
+		
 	// const cleaningFee = parseInt(listing?.baseNightlyRate / 4);
 	const cleaningFee = ListingFees.cleaningFee(listing?.baseNightlyRate);
 	// const baseServiceFee = 14;
@@ -131,9 +135,14 @@ const ListingsShowPage = (props) => {
 		// };
 	}
 
+	const handleToggleDateModal = (e) => {
+		setShowDateModal(true)
+	}
+
 	const handleClearDates = () => {
-		setCheckIn(new Date())
-		setCheckOut(new Date())
+		const newDate = new Date()
+		setCheckIn(newDate)
+		setCheckOut(newDate)
 	}
 
 	const daysApartCalculator = (oldDate, delta) => {
@@ -155,7 +164,7 @@ const ListingsShowPage = (props) => {
 		// const diffTime = Math.abs(new Date(checkOut) - new Date(checkIn));
 		// const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 		// return diffDays;
-
+		console.log(ListingFees.numNights(checkIn, checkOut))
 		return ListingFees.numNights(checkIn, checkOut);
 	}
 
@@ -219,22 +228,26 @@ const ListingsShowPage = (props) => {
 		} else {
 
 			// If form inputs are not fully complete, force focus on form inputs in logical order: checkin, checkout, guests count.
-			const emptyCheckin = (checkIn === "")
-			const emptyCheckout = (checkOut === "")
-			if(emptyCheckin || emptyCheckout) {
-				let inputToFocus;
-				if(emptyCheckin) {
-					inputToFocus = document.querySelector(".checkin-input");
-				} else if(emptyCheckout) {
-					inputToFocus = document.querySelector(".checkout-input");
-				}
-				inputToFocus.focus();
-				inputToFocus.showPicker();
-				return;
-			}
-			if(checkIn.toString() === checkOut.toString()) {
-				document.querySelector(".checkin-input").focus();
-				document.querySelector(".checkin-input").showPicker();
+			// const emptyCheckin = (checkIn === "")
+			// const emptyCheckout = (checkOut === "")
+			// if(emptyCheckin || emptyCheckout) {
+			// 	// let inputToFocus;
+			// 	// if(emptyCheckin) {
+			// 	// 	inputToFocus = document.querySelector(".checkin-input");
+			// 	// } else if(emptyCheckout) {
+			// 	// 	inputToFocus = document.querySelector(".checkout-input");
+			// 	// }
+			// 	// inputToFocus.focus();
+			// 	// inputToFocus.showPicker();
+			// 	// setShowDateModal(true);
+			// 	// return;
+			// }
+			// if(checkIn.toString() === checkOut.toString()) {
+			if(numNights() <= 0) {
+				// document.querySelector(".checkin-input").focus();
+				// document.querySelector(".checkin-input").showPicker();
+				setShowDateModal(true);
+				// console.log(showDateModal)
 				return
 			}
 
@@ -249,6 +262,7 @@ const ListingsShowPage = (props) => {
 					setTimeout(() => {
 						setBookingConfirmed(false);
 						setButtonClickable(true);
+						handleClearDates();
 					}, 2000);
 				})
 				.catch(async (res) => {
@@ -370,9 +384,13 @@ const ListingsShowPage = (props) => {
 								<span className="rating-review-stats stats-text-small">{`${listing.city}, ${listing.state}, United States`}</span>
 							</div>
 							<div className="show-header-buttons stats-text-small">
-								<i className="fa-solid fa-arrow-up-from-bracket"></i>&nbsp;&nbsp;Share 
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<i className="fa-regular fa-heart"></i>&nbsp;&nbsp;Save
+								<div className="show-header-btn">
+									<i className="fa-solid fa-arrow-up-from-bracket"></i>&nbsp;&nbsp;<span className="show-header-btn-text">Share</span>
+								</div>
+								{/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
+								<div className="show-header-btn show-save-btn">
+									<i className="fa-regular fa-heart"></i>&nbsp;&nbsp;<span className="show-header-btn-text">Save</span>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -606,19 +624,40 @@ const ListingsShowPage = (props) => {
 														max={checkOut ? dayBefore : null}
 														onChange={handleChangeCheckIn}
 														required
+														onClick={handleToggleDateModal}
+														readOnly
 													/>
 													<div className="checkin-placeholder">CHECK-IN</div>
 												</div>
 												<div className="checkout-button">
 													<input className="checkout-input" 
 														type="date"
+														// type="text"
 														value={checkOut?.toISOString().slice(0,10)}
+														// value={formatDate(checkOut)}
 														min={checkIn ? dayAfter : daysApartCalculator(minDate(), 2)}
 														onChange={handleChangeCheckOut}
 														required
+														onClick={handleToggleDateModal}
+														readOnly
 													/>
 													<div className="checkout-placeholder">CHECK-OUT</div>
 												</div>
+												{showDateModal && 
+													<div ref={calModalRef} className="listing-date-modal-container">
+														<ListingsShowCalendar 
+															checkIn={checkIn} 
+															setCheckIn={setCheckIn} 
+															checkOut={checkOut}
+															setCheckOut={setCheckOut}
+															modal={true}
+															calModalRef={calModalRef}
+															showDateModal={showDateModal}
+															setShowDateModal={setShowDateModal}
+															handleClearDates={handleClearDates}
+														/>
+													</div>
+												}
 											</div>
 											{numGuestsSelector()}
 										</div>
