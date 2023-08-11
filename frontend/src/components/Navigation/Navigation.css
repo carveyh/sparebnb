@@ -69,6 +69,7 @@
 }
 
 .upper-navbar-logo {
+	cursor: pointer;
 	height: 80px;
 	display: inline-flex;
 	align-items: center;
