@@ -35,8 +35,10 @@ const ListingsShowPage = (props) => {
 	// const reservations = useSele
 	const hostIdFormatted = formatTwoDigitNumberString(host?.id);	
 
-	const [checkIn, setCheckIn] = useState("");
-	const [checkOut, setCheckOut] = useState("");
+	// const [checkIn, setCheckIn] = useState("");
+	// const [checkOut, setCheckOut] = useState("");
+	const [checkIn, setCheckIn] = useState(new Date());
+	const [checkOut, setCheckOut] = useState(new Date());
 	const [numGuests, setNumGuests] = useState(1);
 	const [dayAfter, setDayAfter] = useState();
 	const [dayBefore, setDayBefore] = useState();
@@ -134,6 +136,12 @@ const ListingsShowPage = (props) => {
 		// return diffDays;
 
 		return ListingFees.numNights(checkIn, checkOut);
+	}
+
+	const formatDate = (date) => {
+		const dateParts = date.toString().split(" ").slice(1, 4)
+		dateParts[1] = dateParts[1].concat(",")
+		return dateParts.join(" ")
 	}
 
 	const baseTotalCost = () => {
@@ -517,10 +525,15 @@ const ListingsShowPage = (props) => {
 										}
 									</div>
 									<div className="listing-show-calendar-subtitle">
-										{numNights() ? `${checkIn} - ${checkOut}` : `Add your travel dates for exact pricing`}
+										{numNights() ? `${formatDate(checkIn)} - ${formatDate(checkOut)}` : `Add your travel dates for exact pricing`}
 									</div>
 									<div className="listing-calendars-box">
-										<ListingsShowCalendar />
+										<ListingsShowCalendar 
+											checkIn={checkIn} 
+											setCheckIn={setCheckIn} 
+											checkOut={checkOut}
+											setCheckOut={setCheckOut}
+										/>
 									</div>
 								</div>
 							</div>
@@ -559,7 +572,7 @@ const ListingsShowPage = (props) => {
 												<div className="checkin-button">
 													<input className="checkin-input" 
 														type="date"
-														value={checkIn}
+														value={checkIn.toISOString().slice(0,10)}
 														min={minDate()}
 														max={checkOut ? dayBefore : null}
 														onChange={handleChangeCheckIn}
@@ -570,7 +583,7 @@ const ListingsShowPage = (props) => {
 												<div className="checkout-button">
 													<input className="checkout-input" 
 														type="date"
-														value={checkOut}
+														value={checkOut.toISOString().slice(0,10)}
 														min={checkIn ? dayAfter : daysApartCalculator(minDate(), 2)}
 														onChange={handleChangeCheckOut}
 														required

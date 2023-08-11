@@ -9,21 +9,28 @@ import { addDays } from 'date-fns';
 import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-const ListingsShowCalendar = () => {
+const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut}) => {
 
 	const reservations = Object.values(useSelector(state => state.entities.reservations ? state.entities.reservations : {}))
 
 	const [datesState, setDatesState] = useState([
 		{
 			startDate: new Date(),
-			// endDate: addDays(new Date(), 7),
 			endDate: new Date(),
+			// endDate: addDays(new Date(), 7),
 			key: 'selection',
+			// startDate: checkIn,
+			// endDate: checkOut,
+			// // endDate: addDays(new Date(), 7),
+			// key: 'selection',
 		}
 	])
 
 	const handleSelect = (item) => {
 		setDatesState([item.selection])
+		setCheckIn(item.selection.startDate)
+		setCheckOut(item.selection.endDate)
+		console.log(item.selection)
 	}
 
 	// Calendar will only display 1 month if container is < 606.5px, akin to airbnb
@@ -32,6 +39,7 @@ const ListingsShowCalendar = () => {
 	const [containerSize, setContainerSize] = useState(undefined);
 	// const [blockedDates, setBlockedDates] = useState([]); // better not using useState
 	let blockedDates = [];
+	let maxDate;
 
 	const handleResize = () => {
 		// setContainerSize(calRef.current.offsetWidth);
@@ -67,22 +75,29 @@ const ListingsShowCalendar = () => {
 		blockedDates = blockedDatesArr;
 	}
 
+	const getMaxDate = () => { // airbnb roughly allows you to browse 24 months for booking, not including current month.
+		const tempDate = new Date();
+		// tempDate.setDate(tempDate.getDate() + 730)
+		tempDate.setMonth(tempDate.getMonth() + 24)
+		tempDate.setDate(1)
+		tempDate.setDate(tempDate.getDate() - 1)
+
+		maxDate = tempDate;
+	}
+
 	useEffect(() => {
 		window.addEventListener('resize', handleResize);
 		return () => window.removeEventListener('resize', handleResize);
 	}, [])
 
 	listBlockedDates();
+	getMaxDate();
 
-	useEffect(() => {
-		// console.log("blocked dates:",listBlockedDates())
-		// listBlockedDates();
-	}, []) // run this useEffect once reservations gets populated
-	// }, [reservations]) // run this useEffect once reservations gets populated
+	
 
-	useEffect(() => {
-		console.log("blocked dates should be set", blockedDates)
-	}, [blockedDates])
+	// useEffect(() => {
+	// 	console.log("blocked dates should be set", blockedDates)
+	// }, [blockedDates])
 
 	return (
 		<div ref={calRef} className='listings-show-calendar-inner-container'>
@@ -92,12 +107,23 @@ const ListingsShowCalendar = () => {
 				months={numMonths}
 				ranges={datesState}
 				onChange={handleSelect}
-				showDateDisplay={false}
+				showDateDisplay={false} // Don't need this for on page
+				editableDateInputs={true} // if showDateDisplay={true}
 				fixedHeight={false} //airbnb has this behavior - if a month needs 6 lines for a month it will change height.
 				// blockedDates={listBlockedDates()}
 				disabledDates={blockedDates}
+				minDate={new Date()}
+				maxDate={maxDate}
+				rangeColors={["#3e3e3e","#717171", "#FF0000"]}
+				color="FF0000"
+				weekdayDisplayFormat='EEEEEE'
+				// initialFocusedRange={[]}
 
-				// showPreview={false}
+				// scroll={{enabled: true}} // calendar turns gray and empty...not needed
+				// showMonthAndYearPickers={false} // not as clean, can omit as airbnb forces you to use showMonthArrow or type in dates
+				// showMonthArrow={true} // needed to select from different future months
+				// showSelectionPreview={false} // no apparent change
+				// showPreview={false} //no apparent change
 			/>
 		</div>
 	)
