@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 import { useLoadScript } from "@react-google-maps/api";
+import Footer from "./components/Footer/Footer";
 
 function App() {
 
@@ -48,6 +49,8 @@ function App() {
           <Route><h1>404 - page not found.</h1></Route>
         </Switch>
       </div>
+
+      <Footer />
 
     </div>
   );

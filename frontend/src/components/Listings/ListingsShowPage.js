@@ -748,11 +748,11 @@ const ListingsShowPage = (props) => {
 
 				{/* OMITTED: Host details from airbnb */}
 
-				<div className="horizontal-rule-top-border plain-text">
+				{/* <div className="horizontal-rule-top-border plain-text">
 					<br/><br/><br/><br/><br/>
 					<div>Footer</div>
 					<br/><br/><br/><br/><br/>
-				</div>
+				</div> */}
 			</div>
 		</div>
 		
