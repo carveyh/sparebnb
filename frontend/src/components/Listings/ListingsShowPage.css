@@ -712,6 +712,10 @@
 	padding-right: 8px;
 }
 
+.num-guests-selector:focus {
+	outline: none;
+}
+
 .num-guests-placeholder {
 	position: absolute;
 	font-size: 10px;

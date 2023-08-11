@@ -117,11 +117,11 @@ const ListingsFilterCarousel = ({filter, setFilter}) => {
 	)
 }
 
-const ListingsMain = ({showIndexMap, setShowIndexMap, localLatitude, localLongitude, isLoaded}) => {
+const ListingsMain = ({filter, setFilter, showIndexMap, setShowIndexMap, localLatitude, localLongitude, isLoaded}) => {
 	// const sessionUser = useSelector(state => state.session?.user )
 	
 	const dispatch = useDispatch();
-	const [filter, setFilter] = useState(null);
+	// const [filter, setFilter] = useState(null);
 	// const [showIndexMap, setShowIndexMap] = useState(false);
 
 	useEffect(() => {

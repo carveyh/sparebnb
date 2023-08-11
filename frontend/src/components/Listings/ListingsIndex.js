@@ -88,6 +88,10 @@ const ListingsIndex = ({localLatitude, localLongitude, filter=null, isLoaded}) =
 	}, [])
 	// }, [filter])
 
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [filter])
+
 	// const destinations = filteredListings.map(listing => {
 	// 	return {lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) } 
 	// } )

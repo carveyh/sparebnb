@@ -9,7 +9,7 @@ import SignupForm from "../AuthForms/SignupForm";
 import { Modal } from "../../context/Modal";
 import { useState } from "react";
 
-const Navigation = () => {
+const Navigation = ({filter, setFilter}) => {
 	
 	const [showSignUpModal, setShowSignUpModal] = useState(false);
 	const [showLogInModal, setShowLogInModal] = useState(false);
@@ -46,9 +46,10 @@ const Navigation = () => {
 			<header className="upper-navbar-header">
 				<div className="upper-navbar-container">
 					<div className="upper-navbar-logo-div">
-						<div className="upper-navbar-logo">
+						<div onClick={e => setFilter(null)} className="upper-navbar-logo">
 							{/* This onClick will force page to reload if click on Link when already on the to path */}
-							<Link onClick={() => window.location.pathname === "/" ? window.location.reload(): null} to="/">
+							{/* <Link onClick={() => window.location.pathname === "/" ? window.location.reload(): null} to="/"> */}
+							<Link to="/">
 								<img src={require("../../images/sparebnb_logo_2.png")} style={{width:"140px", height:"32px"}}/>
 							</Link>
 						</div>
