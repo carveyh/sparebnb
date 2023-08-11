@@ -2,8 +2,8 @@
 
 .listing-date-modal-container {
 	position: absolute;
-	top: 0px;
-	right: 0px;
+	top: -5px;
+	right: -5px;
 	width: 200%;
 	z-index: 6;
 	padding: 24px 32px 16px;
