@@ -163,8 +163,7 @@ const ListingsShowPage = (props) => {
 		// if(!checkIn || !checkOut) return null;
 		// const diffTime = Math.abs(new Date(checkOut) - new Date(checkIn));
 		// const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-		// return diffDays;
-		console.log(ListingFees.numNights(checkIn, checkOut))
+		// return diffDays
 		return ListingFees.numNights(checkIn, checkOut);
 	}
 
@@ -247,6 +246,7 @@ const ListingsShowPage = (props) => {
 				// document.querySelector(".checkin-input").focus();
 				// document.querySelector(".checkin-input").showPicker();
 				setShowDateModal(true);
+				// handleToggleDateModal();
 				// console.log(showDateModal)
 				return
 			}
@@ -748,11 +748,11 @@ const ListingsShowPage = (props) => {
 
 				{/* OMITTED: Host details from airbnb */}
 
-				<div className="horizontal-rule-top-border plain-text">
+				{/* <div className="horizontal-rule-top-border plain-text">
 					<br/><br/><br/><br/><br/>
 					<div>Footer</div>
 					<br/><br/><br/><br/><br/>
-				</div>
+				</div> */}
 			</div>
 		</div>
 		
