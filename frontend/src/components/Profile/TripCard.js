@@ -116,7 +116,8 @@ export const TripCard = ({reservation, listing, review, tripType}) => {
 	}
 
 	const completedTripDetails = () => {
-		const numNights = ListingFees.numNights(reservation.startDate, reservation.endDate);
+		const numNights = ListingFees.tripNumNights(reservation.startDate, reservation.endDate);
+		console.log()
 		const totalCost = reservation.baseNightlyRate *  numNights;
 		return (
 			<>
