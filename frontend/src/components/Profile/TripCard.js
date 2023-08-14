@@ -10,6 +10,7 @@ import { updateReservation, destroyReservation } from "../../store/reservation"
 import { formatTwoDigitNumberString } from "../../utils/urlFormatter"
 import * as ListingFees from "../Listings/ListingFees";
 import { ReviewForm } from "./ReviewForm"
+import { destroyResReview } from "../../store/reservation_reviews"
 
 export const TripCard = ({reservation, listing, review, tripType}) => {
 
@@ -115,6 +116,28 @@ export const TripCard = ({reservation, listing, review, tripType}) => {
 		setNumGuests(reservation.numGuests)
 	}
 
+	const handleDeleteReview = e => {
+		return dispatch(destroyResReview(review.id))
+		.then(() => {
+			// setReviewComplete(true)
+			// setTimeout(() => {
+			// 	setShowReviewForm(false)
+			// }, 1700)
+		})
+		.catch(async (res) => {
+			// let data;
+			// try {
+			// 	data = await res.clone().json();
+			// } catch {
+			// 	data = await res.text()
+			// }
+			// if(data?.errors) setErrors(data.errors)
+			// else if(data) setErrors([data])
+			// else setErrors([res.statusText]);
+			
+		})
+	}
+
 	const completedTripDetails = () => {
 		const numNights = ListingFees.tripNumNights(reservation.startDate, reservation.endDate);
 		console.log()
@@ -137,17 +160,40 @@ export const TripCard = ({reservation, listing, review, tripType}) => {
 					</div>
 				</div>
 				<div className="past-trip-controls">
-					<div 
-						className={`past-trip-review-button ${review ? `show-posted-review-form-btn` : `new-review-form-btn`}`}
-						onClick={review ? e => setShowReviewModal(true) : e => setShowReviewForm(true)}
-					>
-						<div className={`past-trip-review-button-inner`}>
-							{review ? 
-								<><div className="trip-card-review-complete-icon"><i class="fa-solid fa-check"></i></div> <span>Review Complete</span> </> 
-								: 
-								<><div className="trip-card-review-create-icon"><i class="fa-solid fa-pen-to-square"></i></div> <span>Leave a Review</span> </> }
+					{review ? 
+						<div className="review-update-delete-btns">
+							<div className="review-edit-btn"
+								onClick={e => setShowReviewForm(true)}
+							>
+								<div className="past-trip-review-button-inner">
+									<div className="trip-card-review-create-icon"><i class="fa-solid fa-pen-to-square"></i></div> <span>Edit</span>
+								</div>
+							</div>
+							<div className="review-del-btn"
+								onClick={handleDeleteReview}
+							>
+								<div className="past-trip-review-button-inner">
+								<div className="trip-card-review-create-icon"><i class="fa-solid fa-trash-can"></i></div> <span>Delete</span>
+								</div>
+							</div>
 						</div>
-					</div>
+						:
+						<div 
+							className={`past-trip-review-button ${review ? `show-posted-review-form-btn` : `new-review-form-btn`}`}
+							onClick={review ? e => setShowReviewModal(true) : e => setShowReviewForm(true)}
+						>
+							<div className={`past-trip-review-button-inner`}>
+								{review ? 
+									<>
+										<div className="trip-card-review-complete-icon"><i class="fa-solid fa-check"></i></div> <span>Review Complete</span>
+										
+									</> 
+									: 
+									// <><div className="trip-card-review-create-icon"><i class="fa-solid fa-pen-to-square"></i></div> <span>Leave a Review</span> </> }
+									<><div className="trip-card-review-create-icon"><i class="fa-solid fa-plus"></i></div> <span>Leave a Review</span> </> }
+							</div>
+						</div>
+					}
 				</div>
 			</>
 		)
@@ -258,7 +304,7 @@ export const TripCard = ({reservation, listing, review, tripType}) => {
 				<ReviewsModal listingId={listing.id} setShowReviewsModal={setShowReviewModal} specificReviewId={review.id} />
 			</Modal>}
 			{showReviewForm && <Modal onClose={e => setShowReviewForm(false)}>
-				<ReviewForm reservation={reservation} listing={listing} setShowReviewForm={setShowReviewForm}/>
+				<ReviewForm review={review} reservation={reservation} listing={listing} setShowReviewForm={setShowReviewForm}/>
 			</Modal>}
 		</>
 	)
