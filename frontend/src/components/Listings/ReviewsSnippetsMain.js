@@ -23,7 +23,8 @@ export const ReviewSnippetIndividual = ({review, endDate, truncated=true, setSho
 					</div>
 					<div className="snippet-header-box">
 						<div className="guest-first-name">{review.reviewerFirstName}</div>
-						<div className="snippet-res-month-yr">{endDate}</div>
+						{/* <div className="snippet-res-month-yr">{endDate}</div> */}
+						<div className="snippet-res-month-yr">{review.updatedAt.slice(0,10)}</div>
 					</div>
 				</div>
 				<div className={`snippet-body ${truncated && `snippet-body-truncated`} snippet-body-${review.id}`}>{review.body}</div>
@@ -40,7 +41,7 @@ export const ReviewsSnippetsMain = ({listingId, setShowReviewsModal}) => {
 
 	const reservations = Object.values(useSelector(state => state.entities.reservations ? state.entities.reservations : {}))
 	const reviews = Object.values(useSelector(state => state.entities.resReviews ? state.entities.resReviews : {}))
-	reviews.sort((a, b) => new Date(b.reviewDate) - new Date(a.reviewDate))
+	reviews.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
 
 	useEffect(() => {
 		dispatch(clearAllResReviews())

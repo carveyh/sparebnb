@@ -32,7 +32,7 @@
 }
 
 .past-trip-review-button {
-	background-color: pink;
+	/* background-color: pink; */
 	border-radius: 8px;
 
 	cursor: pointer;
@@ -46,13 +46,38 @@
 	align-items: center;
 }
 
+.review-update-delete-btns {
+	width: 210px;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.review-edit-btn {
+	cursor: pointer;
+	box-sizing: border-box;
+	border-radius: 8px;
+	background-color: #DDDDDD;
+}
+
+.review-del-btn {
+	cursor: pointer;
+	box-sizing: border-box;
+	border-radius: 8px;
+	background-color: #434343;
+	color: white;
+}
+
 .show-posted-review-form-btn {
 	background-color: green;
 	color: white;
 }
 
 .new-review-form-btn {
-	background-color: rgb(114, 114, 114);
+	/* background-color: rgb(114, 114, 114); */
+	background-color: #FF0000;
 	color: white;
 }
 

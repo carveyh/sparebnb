@@ -6,6 +6,7 @@ const Footer = () => {
 			<div className="footer-general-links">
 				<span className="">© 2023 Sparebnb, Inc.</span>
 				<span className="footer-dot">·</span>
+				{/* eventually this needs to be portfolio link: */}
 				<span className="">Carvey Hor</span>
 				<span className="footer-dot">·</span>
 				<span className="footer-link"><a target="_blank" href="https://www.linkedin.com/in/carvey-hor/">LinkedIn</a></span>

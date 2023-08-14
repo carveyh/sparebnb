@@ -5,9 +5,9 @@ import { useDispatch } from "react-redux";
 import { useTabIndex } from 'react-tabindex'
 
 import { ReviewStarInput } from "./ReviewStarInput";
-import { createResReview } from "../../store/reservation_reviews";
+import { createResReview, updateResReview } from "../../store/reservation_reviews";
 
-export const ReviewForm = ({reservation, listing, setShowReviewForm}) => {
+export const ReviewForm = ({review, reservation, listing, setShowReviewForm}) => {
 	const dispatch = useDispatch();
 	const tabIndex = useTabIndex();
 
@@ -25,14 +25,14 @@ export const ReviewForm = ({reservation, listing, setShowReviewForm}) => {
 	if(startDate) startDateMonth = monthNames[startDate?.getMonth()]
 	if(endDate) endDateMonth = monthNames[endDate?.getMonth()]
 
-	const [reviewBody, setReviewBody] = useState("");
-	const [cleanliness, setCleanliness] = useState(0);
-	const [accuracy, setAccuracy] = useState(0);
-	const [communication, setCommunication] = useState(0);
-	const [location, setLocation] = useState(0);
-	const [checkin, setCheckin] = useState(0);
-	const [value, setValue] = useState(0);
-	const [overallRating, setOverallRating] = useState(0);
+	const [reviewBody, setReviewBody] = useState(review?.body);
+	const [cleanliness, setCleanliness] = useState(review?.cleanliness);
+	const [accuracy, setAccuracy] = useState(review?.accuracy);
+	const [communication, setCommunication] = useState(review?.communication);
+	const [location, setLocation] = useState(review?.location);
+	const [checkin, setCheckin] = useState(review?.checkin);
+	const [value, setValue] = useState(review?.value);
+	const [overallRating, setOverallRating] = useState(review?.overallRating);
 
 	const [errors, setErrors] = useState({});
 
@@ -46,7 +46,7 @@ export const ReviewForm = ({reservation, listing, setShowReviewForm}) => {
 			setFormIncomplete(true)
 			return;
 		}
-		const review = {
+		const newReview = {
 			body: reviewBody,
 			cleanliness,
 			accuracy,
@@ -56,27 +56,51 @@ export const ReviewForm = ({reservation, listing, setShowReviewForm}) => {
 			value,
 			overallRating,
 			reviewerId: sessionUser.id,
-			reservationId: reservation.id
+			reservationId: reservation.id,
+			id: review.id
 		}
-		return dispatch(createResReview(review))
-		.then(() => {
-			setReviewComplete(true)
-			setTimeout(() => {
-				setShowReviewForm(false)
-			}, 1700)
-		})
-		.catch(async (res) => {
-			let data;
-			try {
-				data = await res.clone().json();
-			} catch {
-				data = await res.text()
-			}
-			if(data?.errors) setErrors(data.errors)
-			else if(data) setErrors([data])
-			else setErrors([res.statusText]);
-			
-		})
+		if(review) {
+			return dispatch(updateResReview(newReview))
+			.then(() => {
+				setReviewComplete(true)
+				setTimeout(() => {
+					setShowReviewForm(false)
+				}, 1700)
+			})
+			.catch(async (res) => {
+				let data;
+				try {
+					data = await res.clone().json();
+				} catch {
+					data = await res.text()
+				}
+				if(data?.errors) setErrors(data.errors)
+				else if(data) setErrors([data])
+				else setErrors([res.statusText]);
+				
+			})
+		} else {
+			return dispatch(createResReview(newReview))
+			.then(() => {
+				setReviewComplete(true)
+				setTimeout(() => {
+					setShowReviewForm(false)
+				}, 1700)
+			})
+			.catch(async (res) => {
+				let data;
+				try {
+					data = await res.clone().json();
+				} catch {
+					data = await res.text()
+				}
+				if(data?.errors) setErrors(data.errors)
+				else if(data) setErrors([data])
+				else setErrors([res.statusText]);
+				
+			})
+		}
+		
 	}
 
 	return(
@@ -173,13 +197,13 @@ export const ReviewForm = ({reservation, listing, setShowReviewForm}) => {
 					</div>
 
 					<div className="review-form-section review-form-submit-section">
-						<button type="submit" tabIndex={2} className="review-form-submit" >Submit review</button>
+						<button type="submit" tabIndex={2} className="review-form-submit" >{review ? `Update review` : `Submit review`}</button>
 					</div> 
 				</form>
 			</div>
 			{reviewComplete && <div className={`review-complete-display ${reviewComplete && `review-complete-display-active`}`}>
 				<div className="review-complete-shimmer review-complete-shimmer-active"></div>
-					<span className="review-complete-text">Review complete</span>
+					<span className="review-complete-text">{review ? `Update complete` : `Review complete`}</span>
 			</div>}
 		</div>
 	)

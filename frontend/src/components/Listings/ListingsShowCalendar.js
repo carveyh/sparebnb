@@ -114,6 +114,7 @@ const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut, modal
 	}
 
 	const clickOutsideClose = (e) => {
+		// e.preventDefault();
 		// need calModalRef.current bc if close button is clicked, the ref will no longer be available to check
 		if(calModalRef.current && !calModalRef.current.contains(e.target) && showDateModal) {
 			setShowDateModal(false)

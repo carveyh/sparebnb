@@ -219,7 +219,7 @@ const ListingsShowPage = (props) => {
 		reserveBtn.current.classList.remove("mouse-down-reserve-btn");
 		if(e.target === reserveBtn.current || e.target.parentElement === reserveBtn.current) handleSubmit(e);
 	}
-
+	console.log(showDateModal)
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if(!sessionUser || !buttonClickable) {
@@ -243,13 +243,15 @@ const ListingsShowPage = (props) => {
 			// }
 			// if(checkIn.toString() === checkOut.toString()) {
 			if(numNights() <= 0) {
+				console.log(numNights())
+				// console.log(showDateModal)
 				// document.querySelector(".checkin-input").focus();
 				// document.querySelector(".checkin-input").showPicker();
 				setShowDateModal(true);
 				// handleToggleDateModal();
-				// console.log(showDateModal)
 				return
 			}
+			
 
 			const reservation = { checkIn, checkOut, numGuests, listingId,
 				reserverId: sessionUser.id,
@@ -624,7 +626,7 @@ const ListingsShowPage = (props) => {
 														max={checkOut ? dayBefore : null}
 														onChange={handleChangeCheckIn}
 														required
-														onClick={handleToggleDateModal}
+														onClick={e => setShowDateModal(true)}
 														readOnly
 													/>
 													<div className="checkin-placeholder">CHECK-IN</div>
@@ -638,7 +640,7 @@ const ListingsShowPage = (props) => {
 														min={checkIn ? dayAfter : daysApartCalculator(minDate(), 2)}
 														onChange={handleChangeCheckOut}
 														required
-														onClick={handleToggleDateModal}
+														onClick={e => setShowDateModal(true)}
 														readOnly
 													/>
 													<div className="checkout-placeholder">CHECK-OUT</div>
