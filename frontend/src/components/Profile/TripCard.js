@@ -186,10 +186,8 @@ export const TripCard = ({reservation, listing, review, tripType}) => {
 								{review ? 
 									<>
 										<div className="trip-card-review-complete-icon"><i class="fa-solid fa-check"></i></div> <span>Review Complete</span>
-										
 									</> 
 									: 
-									// <><div className="trip-card-review-create-icon"><i class="fa-solid fa-pen-to-square"></i></div> <span>Leave a Review</span> </> }
 									<><div className="trip-card-review-create-icon"><i class="fa-solid fa-plus"></i></div> <span>Leave a Review</span> </> }
 							</div>
 						</div>

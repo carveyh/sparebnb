@@ -60,14 +60,25 @@
 	box-sizing: border-box;
 	border-radius: 8px;
 	background-color: #DDDDDD;
+	transition: all 0.3s;
+}
+
+.review-edit-btn:hover {
+	color: white;
+	background-color: #FF0000;
 }
 
 .review-del-btn {
 	cursor: pointer;
 	box-sizing: border-box;
 	border-radius: 8px;
-	background-color: #434343;
+	background-color: #585858;
 	color: white;
+	transition: all 0.5s;
+}
+
+.review-del-btn:hover {
+	background-color: black;
 }
 
 .show-posted-review-form-btn {
@@ -79,6 +90,11 @@
 	/* background-color: rgb(114, 114, 114); */
 	background-color: #FF0000;
 	color: white;
+	transition: background-color 0.3s;
+}
+
+.new-review-form-btn:hover {
+	background-color: #d00000;
 }
 
 .past-trip-review-button-inner {

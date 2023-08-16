@@ -36,7 +36,7 @@ export const ReviewsModal = ({listingId, setShowReviewsModal, specificReviewId})
 	}
 
 
-	reviews.sort((a, b) => new Date(b.reviewDate) - new Date(a.reviewDate))
+	reviews.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
 
 	useEffect(() => {
 		// dispatch(fetchListing(listingId))
