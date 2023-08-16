@@ -13,6 +13,7 @@
 .grid-container {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(6, 1fr);
 
 	/* spacing in btwn */
 	row-gap: 40px;
@@ -161,8 +162,35 @@
 	/* overflow: scroll; */
 }
 
+@container (width < 1880px){
+	.grid-container {
+		grid-template-columns: repeat(6, 1fr);
+	}
+}
+
+/* @container (width < 1640px){ */
+@container (width < 1700px){
+	.grid-container {
+		grid-template-columns: repeat(5, 1fr);
+	}
+}
+
+/* @container (width < 1128px){ */
+@container (width < 1465px){
+	.grid-container {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+@container main-body (width < 1420px){
+	.grid-container-container {
+		/* padding: 40px; */
+	}
+}
+
 /* @container (min-width: 800px){ */
-@container (width < 940px){
+@container (width < 950px){
+/* @container (width < 940px){ */
 	.grid-item {
 		color: green;
 	}

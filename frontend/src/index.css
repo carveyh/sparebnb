@@ -12,6 +12,8 @@
 
 #main-body {
 	/* padding: 0px 80px; */
+	container-type: inline-size;
+	container-name: main-body;
 }
 
 * {
