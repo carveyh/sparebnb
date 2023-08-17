@@ -66,19 +66,6 @@ const SignupForm = ({setShowSignUpModal, setShowLogInModal}) => {
 		checkPasswordStrength();
 	}, [password, firstName, lastName, email, password])
 
-	useEffect(() => {
-		console.log("----------------")
-		console.log(passwordMinLength, "passwordMinLength", password.length)
-		console.log(passwordNotNameEmail, "passwordNotNameEmail")
-		console.log(passwordNumSymbol, "passwordNumSymbolh")
-		console.log(typeof firstName)
-	})
-	// }, [checkPasswordStrength])
-	// }, [passwordMinLength, passwordNotNameEmail, passwordNumSymbol])
-	// }, [firstName, lastName, email, password, passwordMinLength, passwordNotNameEmail, passwordNumSymbol])
-
-	
-
 	const handleFirstName = (e) => {
 		e.preventDefault();
 		setFirstName(e.target.value);

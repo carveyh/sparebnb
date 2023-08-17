@@ -219,7 +219,7 @@ const ListingsShowPage = (props) => {
 		reserveBtn.current.classList.remove("mouse-down-reserve-btn");
 		if(e.target === reserveBtn.current || e.target.parentElement === reserveBtn.current) handleSubmit(e);
 	}
-	console.log(showDateModal)
+	
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if(!sessionUser || !buttonClickable) {
@@ -243,7 +243,7 @@ const ListingsShowPage = (props) => {
 			// }
 			// if(checkIn.toString() === checkOut.toString()) {
 			if(numNights() <= 0) {
-				console.log(numNights())
+				// console.log(numNights())
 				// console.log(showDateModal)
 				// document.querySelector(".checkin-input").focus();
 				// document.querySelector(".checkin-input").showPicker();

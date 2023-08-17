@@ -14,13 +14,21 @@
 	top: 0px;
 	box-sizing: border-box;
 	display: block;
+	display: flex;
+	justify-content: space-between;
+	justify-content: center;
 	background-color: white;
 	z-index: 100;
 	border-bottom: 0.5px solid rgb(221, 221, 221);
 }
 
+.non-listings-header{
+	padding-left: 80px;
+	padding-right: 80px;
+}
+
 .narrow-navbar {
-	position: relative;
+	/* position: relative; */
 }
 
 /****************************/
@@ -29,18 +37,22 @@
 
 .upper-navbar-container {
 	height: 100%;
-	position: relative;
+	width: 100%;
+	/* position: relative; */
 	display: flex;
 	justify-content: space-between;
+	/* justify-content: center; */
 	align-items: center;
 	box-sizing: border-box;
 	/* Padding changes - if it is full screen, 80px, else 40px */
-	padding: 0px 80px;
+	/* padding: 0px 80px; */
 	font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
 }
 
 .narrow-navbar-container {
+	min-width: 1440px;
 	padding: 0px 160px;
+	box-sizing: border-box;
 }
 
 @container navbar-width (width < 1270px) {

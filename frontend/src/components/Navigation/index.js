@@ -21,9 +21,11 @@ const Navigation = ({filter, setFilter}) => {
 	if(location.pathname.startsWith('/listings')){
 		upperNavbarContainer?.classList.add('narrow-navbar-container')
 		upperNavbar?.classList.add('narrow-navbar')
+		upperNavbar?.classList.remove('non-listings-header')
 	} else {
 		upperNavbarContainer?.classList.remove('narrow-navbar-container')
 		upperNavbar?.classList.remove('narrow-navbar')
+		upperNavbar?.classList.add('non-listings-header')
 	}
 
 	// Disables page scrolling if a modal is open!
