@@ -41,8 +41,7 @@ export const ReviewForm = ({review, reservation, listing, setShowReviewForm}) =>
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// setReviewComplete(true)
-		if(reviewBody === "" || [cleanliness, accuracy, communication, location, checkin, value, overallRating].some(rating => rating === 0) ) {
+		if(((reviewBody === "") || (reviewBody === undefined)) || [cleanliness, accuracy, communication, location, checkin, value, overallRating].some(rating => (rating === 0) || (rating === undefined) ) ) {
 			setFormIncomplete(true)
 			return;
 		}
@@ -57,7 +56,7 @@ export const ReviewForm = ({review, reservation, listing, setShowReviewForm}) =>
 			overallRating,
 			reviewerId: sessionUser.id,
 			reservationId: reservation.id,
-			id: review.id
+			id: review?.id
 		}
 		if(review) {
 			return dispatch(updateResReview(newReview))

@@ -68,19 +68,9 @@ const ListingsIndex = ({localLatitude, localLongitude, filter=null, isLoaded}) =
 		filteredListings = Object.values(listings)
 	}
 
-	// const [localLatitude, setLocalLatitude] = useState(null)
-	// const [localLongitude, setLocalLongitude] = useState(null)
 	const [distancesObj, setDistancesObj] = useState(null);
 	const [distancesArray, setDistancesArray] = useState([]);
 	const [destinations, setDestinations] = useState([]);
-
-	// useEffect(() => {
-	// 	navigator.geolocation.getCurrentPosition((position) => {
-	// 		setLocalLatitude(position.coords.latitude)
-	// 		setLocalLongitude(position.coords.longitude)
-	// 		console.log("that simple?", position)
-	// 	}, (err) => {}, {enableHighAccuracy: false, timeout: 20000, maximumAge: Infinity})
-	// }, [])
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -123,71 +113,21 @@ const ListingsIndex = ({localLatitude, localLongitude, filter=null, isLoaded}) =
 							setDistancesArray(
 								response.rows[0].elements.map(element => element.distance.text.split(" ")[0])
 							)
-							// console.log("status", status)
-							console.log("response of Distance Matrix Service Obj", response)
-							// console.log("response of Distance Matrix Service Obj", response.)
+							// console.log("response of Distance Matrix Service Obj", response)
 						})
 						.catch((err) => {
-							console.log("origin lat", parseFloat(localLatitude), "origin long", parseFloat(localLongitude))
-							console.log("destinations", destinations)
-							console.log(`inner catch distance error #${numTries++}`)
-							getDistance()	
+							// console.log("origin lat", parseFloat(localLatitude), "origin long", parseFloat(localLongitude))
+							// console.log("destinations", destinations)
+							// console.log(`inner catch distance error #${numTries++}`)
+							// getDistance()	
 						})	
 				} 
 				catch (err) {
-					// console.log(`outer catch distance error #${numTries++}`)
-					// getDistance()
+					// 
 				}
 			}
 			getDistance();
-			// service.getDistanceMatrix(
-			// 	{
-			// 		origins: [{lat:parseFloat(localLatitude), lng:parseFloat(localLongitude)}],
-			// 		destinations: destinations,
-			// 		travelMode: "DRIVING",
-			// 		unitSystem: window.google.maps.UnitSystem.IMPERIAL,
-			// 		avoidHighways: false,
-			// 		avoidTolls: false
-			// 	}
-			// )
-			// 	.then((response) => {
-			// 		setDistancesArray(
-			// 			response.rows[0].elements.map(element => element.distance.text.split(" ")[0])
-			// 		)
-			// 		// console.log("status", status)
-			// 		console.log("response of Distance Matrix Service Obj", response)
-			// 		// console.log("response of Distance Matrix Service Obj", response.)
-			// 	})
-			// 	.catch((err) => {
-			// 		console.log("error", err)
-			// 	})
-			// 	,
-			// 	(response, status) => {
-			// 		if (status !== "OK") {
-			// 			console.log("error. origin", {lat:parseFloat(localLatitude), lng:parseFloat(localLongitude)})
-			// 		} else {
-			// 			setDistancesArray(
-			// 				response.rows[0].elements.map(element => element.distance.text.split(" ")[0])
-			// 			)
-			// 			console.log("status", status)
-			// 			console.log("response of Distance Matrix Service Obj", response)
-			// 		}
-			// 	}
-			// );
 		}
-
-		// DOESNT WORK IF WE ACCESS RESPONSE
-		// setDistancesObj(<DistanceMatrixService
-		// 	options={{
-		// 		origins: [{lat:parseFloat(localLatitude), lng:parseFloat(localLongitude)}],
-		// 		destinations: destinations,
-		// 		travelMode: "DRIVING",
-		// 	}}
-		// 	callback={(response) => {
-		// 		distancesArray.push(response)
-		// 		console.log("response of Distance Matrix Service Obj", response?.rows[0].elements.map(element => element.distance))
-		// 	}}
-		// />)
 	}, [localLatitude, localLongitude, destinations, isLoaded])
 
 	const numTestListings = 13;

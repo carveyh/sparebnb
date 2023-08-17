@@ -87,7 +87,6 @@ export const updateResReview = (review) => async (dispatch) => {
 	const res = await csrfFetch(`/api/reservation_reviews/${review.id}`, {
 		method: 'PATCH',
 		body: JSON.stringify(review),
-		// body: JSON.stringify({review: review}), // try this if above not work
 	})
 	if(res.ok){
 		const data = await res.json();

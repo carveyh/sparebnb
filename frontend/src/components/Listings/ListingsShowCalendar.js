@@ -27,7 +27,6 @@ const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut, modal
 			
 			startDate: null,
 			endDate: null,
-			// endDate: addDays(new Date(), 7),
 			key: 'selection',
 
 		}
@@ -58,7 +57,6 @@ const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut, modal
 		setDatesState([item.selection])
 		setCheckIn(item.selection.startDate)
 		setCheckOut(item.selection.endDate)
-		console.log(item.selection)
 	}
 
 	// Calendar will only display 1 month if container is < 606.5px, akin to airbnb
@@ -70,11 +68,6 @@ const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut, modal
 	let maxDate;
 
 	const handleResize = () => {
-		// setContainerSize(calRef.current.offsetWidth);
-		// console.log("calRef", calRef);
-		// console.log("calRef.current", calRef.current);
-		// console.log("containerSize", containerSize);
-		// console.log("calRef.current.offsetWidth", calRef.current.offsetWidth);
 		if(calRef.current.offsetWidth < 606.5) {
 			setNumMonths(1)
 		} else {
@@ -92,8 +85,6 @@ const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut, modal
 			let currentDate = new Date(startDateString)
 			const endDate = new Date(endDateString)
 			while(currentDate < endDate) { //NOT inclusive of endDate, because should be able to book the endDate?
-				// console.log("reservation.startDate", reservation.startDate)
-				// console.log("currentDate", currentDate)
 				blockedDatesArr.push(new Date(currentDate)) // if not new Date, it will be the same date object pushed onto array multiple times with same final value
 				currentDate.setDate(currentDate.getDate() + 1) //cannot just do currentDate = new Date(currentDate.getDate() + 1) ... 
 			}
@@ -105,7 +96,6 @@ const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut, modal
 
 	const getMaxDate = () => { // airbnb roughly allows you to browse 24 months for booking, not including current month.
 		const tempDate = new Date();
-		// tempDate.setDate(tempDate.getDate() + 730)
 		tempDate.setMonth(tempDate.getMonth() + 24)
 		tempDate.setDate(1)
 		tempDate.setDate(tempDate.getDate() - 1)
@@ -114,7 +104,6 @@ const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut, modal
 	}
 
 	const clickOutsideClose = (e) => {
-		// e.preventDefault();
 		// need calModalRef.current bc if close button is clicked, the ref will no longer be available to check
 		if(calModalRef.current && !calModalRef.current.contains(e.target) && showDateModal) {
 			setShowDateModal(false)
@@ -131,27 +120,8 @@ const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut, modal
 		}
 	}, [])
 
-	// useEffect(() => {
-	// 	setDatesState({
-	// 		// startDate: new Date(),
-	// 		// endDate: new Date(),
-	// 		// // endDate: addDays(new Date(), 7),
-	// 		// key: 'selection',
-	// 		startDate: checkIn,
-	// 		endDate: checkOut,
-	// 		// endDate: addDays(new Date(), 7),
-	// 		key: 'selection',
-	// 	})
-	// }, [checkIn, checkOut])
-
 	listBlockedDates();
 	getMaxDate();
-
-	
-
-	// useEffect(() => {
-	// 	console.log("blocked dates should be set", blockedDates)
-	// }, [blockedDates])
 
 	return (
 		<>

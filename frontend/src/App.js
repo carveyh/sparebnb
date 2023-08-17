@@ -33,7 +33,7 @@ function App() {
 		navigator.geolocation.getCurrentPosition((position) => {
 			setLocalLatitude(position.coords.latitude)
 			setLocalLongitude(position.coords.longitude)
-			console.log("that simple?", position)
+			// console.log("that simple?", position)
 		}, (err) => {}, {enableHighAccuracy: false, timeout: 20000, maximumAge: Infinity})
 	}, [])
 
