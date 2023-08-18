@@ -81,7 +81,7 @@ export const ReviewsModal = ({listingId, setShowReviewsModal, specificReviewId})
 	return (
 		<div className="reviews-modal-outer-container">
 			<div className="reviews-modal-forehead">
-				<button onClick={e => setShowReviewsModal(false)} className="x-close"><i class="fa-solid fa-x"></i></button>
+				<button onClick={e => setShowReviewsModal(false)} className="x-close"><i className="fa-solid fa-x"></i></button>
 			</div>
 			<div className="reviews-modal-non-forehead">
 				<div className="modal-ratings-section">

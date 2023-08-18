@@ -204,7 +204,7 @@ const SignupForm = ({setShowSignUpModal, setShowLogInModal}) => {
 				{!passwordOK() && <>
 				{(formIncomplete) && <div className={`error-tooltip ${!passwordNotNameEmail || password === "" ? `error-password-tooltip` : `ok-password-tooltip`}`}><i className={`fa-solid ${!passwordNotNameEmail || password === "" ? "fa-circle-xmark " : "fa-circle-check"}`}></i> Can't contain your name or email address</div>}
 				{(formIncomplete) && <div className={`error-tooltip ${!passwordMinLength ? `error-password-tooltip` : `ok-password-tooltip`}`}><i className={`fa-solid ${!passwordMinLength ? "fa-circle-xmark " : "fa-circle-check"}`}></i> At least 8 characters</div>}
-				{(formIncomplete) && <div className={`error-tooltip ${!passwordNumSymbol ? `error-password-tooltip` : `ok-password-tooltip`}`}><i className={`fa-solid ${!passwordNumSymbol ? "fa-circle-xmark " : "fa-circle-check"}`}></i> Contains a number of symbol</div>}
+				{(formIncomplete) && <div className={`error-tooltip ${!passwordNumSymbol ? `error-password-tooltip` : `ok-password-tooltip`}`}><i className={`fa-solid ${!passwordNumSymbol ? "fa-circle-xmark " : "fa-circle-check"}`}></i> Contains a number or symbol</div>}
 				</>}
 			</div>
 		</>

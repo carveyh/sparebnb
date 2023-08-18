@@ -1,7 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Testing from "./components/Testing";
-import ListingsIndex from "./components/Listings";
+import ListingsMain from "./components/Listings";
 import { TestingConceptsPage } from "./components/Testing/TestingConcepts";
 import ListingsShowPage from "./components/Listings/ListingsShowPage";
 import ProfilePage from "./components/Profile";
@@ -57,7 +57,7 @@ function App() {
           <Route exact path="/testing"><Testing /></Route>
           <Route exact path="/testing-concepts"><TestingConceptsPage /></Route>
           <Route exact path="/">
-            {<ListingsIndex 
+            {<ListingsMain 
               filter={filter} setFilter={setFilter}
               showIndexMap={showIndexMap} setShowIndexMap={setShowIndexMap}
               localLatitude={localLatitude} localLongitude={localLongitude} isLoaded={isLoaded} 

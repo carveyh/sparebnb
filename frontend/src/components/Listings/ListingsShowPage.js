@@ -465,7 +465,7 @@ const ListingsShowPage = (props) => {
 									{/* CARD #1 */}
 									<div className="listing-feature-card">
 										<div className="listing-feature-icon">
-											<i class="fa-solid fa-wifi"></i>
+											<i className="fa-solid fa-wifi"></i>
 										</div>
 										<div className="listing-feature-text">
 											<div className="listing-feature-header">
@@ -479,7 +479,7 @@ const ListingsShowPage = (props) => {
 									{/* CARD #2 */}
 									<div className="listing-feature-card">
 										<div className="listing-feature-icon">
-											<i class="fa-solid fa-door-open"></i>
+											<i className="fa-solid fa-door-open"></i>
 										</div>
 										<div className="listing-feature-text">
 											<div className="listing-feature-header">
@@ -514,10 +514,10 @@ const ListingsShowPage = (props) => {
 										<span className="sleep-text">Where you'll sleep </span>
 										<div className="sleep-buttons-container">
 											<span className="sleep-counter">{`${currentSleepPhotoNum} / ${sleepPhotoPairsTotal}`}</span>
-											{/* <div className="sleep-button" onMouseDown={mouseDownSleepBtn} onMouseUp={(shiftSleepPhoto)("prev")}><i class="fa-solid fa-chevron-left"></i></div> */}
-											{/* <div className="sleep-button" ref={prevSleepBtn} onMouseDown={(mouseDownSleepBtn)("prev")} ><i class="fa-solid fa-chevron-left"></i></div> */}
-											<div className="sleep-button" ref={prevSleepBtn} onMouseDown={mouseDownSleepBtn("prev")} ><i class="fa-solid fa-chevron-left"></i></div>
-											<div className="sleep-button" ref={nextSleepBtn} onMouseDown={mouseDownSleepBtn("next")} ><i class="fa-solid fa-chevron-right"></i></div>
+											{/* <div className="sleep-button" onMouseDown={mouseDownSleepBtn} onMouseUp={(shiftSleepPhoto)("prev")}><i className="fa-solid fa-chevron-left"></i></div> */}
+											{/* <div className="sleep-button" ref={prevSleepBtn} onMouseDown={(mouseDownSleepBtn)("prev")} ><i className="fa-solid fa-chevron-left"></i></div> */}
+											<div className="sleep-button" ref={prevSleepBtn} onMouseDown={mouseDownSleepBtn("prev")} ><i className="fa-solid fa-chevron-left"></i></div>
+											<div className="sleep-button" ref={nextSleepBtn} onMouseDown={mouseDownSleepBtn("next")} ><i className="fa-solid fa-chevron-right"></i></div>
 										</div>
 									</div>
 									<div className="sleep-carousel-container">

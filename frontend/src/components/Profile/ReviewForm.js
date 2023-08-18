@@ -105,7 +105,7 @@ export const ReviewForm = ({review, reservation, listing, setShowReviewForm}) =>
 	return(
 		<div className="review-form-container">
 			<div className="reviews-form-forehead">
-			<button onClick={e => setShowReviewForm(false)} className="x-close"><i class="fa-solid fa-x"></i></button>
+			<button onClick={e => setShowReviewForm(false)} className="x-close"><i className="fa-solid fa-x"></i></button>
 			</div>
 			<div className="reviews-form-non-forehead">
 				<form onSubmit={handleSubmit}>
