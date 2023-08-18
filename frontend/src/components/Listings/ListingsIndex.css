@@ -18,6 +18,7 @@
 	/* spacing in btwn */
 	row-gap: 40px;
 	column-gap: 24px;
+	padding-top: 24px;
 }
 
 .grid-item {
@@ -228,10 +229,14 @@
 
 .index-map-toggle-container-outer {
 	--toggle-map-btn-height: 48px;
-	position: fixed;
-	bottom: calc(137px - var(--toggle-map-btn-height));
-	left: 50%;
-	transform: translateX(-50%);
+	bottom: calc((137px + 48px) - var(--toggle-map-btn-height));
+	/* left: 50%; */
+	/* transform: translateX(-50%); */
+	/* position: fixed; */
+	height: 0px;
+	position: sticky;
+	display: flex;
+	justify-content: center;
 }
 
 .index-map-toggle-container {

@@ -14,6 +14,12 @@
 	/* padding: 0px 80px; */
 	container-type: inline-size;
 	container-name: main-body;
+	min-height: calc(100vh - var(--toggle-map-btn-height));
+}
+
+#main-body-inner{
+	/* container-type: inline-size; */
+	/* container-name: main-body; */
 }
 
 * {

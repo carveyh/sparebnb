@@ -52,6 +52,9 @@ function App() {
       <Navigation filter={filter} setFilter={setFilter} />
 
       <div ref={mainBodyRef} id="main-body">
+      {/* <div id="main-body"> */}
+        {/* <div ref={mainBodyRef} id="main-body-inner"> */}
+        {/* <div id="main-body-inner"> */}
 
         <Switch>
           <Route exact path="/testing"><Testing /></Route>
@@ -71,6 +74,7 @@ function App() {
           </Route>
           <Route><h1>404 - page not found.</h1></Route>
         </Switch>
+        {/* </div> */}
       </div>
 
       {!showIndexMap && <Footer />}
