@@ -164,14 +164,14 @@ export const TripCard = ({reservation, listing, review, tripType}) => {
 								onClick={e => setShowReviewForm(true)}
 							>
 								<div className="past-trip-review-button-inner">
-									<div className="trip-card-review-create-icon"><i class="fa-solid fa-pen-to-square"></i></div> <span>Edit</span>
+									<div className="trip-card-review-create-icon"><i className="fa-solid fa-pen-to-square"></i></div> <span>Edit</span>
 								</div>
 							</div>
 							<div className="review-del-btn"
 								onClick={handleDeleteReview}
 							>
 								<div className="past-trip-review-button-inner">
-								<div className="trip-card-review-create-icon"><i class="fa-solid fa-trash-can"></i></div> <span>Delete</span>
+								<div className="trip-card-review-create-icon"><i className="fa-solid fa-trash-can"></i></div> <span>Delete</span>
 								</div>
 							</div>
 						</div>
@@ -183,10 +183,10 @@ export const TripCard = ({reservation, listing, review, tripType}) => {
 							<div className={`past-trip-review-button-inner`}>
 								{review ? 
 									<>
-										<div className="trip-card-review-complete-icon"><i class="fa-solid fa-check"></i></div> <span>Review Complete</span>
+										<div className="trip-card-review-complete-icon"><i className="fa-solid fa-check"></i></div> <span>Review Complete</span>
 									</> 
 									: 
-									<><div className="trip-card-review-create-icon"><i class="fa-solid fa-plus"></i></div> <span>Leave a Review</span> </> }
+									<><div className="trip-card-review-create-icon"><i className="fa-solid fa-plus"></i></div> <span>Leave a Review</span> </> }
 							</div>
 						</div>
 					}
@@ -260,7 +260,7 @@ export const TripCard = ({reservation, listing, review, tripType}) => {
 									</div>
 									<div className="update-field trips-update-field trip-card-reset-box">
 										{/* <input className={unChanged() ? `trip-crud-btn-disabled` : `trip-crud-btn-enabled`} type="button" onClick={handleUpdate} value="Update"/> */}
-										<div id={reservation?.id} onClick={handleReset}><i class="fa-solid fa-rotate-right"></i></div>
+										<div id={reservation?.id} onClick={handleReset}><i className="fa-solid fa-rotate-right"></i></div>
 									</div>
 
 									

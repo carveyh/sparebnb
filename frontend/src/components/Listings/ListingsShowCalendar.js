@@ -9,7 +9,7 @@ import { addDays } from 'date-fns';
 import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut, modal, calModalRef, showDateModal, setShowDateModal, handleClearDates}) => {
+const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut, modal, calModalRef, showDateModal, setShowDateModal, handleClearDates, reserveBtn}) => {
 
 	const reservations = Object.values(useSelector(state => state.entities.reservations ? state.entities.reservations : {}))
 
@@ -105,7 +105,7 @@ const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut, modal
 
 	const clickOutsideClose = (e) => {
 		// need calModalRef.current bc if close button is clicked, the ref will no longer be available to check
-		if(calModalRef.current && !calModalRef.current.contains(e.target) && showDateModal) {
+		if(calModalRef.current &&  !reserveBtn.current.contains(e.target) && !calModalRef.current.contains(e.target) && showDateModal) {
 			setShowDateModal(false)
 			document.removeEventListener("click",clickOutsideClose)
 		}

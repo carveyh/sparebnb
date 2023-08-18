@@ -29,7 +29,7 @@ export const ReviewSnippetIndividual = ({review, endDate, truncated=true, setSho
 				</div>
 				<div className={`snippet-body ${truncated && `snippet-body-truncated`} snippet-body-${review.id}`}>{review.body}</div>
 				<div className="snippet-more-btn">
-					{(showMore && truncated) && <><div onClick={e => setShowReviewsModal(true)} className="show-more-text">Show more</div> <i class="fa-solid fa-chevron-right"></i></>}
+					{(showMore && truncated) && <><div onClick={e => setShowReviewsModal(true)} className="show-more-text">Show more</div> <i className="fa-solid fa-chevron-right"></i></>}
 				</div>
 			</div>
 		</div>
