@@ -17,8 +17,6 @@ const SpareMap = ({center={ lat: 40.77413645301188, lng: -73.97082471226298 }, z
   const [isOpen, setIsOpen] = useState(false);
   const [infoWindowData, setInfoWindowData] = useState();
 
-	const googleMapRef = useRef(null);
-
 	const listingsMarkers = [];
 	let spareIcon;
 
@@ -93,6 +91,7 @@ const SpareMap = ({center={ lat: 40.77413645301188, lng: -73.97082471226298 }, z
 				)
 			});
 			map.fitBounds(bounds);
+			// map.setZoom(listings?.length === 1 ? 14 : null)
 		}
 		setMapRef(map);
 	}
@@ -121,9 +120,13 @@ const SpareMap = ({center={ lat: 40.77413645301188, lng: -73.97082471226298 }, z
 			});
 			// googleMapRef.current?.fitBounds(bounds);
 			mapRef?.fitBounds(bounds);
+			// mapRef?.panToBounds(bounds);
+			// mapRef?.setZoom(listings?.length === 1 ? 14 : null)
 		}
 		if(listings?.length === 1){
 			newCenter={lat: parseFloat(listings[0].latitude), lng: parseFloat(listings[0].longitude) }
+			mapRef?.setCenter(newCenter);
+			mapRef?.setZoom(14);
 		}
 	}
 
@@ -141,8 +144,6 @@ const SpareMap = ({center={ lat: 40.77413645301188, lng: -73.97082471226298 }, z
           center={listings?.length === 1 ? newCenter : centerMemo}
           zoom={zoom}
 					onLoad={onLoad}
-					// ref={googleMapRef}
-					// ref={(ref) => { this.map = ref; }}
         >
 					{listings ? 
 						<>
