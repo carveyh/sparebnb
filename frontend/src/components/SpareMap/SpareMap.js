@@ -3,16 +3,21 @@ import './SpareMap.css';
 import { GoogleMap, Marker, useLoadScript, InfoWindow, Circle } from "@react-google-maps/api";
 import { useMemo } from "react";
 import { useState } from 'react';
+import { useRef } from 'react';
+import { useEffect } from 'react';
 import { MapInfoCard } from './MapInfoCard';
 
-const SpareMap = ({isLoaded, center={ lat: 40.77413645301188, lng: -73.97082471226298 }, zoom=12, listings}) => {
-  // const { isLoaded } = useLoadScript({
-  //   googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
-  // });
+// const SpareMap = ({isLoaded, center={ lat: 40.77413645301188, lng: -73.97082471226298 }, zoom=14, listings}) => {
+const SpareMap = ({center={ lat: 40.77413645301188, lng: -73.97082471226298 }, zoom=14, listings}) => {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
+  });
   const centerMemo = useMemo(() => (center), []);
   const [mapRef, setMapRef] = useState();
   const [isOpen, setIsOpen] = useState(false);
   const [infoWindowData, setInfoWindowData] = useState();
+
+	const googleMapRef = useRef(null);
 
 	const listingsMarkers = [];
 	let spareIcon;
@@ -65,9 +70,14 @@ const SpareMap = ({isLoaded, center={ lat: 40.77413645301188, lng: -73.970824712
 		})
 	}
 
+	let newCenter;
+	if(listings?.length === 1){
+		newCenter={lat: parseFloat(listings[0].latitude), lng: parseFloat(listings[0].longitude) }
+	}
+
 	const onLoad = (map) => {
-		setMapRef(map);
-		if(listings){
+		
+		if(listings?.length > 1){
 			const bounds = new window.google.maps.LatLngBounds();
 			// listings?.forEach(({ latitude, longitude }) => {
 			listings?.forEach((listing, idx) => {
@@ -84,6 +94,7 @@ const SpareMap = ({isLoaded, center={ lat: 40.77413645301188, lng: -73.970824712
 			});
 			map.fitBounds(bounds);
 		}
+		setMapRef(map);
 	}
 
   const handleMarkerClick = (id, lat, lng, address) => {
@@ -92,6 +103,34 @@ const SpareMap = ({isLoaded, center={ lat: 40.77413645301188, lng: -73.970824712
     setIsOpen(true);
   };
 
+	const customFitBounds = () => {
+		if(listings?.length > 1){
+			const bounds = new window.google.maps.LatLngBounds();
+			// listings?.forEach(({ latitude, longitude }) => {
+			listings?.forEach((listing, idx) => {
+				bounds.extend({ lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) })
+				listingsMarkers.push(
+					<Marker 
+						key={idx}
+						position={{lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude)}} 
+						options={{
+							icon:spareIcon,
+						}}
+					/>	
+				)
+			});
+			// googleMapRef.current?.fitBounds(bounds);
+			mapRef?.fitBounds(bounds);
+		}
+		if(listings?.length === 1){
+			newCenter={lat: parseFloat(listings[0].latitude), lng: parseFloat(listings[0].longitude) }
+		}
+	}
+
+	useEffect(() => {
+		customFitBounds();
+	}, [listings])
+
   return (
     <div className="overall-map-container">
       {!isLoaded ? (
@@ -99,9 +138,11 @@ const SpareMap = ({isLoaded, center={ lat: 40.77413645301188, lng: -73.970824712
       ) : (
         <GoogleMap
           mapContainerClassName={listings ? "map-container-listings-index" : "map-container-listing-show"}
-          center={centerMemo}
+          center={listings?.length === 1 ? newCenter : centerMemo}
           zoom={zoom}
 					onLoad={onLoad}
+					// ref={googleMapRef}
+					// ref={(ref) => { this.map = ref; }}
         >
 					{listings ? 
 						<>
