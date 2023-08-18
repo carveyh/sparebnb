@@ -10,16 +10,18 @@
 	box-shadow: 0 2px 4px rgba(0,0,0,0.08);
 	padding: 0px 80px;
 	z-index: 99;
+	display: flex;
+	justify-content: center;
 }
 
 
 .carousel-main {
 	/* gap: 2em; */
 	height: 100%;
-	width: 100%;
+	/* width: 100%; */
 	display: flex;
 	justify-content: flex-start;
-	justify-content: center;
+	/* justify-content: center; */
 	align-items: center;
 	overflow-x:scroll;
 	/* This is shorthand for overscroll-behavior-x and -y and prevents scrolling of */
