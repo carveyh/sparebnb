@@ -564,10 +564,11 @@ const ListingsShowPage = (props) => {
 										{numNights() > 0 ? 
 											`${numNights()} nights in ${listing.city}`
 											: 
-											checkIn === "" ? 
-												"Select check-in date"
-												:
-												"Select checkout date"
+											// checkIn === "" ? 
+											// 	"Select check-in date"
+											// 	:
+											// 	"Select checkout date"
+												"Select date range"
 										}
 									</div>
 									<div className="listing-show-calendar-subtitle">
@@ -657,6 +658,7 @@ const ListingsShowPage = (props) => {
 															showDateModal={showDateModal}
 															setShowDateModal={setShowDateModal}
 															handleClearDates={handleClearDates}
+															reserveBtn={reserveBtn}
 														/>
 													</div>
 												}
