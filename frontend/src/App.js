@@ -30,11 +30,33 @@ function App() {
   const mainBodyRef = useRef(null);
 
 	useEffect(() => {
-		navigator.geolocation.getCurrentPosition((position) => {
-			setLocalLatitude(position.coords.latitude)
-			setLocalLongitude(position.coords.longitude)
-			// console.log("that simple?", position)
-		}, (err) => {}, {enableHighAccuracy: false, timeout: 20000, maximumAge: Infinity})
+    const fetchLocationWithIPAPI = async () => {
+      let endpoint = `http://ip-api.com/json`;
+      try {
+        const res = await fetch(endpoint);
+        // const data = await res.json();
+        // console.log("ip-api success", data, "lat", data.lat, "lon", data.lon, "zip", data.zip);
+        // console.log("ip-api usage limiting", res.headers.entries)
+        for(const [key, value] of res.headers.entries()) {
+          console.log(`${key}: ${value}`);
+        }
+        const data = await res.json();
+        console.log("ip-api success", data, "lat", data.lat, "lon", data.lon, "zip", data.zip);
+        setLocalLatitude(data.lat)
+        setLocalLongitude(data.lon)
+      }
+      catch (err) {
+        console.err(err.message, err);
+      }
+    };
+    fetchLocationWithIPAPI();
+    // // Previous way: using window.navigator interface, this prompted user to consent '<site> wants to Know your location: Allow this time / Allow on every visit / Don't allow'
+    // // new way less friction without needing to prompt user
+		// navigator.geolocation.getCurrentPosition((position) => {
+		// 	setLocalLatitude(position.coords.latitude)
+		// 	setLocalLongitude(position.coords.longitude)
+		// 	console.log("that simple?", position, "lat", position.coords.latitude, "lon", position.coords.longitude, "zip", position.coords.zip)
+		// }, (err) => {}, {enableHighAccuracy: false, timeout: 20000, maximumAge: Infinity})
 	}, [])
 
   // Dynamically anchor footer to bottom of viewport if page height is less than viewport:

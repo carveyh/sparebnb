@@ -142,9 +142,7 @@ const ListingsMain = ({filter, setFilter, showIndexMap, setShowIndexMap, localLa
 			{showIndexMap ? 
 				<SpareMap isLoaded={isLoaded} listings={filteredListings} />
 			:
-			<>
 				<ListingsIndex localLatitude={localLatitude} localLongitude={localLongitude} isLoaded={isLoaded} filter={filter} />
-			</>
 			}
 			<div className="index-map-toggle-container-outer">
 				<div onClick={e => setShowIndexMap(old => !old)} className="index-map-toggle-container"><span>{showIndexMap ? "Show list" : "Show map"}</span><span>&nbsp;&nbsp;<i className={`fa-solid ${showIndexMap ? `fa-list-ul` : `fa-map` }`}></i></span></div>

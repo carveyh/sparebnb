@@ -56,7 +56,7 @@ const Navigation = ({filter, setFilter}) => {
 							</Link>
 						</div>
 					</div>
-					<div className="upper-navbar-search-container">
+					{/* <div className="upper-navbar-search-container">
 						{!location.pathname.startsWith('/users') && <div className="upper-navbar-search">
 							<span className="search-location-unopened"></span>
 							<button className="search-location-unopened">
@@ -76,7 +76,7 @@ const Navigation = ({filter, setFilter}) => {
 								</div>
 							</button>
 						</div>}
-					</div>
+					</div> */}
 
 					{/* UPPER RIGHT NAV!!! START */}
 					<div className="upper-navbar-right-div">
