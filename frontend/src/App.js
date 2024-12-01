@@ -34,19 +34,13 @@ function App() {
       let endpoint = `http://ip-api.com/json`;
       try {
         const res = await fetch(endpoint);
-        // const data = await res.json();
-        // console.log("ip-api success", data, "lat", data.lat, "lon", data.lon, "zip", data.zip);
-        // console.log("ip-api usage limiting", res.headers.entries)
-        for(const [key, value] of res.headers.entries()) {
-          console.log(`${key}: ${value}`);
-        }
         const data = await res.json();
-        console.log("ip-api success", data, "lat", data.lat, "lon", data.lon, "zip", data.zip);
+        // console.log("ip-api success", data, "lat", data.lat, "lon", data.lon, "zip", data.zip);
         setLocalLatitude(data.lat)
         setLocalLongitude(data.lon)
       }
       catch (err) {
-        console.err(err.message, err);
+        console.error(err.message);
       }
     };
     fetchLocationWithIPAPI();
