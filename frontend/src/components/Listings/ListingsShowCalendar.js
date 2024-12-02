@@ -25,15 +25,19 @@ const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut, modal
 			// // endDate: addDays(new Date(), 7),
 			// key: 'selection',
 			
-			startDate: null,
-			endDate: null,
+			// startDate: null,
+			// endDate: null,
+			// key: 'selection',
+
+			startDate: checkIn,
+			endDate: checkOut,
 			key: 'selection',
 
 		}
 	])
 
 	useEffect(() => {
-		if(checkIn < checkOut) {
+		if(checkIn <= checkOut) {
 			setDatesState(
 				[{
 					startDate: checkIn,
@@ -131,10 +135,12 @@ const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut, modal
 					direction="horizontal"
 					months={numMonths}
 					ranges={datesState}
+					// initialFocusedRange={datesState}
 					// ranges={(checkIn && checkOut) ? datesState : undefined}
 					// ranges={undefined} // if we want to "clear dates"
 					onChange={handleSelect}
-					showDateDisplay={true} // Don't need this for on page
+					showDateDisplay={true} // Shows picker for ability to update end date while keeping selected start date
+					dateDisplayFormat={"P"}
 					editableDateInputs={true} // if showDateDisplay={true}
 					fixedHeight={false} //airbnb has this behavior - if a month needs 6 lines for a month it will change height.
 					disabledDates={blockedDates}

@@ -24,15 +24,10 @@ const ListingsIndex = ({localLatLon, filter=null, isMapsAPILoaded}) => {
 		filteredListings = Object.values(listings);
 	}
 
-	// debugger
 	useEffect(() => {
 		window.scrollTo(0, 0);
-		console.log(listings)
-		// debugger
 		dispatch(fetchListings())
-		// debugger
 	}, [])
-	// debugger
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -70,9 +65,7 @@ const ListingsIndex = ({localLatLon, filter=null, isMapsAPILoaded}) => {
 	const numTestListings = 13;
 	const listingCards = [];
 
-	// debugger
 	if(filteredListings.length !== 0){
-		console.log("filteredListings", filteredListings, "filter", filter)
 		if(!filter){
 			for(let i = 1; i <= numTestListings; i++) {
 				listingCards.push(
@@ -87,7 +80,6 @@ const ListingsIndex = ({localLatLon, filter=null, isMapsAPILoaded}) => {
 			}
 		} else {
 			for(let i = 1; i <= filteredListings.length; i++) {
-				// debugger
 				listingCards.push(
 					<ListingsIndexCard 
 						// key={filteredListings[(i - 1 & filteredListings.length)].id}
@@ -100,7 +92,6 @@ const ListingsIndex = ({localLatLon, filter=null, isMapsAPILoaded}) => {
 			}
 		}
 	}
-	// debugger
 	
 	return (
 		<div className="grid-container-container" >

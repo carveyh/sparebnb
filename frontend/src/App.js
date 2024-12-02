@@ -22,7 +22,7 @@ function App() {
 	const loggedIn = useSelector(state => !!state.session.user);
 	const location = useLocation();
 
-  const [isMapsAPILoaded, setIsMapsAPILoaded] = useState(null);
+  const [isMapsAPILoaded, setIsMapsAPILoaded] = useState(false);
   const [localLatLon, setLocalLatLon] = useState(null);
   const [showIndexMap, setShowIndexMap] = useState(false);
   const [filter, setFilter] = useState(null);

@@ -195,17 +195,3 @@ const SpareMap = ({center={ lat: 40.77413645301188, lng: -73.97082471226298 }, z
 };
 
 export default SpareMap;
-
-					{/* <Circle
-					radius={1200}
-					center={center}
-					onMouseOver={() => console.log('mouseover')}
-					onClick={() => console.log('click')}
-					onMouseOut={() => console.log('mouseout')}
-					// strokeColor='transparent'
-					// strokeOpacity={0}
-					// strokeWeight={5}
-					// fillColor='#FF0000'
-					// fillOpacity={0.2}
-					/>
-					*/}
