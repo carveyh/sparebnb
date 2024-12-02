@@ -21,7 +21,7 @@ import { ReviewsSubCategories } from "./ReviewsSubCategories";
 import { ReviewsSnippetsMain } from "./ReviewsSnippetsMain";
 import { ReviewsModal } from "./ReviewsModal";
 import { Modal } from "../../context/Modal";
-import * as ListingFees from "./ListingFees"
+import * as ListingFees from "../../utils/listingFeeUtils";
 import { Redirect } from "react-router-dom";
 import Map from "../SpareMap/SpareMap.js"
 import ListingsShowCalendar from "./ListingsShowCalendar";

@@ -8,7 +8,7 @@ import { Modal } from "../../context/Modal"
 import { ReviewsModal } from "../Listings/ReviewsModal"
 import { updateReservation, destroyReservation } from "../../store/reservation"
 import { formatTwoDigitNumberString } from "../../utils/urlFormatter"
-import * as ListingFees from "../Listings/ListingFees";
+import * as ListingFees from "../../utils/listingFeeUtils";
 import { ReviewForm } from "./ReviewForm"
 import { destroyResReview } from "../../store/reservation_reviews"
 

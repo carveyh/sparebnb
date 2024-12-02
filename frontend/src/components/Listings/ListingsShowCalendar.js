@@ -134,16 +134,17 @@ const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut, modal
 					// ranges={(checkIn && checkOut) ? datesState : undefined}
 					// ranges={undefined} // if we want to "clear dates"
 					onChange={handleSelect}
-					showDateDisplay={false} // Don't need this for on page
+					showDateDisplay={true} // Don't need this for on page
 					editableDateInputs={true} // if showDateDisplay={true}
 					fixedHeight={false} //airbnb has this behavior - if a month needs 6 lines for a month it will change height.
-					// blockedDates={listBlockedDates()}
 					disabledDates={blockedDates}
 					minDate={new Date()}
 					maxDate={maxDate}
 					rangeColors={["#3e3e3e","#717171", "#FF0000"]}
 					color="FF0000"
 					weekdayDisplayFormat='EEEEEE'
+					// retainEndDateOnFirstSelection={true}
+					
 					// initialFocusedRange={[]}
 
 					// scroll={{enabled: true}} // calendar turns gray and empty...not needed
