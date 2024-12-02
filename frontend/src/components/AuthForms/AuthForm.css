@@ -131,7 +131,7 @@ div.signup-form, div.login-form {
 }
 
 .signup-form .auth-form-body {
-	overflow-y:scroll;
+	overflow-y:auto;
 	scroll-behavior: smooth;
 }
 
