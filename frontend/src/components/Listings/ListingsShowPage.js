@@ -4,15 +4,11 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
-import { fetchListing, fetchListings } from "../../store/listings";
-import { fetchUser } from "../../store/user";
-import { useHistory } from "react-router-dom";
+import { fetchListing } from "../../store/listings";
 import { useParams } from "react-router-dom";
 import { formatTwoDigitNumberString } from "../../utils/urlFormatter";
 import { useState } from "react";
 import { clearAllReservations, createReservation, fetchReservations } from "../../store/reservation";
-
-import {AnimatePresence, motion} from "framer-motion";
 import { fetchResReviewsForListing } from "../../store/reservation_reviews";
 
 // Relevant Components
@@ -21,10 +17,10 @@ import { ReviewsSubCategories } from "./ReviewsSubCategories";
 import { ReviewsSnippetsMain } from "./ReviewsSnippetsMain";
 import { ReviewsModal } from "./ReviewsModal";
 import { Modal } from "../../context/Modal";
-import * as ListingFees from "./ListingFees"
-import { Redirect } from "react-router-dom";
+import * as ListingFees from "../../utils/listingFeeUtils";
 import Map from "../SpareMap/SpareMap.js"
 import ListingsShowCalendar from "./ListingsShowCalendar";
+import { formatDateForInputElement } from "../../utils/dateFormatter.js";
 
 const ListingsShowPage = (props) => {
 	const dispatch = useDispatch();
@@ -32,15 +28,10 @@ const ListingsShowPage = (props) => {
 	const sessionUser = useSelector(state => state.session?.user)
 	const listing = useSelector(state => state.entities?.listings ? state.entities.listings[`${listingId}`] : {})
 	const host = useSelector(state => state.entities?.users ? state.entities.users[`${listing?.hostId}`] : {})
-	// const reservations = useSele
 	const hostIdFormatted = formatTwoDigitNumberString(host?.id);	
 
-	// const [checkIn, setCheckIn] = useState("");
-	// const [checkOut, setCheckOut] = useState("");
 	const [checkIn, setCheckIn] = useState(new Date());
 	const [checkOut, setCheckOut] = useState(new Date());
-	// const [checkIn, setCheckIn] = useState(undefined);
-	// const [checkOut, setCheckOut] = useState(undefined);
 	const [numGuests, setNumGuests] = useState(1);
 	const [dayAfter, setDayAfter] = useState();
 	const [dayBefore, setDayBefore] = useState();
@@ -81,7 +72,7 @@ const ListingsShowPage = (props) => {
 	const baseServiceFee = ListingFees.baseServiceFee(listing?.baseNightlyRate);
 
 	useEffect(() => {
-		// Add this line to try to always be at top of a page when navigationg from a dff one
+		// Add this line to always be at top of a page when navigationg from a dff one
 		window.scrollTo(0, 0);
 		dispatch(fetchListing(listingId))
 			.then(() => {
@@ -89,8 +80,8 @@ const ListingsShowPage = (props) => {
 				dispatch(fetchReservations({id:listingId, type: "listing"}))
 				dispatch(fetchResReviewsForListing(listingId))
 			})
-			.catch(() => {
-				// 
+			.catch((err) => {
+				console.error(err.message);
 			})
 	}, [])
 
@@ -101,7 +92,6 @@ const ListingsShowPage = (props) => {
 		const formattedDateString = dateString.split('-').join('/')
 		const newDate = new Date(formattedDateString);
 		setCheckIn(newDate);
-		// setCheckIn(e.target.value);
 		setDayAfter(daysApartCalculator(e.target.value, 2))
 
 		if(newDate > checkOut){
@@ -124,15 +114,7 @@ const ListingsShowPage = (props) => {
 		const formattedDateString = dateString.split('-').join('/')
 		const newDate = new Date(formattedDateString);
 		setCheckOut(newDate);
-		// setCheckOut(e.target.value);
 		setDayBefore(daysApartCalculator(e.target.value, -0));
-		// Not working great, if you click up and down on month selector the date input automatically selects a date,
-		// this will cause shift in focus
-		// if(!checkIn) {
-		// 	const inputToFocus = document.querySelector(".checkin-input");
-		// 	inputToFocus.focus();
-		// 	inputToFocus.showPicker();
-		// };
 	}
 
 	const handleToggleDateModal = (e) => {
@@ -160,10 +142,6 @@ const ListingsShowPage = (props) => {
 	}
 
 	const numNights = () => {
-		// if(!checkIn || !checkOut) return null;
-		// const diffTime = Math.abs(new Date(checkOut) - new Date(checkIn));
-		// const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-		// return diffDays
 		return ListingFees.numNights(checkIn, checkOut);
 	}
 
@@ -225,34 +203,11 @@ const ListingsShowPage = (props) => {
 		if(!sessionUser || !buttonClickable) {
 			return
 		} else {
-
-			// If form inputs are not fully complete, force focus on form inputs in logical order: checkin, checkout, guests count.
-			// const emptyCheckin = (checkIn === "")
-			// const emptyCheckout = (checkOut === "")
-			// if(emptyCheckin || emptyCheckout) {
-			// 	// let inputToFocus;
-			// 	// if(emptyCheckin) {
-			// 	// 	inputToFocus = document.querySelector(".checkin-input");
-			// 	// } else if(emptyCheckout) {
-			// 	// 	inputToFocus = document.querySelector(".checkout-input");
-			// 	// }
-			// 	// inputToFocus.focus();
-			// 	// inputToFocus.showPicker();
-			// 	// setShowDateModal(true);
-			// 	// return;
-			// }
-			// if(checkIn.toString() === checkOut.toString()) {
 			if(numNights() <= 0) {
-				// console.log(numNights())
-				// console.log(showDateModal)
-				// document.querySelector(".checkin-input").focus();
-				// document.querySelector(".checkin-input").showPicker();
 				setShowDateModal(true);
-				// handleToggleDateModal();
 				return
 			}
 			
-
 			const reservation = { checkIn, checkOut, numGuests, listingId,
 				reserverId: sessionUser.id,
 				baseNightlyRate: listing.baseNightlyRate
@@ -622,7 +577,7 @@ const ListingsShowPage = (props) => {
 												<div className="checkin-button">
 													<input className="checkin-input" 
 														type="date"
-														value={checkIn !== "" ? checkIn?.toISOString().slice(0,10) : ""}
+														value={checkIn !== "" ? formatDateForInputElement(checkIn) : ""}
 														min={minDate()}
 														max={checkOut ? dayBefore : null}
 														onChange={handleChangeCheckIn}
@@ -635,9 +590,7 @@ const ListingsShowPage = (props) => {
 												<div className="checkout-button">
 													<input className="checkout-input" 
 														type="date"
-														// type="text"
-														value={checkOut?.toISOString().slice(0,10)}
-														// value={formatDate(checkOut)}
+														value={checkOut !== "" ? formatDateForInputElement(checkOut) : ""}
 														min={checkIn ? dayAfter : daysApartCalculator(minDate(), 2)}
 														onChange={handleChangeCheckOut}
 														required
@@ -746,7 +699,7 @@ const ListingsShowPage = (props) => {
 					<div className="listing-show-map-subheader">
 						{`${listing.city}, ${listing.state}, United States`}
 					</div>
-					<Map isLoaded={props.isLoaded} zoom={14} center={{lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) }}/>
+					<Map isMapsAPILoaded={props.isMapsAPILoaded} zoom={14} center={{lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) }}/>
 					<br/><br/><br/><br/><br/>
 				</div>
 

@@ -1,13 +1,15 @@
 import "./Footer.css";
+import { useLocation } from "react-router-dom";
 
 const Footer = () => {
+	const location = useLocation();
+	const narrowFooter = location.pathname.startsWith('/listings') ? true : false;
 	return (
-		<div className="footer-container">
+		<div className={`footer-container ${narrowFooter ? 'narrow-footer-container' : ''}`}>
 			<div className="footer-general-links">
 				<span className="">© 2023 Sparebnb, Inc.</span>
 				<span className="footer-dot">·</span>
-				{/* eventually this needs to be portfolio link: */}
-				<span className="">Carvey Hor</span>
+				<span className="footer-link"><a target="_blank" href="https://carvey.dev/">Carvey Hor</a></span>
 				<span className="footer-dot">·</span>
 				<span className="footer-link"><a target="_blank" href="https://www.linkedin.com/in/carvey-hor/">LinkedIn</a></span>
 				<span className="footer-dot">·</span>

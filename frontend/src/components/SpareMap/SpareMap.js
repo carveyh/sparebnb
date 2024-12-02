@@ -3,15 +3,14 @@ import './SpareMap.css';
 import { GoogleMap, Marker, useLoadScript, InfoWindow, Circle } from "@react-google-maps/api";
 import { useMemo } from "react";
 import { useState } from 'react';
-import { useRef } from 'react';
 import { useEffect } from 'react';
 import { MapInfoCard } from './MapInfoCard';
 
-// const SpareMap = ({isLoaded, center={ lat: 40.77413645301188, lng: -73.97082471226298 }, zoom=14, listings}) => {
-const SpareMap = ({center={ lat: 40.77413645301188, lng: -73.97082471226298 }, zoom=14, listings}) => {
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
-  });
+const SpareMap = ({center={ lat: 40.77413645301188, lng: -73.97082471226298 }, zoom=14, listings, isMapsAPILoaded}) => {
+	// // Moved to App.js to load only Google Maps API only once:
+  // const { isLoaded } = useLoadScript({
+  //   googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
+  // });
   const centerMemo = useMemo(() => (center), []);
   const [mapRef, setMapRef] = useState();
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +19,7 @@ const SpareMap = ({center={ lat: 40.77413645301188, lng: -73.97082471226298 }, z
 	const listingsMarkers = [];
 	let spareIcon;
 
-	if(isLoaded) {
+	if(isMapsAPILoaded) {
 		spareIcon = {
 			url: "https://i.imgur.com/DekpBQl.png",
 			// scaledSize: new window.google.maps.Size(35, 35),
@@ -136,7 +135,7 @@ const SpareMap = ({center={ lat: 40.77413645301188, lng: -73.97082471226298 }, z
 
   return (
     <div className="overall-map-container">
-      {!isLoaded ? (
+      {!isMapsAPILoaded ? (
         <></>
       ) : (
         <GoogleMap
@@ -196,17 +195,3 @@ const SpareMap = ({center={ lat: 40.77413645301188, lng: -73.97082471226298 }, z
 };
 
 export default SpareMap;
-
-					{/* <Circle
-					radius={1200}
-					center={center}
-					onMouseOver={() => console.log('mouseover')}
-					onClick={() => console.log('click')}
-					onMouseOut={() => console.log('mouseout')}
-					// strokeColor='transparent'
-					// strokeOpacity={0}
-					// strokeWeight={5}
-					// fillColor='#FF0000'
-					// fillOpacity={0.2}
-					/>
-					*/}

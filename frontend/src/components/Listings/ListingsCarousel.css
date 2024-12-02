@@ -27,6 +27,7 @@
 	/* This is shorthand for overscroll-behavior-x and -y and prevents scrolling of */
 	/* other elements, "bounce" effect, and refresh/back/fwd navigation with trackpad scrolling */
 	overscroll-behavior: contain;
+	scrollbar-width: none;
 }
 
 .carousel-main::-webkit-scrollbar {

@@ -3,10 +3,7 @@
 	width: 100%;
 	background-color: #F7F7F7;
 	border-top: 1px solid #DDDDDD;
-	padding-left: 160px;
-	padding-right: 160px;
-	padding-top: 24px;
-	padding-bottom: 24px;
+	padding: 24px 80px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -14,6 +11,22 @@
 	font-size: 14px;
 	color: #222222;
 	font-weight: 300;
+}
+
+.narrow-footer-container {
+	padding: 24px 160px;
+}
+
+@media (max-width: 1270px) {
+	.narrow-footer-container {
+		padding: 24px 80px;
+	}
+}
+
+@media (max-width: 1120px) {
+	.narrow-footer-container {
+		padding: 24px 40px;
+	}
 }
 
 .footer-link:hover {
