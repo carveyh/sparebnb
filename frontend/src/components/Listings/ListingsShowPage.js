@@ -746,7 +746,7 @@ const ListingsShowPage = (props) => {
 					<div className="listing-show-map-subheader">
 						{`${listing.city}, ${listing.state}, United States`}
 					</div>
-					<Map isLoaded={props.isLoaded} zoom={14} center={{lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) }}/>
+					<Map isMapsAPILoaded={props.isMapsAPILoaded} zoom={14} center={{lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) }}/>
 					<br/><br/><br/><br/><br/>
 				</div>
 

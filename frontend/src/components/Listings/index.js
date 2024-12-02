@@ -1,14 +1,14 @@
 import ListingsIndex from "./ListingsIndex";
 
 import "./ListingsCarousel.css";
-import { useState } from "react";
+// import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchListings } from "../../store/listings";
-import { Route, Switch } from "react-router-dom";
-import ListingsShowPage from "./ListingsShowPage";
-import Testing from "../Testing";
+// import { Route, Switch } from "react-router-dom";
+// import ListingsShowPage from "./ListingsShowPage";
+// import Testing from "../Testing";
 import SpareMap from "../SpareMap/SpareMap";
 
 const ListingsFilterCarousel = ({filter, setFilter}) => {
@@ -117,7 +117,7 @@ const ListingsFilterCarousel = ({filter, setFilter}) => {
 	)
 }
 
-const ListingsMain = ({filter, setFilter, showIndexMap, setShowIndexMap, localLatitude, localLongitude, isLoaded}) => {
+const ListingsMain = ({filter, setFilter, showIndexMap, setShowIndexMap, localLatLon, isMapsAPILoaded}) => {
 	// const sessionUser = useSelector(state => state.session?.user )
 	
 	const dispatch = useDispatch();
@@ -140,9 +140,9 @@ const ListingsMain = ({filter, setFilter, showIndexMap, setShowIndexMap, localLa
 		<>
 			<ListingsFilterCarousel filter={filter} setFilter={setFilter}/>
 			{showIndexMap ? 
-				<SpareMap isLoaded={isLoaded} listings={filteredListings} />
+				<SpareMap isMapsAPILoaded={isMapsAPILoaded} listings={filteredListings} />
 			:
-				<ListingsIndex localLatitude={localLatitude} localLongitude={localLongitude} isLoaded={isLoaded} filter={filter} />
+				<ListingsIndex localLatLon={localLatLon} isMapsAPILoaded={isMapsAPILoaded} filter={filter} />
 			}
 			<div className="index-map-toggle-container-outer">
 				<div onClick={e => setShowIndexMap(old => !old)} className="index-map-toggle-container"><span>{showIndexMap ? "Show list" : "Show map"}</span><span>&nbsp;&nbsp;<i className={`fa-solid ${showIndexMap ? `fa-list-ul` : `fa-map` }`}></i></span></div>
