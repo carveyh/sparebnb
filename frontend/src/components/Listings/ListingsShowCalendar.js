@@ -140,7 +140,7 @@ const ListingsShowCalendar = ({checkIn, setCheckIn, checkOut, setCheckOut, modal
 					// ranges={undefined} // if we want to "clear dates"
 					onChange={handleSelect}
 					showDateDisplay={true} // Shows picker for ability to update end date while keeping selected start date
-					dateDisplayFormat={"P"}
+					dateDisplayFormat={"P"} // This sets date format for `showDateDisplay` start/end date buttons to 'MM-DD-YYYY'
 					editableDateInputs={true} // if showDateDisplay={true}
 					fixedHeight={false} //airbnb has this behavior - if a month needs 6 lines for a month it will change height.
 					disabledDates={blockedDates}
