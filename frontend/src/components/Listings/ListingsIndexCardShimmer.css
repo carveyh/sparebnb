@@ -1,0 +1,40 @@
+.LICS {
+  border-radius: 12px;
+  height: auto;
+  width: 100%;
+  aspect-ratio: 274.83 / 361.3;
+}
+
+.LICS-photo {
+  background-color: rgba(235, 235, 244, 0.6);
+  height: auto;
+  width: 100%;
+  aspect-ratio: 325 / 309;
+  border-radius: 12px;
+}
+
+.LICS-text-top-row, .LICS-text-distance, .LICS-text-dates, .LICS-text-price {
+  border-radius: 3px;
+  background-color: rgba(235, 235, 244, 0.6);
+}
+
+.LICS-text-top-row {
+  width: 100%;
+  height: 15px;
+}
+
+.LICS-text-distance, .LICS-text-dates, .LICS-text-price {
+  height: 15px;
+  padding: 0;
+  margin-top: 5px;
+}
+.LICS-text-distance {
+  width: 50%;
+}
+.LICS-text-dates {
+  width: 40%;
+}
+.LICS-text-price {
+  width: 30%;
+  padding-top: 5px;
+}

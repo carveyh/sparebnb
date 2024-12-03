@@ -21,6 +21,7 @@ import * as ListingFees from "../../utils/listingFeeUtils";
 import Map from "../SpareMap/SpareMap.js"
 import ListingsShowCalendar from "./ListingsShowCalendar";
 import { formatDateForInputElement } from "../../utils/dateFormatter.js";
+import NotFoundPage from "../NotFound/index.js";
 
 const ListingsShowPage = (props) => {
 	const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const ListingsShowPage = (props) => {
 	const [currentSleepPhotoNum, setCurrentSleepPhotoNum] = useState(1);
 	const [disabledToolTipRunning, setDisabledToolTipRunning] = useState(false);
 	const [showDateModal, setShowDateModal] = useState(false);
+	const [isLoadingListing, setIsLoadingListing] = useState(true);
 
 	// Review modal
 	const [showReviewsModal, setShowReviewsModal] = useState(false);
@@ -74,6 +76,7 @@ const ListingsShowPage = (props) => {
 	useEffect(() => {
 		// Add this line to always be at top of a page when navigationg from a dff one
 		window.scrollTo(0, 0);
+		if(!listing) {
 		dispatch(fetchListing(listingId))
 			.then(() => {
 				dispatch(clearAllReservations())
@@ -83,6 +86,13 @@ const ListingsShowPage = (props) => {
 			.catch((err) => {
 				console.error(err.message);
 			})
+			.finally(() => {
+				setIsLoadingListing(false);
+			})
+		}
+		else {
+			setIsLoadingListing(false);
+		}
 	}, [])
 
 	
@@ -311,7 +321,9 @@ const ListingsShowPage = (props) => {
 	// LOGIC FOR SLEEP PHOTOS CAROUSEL - END
 
 	// if(!listing) return <Redirect to="/" /> 
-	if(!listing || !host) return null;
+	// console.log(listing, isLoadingListing)
+	if(isLoadingListing && !listing) return null;
+	if(!isLoadingListing && !listing) return <NotFoundPage/>;
 
 	return (
 		<>
@@ -398,7 +410,7 @@ const ListingsShowPage = (props) => {
 									<div className="details-card-stats-horizontal-splitter">
 										<div className="details-card-stats-text-container">
 												<div className="details-card-stats-text-top heading-2">
-													Entire home hosted by {`${host.firstName}`}
+													Entire home hosted by {`${host?.firstName}`}
 												</div>
 												<div className="details-card-stats-text-bottom plain-text">
 													{`${listing.maxGuests}`} guest{listing.maxGuests > 1 && 's'} · {`${listing.numBedrooms}`} bedroom{listing.numBedrooms > 1 && 's'} · {`${listing?.numBeds}`} bed{listing.numBeds > 1 && 's'} · {`${listing?.numBaths}`} bath{listing.numBaths > 1 && 's'}

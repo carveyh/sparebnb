@@ -8,25 +8,13 @@ import LoginForm from "../AuthForms/LoginForm";
 import SignupForm from "../AuthForms/SignupForm";
 import { Modal } from "../../context/Modal";
 import { useState } from "react";
+import useIsListingsShowPage from "../../hooks/useIsListingsShowPage";
 
 const Navigation = ({filter, setFilter}) => {
 	
 	const [showSignUpModal, setShowSignUpModal] = useState(false);
 	const [showLogInModal, setShowLogInModal] = useState(false);
-	
-	// If on listings show page, narrow navbar.
-	const location = useLocation();
-	const upperNavbar = document.querySelector('.upper-navbar-header');
-	const upperNavbarContainer = document.querySelector('.upper-navbar-container');
-	if(location.pathname.startsWith('/listings')){
-		upperNavbarContainer?.classList.add('narrow-navbar-container')
-		upperNavbar?.classList.add('narrow-navbar')
-		upperNavbar?.classList.remove('non-listings-header')
-	} else {
-		upperNavbarContainer?.classList.remove('narrow-navbar-container')
-		upperNavbar?.classList.remove('narrow-navbar')
-		upperNavbar?.classList.add('non-listings-header')
-	}
+	const isListings = useIsListingsShowPage();
 
 	// Disables page scrolling if a modal is open!
 	if(showLogInModal || showSignUpModal){
@@ -45,12 +33,10 @@ const Navigation = ({filter, setFilter}) => {
 
 	return (
 		<>
-			<header className="upper-navbar-header">
-				<div className="upper-navbar-container">
+			<header className={`upper-navbar-header ${isListings ? 'narrow-navbar' : 'non-listings-header'}`}>
+				<div className={`upper-navbar-container ${isListings && 'narrow-navbar-container'}`}>
 					<div className="upper-navbar-logo-div">
 						<div onClick={e => setFilter(null)} className="upper-navbar-logo">
-							{/* This onClick will force page to reload if click on Link when already on the to path */}
-							{/* <Link onClick={() => window.location.pathname === "/" ? window.location.reload(): null} to="/"> */}
 							<Link to="/">
 								<img src={require("../../images/sparebnb_logo_2.png")} style={{width:"140px", height:"32px"}}/>
 							</Link>
@@ -105,12 +91,6 @@ const Navigation = ({filter, setFilter}) => {
 				</div>
 			</header>
 			
-			{/* {showSignUpModal && <Modal onClose={e => setShowSignUpModal(false)}>
-				<SignupForm setShowSignUpModal={setShowSignUpModal} setShowLogInModal={setShowLogInModal}/>
-			</Modal>}
-			{showLogInModal && <Modal onClose={e => setShowLogInModal(false)}>
-				<LoginForm setShowSignUpModal={setShowSignUpModal} setShowLogInModal={setShowLogInModal}/>
-			</Modal>} */}
 			{(showLogInModal || showSignUpModal) && <Modal onClose={handleCloseModals}>
 				{showLogInModal && <LoginForm setShowSignUpModal={setShowSignUpModal} setShowLogInModal={setShowLogInModal}/>}
 				{showSignUpModal && <SignupForm setShowSignUpModal={setShowSignUpModal} setShowLogInModal={setShowLogInModal}/>}
