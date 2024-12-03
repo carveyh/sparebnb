@@ -42,7 +42,7 @@ const ProfileButton = ({setShowSignUpModal, setShowLogInModal}) => {
 
 	useEffect(() => {
 		document.addEventListener("click", handleCloseDropDown)
-		// return document.removeEventListener("click", handleCloseDropDown)
+		return () => document.removeEventListener("click", handleCloseDropDown)
 	}, [])
 
 	const MenuDivider = () => {

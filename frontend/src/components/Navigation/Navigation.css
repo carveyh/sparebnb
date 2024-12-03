@@ -50,12 +50,13 @@
 }
 
 .narrow-navbar-container {
-	min-width: 1440px;
+	max-width: 1440px;
+	width: 100%;
 	padding: 0px 160px;
 	box-sizing: border-box;
 }
 
-@container navbar-width (width < 1270px) {
+@media (max-width: 1270px) {
 	.narrow-navbar-container {
 		min-width: unset;
 		width: 100%;
@@ -63,7 +64,7 @@
 		
 	}
 }
-@container navbar-width (width < 1120px) {
+@media (max-width: 1120px) {
 	.narrow-navbar-container {
 		min-width: unset;
 		width: 100%;

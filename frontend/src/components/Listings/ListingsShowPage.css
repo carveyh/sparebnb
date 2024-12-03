@@ -63,7 +63,8 @@
 }
 
 .show-page-dynamic-inner-container {
-	min-width: 1440px;
+	/* min-width: 1440px; */
+	max-width: 1440px;
 	padding: 0px 160px;
 	box-sizing: border-box;
 }
@@ -176,7 +177,7 @@
 }
 
 
-@container overall-page-width (width < 1270px) {
+@media (max-width: 1270px) {
 	.show-page-dynamic-inner-container {
 		min-width: unset;
 		width: 100%;
@@ -184,7 +185,7 @@
 		
 	}
 }
-@container overall-page-width (width < 1120px) {
+@media (max-width: 1120px) {
 	.show-page-dynamic-inner-container {
 		min-width: unset;
 		width: 100%;
