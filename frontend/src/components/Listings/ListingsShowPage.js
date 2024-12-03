@@ -76,6 +76,7 @@ const ListingsShowPage = (props) => {
 	useEffect(() => {
 		// Add this line to always be at top of a page when navigationg from a dff one
 		window.scrollTo(0, 0);
+		if(!listing) {
 		dispatch(fetchListing(listingId))
 			.then(() => {
 				dispatch(clearAllReservations())
@@ -88,6 +89,10 @@ const ListingsShowPage = (props) => {
 			.finally(() => {
 				setIsLoadingListing(false);
 			})
+		}
+		else {
+			setIsLoadingListing(false);
+		}
 	}, [])
 
 	
