@@ -13,6 +13,7 @@ import { useRef } from "react";
 
 import { useLoadScript, useJsApiLoader } from "@react-google-maps/api";
 import Footer from "./components/Footer/Footer";
+import NotFoundPage from "./components/NotFound";
 
 function App() {
   const { isLoaded } = useJsApiLoader({
@@ -86,7 +87,7 @@ function App() {
           <Route exact path="/listings/:listingId">
             <ListingsShowPage isMapsAPILoaded={isMapsAPILoaded} />
           </Route>
-          <Route><h1>404 - page not found.</h1></Route>
+          <Route><NotFoundPage/></Route>
         </Switch>
         {/* </div> */}
       </div>

@@ -60,7 +60,7 @@
 
 .category-selector:hover {
 	cursor: pointer;
-	animation: fadeInCategory 0.1s ease-in 0.0s 1 normal forwards;
+	animation: fadeInCategory 0.0s linear 0.0s 1 normal forwards;
 	/* animation: name duration timing-function delay iteration-count direction fill-mode; */
 }
 
