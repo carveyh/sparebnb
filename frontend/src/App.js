@@ -32,20 +32,24 @@ function App() {
     if(isLoaded) setIsMapsAPILoaded(true);
   }, [isLoaded])
 
-	useEffect(() => {
-    const fetchLocationWithIPAPI = async () => {
-      let endpoint = `http://ip-api.com/json`;
+  useEffect(() => {
+    const locationRequestOptions = {
+      method: "GET",
+      redirect: "follow",
+    }
+    const locationRequestEndpoint = `https://api.ipgeolocation.io/ipgeo?apiKey=${process.env.REACT_APP_IPGEOLOCATION_API_KEY}`
+    const fetchLocationWithIPGeolocation = async () => {
       try {
-        const res = await fetch(endpoint);
+        const res = await fetch(locationRequestEndpoint, locationRequestOptions);
         const data = await res.json();
-        setLocalLatLon([data.lat, data.lon]);
+        setLocalLatLon([data.latitude, data.longitude]);
       }
       catch (err) {
         console.error(err.message);
       }
     };
-    fetchLocationWithIPAPI();
-	}, [])
+    fetchLocationWithIPGeolocation();
+  }, [])
 
   // Dynamically anchor footer to bottom of viewport if page height is less than viewport:
   useEffect(() => {
