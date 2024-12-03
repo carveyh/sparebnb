@@ -207,13 +207,13 @@
 /* the remaining right half is split into quadrants, */
 /* AFTER first applying a padding-left within that half */
 .photo-wall-big {
-	flex-basis: 33%;
+	flex-basis: 50%;
 	flex-grow: 1;
 	box-sizing: border-box;
 }
 
 .photo-wall-grid {
-	flex-basis: 33%;
+	flex-basis: 50%;
 	flex-grow: 1;
 	box-sizing: border-box;
 	padding-left: 8px;
@@ -226,6 +226,8 @@
 		"one two"
 		"three four"
 		;
+	grid-template-rows: repeat(2, 1fr);
+	grid-template-columns: repeat(2, 1fr);
 	gap: 8px;
 }
 
@@ -234,13 +236,42 @@
 
 }
 
+.listings-show-photo-shimmer {
+	width:100%;
+	height:100%;
+	background-color: rgba(235, 235, 244, 0.6);
+	animation: 2.0s ease-in-out 0s infinite pulseShimmer;
+}
+
+@keyframes pulseShimmer {
+	0% { 
+		background-color: rgba(235, 235, 244, 0.3);
+	}
+	50% { 
+		background-color: rgba(235, 235, 244, 0.6); 
+	}
+	100% { 
+		background-color: rgba(235, 235, 244, 0.3);
+	}
+}
+
 .listings-show-photo {
 	width:100%;
 	height:100%;
 	object-fit: cover;
+	animation: 0.2s linear 0s 1 listingsShowPhotoFadeIn;
 }
 
-.photo-wall-big > img {
+@keyframes listingsShowPhotoFadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.photo-wall-big > img, .photo-wall-big > .listings-show-photo-shimmer {
 	border-top-left-radius: 12px;
 	border-bottom-left-radius: 12px;
 }
@@ -252,7 +283,7 @@
 .photo-wall-two {
 	grid-area: two;
 }
-.photo-wall-two > img {
+.photo-wall-two > img, .photo-wall-two > .listings-show-photo-shimmer {
 	border-top-right-radius: 12px;
 }
 
@@ -262,7 +293,7 @@
 .photo-wall-four {
 	grid-area: four;
 }
-.photo-wall-four > img {
+.photo-wall-four > img, .photo-wall-four > .listings-show-photo-shimmer {
 	border-bottom-right-radius: 12px;
 }
 
@@ -511,7 +542,7 @@
 .carousel-photo:last-child{
 	/* margin-right: 0px; */
 }
-.carousel-photo > img {
+.carousel-photo > img, .carousel-photo > .listings-show-photo-shimmer {
 	/* With border radius, actually causes next item to bleed through on edge after scroll snap somtimes... */
 	border-radius: 8px;
 }

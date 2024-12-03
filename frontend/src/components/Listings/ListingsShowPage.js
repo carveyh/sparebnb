@@ -12,7 +12,7 @@ import { clearAllReservations, createReservation, fetchReservations } from "../.
 import { fetchResReviewsForListing } from "../../store/reservation_reviews";
 
 // Relevant Components
-import { ListingsShowPhoto } from "./ListingsShowPhoto";
+import ListingsShowPhoto from "./ListingsShowPhoto";
 import { ReviewsSubCategories } from "./ReviewsSubCategories";
 import { ReviewsSnippetsMain } from "./ReviewsSnippetsMain";
 import { ReviewsModal } from "./ReviewsModal";

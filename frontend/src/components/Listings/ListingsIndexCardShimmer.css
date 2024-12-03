@@ -38,3 +38,8 @@
   width: 30%;
   padding-top: 5px;
 }
+
+/* Add shimmer animation to every class beginning with .LICS */
+[class*="LICS-"] {
+  animation: 2.0s ease-in-out 0s infinite pulseShimmer;
+}
