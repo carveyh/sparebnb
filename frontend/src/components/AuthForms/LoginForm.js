@@ -25,7 +25,9 @@ const LoginForm = ({setShowSignUpModal, setShowLogInModal}) => {
 	const activeBtnRef = useRef(null);
 
 	useEffect(() => {
-		// document.querySelector(".x-close").focus({focusVisible:true, preventScroll:false})
+		return () => {
+			document.removeEventListener("mouseup", mouseUpAuthBtn);
+		}
 	}, [])
 
 	useEffect(() => {

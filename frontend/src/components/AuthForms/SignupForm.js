@@ -58,8 +58,9 @@ const SignupForm = ({setShowSignUpModal, setShowLogInModal}) => {
 	}
 
 	useEffect(() => {
-		// document.querySelector(".x-close").focus({preventScroll:false, focusVisible: true});
-		return () => {}
+		return () => {
+			document.removeEventListener("mouseup", mouseUpAuthBtn);
+		}
 	}, [])
 
 	useEffect(() => {
