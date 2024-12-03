@@ -1,6 +1,6 @@
 import "./NotFound.css";
 import { useLocation } from "react-router-dom";
-import useIsListingsShowPage from "../hooks/useIsListingsShowPage";
+import useIsListingsShowPage from "../../hooks/useIsListingsShowPage";
 
 export default function NotFoundPage () {
   console.log()
