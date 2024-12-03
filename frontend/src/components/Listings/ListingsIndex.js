@@ -6,6 +6,7 @@ import { fetchListings } from "../../store/listings";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import ListingsIndexCard from "./ListingsIndexCard";
+import ListingsIndexCardShimmer from "./ListingsIndexCardShimmer";
 // import { useHistory } from "react-router-dom";
 // import { useLocation } from "react-router-dom";
 // import { Loader } from "@googlemaps/js-api-loader";
@@ -16,6 +17,7 @@ import ListingsIndexCard from "./ListingsIndexCard";
 const ListingsIndex = ({localLatLon, filter=null, isMapsAPILoaded}) => {
 	const dispatch = useDispatch();
 	const [distancesArray, setDistancesArray] = useState([]);
+	const [isLoadingListings, setIsLoadingListings] = useState(true);
 	const listings = useSelector(state => state.entities?.listings ? state.entities.listings : {})
 	let filteredListings;
 	if(filter) {
@@ -27,6 +29,13 @@ const ListingsIndex = ({localLatLon, filter=null, isMapsAPILoaded}) => {
 	useEffect(() => {
 		window.scrollTo(0, 0);
 		dispatch(fetchListings())
+			.catch((err) => {
+				console.error(err.message);
+			})
+			.finally(() => {
+				// setTimeout(() => {setIsLoadingListings(false)}, 3000); // Testing: simulate load time to preview shimmer
+				setIsLoadingListings(false);
+			})
 	}, [])
 
 	useEffect(() => {
@@ -63,7 +72,7 @@ const ListingsIndex = ({localLatLon, filter=null, isMapsAPILoaded}) => {
 	}, [localLatLon, listings, isMapsAPILoaded, filter])
 
 	const numTestListings = 13;
-	const listingCards = [];
+	let listingCards = [];
 
 	if(filteredListings.length !== 0){
 		if(!filter){
@@ -92,6 +101,21 @@ const ListingsIndex = ({localLatLon, filter=null, isMapsAPILoaded}) => {
 			}
 		}
 	}
+
+	if(isLoadingListings) listingCards = [		
+			<ListingsIndexCardShimmer/>,
+			<ListingsIndexCardShimmer/>,
+			<ListingsIndexCardShimmer/>,
+			<ListingsIndexCardShimmer/>,
+			<ListingsIndexCardShimmer/>,
+			<ListingsIndexCardShimmer/>,
+			<ListingsIndexCardShimmer/>,
+			<ListingsIndexCardShimmer/>,
+			<ListingsIndexCardShimmer/>,
+			<ListingsIndexCardShimmer/>,
+			<ListingsIndexCardShimmer/>,
+			<ListingsIndexCardShimmer/>,
+	];
 	
 	return (
 		<div className="grid-container-container" >
