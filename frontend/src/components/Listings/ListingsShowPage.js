@@ -1,15 +1,21 @@
 import "./ListingsShowPage.css";
 
+// Redux
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { useRef } from "react";
-import { useSelector } from "react-redux";
 import { fetchListing } from "../../store/listings";
-import { useParams } from "react-router-dom";
-import { formatTwoDigitNumberString } from "../../utils/urlFormatter";
-import { useState } from "react";
+import { fetchUser } from "../../store/user.js";
 import { clearAllReservations, createReservation, fetchReservations } from "../../store/reservation";
 import { fetchResReviewsForListing } from "../../store/reservation_reviews";
+import { useSelector } from "react-redux";
+
+// React
+import { useState, useEffect, useRef } from "react";
+import { useParams } from "react-router-dom";
+
+// Util
+import { formatTwoDigitNumberString } from "../../utils/urlFormatter";
+import * as ListingFees from "../../utils/listingFeeUtils";
+import { formatDateForInputElement } from "../../utils/dateFormatter.js";
 
 // Relevant Components
 import ListingsShowPhoto from "./ListingsShowPhoto";
@@ -17,35 +23,42 @@ import { ReviewsSubCategories } from "./ReviewsSubCategories";
 import { ReviewsSnippetsMain } from "./ReviewsSnippetsMain";
 import { ReviewsModal } from "./ReviewsModal";
 import { Modal } from "../../context/Modal";
-import * as ListingFees from "../../utils/listingFeeUtils";
 import Map from "../SpareMap/SpareMap.js"
 import ListingsShowCalendar from "./ListingsShowCalendar";
-import { formatDateForInputElement } from "../../utils/dateFormatter.js";
 import NotFoundPage from "../NotFound/index.js";
+
 
 const ListingsShowPage = (props) => {
 	const dispatch = useDispatch();
 	const { listingId } = useParams()
+	
+	// Redux store selectors
 	const sessionUser = useSelector(state => state.session?.user)
 	const listing = useSelector(state => state.entities?.listings ? state.entities.listings[`${listingId}`] : {})
 	const host = useSelector(state => state.entities?.users ? state.entities.users[`${listing?.hostId}`] : {})
 	const hostIdFormatted = formatTwoDigitNumberString(host?.id);	
 
+	// Load state
+	const [isLoadingListing, setIsLoadingListing] = useState(true);
+
+	// Form related states
 	const [checkIn, setCheckIn] = useState(new Date());
 	const [checkOut, setCheckOut] = useState(new Date());
 	const [numGuests, setNumGuests] = useState(1);
 	const [dayAfter, setDayAfter] = useState();
 	const [dayBefore, setDayBefore] = useState();
-	const [errors, setErrors] = useState([]);
 	const [bookingConfirmed, setBookingConfirmed] = useState(false);
 	const [buttonClickable, setButtonClickable] = useState(true);
-	const [currentSleepPhotoNum, setCurrentSleepPhotoNum] = useState(1);
 	const [disabledToolTipRunning, setDisabledToolTipRunning] = useState(false);
-	const [showDateModal, setShowDateModal] = useState(false);
-	const [isLoadingListing, setIsLoadingListing] = useState(true);
 
-	// Review modal
+	// Presentation states
+	const [currentSleepPhotoNum, setCurrentSleepPhotoNum] = useState(1);
+	const [showDateModal, setShowDateModal] = useState(false);
 	const [showReviewsModal, setShowReviewsModal] = useState(false);
+
+	// Error state
+	const [errors, setErrors] = useState([]);
+
 	// Disables page scrolling if a modal is open!
 	if(showReviewsModal){
 		// This was working fine before, but as of 7/20, it will cause site to expand to cover the missing scroll bar...need to check how to prevent this change in layout on page.
@@ -56,7 +69,7 @@ const ListingsShowPage = (props) => {
 		document.querySelector('body').style.overflowY = "scroll";
 	}
 
-	// !!! NEED TO CHANGE THIS ONE WE HAVE DYNAMIC LISTINGS PHOTOS!!! FOR NOW EACH LISTING HAS 6 PHOTOS
+	// TODO: Change when num photos per listing changes, currently fixed at 6 for simplicity.
 	const sleepPhotoTotal = 6;
 	const sleepPhotoPairsTotal = Math.round(sleepPhotoTotal / 2.0)
 
@@ -74,28 +87,48 @@ const ListingsShowPage = (props) => {
 	const baseServiceFee = ListingFees.baseServiceFee(listing?.baseNightlyRate);
 
 	useEffect(() => {
-		// Add this line to always be at top of a page when navigationg from a dff one
-		window.scrollTo(0, 0);
+		window.scrollTo(0, 0); // Will scroll to top if soft navigating from another page
+
+		// Fetch this listing if not already in store.
 		if(!listing) {
-		dispatch(fetchListing(listingId))
+			dispatch(fetchListing(listingId))
+				.then(() => {
+				})
+				.catch((err) => {
+					console.error(err.message);
+				})
+		}
+
+		// Get reservation reviews for listing
+		dispatch(fetchResReviewsForListing(listingId))
+				.catch((err) => {
+					console.error(err.message);
+				})
+
+		// Clear stale reservations and then fetch reservations related to this listing 
+		// for calendar / reservation system to be able to block already booked dates.
+		dispatch(clearAllReservations())
 			.then(() => {
-				dispatch(clearAllReservations())
 				dispatch(fetchReservations({id:listingId, type: "listing"}))
-				dispatch(fetchResReviewsForListing(listingId))
 			})
 			.catch((err) => {
 				console.error(err.message);
 			})
-			.finally(() => {
-				setIsLoadingListing(false);
-			})
-		}
-		else {
-			setIsLoadingListing(false);
-		}
 	}, [])
 
-	
+	// Fetch the host after dispatch(fetchListing(listingId)) completes, and listing = useSelector() has a chance to update listing.
+	// If listing is already in store, can go ahead and fetch the host.
+	useEffect(() => {
+		if(listing) {
+			dispatch(fetchUser(listing.hostId))
+				.catch((err) => {
+					console.error(err.message);
+				})
+				.finally(() => {
+					setIsLoadingListing(false);
+				})
+		}
+	}, [listing])
 
 	const handleChangeCheckIn = e => {
 		const dateString = e.target.value;
@@ -109,14 +142,6 @@ const ListingsShowPage = (props) => {
 			document.querySelector(".checkout-input").focus();
 			document.querySelector(".checkout-input").showPicker();
 		}
-
-		// Not working great, if you click up and down on month selector the date input automatically selects a date,
-		// this will cause shift in focus
-		// if(!checkOut) {
-		// 	const inputToFocus = document.querySelector(".checkout-input");
-		// 	inputToFocus.focus();
-		// 	inputToFocus.showPicker();
-		// };
 	}
 
 	const handleChangeCheckOut = e => {
@@ -125,10 +150,6 @@ const ListingsShowPage = (props) => {
 		const newDate = new Date(formattedDateString);
 		setCheckOut(newDate);
 		setDayBefore(daysApartCalculator(e.target.value, -0));
-	}
-
-	const handleToggleDateModal = (e) => {
-		setShowDateModal(true)
 	}
 
 	const handleClearDates = () => {
@@ -320,9 +341,7 @@ const ListingsShowPage = (props) => {
 	// LOGIC FOR SLEEP PHOTOS CAROUSEL - END
 	// LOGIC FOR SLEEP PHOTOS CAROUSEL - END
 
-	// if(!listing) return <Redirect to="/" /> 
-	// console.log(listing, isLoadingListing)
-	if(isLoadingListing && !listing) return null;
+	if(isLoadingListing || !listing || !host) return null;
 	if(!isLoadingListing && !listing) return <NotFoundPage/>;
 
 	return (
@@ -480,7 +499,7 @@ const ListingsShowPage = (props) => {
 									<div className="sleep-header heading-2">
 										<span className="sleep-text">Where you'll sleep </span>
 										<div className="sleep-buttons-container">
-											<span className="sleep-counter">{`${currentSleepPhotoNum} / ${sleepPhotoPairsTotal}`}</span>
+											{/* <span className="sleep-counter">{`${currentSleepPhotoNum} / ${sleepPhotoPairsTotal}`}</span> */}
 											{/* <div className="sleep-button" onMouseDown={mouseDownSleepBtn} onMouseUp={(shiftSleepPhoto)("prev")}><i className="fa-solid fa-chevron-left"></i></div> */}
 											{/* <div className="sleep-button" ref={prevSleepBtn} onMouseDown={(mouseDownSleepBtn)("prev")} ><i className="fa-solid fa-chevron-left"></i></div> */}
 											<div className="sleep-button" ref={prevSleepBtn} onMouseDown={mouseDownSleepBtn("prev")} ><i className="fa-solid fa-chevron-left"></i></div>
