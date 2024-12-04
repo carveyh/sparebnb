@@ -31,12 +31,12 @@ import NotFoundPage from "../NotFound/index.js";
 const ListingsShowPage = (props) => {
 	const dispatch = useDispatch();
 	const { listingId } = useParams()
-	const hostIdFormatted = formatTwoDigitNumberString(host?.id);	
-
+	
 	// Redux store selectors
 	const sessionUser = useSelector(state => state.session?.user)
 	const listing = useSelector(state => state.entities?.listings ? state.entities.listings[`${listingId}`] : {})
 	const host = useSelector(state => state.entities?.users ? state.entities.users[`${listing?.hostId}`] : {})
+	const hostIdFormatted = formatTwoDigitNumberString(host?.id);	
 
 	// Load state
 	const [isLoadingListing, setIsLoadingListing] = useState(true);
@@ -499,7 +499,7 @@ const ListingsShowPage = (props) => {
 									<div className="sleep-header heading-2">
 										<span className="sleep-text">Where you'll sleep </span>
 										<div className="sleep-buttons-container">
-											<span className="sleep-counter">{`${currentSleepPhotoNum} / ${sleepPhotoPairsTotal}`}</span>
+											{/* <span className="sleep-counter">{`${currentSleepPhotoNum} / ${sleepPhotoPairsTotal}`}</span> */}
 											{/* <div className="sleep-button" onMouseDown={mouseDownSleepBtn} onMouseUp={(shiftSleepPhoto)("prev")}><i className="fa-solid fa-chevron-left"></i></div> */}
 											{/* <div className="sleep-button" ref={prevSleepBtn} onMouseDown={(mouseDownSleepBtn)("prev")} ><i className="fa-solid fa-chevron-left"></i></div> */}
 											<div className="sleep-button" ref={prevSleepBtn} onMouseDown={mouseDownSleepBtn("prev")} ><i className="fa-solid fa-chevron-left"></i></div>

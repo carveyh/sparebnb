@@ -509,7 +509,6 @@
 .sleep-carousel {
 	display: flex;
 	overflow-x: scroll;
-	overscroll-behavior-x: contain;
   white-space: nowrap;
 	width: 100%;
 	scroll-snap-type: x mandatory;
