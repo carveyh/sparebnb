@@ -74,48 +74,41 @@ const ListingsIndex = ({localLatLon, filter=null, isMapsAPILoaded}) => {
 	const numTestListings = 13;
 	let listingCards = [];
 
-	if(filteredListings.length !== 0){
-		if(!filter){
-			for(let i = 1; i <= numTestListings; i++) {
-				listingCards.push(
-					<ListingsIndexCard 
-						// key={filteredListings[(i - 1 & filteredListings.length)].id}
-						distance={distancesArray[i - 1]} 
-						filter={filter} 
-						listing={filteredListings[(i - 1) % filteredListings.length]} 
-						num={i} 
-					/>
-				)
-			}
-		} else {
-			for(let i = 1; i <= filteredListings.length; i++) {
-				listingCards.push(
-					<ListingsIndexCard 
-						// key={filteredListings[(i - 1 & filteredListings.length)].id}
-						distance={distancesArray[i - 1]} 
-						filter={filter} 
-						listing={filteredListings[(i - 1) % filteredListings.length]} 
-						num={i} 
-					/>
-				)
+	if(isLoadingListings) {
+		listingCards = [];
+		for(let count = 0; count < 12; count++) {
+			listingCards.push(<ListingsIndexCardShimmer key={count}/>);
+		}
+	} else {
+		listingCards = [];
+		if(filteredListings.length !== 0){
+			if(!filter){
+				for(let i = 1; i <= numTestListings; i++) {
+					listingCards.push(
+						<ListingsIndexCard 
+							key={filteredListings[((i - 1) % filteredListings.length)].title}
+							distance={distancesArray[i - 1]} 
+							filter={filter} 
+							listing={filteredListings[(i - 1) % filteredListings.length]} 
+							num={i} 
+						/>
+					)
+				}
+			} else {
+				for(let i = 1; i <= filteredListings.length; i++) {
+					listingCards.push(
+						<ListingsIndexCard 
+							key={filteredListings[((i - 1) % filteredListings.length)].title}
+							distance={distancesArray[i - 1]} 
+							filter={filter} 
+							listing={filteredListings[(i - 1) % filteredListings.length]} 
+							num={i} 
+						/>
+					)
+				}
 			}
 		}
 	}
-
-	if(isLoadingListings) listingCards = [		
-			<ListingsIndexCardShimmer/>,
-			<ListingsIndexCardShimmer/>,
-			<ListingsIndexCardShimmer/>,
-			<ListingsIndexCardShimmer/>,
-			<ListingsIndexCardShimmer/>,
-			<ListingsIndexCardShimmer/>,
-			<ListingsIndexCardShimmer/>,
-			<ListingsIndexCardShimmer/>,
-			<ListingsIndexCardShimmer/>,
-			<ListingsIndexCardShimmer/>,
-			<ListingsIndexCardShimmer/>,
-			<ListingsIndexCardShimmer/>,
-	];
 	
 	return (
 		<div className="grid-container-container" >

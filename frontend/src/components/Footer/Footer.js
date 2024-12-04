@@ -17,7 +17,7 @@ const Footer = () => {
 					<span className="footer-link"><a target="_blank" href="https://github.com/carveyh/">Github</a></span>
 				</div>
 				<div className="footer-icon-links">
-					<div><a target="_blank" href="https://carvey.dev/"><i class="fa-solid fa-up-right-from-square"></i></a></div>
+					<div><a target="_blank" href="https://carvey.dev/"><i className="fa-solid fa-up-right-from-square"></i></a></div>
 					<div><a target="_blank" href="https://www.linkedin.com/in/carvey-hor/"><i className="fa-brands fa-linkedin"></i></a></div>
 					<div><a target="_blank" href="https://github.com/carveyh/"><i className="fa-brands fa-square-github"></i></a></div>
 				</div>
