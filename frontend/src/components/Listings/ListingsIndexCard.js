@@ -9,7 +9,7 @@ export default function ListingsIndexCard ({distance, listing, num, filter}) {
 		return (twoDigit === oneDigit + '0') ? oneDigit : twoDigit;
 	}
 	return (
-		<motion.div key={num.toString() + filter} initial={{opacity:0.0}} animate={{opacity:1, transition:{delay:(num) * 0.035, duration: 0.2, ease:'easeIn'} }} exit={{opacity: 0}}>
+		<motion.div key={num.toString() + filter} initial={{opacity:0.0}} animate={{opacity:1, transition:{delay:(num) * 0.035, duration: 0.2, ease:'easeIn'} }} >
 		<Link to={`/listings/${listing?.id}`}>
 			<div className={`grid-item grid-item-${num}`} >
 				{/* IMPLEMENT SAVED LISTINGS LATER!!! AND BRING THIS HEART BACK!!! */}
@@ -26,7 +26,7 @@ export default function ListingsIndexCard ({distance, listing, num, filter}) {
 							<span className="index-rating-num">{formattedOverallRating()}</span>
 						</>
 					}</span></div>
-					{distance ? <p>{`${distance} miles away`}</p> : <p>Calculating distance...</p>}
+					{distance ? <p key={listing?.title}>{`${distance} miles away`}</p> : <p>Calculating distance...</p>}
 					{/* <p>{`${listing?.title}`}</p> */}
 					<p>June 15 - 22</p>
 					<div className="listings-index-price-para"><div className="listings-index-price-figure">{`$${listing?.baseNightlyRate}`}</div><div>&nbsp;night</div></div>

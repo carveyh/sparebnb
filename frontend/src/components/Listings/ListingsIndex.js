@@ -40,6 +40,7 @@ const ListingsIndex = ({localLatLon, filter=null, isMapsAPILoaded}) => {
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
+		setDistancesArray([]);
 	}, [filter])
 
 	let destinations = filteredListings.map(listing => {
@@ -82,30 +83,17 @@ const ListingsIndex = ({localLatLon, filter=null, isMapsAPILoaded}) => {
 	} else {
 		listingCards = [];
 		if(filteredListings.length !== 0){
-			if(!filter){
-				for(let i = 1; i <= numTestListings; i++) {
-					listingCards.push(
-						<ListingsIndexCard 
-							key={filteredListings[((i - 1) % filteredListings.length)].title}
-							distance={distancesArray[i - 1]} 
-							filter={filter} 
-							listing={filteredListings[(i - 1) % filteredListings.length]} 
-							num={i} 
-						/>
-					)
-				}
-			} else {
-				for(let i = 1; i <= filteredListings.length; i++) {
-					listingCards.push(
-						<ListingsIndexCard 
-							key={filteredListings[((i - 1) % filteredListings.length)].title}
-							distance={distancesArray[i - 1]} 
-							filter={filter} 
-							listing={filteredListings[(i - 1) % filteredListings.length]} 
-							num={i} 
-						/>
-					)
-				}
+			let limit = filter ? filteredListings.length : numTestListings;
+			for(let i = 1; i <= limit; i++) {
+				listingCards.push(
+					<ListingsIndexCard 
+						key={filteredListings[((i - 1) % filteredListings.length)].title}
+						distance={distancesArray[i - 1]} 
+						filter={filter} 
+						listing={filteredListings[(i - 1) % filteredListings.length]} 
+						num={i} 
+					/>
+				)
 			}
 		}
 	}
